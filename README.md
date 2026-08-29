@@ -65,10 +65,9 @@ PDF targets still works.
   instrument, 1,934 in all. One key to a page, two columns.
 - **Banjo drone spikes**: where to spike the 5th string for every key, major
   and minor, repeated on each banjo page and collected in one table.
-- **Piano**: two voicings per chord. Close root position first — the chord
-  as you spell it at a keyboard — then the open worship voicing from
-  `piano.pdf`, with root and fifth low and the third high, out of the bass
-  player's way.
+- **Piano**: one voicing per chord — close root position, the chord as you
+  spell it at a keyboard. The open worship voicings from `piano.pdf` are
+  kept in `data/piano-shapes.yaml` rather than printed beside them.
 - **Bass**: where every root sits on each string, the movable arpeggio
   patterns measured from it, and which degrees to play under every chord in
   the book. Bass players don't finger chord grids.
@@ -109,8 +108,8 @@ SCHEME=saddle` instead if you'd rather fold sheets into signatures and sew
 through the fold.
 
 At present the book is **90 pages — 12 sheets of Letter**, one key to a page
-for the fretted instruments and two for the piano, which carries two
-voicings of every chord.
+for the fretted instruments and two for the piano, whose note lists are too
+wide to set in two columns.
 
 ## Colour
 
@@ -265,7 +264,7 @@ fingering actually sounds on that instrument's tuning and compares:
   purpose. Reported and allowed.
 - **Note** — wide stretches and other things worth an eyebrow.
 
-The current state is **2,439 voicings, 0 errors, 291 warnings** — 103 entries corrected (48 needed one string moved, 36 two, 19 three), and 6 left for proofreading.
+The current state is **2,127 voicings, 0 errors, 291 warnings** — 103 entries corrected (48 needed one string moved, 36 two, 19 three), and 6 left for proofreading.
 
 Where a voicing failed, `tools/repair.py` searched the neighbourhood of what
 was written for the closest playable fingering that does spell the chord —

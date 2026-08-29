@@ -416,7 +416,8 @@
   \pageheader{Piano}{#1}{\ifthenelse{\equal{#2}{cont}}{continued}{}}%
   \pagerule
   \raggedright
-}{\par}
+  \begin{multicols}{2}%
+}{\end{multicols}}
 
 % Name above, notes below: a five-note voicing in a flat key is too wide to
 % share a line with its name at this trim size.

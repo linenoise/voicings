@@ -9,29 +9,23 @@ keys:
   - chord: C
     frets:
     - C-E-G
-    - C-G-C-E
     note: Basic open major
   - chord: Cadd9
     frets:
     - C-E-G-D
-    - C-G-C-D-E
     note: Very common
   - chord: C2
     frets:
     - C-D-E-G
-    - C-G-D-E
     note: Signature worship sound
     star: true
   - chord: Csus2
     frets:
     - C-D-G
-    - C-G-D
     note: Open, unresolved
   - chord: Csus4
     frets:
     - C-F-G
-    - C-G-F-C
-    - C-F-G-C
     note: Suspended
   - chord: C5
     frets:
@@ -40,75 +34,61 @@ keys:
   - chord: Cmaj7
     frets:
     - C-E-G-B
-    - C-G-B-E
     note: Tender / reflective
   - chord: Cmaj9
     frets:
     - C-E-G-B-D
-    - C-G-B-D-E
     note: Very spacious
     star: true
   - chord: Cm
     frets:
     - C-Eb-G
-    - C-G-C-Eb
     note: Basic minor
   - chord: Cm7
     frets:
     - C-Eb-G-Bb
-    - C-G-Bb-Eb
     note: Warm / soulful
   - chord: Cm9
     frets:
     - C-Eb-G-Bb-D
-    - C-G-Bb-D-Eb
     note: Modern worship
     star: true
   - chord: Cmadd9
     frets:
     - C-Eb-G-D
-    - C-G-D-Eb
     note: Dark but open
   - chord: C7
     frets:
     - C-E-G-Bb
-    - C-G-Bb-E
     note: Gospel / blues colour
   - chord: C6
     frets:
     - C-E-G-A
-    - C-G-A-E
     note: Gentle
   - chord: C6/9
     frets:
     - C-E-G-A-D
-    - C-G-A-D-E
     note: Rich worship / gospel
     star: true
   - chord: Cm6
     frets:
     - C-Eb-G-A
-    - C-G-A-Eb
     note: Minor, gentle
   - chord: C9
     frets:
     - C-E-G-Bb-D
-    - C-G-Bb-D-E
     note: Dominant, spacious
   - chord: C7sus4
     frets:
     - C-F-G-Bb
-    - C-G-Bb-F
     note: Hangs before resolving
   - chord: C+
     frets:
     - C-E-G#
-    - C-G#-E
     note: Lifts into the next chord
   - chord: C°
     frets:
     - C-Eb-Gb
-    - C-Eb-Gb-C
     note: Passing, unsettled
   - chord: C°7
     frets:
@@ -117,40 +97,34 @@ keys:
   - chord: Cm7b5
     frets:
     - C-Eb-Gb-Bb
-    - C-Gb-Bb-Eb
     note: The two chord in a minor key
   - chord: C7b5
     frets:
     - C-E-Gb-Bb
-    - C-Gb-Bb-E
     note: Altered dominant
   - chord: C7#5
     frets:
     - C-E-G#-Bb
-    - C-G#-Bb-E
     note: Altered dominant
   - chord: C7b9
     frets:
     - C-E-G-Bb-Db
-    - C-G-Bb-Db-E
     note: Tense dominant
   - chord: C7#9
     frets:
     - C-E-G-Bb-D#
-    - C-G-Bb-D#-E
     note: Gospel dominant
   - chord: Cm11
     frets:
     - C-Eb-G-Bb-D-F
-    - C-G-Bb-Eb-F
     note: Suspended minor wash
   - chord: C/E
     frets:
-    - E-G-C-E
+    - E-G-C
     note: Smooth bass movement
   - chord: C/G
     frets:
-    - G-C-E-G
+    - G-C-E
     note: Strong / open
   - chord: Csus2/E
     frets:
@@ -158,44 +132,38 @@ keys:
     note: Suspended bass colour
   - chord: Cm/Eb
     frets:
-    - Eb-G-C-Eb
+    - Eb-G-C
     note: Minor, third in the bass
   - chord: Cm/G
     frets:
-    - G-C-Eb-G
+    - G-C-Eb
     note: Minor, fifth in the bass
   - chord: C7/E
     frets:
-    - E-G-Bb-E
+    - E-G-Bb-C
     note: Dominant, third in the bass
 - key: Db
   chords:
   - chord: Db
     frets:
     - Db-F-Ab
-    - Db-Ab-Db-F
     note: Basic open major
   - chord: Dbadd9
     frets:
     - Db-F-Ab-Eb
-    - Db-Ab-Db-Eb-F
     note: Very common
   - chord: Db2
     frets:
     - Db-Eb-F-Ab
-    - Db-Ab-Eb-F
     note: Signature worship sound
     star: true
   - chord: Dbsus2
     frets:
     - Db-Eb-Ab
-    - Db-Ab-Eb
     note: Open, unresolved
   - chord: Dbsus4
     frets:
     - Db-Gb-Ab
-    - Db-Ab-Gb-Db
-    - Db-Gb-Ab-Db
     note: Suspended
   - chord: Db5
     frets:
@@ -204,75 +172,61 @@ keys:
   - chord: Dbmaj7
     frets:
     - Db-F-Ab-C
-    - Db-Ab-C-F
     note: Tender / reflective
   - chord: Dbmaj9
     frets:
     - Db-F-Ab-C-Eb
-    - Db-Ab-C-Eb-F
     note: Very spacious
     star: true
   - chord: Dbm
     frets:
     - Db-Fb-Ab
-    - Db-Ab-Db-Fb
     note: Basic minor
   - chord: Dbm7
     frets:
     - Db-Fb-Ab-Cb
-    - Db-Ab-Cb-Fb
     note: Warm / soulful
   - chord: Dbm9
     frets:
     - Db-Fb-Ab-Cb-Eb
-    - Db-Ab-Cb-Eb-Fb
     note: Modern worship
     star: true
   - chord: Dbmadd9
     frets:
     - Db-Fb-Ab-Eb
-    - Db-Ab-Eb-Fb
     note: Dark but open
   - chord: Db7
     frets:
     - Db-F-Ab-Cb
-    - Db-Ab-Cb-F
     note: Gospel / blues colour
   - chord: Db6
     frets:
     - Db-F-Ab-Bb
-    - Db-Ab-Bb-F
     note: Gentle
   - chord: Db6/9
     frets:
     - Db-F-Ab-Bb-Eb
-    - Db-Ab-Bb-Eb-F
     note: Rich worship / gospel
     star: true
   - chord: Dbm6
     frets:
     - Db-Fb-Ab-Bb
-    - Db-Ab-Bb-Fb
     note: Minor, gentle
   - chord: Db9
     frets:
     - Db-F-Ab-Cb-Eb
-    - Db-Ab-Cb-Eb-F
     note: Dominant, spacious
   - chord: Db7sus4
     frets:
     - Db-Gb-Ab-Cb
-    - Db-Ab-Cb-Gb
     note: Hangs before resolving
   - chord: Db+
     frets:
     - Db-F-A
-    - Db-A-F
     note: Lifts into the next chord
   - chord: Db°
     frets:
     - Db-Fb-Abb
-    - Db-Fb-Abb-Db
     note: Passing, unsettled
   - chord: Db°7
     frets:
@@ -281,40 +235,34 @@ keys:
   - chord: Dbm7b5
     frets:
     - Db-Fb-Abb-Cb
-    - Db-Abb-Cb-Fb
     note: The two chord in a minor key
   - chord: Db7b5
     frets:
     - Db-F-Abb-Cb
-    - Db-Abb-Cb-F
     note: Altered dominant
   - chord: Db7#5
     frets:
     - Db-F-A-Cb
-    - Db-A-Cb-F
     note: Altered dominant
   - chord: Db7b9
     frets:
     - Db-F-Ab-Cb-Ebb
-    - Db-Ab-Cb-Ebb-F
     note: Tense dominant
   - chord: Db7#9
     frets:
     - Db-F-Ab-Cb-E
-    - Db-Ab-Cb-E-F
     note: Gospel dominant
   - chord: Dbm11
     frets:
     - Db-Fb-Ab-Cb-Eb-Gb
-    - Db-Ab-Cb-Fb-Gb
     note: Suspended minor wash
   - chord: Db/F
     frets:
-    - F-Ab-Db-F
+    - F-Ab-Db
     note: Smooth bass movement
   - chord: Db/Ab
     frets:
-    - Ab-Db-F-Ab
+    - Ab-Db-F
     note: Strong / open
   - chord: Dbsus2/F
     frets:
@@ -322,44 +270,38 @@ keys:
     note: Suspended bass colour
   - chord: Dbm/Fb
     frets:
-    - Fb-Ab-Db-Fb
+    - Fb-Ab-Db
     note: Minor, third in the bass
   - chord: Dbm/Ab
     frets:
-    - Ab-Db-Fb-Ab
+    - Ab-Db-Fb
     note: Minor, fifth in the bass
   - chord: Db7/F
     frets:
-    - F-Ab-Cb-F
+    - F-Ab-Cb-Db
     note: Dominant, third in the bass
 - key: D
   chords:
   - chord: D
     frets:
     - D-F#-A
-    - D-A-D-F#
     note: Basic open major
   - chord: Dadd9
     frets:
     - D-F#-A-E
-    - D-A-D-E-F#
     note: Very common
   - chord: D2
     frets:
     - D-E-F#-A
-    - D-A-E-F#
     note: Signature worship sound
     star: true
   - chord: Dsus2
     frets:
     - D-E-A
-    - D-A-E
     note: Open, unresolved
   - chord: Dsus4
     frets:
     - D-G-A
-    - D-A-G-D
-    - D-G-A-D
     note: Suspended
   - chord: D5
     frets:
@@ -368,75 +310,61 @@ keys:
   - chord: Dmaj7
     frets:
     - D-F#-A-C#
-    - D-A-C#-F#
     note: Tender / reflective
   - chord: Dmaj9
     frets:
     - D-F#-A-C#-E
-    - D-A-C#-E-F#
     note: Very spacious
     star: true
   - chord: Dm
     frets:
     - D-F-A
-    - D-A-D-F
     note: Basic minor
   - chord: Dm7
     frets:
     - D-F-A-C
-    - D-A-C-F
     note: Warm / soulful
   - chord: Dm9
     frets:
     - D-F-A-C-E
-    - D-A-C-E-F
     note: Modern worship
     star: true
   - chord: Dmadd9
     frets:
     - D-F-A-E
-    - D-A-E-F
     note: Dark but open
   - chord: D7
     frets:
     - D-F#-A-C
-    - D-A-C-F#
     note: Gospel / blues colour
   - chord: D6
     frets:
     - D-F#-A-B
-    - D-A-B-F#
     note: Gentle
   - chord: D6/9
     frets:
     - D-F#-A-B-E
-    - D-A-B-E-F#
     note: Rich worship / gospel
     star: true
   - chord: Dm6
     frets:
     - D-F-A-B
-    - D-A-B-F
     note: Minor, gentle
   - chord: D9
     frets:
     - D-F#-A-C-E
-    - D-A-C-E-F#
     note: Dominant, spacious
   - chord: D7sus4
     frets:
     - D-G-A-C
-    - D-A-C-G
     note: Hangs before resolving
   - chord: D+
     frets:
     - D-F#-A#
-    - D-A#-F#
     note: Lifts into the next chord
   - chord: D°
     frets:
     - D-F-Ab
-    - D-F-Ab-D
     note: Passing, unsettled
   - chord: D°7
     frets:
@@ -445,40 +373,34 @@ keys:
   - chord: Dm7b5
     frets:
     - D-F-Ab-C
-    - D-Ab-C-F
     note: The two chord in a minor key
   - chord: D7b5
     frets:
     - D-F#-Ab-C
-    - D-Ab-C-F#
     note: Altered dominant
   - chord: D7#5
     frets:
     - D-F#-A#-C
-    - D-A#-C-F#
     note: Altered dominant
   - chord: D7b9
     frets:
     - D-F#-A-C-Eb
-    - D-A-C-Eb-F#
     note: Tense dominant
   - chord: D7#9
     frets:
     - D-F#-A-C-E#
-    - D-A-C-E#-F#
     note: Gospel dominant
   - chord: Dm11
     frets:
     - D-F-A-C-E-G
-    - D-A-C-F-G
     note: Suspended minor wash
   - chord: D/F#
     frets:
-    - F#-A-D-F#
+    - F#-A-D
     note: Smooth bass movement
   - chord: D/A
     frets:
-    - A-D-F#-A
+    - A-D-F#
     note: Strong / open
   - chord: Dsus2/F#
     frets:
@@ -486,44 +408,38 @@ keys:
     note: Suspended bass colour
   - chord: Dm/F
     frets:
-    - F-A-D-F
+    - F-A-D
     note: Minor, third in the bass
   - chord: Dm/A
     frets:
-    - A-D-F-A
+    - A-D-F
     note: Minor, fifth in the bass
   - chord: D7/F#
     frets:
-    - F#-A-C-F#
+    - F#-A-C-D
     note: Dominant, third in the bass
 - key: Eb
   chords:
   - chord: Eb
     frets:
     - Eb-G-Bb
-    - Eb-Bb-Eb-G
     note: Basic open major
   - chord: Ebadd9
     frets:
     - Eb-G-Bb-F
-    - Eb-Bb-Eb-F-G
     note: Very common
   - chord: Eb2
     frets:
     - Eb-F-G-Bb
-    - Eb-Bb-F-G
     note: Signature worship sound
     star: true
   - chord: Ebsus2
     frets:
     - Eb-F-Bb
-    - Eb-Bb-F
     note: Open, unresolved
   - chord: Ebsus4
     frets:
     - Eb-Ab-Bb
-    - Eb-Bb-Ab-Eb
-    - Eb-Ab-Bb-Eb
     note: Suspended
   - chord: Eb5
     frets:
@@ -532,75 +448,61 @@ keys:
   - chord: Ebmaj7
     frets:
     - Eb-G-Bb-D
-    - Eb-Bb-D-G
     note: Tender / reflective
   - chord: Ebmaj9
     frets:
     - Eb-G-Bb-D-F
-    - Eb-Bb-D-F-G
     note: Very spacious
     star: true
   - chord: Ebm
     frets:
     - Eb-Gb-Bb
-    - Eb-Bb-Eb-Gb
     note: Basic minor
   - chord: Ebm7
     frets:
     - Eb-Gb-Bb-Db
-    - Eb-Bb-Db-Gb
     note: Warm / soulful
   - chord: Ebm9
     frets:
     - Eb-Gb-Bb-Db-F
-    - Eb-Bb-Db-F-Gb
     note: Modern worship
     star: true
   - chord: Ebmadd9
     frets:
     - Eb-Gb-Bb-F
-    - Eb-Bb-F-Gb
     note: Dark but open
   - chord: Eb7
     frets:
     - Eb-G-Bb-Db
-    - Eb-Bb-Db-G
     note: Gospel / blues colour
   - chord: Eb6
     frets:
     - Eb-G-Bb-C
-    - Eb-Bb-C-G
     note: Gentle
   - chord: Eb6/9
     frets:
     - Eb-G-Bb-C-F
-    - Eb-Bb-C-F-G
     note: Rich worship / gospel
     star: true
   - chord: Ebm6
     frets:
     - Eb-Gb-Bb-C
-    - Eb-Bb-C-Gb
     note: Minor, gentle
   - chord: Eb9
     frets:
     - Eb-G-Bb-Db-F
-    - Eb-Bb-Db-F-G
     note: Dominant, spacious
   - chord: Eb7sus4
     frets:
     - Eb-Ab-Bb-Db
-    - Eb-Bb-Db-Ab
     note: Hangs before resolving
   - chord: Eb+
     frets:
     - Eb-G-B
-    - Eb-B-G
     note: Lifts into the next chord
   - chord: Eb°
     frets:
     - Eb-Gb-Bbb
-    - Eb-Gb-Bbb-Eb
     note: Passing, unsettled
   - chord: Eb°7
     frets:
@@ -609,40 +511,34 @@ keys:
   - chord: Ebm7b5
     frets:
     - Eb-Gb-Bbb-Db
-    - Eb-Bbb-Db-Gb
     note: The two chord in a minor key
   - chord: Eb7b5
     frets:
     - Eb-G-Bbb-Db
-    - Eb-Bbb-Db-G
     note: Altered dominant
   - chord: Eb7#5
     frets:
     - Eb-G-B-Db
-    - Eb-B-Db-G
     note: Altered dominant
   - chord: Eb7b9
     frets:
     - Eb-G-Bb-Db-Fb
-    - Eb-Bb-Db-Fb-G
     note: Tense dominant
   - chord: Eb7#9
     frets:
     - Eb-G-Bb-Db-F#
-    - Eb-Bb-Db-F#-G
     note: Gospel dominant
   - chord: Ebm11
     frets:
     - Eb-Gb-Bb-Db-F-Ab
-    - Eb-Bb-Db-Gb-Ab
     note: Suspended minor wash
   - chord: Eb/G
     frets:
-    - G-Bb-Eb-G
+    - G-Bb-Eb
     note: Smooth bass movement
   - chord: Eb/Bb
     frets:
-    - Bb-Eb-G-Bb
+    - Bb-Eb-G
     note: Strong / open
   - chord: Ebsus2/G
     frets:
@@ -650,44 +546,38 @@ keys:
     note: Suspended bass colour
   - chord: Ebm/Gb
     frets:
-    - Gb-Bb-Eb-Gb
+    - Gb-Bb-Eb
     note: Minor, third in the bass
   - chord: Ebm/Bb
     frets:
-    - Bb-Eb-Gb-Bb
+    - Bb-Eb-Gb
     note: Minor, fifth in the bass
   - chord: Eb7/G
     frets:
-    - G-Bb-Db-G
+    - G-Bb-Db-Eb
     note: Dominant, third in the bass
 - key: E
   chords:
   - chord: E
     frets:
     - E-G#-B
-    - E-B-E-G#
     note: Basic open major
   - chord: Eadd9
     frets:
     - E-G#-B-F#
-    - E-B-E-F#-G#
     note: Very common
   - chord: E2
     frets:
     - E-F#-G#-B
-    - E-B-F#-G#
     note: Signature worship sound
     star: true
   - chord: Esus2
     frets:
     - E-F#-B
-    - E-B-F#
     note: Open, unresolved
   - chord: Esus4
     frets:
     - E-A-B
-    - E-B-A-E
-    - E-A-B-E
     note: Suspended
   - chord: E5
     frets:
@@ -696,75 +586,61 @@ keys:
   - chord: Emaj7
     frets:
     - E-G#-B-D#
-    - E-B-D#-G#
     note: Tender / reflective
   - chord: Emaj9
     frets:
     - E-G#-B-D#-F#
-    - E-B-D#-F#-G#
     note: Very spacious
     star: true
   - chord: Em
     frets:
     - E-G-B
-    - E-B-E-G
     note: Basic minor
   - chord: Em7
     frets:
     - E-G-B-D
-    - E-B-D-G
     note: Warm / soulful
   - chord: Em9
     frets:
     - E-G-B-D-F#
-    - E-B-D-F#-G
     note: Modern worship
     star: true
   - chord: Emadd9
     frets:
     - E-G-B-F#
-    - E-B-F#-G
     note: Dark but open
   - chord: E7
     frets:
     - E-G#-B-D
-    - E-B-D-G#
     note: Gospel / blues colour
   - chord: E6
     frets:
     - E-G#-B-C#
-    - E-B-C#-G#
     note: Gentle
   - chord: E6/9
     frets:
     - E-G#-B-C#-F#
-    - E-B-C#-F#-G#
     note: Rich worship / gospel
     star: true
   - chord: Em6
     frets:
     - E-G-B-C#
-    - E-B-C#-G
     note: Minor, gentle
   - chord: E9
     frets:
     - E-G#-B-D-F#
-    - E-B-D-F#-G#
     note: Dominant, spacious
   - chord: E7sus4
     frets:
     - E-A-B-D
-    - E-B-D-A
     note: Hangs before resolving
   - chord: E+
     frets:
     - E-G#-B#
-    - E-B#-G#
     note: Lifts into the next chord
   - chord: E°
     frets:
     - E-G-Bb
-    - E-G-Bb-E
     note: Passing, unsettled
   - chord: E°7
     frets:
@@ -773,40 +649,34 @@ keys:
   - chord: Em7b5
     frets:
     - E-G-Bb-D
-    - E-Bb-D-G
     note: The two chord in a minor key
   - chord: E7b5
     frets:
     - E-G#-Bb-D
-    - E-Bb-D-G#
     note: Altered dominant
   - chord: E7#5
     frets:
     - E-G#-B#-D
-    - E-B#-D-G#
     note: Altered dominant
   - chord: E7b9
     frets:
     - E-G#-B-D-F
-    - E-B-D-F-G#
     note: Tense dominant
   - chord: E7#9
     frets:
     - E-G#-B-D-F##
-    - E-B-D-F##-G#
     note: Gospel dominant
   - chord: Em11
     frets:
     - E-G-B-D-F#-A
-    - E-B-D-G-A
     note: Suspended minor wash
   - chord: E/G#
     frets:
-    - G#-B-E-G#
+    - G#-B-E
     note: Smooth bass movement
   - chord: E/B
     frets:
-    - B-E-G#-B
+    - B-E-G#
     note: Strong / open
   - chord: Esus2/G#
     frets:
@@ -814,44 +684,38 @@ keys:
     note: Suspended bass colour
   - chord: Em/G
     frets:
-    - G-B-E-G
+    - G-B-E
     note: Minor, third in the bass
   - chord: Em/B
     frets:
-    - B-E-G-B
+    - B-E-G
     note: Minor, fifth in the bass
   - chord: E7/G#
     frets:
-    - G#-B-D-G#
+    - G#-B-D-E
     note: Dominant, third in the bass
 - key: F
   chords:
   - chord: F
     frets:
     - F-A-C
-    - F-C-F-A
     note: Basic open major
   - chord: Fadd9
     frets:
     - F-A-C-G
-    - F-C-F-G-A
     note: Very common
   - chord: F2
     frets:
     - F-G-A-C
-    - F-C-G-A
     note: Signature worship sound
     star: true
   - chord: Fsus2
     frets:
     - F-G-C
-    - F-C-G
     note: Open, unresolved
   - chord: Fsus4
     frets:
     - F-Bb-C
-    - F-C-Bb-F
-    - F-Bb-C-F
     note: Suspended
   - chord: F5
     frets:
@@ -860,75 +724,61 @@ keys:
   - chord: Fmaj7
     frets:
     - F-A-C-E
-    - F-C-E-A
     note: Tender / reflective
   - chord: Fmaj9
     frets:
     - F-A-C-E-G
-    - F-C-E-G-A
     note: Very spacious
     star: true
   - chord: Fm
     frets:
     - F-Ab-C
-    - F-C-F-Ab
     note: Basic minor
   - chord: Fm7
     frets:
     - F-Ab-C-Eb
-    - F-C-Eb-Ab
     note: Warm / soulful
   - chord: Fm9
     frets:
     - F-Ab-C-Eb-G
-    - F-C-Eb-G-Ab
     note: Modern worship
     star: true
   - chord: Fmadd9
     frets:
     - F-Ab-C-G
-    - F-C-G-Ab
     note: Dark but open
   - chord: F7
     frets:
     - F-A-C-Eb
-    - F-C-Eb-A
     note: Gospel / blues colour
   - chord: F6
     frets:
     - F-A-C-D
-    - F-C-D-A
     note: Gentle
   - chord: F6/9
     frets:
     - F-A-C-D-G
-    - F-C-D-G-A
     note: Rich worship / gospel
     star: true
   - chord: Fm6
     frets:
     - F-Ab-C-D
-    - F-C-D-Ab
     note: Minor, gentle
   - chord: F9
     frets:
     - F-A-C-Eb-G
-    - F-C-Eb-G-A
     note: Dominant, spacious
   - chord: F7sus4
     frets:
     - F-Bb-C-Eb
-    - F-C-Eb-Bb
     note: Hangs before resolving
   - chord: F+
     frets:
     - F-A-C#
-    - F-C#-A
     note: Lifts into the next chord
   - chord: F°
     frets:
     - F-Ab-Cb
-    - F-Ab-Cb-F
     note: Passing, unsettled
   - chord: F°7
     frets:
@@ -937,40 +787,34 @@ keys:
   - chord: Fm7b5
     frets:
     - F-Ab-Cb-Eb
-    - F-Cb-Eb-Ab
     note: The two chord in a minor key
   - chord: F7b5
     frets:
     - F-A-Cb-Eb
-    - F-Cb-Eb-A
     note: Altered dominant
   - chord: F7#5
     frets:
     - F-A-C#-Eb
-    - F-C#-Eb-A
     note: Altered dominant
   - chord: F7b9
     frets:
     - F-A-C-Eb-Gb
-    - F-C-Eb-Gb-A
     note: Tense dominant
   - chord: F7#9
     frets:
     - F-A-C-Eb-G#
-    - F-C-Eb-G#-A
     note: Gospel dominant
   - chord: Fm11
     frets:
     - F-Ab-C-Eb-G-Bb
-    - F-C-Eb-Ab-Bb
     note: Suspended minor wash
   - chord: F/A
     frets:
-    - A-C-F-A
+    - A-C-F
     note: Smooth bass movement
   - chord: F/C
     frets:
-    - C-F-A-C
+    - C-F-A
     note: Strong / open
   - chord: Fsus2/A
     frets:
@@ -978,44 +822,38 @@ keys:
     note: Suspended bass colour
   - chord: Fm/Ab
     frets:
-    - Ab-C-F-Ab
+    - Ab-C-F
     note: Minor, third in the bass
   - chord: Fm/C
     frets:
-    - C-F-Ab-C
+    - C-F-Ab
     note: Minor, fifth in the bass
   - chord: F7/A
     frets:
-    - A-C-Eb-A
+    - A-C-Eb-F
     note: Dominant, third in the bass
 - key: Gb
   chords:
   - chord: Gb
     frets:
     - Gb-Bb-Db
-    - Gb-Db-Gb-Bb
     note: Basic open major
   - chord: Gbadd9
     frets:
     - Gb-Bb-Db-Ab
-    - Gb-Db-Gb-Ab-Bb
     note: Very common
   - chord: Gb2
     frets:
     - Gb-Ab-Bb-Db
-    - Gb-Db-Ab-Bb
     note: Signature worship sound
     star: true
   - chord: Gbsus2
     frets:
     - Gb-Ab-Db
-    - Gb-Db-Ab
     note: Open, unresolved
   - chord: Gbsus4
     frets:
     - Gb-Cb-Db
-    - Gb-Db-Cb-Gb
-    - Gb-Cb-Db-Gb
     note: Suspended
   - chord: Gb5
     frets:
@@ -1024,75 +862,61 @@ keys:
   - chord: Gbmaj7
     frets:
     - Gb-Bb-Db-F
-    - Gb-Db-F-Bb
     note: Tender / reflective
   - chord: Gbmaj9
     frets:
     - Gb-Bb-Db-F-Ab
-    - Gb-Db-F-Ab-Bb
     note: Very spacious
     star: true
   - chord: Gbm
     frets:
     - Gb-Bbb-Db
-    - Gb-Db-Gb-Bbb
     note: Basic minor
   - chord: Gbm7
     frets:
     - Gb-Bbb-Db-Fb
-    - Gb-Db-Fb-Bbb
     note: Warm / soulful
   - chord: Gbm9
     frets:
     - Gb-Bbb-Db-Fb-Ab
-    - Gb-Db-Fb-Ab-Bbb
     note: Modern worship
     star: true
   - chord: Gbmadd9
     frets:
     - Gb-Bbb-Db-Ab
-    - Gb-Db-Ab-Bbb
     note: Dark but open
   - chord: Gb7
     frets:
     - Gb-Bb-Db-Fb
-    - Gb-Db-Fb-Bb
     note: Gospel / blues colour
   - chord: Gb6
     frets:
     - Gb-Bb-Db-Eb
-    - Gb-Db-Eb-Bb
     note: Gentle
   - chord: Gb6/9
     frets:
     - Gb-Bb-Db-Eb-Ab
-    - Gb-Db-Eb-Ab-Bb
     note: Rich worship / gospel
     star: true
   - chord: Gbm6
     frets:
     - Gb-Bbb-Db-Eb
-    - Gb-Db-Eb-Bbb
     note: Minor, gentle
   - chord: Gb9
     frets:
     - Gb-Bb-Db-Fb-Ab
-    - Gb-Db-Fb-Ab-Bb
     note: Dominant, spacious
   - chord: Gb7sus4
     frets:
     - Gb-Cb-Db-Fb
-    - Gb-Db-Fb-Cb
     note: Hangs before resolving
   - chord: Gb+
     frets:
     - Gb-Bb-D
-    - Gb-D-Bb
     note: Lifts into the next chord
   - chord: Gb°
     frets:
     - Gb-Bbb-Dbb
-    - Gb-Bbb-Dbb-Gb
     note: Passing, unsettled
   - chord: Gb°7
     frets:
@@ -1101,40 +925,34 @@ keys:
   - chord: Gbm7b5
     frets:
     - Gb-Bbb-Dbb-Fb
-    - Gb-Dbb-Fb-Bbb
     note: The two chord in a minor key
   - chord: Gb7b5
     frets:
     - Gb-Bb-Dbb-Fb
-    - Gb-Dbb-Fb-Bb
     note: Altered dominant
   - chord: Gb7#5
     frets:
     - Gb-Bb-D-Fb
-    - Gb-D-Fb-Bb
     note: Altered dominant
   - chord: Gb7b9
     frets:
     - Gb-Bb-Db-Fb-Abb
-    - Gb-Db-Fb-Abb-Bb
     note: Tense dominant
   - chord: Gb7#9
     frets:
     - Gb-Bb-Db-Fb-A
-    - Gb-Db-Fb-A-Bb
     note: Gospel dominant
   - chord: Gbm11
     frets:
     - Gb-Bbb-Db-Fb-Ab-Cb
-    - Gb-Db-Fb-Bbb-Cb
     note: Suspended minor wash
   - chord: Gb/Bb
     frets:
-    - Bb-Db-Gb-Bb
+    - Bb-Db-Gb
     note: Smooth bass movement
   - chord: Gb/Db
     frets:
-    - Db-Gb-Bb-Db
+    - Db-Gb-Bb
     note: Strong / open
   - chord: Gbsus2/Bb
     frets:
@@ -1142,44 +960,38 @@ keys:
     note: Suspended bass colour
   - chord: Gbm/Bbb
     frets:
-    - Bbb-Db-Gb-Bbb
+    - Bbb-Db-Gb
     note: Minor, third in the bass
   - chord: Gbm/Db
     frets:
-    - Db-Gb-Bbb-Db
+    - Db-Gb-Bbb
     note: Minor, fifth in the bass
   - chord: Gb7/Bb
     frets:
-    - Bb-Db-Fb-Bb
+    - Bb-Db-Fb-Gb
     note: Dominant, third in the bass
 - key: G
   chords:
   - chord: G
     frets:
     - G-B-D
-    - G-D-G-B
     note: Basic open major
   - chord: Gadd9
     frets:
     - G-B-D-A
-    - G-D-G-A-B
     note: Very common
   - chord: G2
     frets:
     - G-A-B-D
-    - G-D-A-B
     note: Signature worship sound
     star: true
   - chord: Gsus2
     frets:
     - G-A-D
-    - G-D-A
     note: Open, unresolved
   - chord: Gsus4
     frets:
     - G-C-D
-    - G-D-C-G
-    - G-C-D-G
     note: Suspended
   - chord: G5
     frets:
@@ -1188,75 +1000,61 @@ keys:
   - chord: Gmaj7
     frets:
     - G-B-D-F#
-    - G-D-F#-B
     note: Tender / reflective
   - chord: Gmaj9
     frets:
     - G-B-D-F#-A
-    - G-D-F#-A-B
     note: Very spacious
     star: true
   - chord: Gm
     frets:
     - G-Bb-D
-    - G-D-G-Bb
     note: Basic minor
   - chord: Gm7
     frets:
     - G-Bb-D-F
-    - G-D-F-Bb
     note: Warm / soulful
   - chord: Gm9
     frets:
     - G-Bb-D-F-A
-    - G-D-F-A-Bb
     note: Modern worship
     star: true
   - chord: Gmadd9
     frets:
     - G-Bb-D-A
-    - G-D-A-Bb
     note: Dark but open
   - chord: G7
     frets:
     - G-B-D-F
-    - G-D-F-B
     note: Gospel / blues colour
   - chord: G6
     frets:
     - G-B-D-E
-    - G-D-E-B
     note: Gentle
   - chord: G6/9
     frets:
     - G-B-D-E-A
-    - G-D-E-A-B
     note: Rich worship / gospel
     star: true
   - chord: Gm6
     frets:
     - G-Bb-D-E
-    - G-D-E-Bb
     note: Minor, gentle
   - chord: G9
     frets:
     - G-B-D-F-A
-    - G-D-F-A-B
     note: Dominant, spacious
   - chord: G7sus4
     frets:
     - G-C-D-F
-    - G-D-F-C
     note: Hangs before resolving
   - chord: G+
     frets:
     - G-B-D#
-    - G-D#-B
     note: Lifts into the next chord
   - chord: G°
     frets:
     - G-Bb-Db
-    - G-Bb-Db-G
     note: Passing, unsettled
   - chord: G°7
     frets:
@@ -1265,40 +1063,34 @@ keys:
   - chord: Gm7b5
     frets:
     - G-Bb-Db-F
-    - G-Db-F-Bb
     note: The two chord in a minor key
   - chord: G7b5
     frets:
     - G-B-Db-F
-    - G-Db-F-B
     note: Altered dominant
   - chord: G7#5
     frets:
     - G-B-D#-F
-    - G-D#-F-B
     note: Altered dominant
   - chord: G7b9
     frets:
     - G-B-D-F-Ab
-    - G-D-F-Ab-B
     note: Tense dominant
   - chord: G7#9
     frets:
     - G-B-D-F-A#
-    - G-D-F-A#-B
     note: Gospel dominant
   - chord: Gm11
     frets:
     - G-Bb-D-F-A-C
-    - G-D-F-Bb-C
     note: Suspended minor wash
   - chord: G/B
     frets:
-    - B-D-G-B
+    - B-D-G
     note: Smooth bass movement
   - chord: G/D
     frets:
-    - D-G-B-D
+    - D-G-B
     note: Strong / open
   - chord: Gsus2/B
     frets:
@@ -1306,44 +1098,38 @@ keys:
     note: Suspended bass colour
   - chord: Gm/Bb
     frets:
-    - Bb-D-G-Bb
+    - Bb-D-G
     note: Minor, third in the bass
   - chord: Gm/D
     frets:
-    - D-G-Bb-D
+    - D-G-Bb
     note: Minor, fifth in the bass
   - chord: G7/B
     frets:
-    - B-D-F-B
+    - B-D-F-G
     note: Dominant, third in the bass
 - key: Ab
   chords:
   - chord: Ab
     frets:
     - Ab-C-Eb
-    - Ab-Eb-Ab-C
     note: Basic open major
   - chord: Abadd9
     frets:
     - Ab-C-Eb-Bb
-    - Ab-Eb-Ab-Bb-C
     note: Very common
   - chord: Ab2
     frets:
     - Ab-Bb-C-Eb
-    - Ab-Eb-Bb-C
     note: Signature worship sound
     star: true
   - chord: Absus2
     frets:
     - Ab-Bb-Eb
-    - Ab-Eb-Bb
     note: Open, unresolved
   - chord: Absus4
     frets:
     - Ab-Db-Eb
-    - Ab-Eb-Db-Ab
-    - Ab-Db-Eb-Ab
     note: Suspended
   - chord: Ab5
     frets:
@@ -1352,75 +1138,61 @@ keys:
   - chord: Abmaj7
     frets:
     - Ab-C-Eb-G
-    - Ab-Eb-G-C
     note: Tender / reflective
   - chord: Abmaj9
     frets:
     - Ab-C-Eb-G-Bb
-    - Ab-Eb-G-Bb-C
     note: Very spacious
     star: true
   - chord: Abm
     frets:
     - Ab-Cb-Eb
-    - Ab-Eb-Ab-Cb
     note: Basic minor
   - chord: Abm7
     frets:
     - Ab-Cb-Eb-Gb
-    - Ab-Eb-Gb-Cb
     note: Warm / soulful
   - chord: Abm9
     frets:
     - Ab-Cb-Eb-Gb-Bb
-    - Ab-Eb-Gb-Bb-Cb
     note: Modern worship
     star: true
   - chord: Abmadd9
     frets:
     - Ab-Cb-Eb-Bb
-    - Ab-Eb-Bb-Cb
     note: Dark but open
   - chord: Ab7
     frets:
     - Ab-C-Eb-Gb
-    - Ab-Eb-Gb-C
     note: Gospel / blues colour
   - chord: Ab6
     frets:
     - Ab-C-Eb-F
-    - Ab-Eb-F-C
     note: Gentle
   - chord: Ab6/9
     frets:
     - Ab-C-Eb-F-Bb
-    - Ab-Eb-F-Bb-C
     note: Rich worship / gospel
     star: true
   - chord: Abm6
     frets:
     - Ab-Cb-Eb-F
-    - Ab-Eb-F-Cb
     note: Minor, gentle
   - chord: Ab9
     frets:
     - Ab-C-Eb-Gb-Bb
-    - Ab-Eb-Gb-Bb-C
     note: Dominant, spacious
   - chord: Ab7sus4
     frets:
     - Ab-Db-Eb-Gb
-    - Ab-Eb-Gb-Db
     note: Hangs before resolving
   - chord: Ab+
     frets:
     - Ab-C-E
-    - Ab-E-C
     note: Lifts into the next chord
   - chord: Ab°
     frets:
     - Ab-Cb-Ebb
-    - Ab-Cb-Ebb-Ab
     note: Passing, unsettled
   - chord: Ab°7
     frets:
@@ -1429,40 +1201,34 @@ keys:
   - chord: Abm7b5
     frets:
     - Ab-Cb-Ebb-Gb
-    - Ab-Ebb-Gb-Cb
     note: The two chord in a minor key
   - chord: Ab7b5
     frets:
     - Ab-C-Ebb-Gb
-    - Ab-Ebb-Gb-C
     note: Altered dominant
   - chord: Ab7#5
     frets:
     - Ab-C-E-Gb
-    - Ab-E-Gb-C
     note: Altered dominant
   - chord: Ab7b9
     frets:
     - Ab-C-Eb-Gb-Bbb
-    - Ab-Eb-Gb-Bbb-C
     note: Tense dominant
   - chord: Ab7#9
     frets:
     - Ab-C-Eb-Gb-B
-    - Ab-Eb-Gb-B-C
     note: Gospel dominant
   - chord: Abm11
     frets:
     - Ab-Cb-Eb-Gb-Bb-Db
-    - Ab-Eb-Gb-Cb-Db
     note: Suspended minor wash
   - chord: Ab/C
     frets:
-    - C-Eb-Ab-C
+    - C-Eb-Ab
     note: Smooth bass movement
   - chord: Ab/Eb
     frets:
-    - Eb-Ab-C-Eb
+    - Eb-Ab-C
     note: Strong / open
   - chord: Absus2/C
     frets:
@@ -1470,44 +1236,38 @@ keys:
     note: Suspended bass colour
   - chord: Abm/Cb
     frets:
-    - Cb-Eb-Ab-Cb
+    - Cb-Eb-Ab
     note: Minor, third in the bass
   - chord: Abm/Eb
     frets:
-    - Eb-Ab-Cb-Eb
+    - Eb-Ab-Cb
     note: Minor, fifth in the bass
   - chord: Ab7/C
     frets:
-    - C-Eb-Gb-C
+    - C-Eb-Gb-Ab
     note: Dominant, third in the bass
 - key: A
   chords:
   - chord: A
     frets:
     - A-C#-E
-    - A-E-A-C#
     note: Basic open major
   - chord: Aadd9
     frets:
     - A-C#-E-B
-    - A-E-A-B-C#
     note: Very common
   - chord: A2
     frets:
     - A-B-C#-E
-    - A-E-B-C#
     note: Signature worship sound
     star: true
   - chord: Asus2
     frets:
     - A-B-E
-    - A-E-B
     note: Open, unresolved
   - chord: Asus4
     frets:
     - A-D-E
-    - A-E-D-A
-    - A-D-E-A
     note: Suspended
   - chord: A5
     frets:
@@ -1516,75 +1276,61 @@ keys:
   - chord: Amaj7
     frets:
     - A-C#-E-G#
-    - A-E-G#-C#
     note: Tender / reflective
   - chord: Amaj9
     frets:
     - A-C#-E-G#-B
-    - A-E-G#-B-C#
     note: Very spacious
     star: true
   - chord: Am
     frets:
     - A-C-E
-    - A-E-A-C
     note: Basic minor
   - chord: Am7
     frets:
     - A-C-E-G
-    - A-E-G-C
     note: Warm / soulful
   - chord: Am9
     frets:
     - A-C-E-G-B
-    - A-E-G-B-C
     note: Modern worship
     star: true
   - chord: Amadd9
     frets:
     - A-C-E-B
-    - A-E-B-C
     note: Dark but open
   - chord: A7
     frets:
     - A-C#-E-G
-    - A-E-G-C#
     note: Gospel / blues colour
   - chord: A6
     frets:
     - A-C#-E-F#
-    - A-E-F#-C#
     note: Gentle
   - chord: A6/9
     frets:
     - A-C#-E-F#-B
-    - A-E-F#-B-C#
     note: Rich worship / gospel
     star: true
   - chord: Am6
     frets:
     - A-C-E-F#
-    - A-E-F#-C
     note: Minor, gentle
   - chord: A9
     frets:
     - A-C#-E-G-B
-    - A-E-G-B-C#
     note: Dominant, spacious
   - chord: A7sus4
     frets:
     - A-D-E-G
-    - A-E-G-D
     note: Hangs before resolving
   - chord: A+
     frets:
     - A-C#-E#
-    - A-E#-C#
     note: Lifts into the next chord
   - chord: A°
     frets:
     - A-C-Eb
-    - A-C-Eb-A
     note: Passing, unsettled
   - chord: A°7
     frets:
@@ -1593,40 +1339,34 @@ keys:
   - chord: Am7b5
     frets:
     - A-C-Eb-G
-    - A-Eb-G-C
     note: The two chord in a minor key
   - chord: A7b5
     frets:
     - A-C#-Eb-G
-    - A-Eb-G-C#
     note: Altered dominant
   - chord: A7#5
     frets:
     - A-C#-E#-G
-    - A-E#-G-C#
     note: Altered dominant
   - chord: A7b9
     frets:
     - A-C#-E-G-Bb
-    - A-E-G-Bb-C#
     note: Tense dominant
   - chord: A7#9
     frets:
     - A-C#-E-G-B#
-    - A-E-G-B#-C#
     note: Gospel dominant
   - chord: Am11
     frets:
     - A-C-E-G-B-D
-    - A-E-G-C-D
     note: Suspended minor wash
   - chord: A/C#
     frets:
-    - C#-E-A-C#
+    - C#-E-A
     note: Smooth bass movement
   - chord: A/E
     frets:
-    - E-A-C#-E
+    - E-A-C#
     note: Strong / open
   - chord: Asus2/C#
     frets:
@@ -1634,44 +1374,38 @@ keys:
     note: Suspended bass colour
   - chord: Am/C
     frets:
-    - C-E-A-C
+    - C-E-A
     note: Minor, third in the bass
   - chord: Am/E
     frets:
-    - E-A-C-E
+    - E-A-C
     note: Minor, fifth in the bass
   - chord: A7/C#
     frets:
-    - C#-E-G-C#
+    - C#-E-G-A
     note: Dominant, third in the bass
 - key: Bb
   chords:
   - chord: Bb
     frets:
     - Bb-D-F
-    - Bb-F-Bb-D
     note: Basic open major
   - chord: Bbadd9
     frets:
     - Bb-D-F-C
-    - Bb-F-Bb-C-D
     note: Very common
   - chord: Bb2
     frets:
     - Bb-C-D-F
-    - Bb-F-C-D
     note: Signature worship sound
     star: true
   - chord: Bbsus2
     frets:
     - Bb-C-F
-    - Bb-F-C
     note: Open, unresolved
   - chord: Bbsus4
     frets:
     - Bb-Eb-F
-    - Bb-F-Eb-Bb
-    - Bb-Eb-F-Bb
     note: Suspended
   - chord: Bb5
     frets:
@@ -1680,75 +1414,61 @@ keys:
   - chord: Bbmaj7
     frets:
     - Bb-D-F-A
-    - Bb-F-A-D
     note: Tender / reflective
   - chord: Bbmaj9
     frets:
     - Bb-D-F-A-C
-    - Bb-F-A-C-D
     note: Very spacious
     star: true
   - chord: Bbm
     frets:
     - Bb-Db-F
-    - Bb-F-Bb-Db
     note: Basic minor
   - chord: Bbm7
     frets:
     - Bb-Db-F-Ab
-    - Bb-F-Ab-Db
     note: Warm / soulful
   - chord: Bbm9
     frets:
     - Bb-Db-F-Ab-C
-    - Bb-F-Ab-C-Db
     note: Modern worship
     star: true
   - chord: Bbmadd9
     frets:
     - Bb-Db-F-C
-    - Bb-F-C-Db
     note: Dark but open
   - chord: Bb7
     frets:
     - Bb-D-F-Ab
-    - Bb-F-Ab-D
     note: Gospel / blues colour
   - chord: Bb6
     frets:
     - Bb-D-F-G
-    - Bb-F-G-D
     note: Gentle
   - chord: Bb6/9
     frets:
     - Bb-D-F-G-C
-    - Bb-F-G-C-D
     note: Rich worship / gospel
     star: true
   - chord: Bbm6
     frets:
     - Bb-Db-F-G
-    - Bb-F-G-Db
     note: Minor, gentle
   - chord: Bb9
     frets:
     - Bb-D-F-Ab-C
-    - Bb-F-Ab-C-D
     note: Dominant, spacious
   - chord: Bb7sus4
     frets:
     - Bb-Eb-F-Ab
-    - Bb-F-Ab-Eb
     note: Hangs before resolving
   - chord: Bb+
     frets:
     - Bb-D-F#
-    - Bb-F#-D
     note: Lifts into the next chord
   - chord: Bb°
     frets:
     - Bb-Db-Fb
-    - Bb-Db-Fb-Bb
     note: Passing, unsettled
   - chord: Bb°7
     frets:
@@ -1757,40 +1477,34 @@ keys:
   - chord: Bbm7b5
     frets:
     - Bb-Db-Fb-Ab
-    - Bb-Fb-Ab-Db
     note: The two chord in a minor key
   - chord: Bb7b5
     frets:
     - Bb-D-Fb-Ab
-    - Bb-Fb-Ab-D
     note: Altered dominant
   - chord: Bb7#5
     frets:
     - Bb-D-F#-Ab
-    - Bb-F#-Ab-D
     note: Altered dominant
   - chord: Bb7b9
     frets:
     - Bb-D-F-Ab-Cb
-    - Bb-F-Ab-Cb-D
     note: Tense dominant
   - chord: Bb7#9
     frets:
     - Bb-D-F-Ab-C#
-    - Bb-F-Ab-C#-D
     note: Gospel dominant
   - chord: Bbm11
     frets:
     - Bb-Db-F-Ab-C-Eb
-    - Bb-F-Ab-Db-Eb
     note: Suspended minor wash
   - chord: Bb/D
     frets:
-    - D-F-Bb-D
+    - D-F-Bb
     note: Smooth bass movement
   - chord: Bb/F
     frets:
-    - F-Bb-D-F
+    - F-Bb-D
     note: Strong / open
   - chord: Bbsus2/D
     frets:
@@ -1798,44 +1512,38 @@ keys:
     note: Suspended bass colour
   - chord: Bbm/Db
     frets:
-    - Db-F-Bb-Db
+    - Db-F-Bb
     note: Minor, third in the bass
   - chord: Bbm/F
     frets:
-    - F-Bb-Db-F
+    - F-Bb-Db
     note: Minor, fifth in the bass
   - chord: Bb7/D
     frets:
-    - D-F-Ab-D
+    - D-F-Ab-Bb
     note: Dominant, third in the bass
 - key: B
   chords:
   - chord: B
     frets:
     - B-D#-F#
-    - B-F#-B-D#
     note: Basic open major
   - chord: Badd9
     frets:
     - B-D#-F#-C#
-    - B-F#-B-C#-D#
     note: Very common
   - chord: B2
     frets:
     - B-C#-D#-F#
-    - B-F#-C#-D#
     note: Signature worship sound
     star: true
   - chord: Bsus2
     frets:
     - B-C#-F#
-    - B-F#-C#
     note: Open, unresolved
   - chord: Bsus4
     frets:
     - B-E-F#
-    - B-F#-E-B
-    - B-E-F#-B
     note: Suspended
   - chord: B5
     frets:
@@ -1844,75 +1552,61 @@ keys:
   - chord: Bmaj7
     frets:
     - B-D#-F#-A#
-    - B-F#-A#-D#
     note: Tender / reflective
   - chord: Bmaj9
     frets:
     - B-D#-F#-A#-C#
-    - B-F#-A#-C#-D#
     note: Very spacious
     star: true
   - chord: Bm
     frets:
     - B-D-F#
-    - B-F#-B-D
     note: Basic minor
   - chord: Bm7
     frets:
     - B-D-F#-A
-    - B-F#-A-D
     note: Warm / soulful
   - chord: Bm9
     frets:
     - B-D-F#-A-C#
-    - B-F#-A-C#-D
     note: Modern worship
     star: true
   - chord: Bmadd9
     frets:
     - B-D-F#-C#
-    - B-F#-C#-D
     note: Dark but open
   - chord: B7
     frets:
     - B-D#-F#-A
-    - B-F#-A-D#
     note: Gospel / blues colour
   - chord: B6
     frets:
     - B-D#-F#-G#
-    - B-F#-G#-D#
     note: Gentle
   - chord: B6/9
     frets:
     - B-D#-F#-G#-C#
-    - B-F#-G#-C#-D#
     note: Rich worship / gospel
     star: true
   - chord: Bm6
     frets:
     - B-D-F#-G#
-    - B-F#-G#-D
     note: Minor, gentle
   - chord: B9
     frets:
     - B-D#-F#-A-C#
-    - B-F#-A-C#-D#
     note: Dominant, spacious
   - chord: B7sus4
     frets:
     - B-E-F#-A
-    - B-F#-A-E
     note: Hangs before resolving
   - chord: B+
     frets:
     - B-D#-F##
-    - B-F##-D#
     note: Lifts into the next chord
   - chord: B°
     frets:
     - B-D-F
-    - B-D-F-B
     note: Passing, unsettled
   - chord: B°7
     frets:
@@ -1921,40 +1615,34 @@ keys:
   - chord: Bm7b5
     frets:
     - B-D-F-A
-    - B-F-A-D
     note: The two chord in a minor key
   - chord: B7b5
     frets:
     - B-D#-F-A
-    - B-F-A-D#
     note: Altered dominant
   - chord: B7#5
     frets:
     - B-D#-F##-A
-    - B-F##-A-D#
     note: Altered dominant
   - chord: B7b9
     frets:
     - B-D#-F#-A-C
-    - B-F#-A-C-D#
     note: Tense dominant
   - chord: B7#9
     frets:
     - B-D#-F#-A-C##
-    - B-F#-A-C##-D#
     note: Gospel dominant
   - chord: Bm11
     frets:
     - B-D-F#-A-C#-E
-    - B-F#-A-D-E
     note: Suspended minor wash
   - chord: B/D#
     frets:
-    - D#-F#-B-D#
+    - D#-F#-B
     note: Smooth bass movement
   - chord: B/F#
     frets:
-    - F#-B-D#-F#
+    - F#-B-D#
     note: Strong / open
   - chord: Bsus2/D#
     frets:
@@ -1962,13 +1650,13 @@ keys:
     note: Suspended bass colour
   - chord: Bm/D
     frets:
-    - D-F#-B-D
+    - D-F#-B
     note: Minor, third in the bass
   - chord: Bm/F#
     frets:
-    - F#-B-D-F#
+    - F#-B-D
     note: Minor, fifth in the bass
   - chord: B7/D#
     frets:
-    - D#-F#-A-D#
+    - D#-F#-A-B
     note: Dominant, third in the bass

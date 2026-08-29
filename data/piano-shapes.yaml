@@ -350,6 +350,10 @@ slashes:
   - 7
   - 12
   - 16
+  close:
+  - 4
+  - 7
+  - 12
 - quality: ''
   bass: 7
   note: Strong / open
@@ -358,10 +362,19 @@ slashes:
   - 12
   - 16
   - 19
+  close:
+  - 7
+  - 12
+  - 16
 - quality: sus2
   bass: 4
   note: Suspended bass colour
   open:
+  - 4
+  - 7
+  - 12
+  - 14
+  close:
   - 4
   - 7
   - 12
@@ -374,6 +387,10 @@ slashes:
   - 12
   - 15
   note: Minor, third in the bass
+  close:
+  - 3
+  - 7
+  - 12
 - quality: m
   bass: 7
   open:
@@ -382,6 +399,10 @@ slashes:
   - 15
   - 19
   note: Minor, fifth in the bass
+  close:
+  - 7
+  - 12
+  - 15
 - quality: '7'
   bass: 4
   open:
@@ -390,8 +411,14 @@ slashes:
   - 10
   - 16
   note: Dominant, third in the bass
-note: 'Two voicings per chord. `close` is root position, ascending, with any extension stacked above the
-  octave -- the chord as you spell it at a keyboard, and what the piano pages print first. `open` is the
+  close:
+  - 4
+  - 7
+  - 10
+  - 12
+note: 'Numbers are semitones above the root, low to high; over 11 means the next octave up, so C-G-D-E
+  is [0, 7, 14, 16]. `close` is root position, ascending, with any extension stacked above the octave
+  -- the chord as you spell it at a keyboard, and the only voicing the piano pages print. `open` is the
   worship voicing from piano.pdf: root and fifth low for weight, colour above, the third high and out
-  of the bass player''s way. Numbers are semitones above the root, low to high; over 11 means the next
-  octave up, so C-G-D-E is [0, 7, 14, 16].'
+  of the bass player''s way. It is kept here rather than printed -- the pages show one voicing per chord
+  -- so the worksheet import is not lost and can be brought back by editing tools/piano.py.'

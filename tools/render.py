@@ -78,7 +78,7 @@ INK = {
 FIRST_POSITION = 7
 
 CHORDS_PER_PAGE = 34      # fret grids, one line each
-PIANO_PER_PAGE = 20       # two voicings each; a key takes two pages
+PIANO_PER_PAGE = 30       # single column; a key runs to two pages
 WORSHIP_PER_PAGE = 8      # name, notes, and a line of description
 
 
