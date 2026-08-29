@@ -25,8 +25,8 @@ STARTERS = [r"\begin{bookpage}", r"\begin{chordpage}", r"\begin{pianopage}",
 def main():
     body = open(sys.argv[1] if len(sys.argv) > 1 else "build/body.tex").read()
     pdf = sys.argv[2] if len(sys.argv) > 2 else "build/voicings-screen.pdf"
-    # The cover and the nameplate each \clearpage themselves.
-    expected = sum(body.count(s) for s in STARTERS) + 2
+    # The cover \clearpage's itself; everything else is in STARTERS.
+    expected = sum(body.count(s) for s in STARTERS) + 1
     actual = pagecount.count(pdf)
     print("body.tex declares %d pages; %s has %d" % (expected, pdf, actual))
     if actual > expected:

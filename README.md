@@ -42,9 +42,7 @@ PDF targets still works.
 
 ## What's in the book
 
-- **Front cover**, and an inside-front **nameplate** the recipient fills in —
-  these get given away, so the front of the book belongs to whoever is
-  holding it.
+- **Front cover**, with a QR code to this repository.
 - **Table of chords.**
 - **Circle of fifths**, one per instrument (mandolin, banjo, guitar, bass,
   ukulele), each showing the most common voicing of every major key on the
@@ -58,7 +56,7 @@ PDF targets still works.
 - **Nashville number chart**, one per instrument: twelve keys down the side,
   the seven diatonic degrees across, each cell carrying both the chord name
   and its fingering.
-- **Chord sections** — mandolin, guitar, ukulele, banjo, and piano, each
+- **Chord sections** — mandolin, guitar, ukulele, piano, and banjo, each
   covering the full vocabulary in all twelve keys: around 350 voicings per
   instrument, 1,934 in all. One key to a page, two columns.
 - **Banjo drone spikes**: where to spike the 5th string for every key, major
@@ -109,6 +107,24 @@ through the fold.
 At present the book is **90 pages — 12 sheets of Letter**, one key to a page
 for the fretted instruments and two for the piano, which carries two
 voicings of every chord.
+
+## Colour
+
+One pen per instrument, matching the notebook: **green** mandolin, **blue**
+guitar, **purple** ukulele, **red** piano, **orange** banjo, and for bass the
+darkest yellow that still reads as yellow. Every voicing on a page is in its
+instrument's ink, and the cover lists them in those colours.
+
+These are ordinary pen inks rather than a designed palette, but each was
+checked against the page colour for contrast: all six clear 4.5:1, the WCAG
+AA threshold for 12pt bold, because this book gets read in bad light on a
+dark stage. The orange is a shade deeper than a gel pen for exactly that
+reason — a true orange sits at 4.1:1 and misses.
+
+On a mono laser printer the inks all render as mid greys and stop
+distinguishing the instruments. The section dividers and page headings still
+say which instrument you are looking at, so nothing is lost but the colour
+coding.
 
 ## Layout and typography
 
@@ -209,7 +225,9 @@ tex/
   voicings.cls         page geometry, type, chord and circle macros
   screen.tex           the reading edition
   pages.tex            the same pages, for imposition
-notebook/              photographs of the original pages
+(notebook/)            photographs of the original pages -- NOT in version
+                       control; the inside cover carries a home address.
+                       data/notebook-source.yaml records what they held.
 ```
 
 ### Requirements
@@ -263,7 +281,8 @@ guessing rather than repairing, and it would print an invented fingering as
 though the author had written it. Those were either dropped in favour of
 another voicing of the same chord, or — where they were the only one given
 — replaced with a shape generated from theory. They're listed at the end of
-`CORRECTIONS.md` and are the first things to check against the paper.
+`CORRECTIONS.md` and are the first things to check against the paper, if you
+still have the photographs locally.
 
 Because the pipeline records what was originally transcribed,
 `tools/revert.py` can restore the data and replay the whole correction pass.
@@ -317,6 +336,15 @@ On the bass pages the degrees are written number first, accidental second --
 `3b`, `7b`, `5#`. Chord *symbols* keep their conventional spelling, so a
 half-diminished chord is still `Am7b5`; this is only how the intervals are
 named when the page is telling a bass player which notes to reach for.
+
+### Spelling on the circle
+
+The piano circle of fifths respells its notes to the key you actually put a
+finger on, matching whichever side of the circle the label is on: `G#m` shows
+`G#-B-D#`, not `Ab-Cb-Eb`. The chord pages keep the strict spelling -- the
+minor third of G-flat minor is B-double-flat and saying so is the point of
+those pages -- but a circle is read at a glance, and nobody hunts a keyboard
+for B-double-flat.
 
 ### Spelling
 

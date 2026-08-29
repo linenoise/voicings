@@ -58,8 +58,18 @@ CHROMATIC = ["A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"]
 DEGREES = [(0, ""), (2, "m"), (4, "m"), (5, ""), (7, ""), (9, "m"), (11, "°")]
 DEGREE_LABELS = ["1", "2m", "3m", "4", "5", "6m", "7°"]
 
-# Instruments that get their own circle of fifths and Nashville chart.
-CHART_INSTRUMENTS = ["mandolin", "banjo", "guitar", "bass", "ukulele"]
+# Instruments that get their own circle of fifths.
+CHART_INSTRUMENTS = ["mandolin", "guitar", "ukulele", "piano", "banjo", "bass"]
+
+# One pen per instrument, matching the notebook. Defined in voicings.cls.
+INK = {
+    "mandolin": "fretgreen",
+    "guitar":   "fretblue",
+    "ukulele":  "fretpurple",
+    "piano":    "keyred",
+    "banjo":    "fretorange",
+    "bass":     "fretyellow",
+}
 
 # Rows per page. These are tuned against the real compiled PDF -- see
 # `make pagecheck`, which fails if any page overflows onto an unheaded
@@ -192,8 +202,8 @@ class Book(object):
             self.circle_of_fifths(inst)
         for inst in ["mandolin", "guitar", "ukulele"]:
             self.chord_section(inst)
-        self.banjo_section()
         self.piano_section()
+        self.banjo_section()
         self.bass_section()
         self.back_matter()
         return "\n".join(self.out) + "\n"
@@ -202,7 +212,6 @@ class Book(object):
 
     def front_matter(self):
         self.w(r"\coverpage")
-        self.w(r"\nameplatepage")
 
     def contents(self):
         self.w(r"\begin{bookpage}{Table of Chords}")
@@ -211,8 +220,8 @@ class Book(object):
         for inst, label in [("mandolin", "Mandolin Chords"),
                             ("guitar", "Guitar Chords"),
                             ("ukulele", "Ukulele Chords"),
-                            ("banjo", "Banjo Chords"),
                             ("piano", "Piano Chords"),
+                            ("banjo", "Banjo Chords"),
                             ("bass", "Bass")]:
             self.w(r"\tocline{%s}{%s}" % (label, self.section_hint(inst)))
         self.w(r"\tocline{Tunings \& Credits}{back sheet}")
@@ -240,6 +249,7 @@ class Book(object):
 
     def circle_of_fifths(self, instrument):
         title = self.instruments[instrument]["name"]
+        self.w(r"\usevoicingcolor{%s}" % INK[instrument])
         self.w(r"\begin{bookpage}{Circle of Fifths}")
         self.w(r"\pagesubtitle{%s}" % tex_escape(title))
         self.w(r"\begin{circleoffifths}{%s}" % tex_escape(title))
@@ -254,8 +264,10 @@ class Book(object):
             angle = (90 - 30 * i) % 360
             outward = "up" if angle < 180 else "down"
             self.w(r"  \cofsegment{%d}{%s}{%s}{%s}{%s}{%s}{%s}" % (
-                i, tex_escape(major), mv or "",
-                tex_escape(minor), nv or "",
+                i, tex_escape(major),
+                self.circle_voicing(instrument, mv, flat),
+                tex_escape(minor),
+                self.circle_voicing(instrument, nv, flat),
                 self.signature(key), outward))
         self.w(r"\end{circleoffifths}")
         if instrument == "banjo":
@@ -271,6 +283,33 @@ class Book(object):
                    r"relative minor. Both show the most common voicing.}")
         self.w(r"\end{bookpage}")
 
+    def circle_voicing(self, instrument, text, prefer_flat=True):
+        """A voicing as it goes inside the circle.
+
+        The circle sets its own face, so this returns bare text rather than
+        a wrapped \frets{...}. Note names carry sharps and flats that have
+        to be escaped -- a raw # is a macro parameter to TeX, not a symbol.
+
+        Keyboard notes are respelled to the key you actually put a finger
+        on, matching whichever side of the circle the label is on. The
+        chord pages keep the strict spelling -- the minor third of G-flat
+        minor is B-double-flat and saying so is the point of those pages --
+        but a circle of fifths is for finding your way at a glance, and
+        nobody hunts the keyboard for B-double-flat.
+        """
+        if not text:
+            return ""
+        if self.instruments[instrument].get("kind") == "notes":
+            notes = []
+            for n in str(text).split("-"):
+                pc = theory.parse_note(n)
+                notes.append(theory.spell(pc, prefer_flat))
+            return "-".join(
+                tex_escape(n[:1]) + "".join(
+                    r"$\flat$" if a == "b" else r"$\sharp$" for a in n[1:])
+                for n in notes)
+        return tex_escape(str(text))
+
     def signature(self, key):
         sharps = {"C": "", "G": "1\\#", "D": "2\\#", "A": "3\\#", "E": "4\\#",
                   "B": "5\\#", "Gb": "6$\\flat$", "Db": "5$\\flat$",
@@ -285,6 +324,7 @@ class Book(object):
     def chord_section(self, instrument):
         doc = self.voicings[instrument]
         meta = self.instruments[instrument]
+        self.w(r"\usevoicingcolor{%s}" % INK[instrument])
         self.w(r"\sectiondivider{%s Chords}{%s}" % (
             tex_escape(meta["name"]), tex_escape(meta["tuning_label"])
             if "tuning_label" in meta else self.tuning_label(instrument)))
@@ -348,6 +388,7 @@ class Book(object):
     # -- piano -----------------------------------------------------------
 
     def piano_section(self):
+        self.w(r"\usevoicingcolor{%s}" % INK["piano"])
         self.w(r"\sectiondivider{Piano Chords}{notes, low to high}")
         doc = self.voicings["piano"]
         by_key = {k["key"]: k for k in doc["keys"]}
@@ -376,6 +417,7 @@ class Book(object):
         with the drone instruction repeated at the head of every key, since
         that is the thing you need before you play a note in it.
         """
+        self.w(r"\usevoicingcolor{%s}" % INK["banjo"])
         self.w(r"\sectiondivider{Banjo Chords}{gDGBD, open G}")
         doc = self.voicings["banjo"]
         by_key = {k["key"]: k for k in doc["keys"]}
@@ -413,6 +455,7 @@ class Book(object):
     # -- bass ------------------------------------------------------------
 
     def bass_section(self):
+        self.w(r"\usevoicingcolor{%s}" % INK["bass"])
         self.w(r"\sectiondivider{Bass}{E A D G}")
         self.w(r"\begin{bookpage}{Where the Roots Are}")
         self.w(r"\pagesubtitle{Bass}")

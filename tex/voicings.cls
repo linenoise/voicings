@@ -59,8 +59,18 @@
 % Chosen to stay legible on a mono laser printer: everything carries in
 % grey value alone, colour only reinforces it.
 \definecolor{ink}{HTML}{1A1A1A}
-\definecolor{keyred}{HTML}{B3261E}
-\definecolor{fretgreen}{HTML}{1F6F43}
+\definecolor{keyred}{HTML}{B3261E}      % key titles, and piano
+% One pen per instrument, matching the notebook: green for mandolin, blue
+% for guitar, purple for ukulele, red for piano, orange for banjo. These
+% are ordinary pen inks rather than a designed palette, but each is dark
+% enough to clear 4.5:1 against the page -- the threshold for 12pt bold --
+% because a chord book gets read in bad light. The orange is a shade
+% deeper than a gel pen for exactly that reason.
+\definecolor{fretgreen}{HTML}{1B7F45}   % mandolin, green pen
+\definecolor{fretblue}{HTML}{1D3F94}    % guitar, blue pen
+\definecolor{fretpurple}{HTML}{6D3BA8}  % ukulele, purple pen
+\definecolor{fretorange}{HTML}{B0570A}  % banjo, orange pen
+\definecolor{fretyellow}{HTML}{7A6100}  % bass, darkest legible yellow
 \definecolor{rule}{HTML}{B8B8B8}
 \definecolor{faint}{HTML}{6E6E6E}
 \definecolor{paper}{HTML}{FFFFFF}
@@ -92,13 +102,18 @@
 
 % Fret numbers. Monospaced so columns of digits line up down the page,
 % which is most of what makes a chord book readable at arm's length.
-\newcommand{\frets}[1]{{\ttfamily\color{fretgreen}\bfseries #1}}
+% Set per section by \usevoicingcolor; every voicing on a page is in its
+% instrument's ink.
+\newcommand{\voicingcolor}{fretgreen}
+\newcommand{\usevoicingcolor}[1]{\renewcommand{\voicingcolor}{#1}}
+
+\newcommand{\frets}[1]{{\ttfamily\color{\voicingcolor}\bfseries #1}}
 \newcommand{\notlisted}{{\color{rule}\ttfamily--}}
 
 % A fingering above the ninth fret needs two digits per string and runs
 % wider than a column allows, so it sets one size down. Rare enough that
 % the inconsistency costs nothing.
-\newcommand{\fretswide}[1]{{\small\ttfamily\color{fretgreen}\bfseries #1}}
+\newcommand{\fretswide}[1]{{\small\ttfamily\color{\voicingcolor}\bfseries #1}}
 
 % Between alternate voicings of the same chord. A single space let 2200 and
 % 2245 read as one long number; this is a gap plus a faint divider, so the
@@ -116,11 +131,22 @@
 % Instrument on the left, key centred on the page, one line. Built from
 % fixed-width boxes rather than glue: \raggedright is on throughout the
 % book and \hfil under it does not centre reliably.
+% The key is the thing you hunt for when flipping through, so it is set at
+% twice the size of everything else on the line. It centres in the space
+% the instrument name leaves, not on the page: a zero-width label would
+% centre the key perfectly and then "Gb / F#" at this size would run
+% straight over "Piano, continued". The label is nudged up so it sits
+% against the middle of the key rather than on its baseline.
 \newcommand{\pageheader}[2]{%
   \par\noindent
-  \makebox[0.3\linewidth][l]{\footnotesize\color{faint}#1}%
-  \makebox[0.4\linewidth][c]{\large\bfseries\color{keyred}#2}%
-  \makebox[0.3\linewidth][r]{}%
+  % A 21pt line would claim 8mm of a 129mm page just for its own leading,
+  % which costs two chords off the bottom of every key. The key is smashed
+  % to zero height and the line given an explicit strut instead, so the
+  % heading is as tall as it needs to look and no taller.
+  \makebox[\linewidth]{%
+    \rule[-1.9mm]{0pt}{6.6mm}%
+    \raisebox{0.6mm}{\footnotesize\color{faint}#1}%
+    \hfil\smash{\fontsize{21}{21}\selectfont\bfseries\color{keyred}#2}\hfil}%
   \par}
 \newcommand{\pagesubtitle}[1]{%
   \vspace{-1pt}{\footnotesize\color{faint}#1\par}\pagerule}
@@ -144,11 +170,16 @@
     {\color{ink}\rule{\linewidth}{5mm}}
     \vspace{6mm}
 
-    {\large Mandolin\, $\cdot$\, Fiddle\, $\cdot$\, Banjo\par}
-    \vspace{2mm}
-    {\large Guitar\, $\cdot$\, Bass\par}
-    \vspace{2mm}
-    {\large Ukulele\par}
+    % Each in its own pen, the way the notebook is written.
+    {\large
+     \textcolor{fretgreen}{Mandolin}\, $\cdot$\,
+     \textcolor{fretblue}{Guitar}\, $\cdot$\,
+     \textcolor{fretpurple}{Ukulele}\par}
+    \vspace{2.5mm}
+    {\large
+     \textcolor{keyred}{Piano}\, $\cdot$\,
+     \textcolor{fretorange}{Banjo}\, $\cdot$\,
+     \textcolor{fretyellow}{Bass}\par}
     \vfill
     % Vector, generated at compile time by the qrcode package -- no image
     % file to keep in step with the URL beneath it, and it stays sharp at
@@ -160,34 +191,6 @@
     {\footnotesize\color{faint}\bookurl\par}
     \vspace{3mm}
   \end{center}
-  \clearpage}
-
-% ------------------------------------------------------- nameplate (inside)
-% Deliberately blank. This book gets hand-sewn and given away; the person
-% holding it should be able to put their own name in the front.
-\newcommand{\nameplate@line}[1]{%
-  \par\vspace{4.5mm}
-  {\footnotesize\color{faint}#1}\par\vspace{1.5mm}
-  {\color{rule}\hrule height 0.4pt}}
-
-\newcommand{\nameplatepage}{%
-  \thispagestyle{empty}%
-  \vspace*{4mm}
-  {\large\bfseries This book belongs to\par}
-  \vspace{1mm}
-  {\footnotesize\color{faint}%
-   If found, the owner would very much like it back.\par}
-  \vspace{5mm}
-  \nameplate@line{Name}
-  \nameplate@line{Phone}
-  \nameplate@line{Email}
-  \nameplate@line{Band}
-  \vfill
-  {\footnotesize\color{faint}%
-   Fret numbers read from the lowest string.\\
-   \frets{x} means don't play that string.\\
-   Tunings are on the back sheet.\par}
-  \vspace{2mm}
   \clearpage}
 
 % -------------------------------------------------------- table of contents
@@ -209,7 +212,7 @@
   \clearpage\thispagestyle{empty}%
   \null\vfill
   \begin{center}
-    {\fontsize{20}{23}\selectfont\bfseries\color{keyred}#1\par}
+    {\fontsize{20}{23}\selectfont\bfseries\color{\voicingcolor}#1\par}
     \vspace{3mm}
     {\ttfamily\color{faint}#2\par}
   \end{center}
@@ -263,7 +266,7 @@
 \newcommand{\chordrow}[2]{%
   \par\noindent\vbox{\hsize=\linewidth
     \makebox[\chord@name][l]{\small\bfseries #1}#2\par}%
-  \par\vspace{0.6mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.6mm}}
+  \par\vspace{0.40mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.40mm}}
 
 %% An alternate voicing goes under the first, pulled up tight so the pair
 % reads as one chord rather than drifting toward the next one.
@@ -327,16 +330,16 @@
   % at the sides.
   \node[align=center] at (\cof@a:30.2mm) {%
     \ifthenelse{\equal{#7}{up}}%
-      {\cof@frets\ttfamily\color{fretgreen}#3\\[-2.4pt]%
+      {\cof@frets\ttfamily\color{\voicingcolor}#3\\[-2.4pt]%
        \cof@name\bfseries\color{keyred}#2}%
       {\cof@name\bfseries\color{keyred}#2\\[-2.4pt]%
-       \cof@frets\ttfamily\color{fretgreen}#3}};
+       \cof@frets\ttfamily\color{\voicingcolor}#3}};
   \node[align=center] at (\cof@a:18.6mm) {%
     \ifthenelse{\equal{#7}{up}}%
-      {\cof@frets\ttfamily\color{fretgreen}#5\\[-2.4pt]%
+      {\cof@frets\ttfamily\color{\voicingcolor}#5\\[-2.4pt]%
        \cof@minor\bfseries#4}%
       {\cof@minor\bfseries#4\\[-2.4pt]%
-       \cof@frets\ttfamily\color{fretgreen}#5}};
+       \cof@frets\ttfamily\color{\voicingcolor}#5}};
   % Key signatures sit outside the rim: twelve of them around a hub the
   % size of a thumbnail was unreadable.
   \node at (\cof@a:8.4mm) {\cof@sig\color{faint}#6};}
@@ -389,7 +392,7 @@
 % Note names rather than fret numbers, so they need room to breathe and a
 % face that keeps accidentals legible. Not monospaced: the lists vary in
 % length and lining them up would waste the width.
-\newcommand{\notes}[1]{{\color{fretgreen}\bfseries #1}}
+\newcommand{\notes}[1]{{\color{\voicingcolor}\bfseries #1}}
 
 \newenvironment{pianopage}[2]{%
   \clearpage
@@ -459,5 +462,5 @@
   \clearpage}
 
 \newcommand{\tuningrow}[3]{%
-  \item[]{\small\bfseries#1}\quad{\ttfamily\color{fretgreen}\bfseries\small#2}%
+  \item[]{\small\bfseries#1}\quad{\ttfamily\color{\voicingcolor}\bfseries\small#2}%
   \par\vspace{0.5mm}{\scriptsize\color{faint}#3}}
