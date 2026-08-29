@@ -68,9 +68,9 @@ PDF targets still works.
 - **Piano**: one voicing per chord — close root position, the chord as you
   spell it at a keyboard. The open worship voicings from `piano.pdf` are
   kept in `data/piano-shapes.yaml` rather than printed beside them. Note
-  lists are set on one line and never wrapped: a chord broken across two
-  lines reads as two chords, so the piano pages stay single-column and a
-  key runs to two pages.
+  lists are set in two columns and may wrap inside a column -- only ever
+  after a dash, never between a note and the dash that follows it -- but a
+  chord can never break across columns.
 - **Bass**: where every root sits on each string, the movable arpeggio
   patterns measured from it, and which degrees to play under every chord in
   the book. Bass players don't finger chord grids.
@@ -111,8 +111,8 @@ SCHEME=saddle` instead if you'd rather fold sheets into signatures and sew
 through the fold.
 
 At present the book is **90 pages — 12 sheets of Letter**, one key to a page
-for the fretted instruments and two for the piano, whose note lists are too
-wide to set in two columns.
+for the fretted instruments and two for the piano, whose note names run much
+longer in the flat keys.
 
 ## Colour
 

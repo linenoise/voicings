@@ -78,7 +78,7 @@ INK = {
 FIRST_POSITION = 7
 
 CHORDS_PER_PAGE = 34      # fret grids, one line each
-PIANO_PER_PAGE = 30       # single column; a key runs to two pages
+PIANO_PER_PAGE = 30       # two columns; wraps hang under the name
 WORSHIP_PER_PAGE = 8      # name, notes, and a line of description
 
 
@@ -109,7 +109,7 @@ def notes_tex(text):
             # two separately spaced glyphs.
             body += "$%s$" % accidentals
         parts.append(body)
-    return r"\notes{%s}" % "\,--\,".join(parts)
+    return r"\notes{%s}" % r"\notesep ".join(parts)
 
 
 def paginate(items, capacity):
@@ -278,16 +278,17 @@ class Book(object):
                 self.signature(key), outward))
         self.w(r"\end{circleoffifths}")
         if instrument == "banjo":
-            self.w(r"\circlefootnote{Outer ring: major. Inner ring: "
-                   r"relative minor. Spike the drone as shown on the "
-                   r"banjo pages.}")
+            self.w(r"\circlefootnote{Outer ring: major.\\ "
+                   r"Inner ring: relative minor.\\ "
+                   r"Spike the drone as shown on the banjo pages.}")
         elif instrument == "bass":
-            self.w(r"\circlefootnote{String and fret for each root --- "
-                   r"\frets{A3} is the third fret of the A string. "
+            self.w(r"\circlefootnote{String and fret for each root.\\ "
+                   r"\frets{A3} is the third fret of the A string.\\ "
                    r"Whichever sits lowest on the neck.}")
         else:
-            self.w(r"\circlefootnote{Outer ring: major. Inner ring: "
-                   r"relative minor. Both show the most common voicing.}")
+            self.w(r"\circlefootnote{Outer ring: major.\\ "
+                   r"Inner ring: relative minor.\\ "
+                   r"Both show the most common voicing.}")
         self.w(r"\end{bookpage}")
 
     def circle_voicing(self, instrument, text, prefer_flat=True):
@@ -483,8 +484,8 @@ class Book(object):
                       "}{".join(str(f) for f in frets)))
         self.w(r"\end{rootmap}")
         self.w(r"\begin{rootmapnote}")
-        self.w(r"Fret numbers for the root of each key on each string. "
-               r"Everything else is measured from there.")
+        self.w(r"Fret numbers for the root of each key on each string.\\")
+        self.w(r"Everything else is measured from there.")
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 

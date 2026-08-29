@@ -377,7 +377,7 @@
 % there is no reason for it to sit small in the top third of the page.
 \newenvironment{rootmap}{%
   \setlength{\tabcolsep}{7pt}
-  \renewcommand{\arraystretch}{1.6}
+  \renewcommand{\arraystretch}{1.5}
   \begin{tabular}{@{}l|*{4}{c}@{}}
 }{\end{tabular}}
 
@@ -411,12 +411,20 @@
 % length and lining them up would waste the width.
 \newcommand{\notes}[1]{{\color{\voicingcolor}\bfseries #1}}
 
+% Between two notes of a voicing. A long list has to be allowed to wrap in
+% a narrow column, but only in one place: after the dash. Breaking before
+% it strands a dash at the head of the next line, and breaking between a
+% note and its dash makes the first line look finished when it is not.
+% \nobreak shuts the gap before the dash; \allowbreak opens the one after.
+\newcommand{\notesep}{\nobreak\,--\,\allowbreak}
+
 \newenvironment{pianopage}[2]{%
   \clearpage
   \pageheader{Piano}{#1}{\ifthenelse{\equal{#2}{cont}}{continued}{}}%
   \pagerule
   \raggedright
-}{\par}
+  \begin{multicols}{2}%
+}{\end{multicols}}
 
 % Name above, notes below: a five-note voicing in a flat key is too wide to
 % share a line with its name at this trim size.
@@ -428,7 +436,7 @@
 % Two voicings per chord -- the close spelling and the open worship one --
 % run wider than the page in the flat keys, so the second wraps under the
 % name rather than off the edge.
-\newlength{\piano@name}\setlength{\piano@name}{20mm}
+\newlength{\piano@name}\setlength{\piano@name}{17mm}
 \newcommand{\pianorow}[2]{%
   \par\hangindent=\piano@name\hangafter=1
   {\small\makebox[\piano@name][l]{\bfseries #1}\footnotesize #2}%
