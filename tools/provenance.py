@@ -3,7 +3,7 @@
 
 The distinction matters: a transcribed shape is a player's choice and gets
 left alone, while a generated one is the tool's best guess and should be
-redone whenever the generator's judgement improves.
+redone whenever the generator's judgment improves.
 
 It used to be tracked with a `derived: true` flag on each entry, and that
 kept getting lost -- revert.py stripped it, refresh then skipped the

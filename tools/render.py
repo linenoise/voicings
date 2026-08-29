@@ -220,7 +220,7 @@ class Book(object):
 
     def front_matter(self):
         # No instrument owns the front matter, so its sample voicings are
-        # set in plain ink rather than borrowing whichever colour happens
+        # set in plain ink rather than borrowing whichever color happens
         # to be current -- a green x on the contents page reads as a
         # mandolin instruction.
         self.w(r"\usevoicingcolor{ink}")

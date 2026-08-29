@@ -44,7 +44,7 @@ def required(reentrant=False):
     Slash chords are included for the ukulele too. It is re-entrant, so it
     cannot put any note in the bass -- but the shape that contains the note
     is what gets played regardless, and leaving the ukulele short of chords
-    the other instruments have is worse than labelling an inversion.
+    the other instruments have is worse than labeling an inversion.
     """
     return [(q, None) for q in theory.VOCABULARY] + list(theory.SLASH_FORMS)
 

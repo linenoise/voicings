@@ -55,9 +55,9 @@
 % both more honest and easier to read at a glance.
 \raggedright
 
-% ------------------------------------------------------------------ colour
+% ------------------------------------------------------------------ color
 % Chosen to stay legible on a mono laser printer: everything carries in
-% grey value alone, colour only reinforces it.
+% gray value alone, color only reinforces it.
 \definecolor{ink}{HTML}{1A1A1A}
 \definecolor{keyred}{HTML}{B3261E}      % key titles, and piano
 % One pen per instrument, matching the notebook: green for mandolin, blue
@@ -128,16 +128,16 @@
 \newcommand{\pagetitle}[1]{%
   {\large\bfseries\color{ink}#1\par}}
 
-% Instrument on the left, key centred on the page, one line. Built from
+% Instrument on the left, key centered on the page, one line. Built from
 % fixed-width boxes rather than glue: \raggedright is on throughout the
-% book and \hfil under it does not centre reliably.
+% book and \hfil under it does not center reliably.
 % The key is the thing you hunt for when flipping through, so it is set at
-% twice the size of everything else on the line. It centres in the space
+% twice the size of everything else on the line. It centers in the space
 % the instrument name leaves, not on the page: a zero-width label would
-% centre the key perfectly and then "Gb / F#" at this size would run
+% center the key perfectly and then "Gb / F#" at this size would run
 % straight over "Piano, continued". The label is nudged up so it sits
 % against the middle of the key rather than on its baseline.
-% Instrument hard left, key centred on the page, "continued" hard right.
+% Instrument hard left, key centered on the page, "continued" hard right.
 % The two labels sit in zero-width boxes so neither shifts the key: it
 % lands in the same place on every page, which is what makes the book
 % flippable. Putting "continued" on the right rather than after the
@@ -147,10 +147,10 @@
 % which costs two chords off the bottom of every key. The key is smashed
 % to zero height and the line given an explicit strut instead, so the
 % heading is as tall as it needs to look and no taller.
-% #1 point size for the centred text, #2 left, #3 centre, #4 right.
+% #1 point size for the centered text, #2 left, #3 center, #4 right.
 \newcommand{\pageheaderat}[4]{%
   \par\noindent
-  % \hbox to, not \makebox: \makebox centres its own contents, so its
+  % \hbox to, not \makebox: \makebox centers its own contents, so its
   % glue competes with the \hfil pair below and the whole heading bunches
   % into the middle of the line instead of spreading across it.
   \hbox to \linewidth{%
@@ -163,7 +163,7 @@
 \newcommand{\pageheader}[3]{\pageheaderat{21}{#1}{#2}{#3}}
 
 % A circle-of-fifths page carries the same heading as a chord page --
-% instrument bold on the left, subject centred -- but "Circle of Fifths"
+% instrument bold on the left, subject centered -- but "Circle of Fifths"
 % is sixteen characters where a key is at most seven. At 21pt it would run
 % straight over the instrument name, and even 18pt leaves under a point of
 % air. 16pt is as large as clears the label comfortably on both sides,
@@ -259,8 +259,8 @@
 \setlength{\columnsep}{3mm}
 \setlength{\columnseprule}{0pt}
 
-% Instrument on the left, key centred on the same line. The instrument is
-% set in a zero-width box so it does not push the key off centre: the key
+% Instrument on the left, key centered on the same line. The instrument is
+% set in a zero-width box so it does not push the key off center: the key
 % is what the eye hunts for when flipping, and it should sit in the same
 % place on every page.
 \newenvironment{chordpage}[4]{%
@@ -315,9 +315,9 @@
 % ------------------------------------------------------- circle of fifths
 % Twelve segments, major on the outside, relative minor inside. Drawn
 % rather than tabulated because the whole point of the circle is that
-% neighbours are a fifth apart and you can see it.
+% neighbors are a fifth apart and you can see it.
 % Sized to the page, not to habit. The binding constraint is width: a
-% six-character fingering like xx0231 is eight millimetres wide, and the
+% six-character fingering like xx0231 is eight millimeters wide, and the
 % ring it sits in has to give it more arc than that. The circle was drawn
 % at 62mm across on a page that allows 72mm, which is where the guitar
 % page's collisions came from. Signatures move back inside the hub, since
@@ -355,8 +355,8 @@
     (\cof@edge:\cof@inner) -- (\cof@edge:\cof@outer);
   % Name and fingering go in ONE node, stacked. Putting them at two radii
   % made them collide at three and nine o'clock, where a radial gap of
-  % three millimetres is a horizontal gap of three millimetres and the
-  % fret numbers are six millimetres wide.
+  % three millimeters is a horizontal gap of three millimeters and the
+  % fret numbers are six millimeters wide.
   % Name and voicing stay in one node so the pair occupies a single compact
   % block, but the stack is ordered so the voicing falls on the outward
   % side of the band -- where the wedge is wider, and where the longer of

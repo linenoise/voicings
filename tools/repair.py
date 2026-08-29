@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Propose a correction for every voicing the validator rejects.
 
-For each failing voicing, search the neighbourhood of what is written for
+For each failing voicing, search the neighborhood of what is written for
 the closest fingering that actually spells the chord, and is playable.
 "Closest" is deliberately conservative, in this priority order:
 

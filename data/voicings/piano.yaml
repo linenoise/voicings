@@ -60,7 +60,7 @@ keys:
   - chord: C7
     frets:
     - C-E-G-Bb
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: C6
     frets:
     - C-E-G-A
@@ -129,7 +129,7 @@ keys:
   - chord: Csus2/E
     frets:
     - E-G-C-D
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Cm/Eb
     frets:
     - Eb-G-C
@@ -198,7 +198,7 @@ keys:
   - chord: Db7
     frets:
     - Db-F-Ab-B
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: Db6
     frets:
     - Db-F-Ab-Bb
@@ -267,7 +267,7 @@ keys:
   - chord: Dbsus2/F
     frets:
     - F-Ab-Db-Eb
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Dbm/E
     frets:
     - E-Ab-Db
@@ -336,7 +336,7 @@ keys:
   - chord: D7
     frets:
     - D-F#-A-C
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: D6
     frets:
     - D-F#-A-B
@@ -405,7 +405,7 @@ keys:
   - chord: Dsus2/F#
     frets:
     - F#-A-D-E
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Dm/F
     frets:
     - F-A-D
@@ -474,7 +474,7 @@ keys:
   - chord: Eb7
     frets:
     - Eb-G-Bb-Db
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: Eb6
     frets:
     - Eb-G-Bb-C
@@ -543,7 +543,7 @@ keys:
   - chord: Ebsus2/G
     frets:
     - G-Bb-Eb-F
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Ebm/Gb
     frets:
     - Gb-Bb-Eb
@@ -612,7 +612,7 @@ keys:
   - chord: E7
     frets:
     - E-G#-B-D
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: E6
     frets:
     - E-G#-B-C#
@@ -681,7 +681,7 @@ keys:
   - chord: Esus2/G#
     frets:
     - G#-B-E-F#
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Em/G
     frets:
     - G-B-E
@@ -750,7 +750,7 @@ keys:
   - chord: F7
     frets:
     - F-A-C-Eb
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: F6
     frets:
     - F-A-C-D
@@ -819,7 +819,7 @@ keys:
   - chord: Fsus2/A
     frets:
     - A-C-F-G
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Fm/Ab
     frets:
     - Ab-C-F
@@ -888,7 +888,7 @@ keys:
   - chord: Gb7
     frets:
     - Gb-Bb-Db-E
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: Gb6
     frets:
     - Gb-Bb-Db-Eb
@@ -957,7 +957,7 @@ keys:
   - chord: Gbsus2/Bb
     frets:
     - Bb-Db-Gb-Ab
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Gbm/A
     frets:
     - A-Db-Gb
@@ -1026,7 +1026,7 @@ keys:
   - chord: G7
     frets:
     - G-B-D-F
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: G6
     frets:
     - G-B-D-E
@@ -1095,7 +1095,7 @@ keys:
   - chord: Gsus2/B
     frets:
     - B-D-G-A
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Gm/A#
     frets:
     - A#-D-G
@@ -1164,7 +1164,7 @@ keys:
   - chord: Ab7
     frets:
     - Ab-C-Eb-Gb
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: Ab6
     frets:
     - Ab-C-Eb-F
@@ -1233,7 +1233,7 @@ keys:
   - chord: Absus2/C
     frets:
     - C-Eb-Ab-Bb
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Abm/B
     frets:
     - B-Eb-Ab
@@ -1302,7 +1302,7 @@ keys:
   - chord: A7
     frets:
     - A-C#-E-G
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: A6
     frets:
     - A-C#-E-F#
@@ -1371,7 +1371,7 @@ keys:
   - chord: Asus2/C#
     frets:
     - C#-E-A-B
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Am/C
     frets:
     - C-E-A
@@ -1440,7 +1440,7 @@ keys:
   - chord: Bb7
     frets:
     - Bb-D-F-Ab
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: Bb6
     frets:
     - Bb-D-F-G
@@ -1509,7 +1509,7 @@ keys:
   - chord: Bbsus2/D
     frets:
     - D-F-Bb-C
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Bbm/Db
     frets:
     - Db-F-Bb
@@ -1578,7 +1578,7 @@ keys:
   - chord: B7
     frets:
     - B-D#-F#-A
-    note: Gospel / blues colour
+    note: Gospel / blues color
   - chord: B6
     frets:
     - B-D#-F#-G#
@@ -1647,7 +1647,7 @@ keys:
   - chord: Bsus2/D#
     frets:
     - D#-F#-B-C#
-    note: Suspended bass colour
+    note: Suspended bass color
   - chord: Bm/D
     frets:
     - D-F#-B

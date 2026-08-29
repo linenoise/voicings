@@ -12,7 +12,7 @@ semitones from its open g. Most necks carry spikes at 7, 9 and 10; 8 and
 
 Preference order for the drone: the root of the key, then the fifth, then
 the third. The root is the safest drone; the fifth is the sweetest under a
-I-IV-V; the third colours the chord and is the one to avoid if the tune
+I-IV-V; the third colors the chord and is the one to avoid if the tune
 moves between major and minor.
 """
 

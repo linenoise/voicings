@@ -93,7 +93,7 @@ CHARACTERISTIC = {
 
 # When an instrument has fewer strings than the chord has notes, something
 # has to go. This is the order it goes in: the fifth first (it is implied by
-# the root and adds nothing to the colour), then the root (the bass player
+# the root and adds nothing to the color), then the root (the bass player
 # has it), then the ninth, and only then a tone that defines the chord.
 # Nothing here will drop the third or the seventh -- that would turn one
 # chord into another, which is the whole thing a chord book exists to avoid.

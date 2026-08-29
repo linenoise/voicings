@@ -163,7 +163,7 @@ shapes:
     - 7
     - 10
     - 16
-    note: Gospel / blues colour
+    note: Gospel / blues color
   '6':
     close:
     - 0
@@ -368,7 +368,7 @@ slashes:
   - 16
 - quality: sus2
   bass: 4
-  note: Suspended bass colour
+  note: Suspended bass color
   open:
   - 4
   - 7
@@ -419,7 +419,7 @@ slashes:
 note: 'Numbers are semitones above the root, low to high; over 11 means the next octave up, so C-G-D-E
   is [0, 7, 14, 16]. `close` is root position, ascending, with any extension stacked above the octave
   -- the chord as you spell it at a keyboard, and the only voicing the piano pages print. `open` is the
-  worship voicing from piano.pdf: root and fifth low for weight, colour above, the third high and out
+  worship voicing from piano.pdf: root and fifth low for weight, color above, the third high and out
   of the bass player''s way. It is kept here rather than printed -- the pages show one voicing per chord
   -- so the worksheet import is not lost and can be brought back by editing tools/piano.py. Notes are
   named by the key you actually play: A, not B-double-flat. Flat keys take flats and sharp keys take sharps,
