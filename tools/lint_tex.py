@@ -19,6 +19,8 @@ PRIMITIVES = {
     "hrule", "rule", "linewidth", "href", "dagger", "cdot", "protect",
     "relax", "space", "thispagestyle", "pagestyle", "hline", "smaller",
     "rightarrow", "flat", "sharp", "bigstar", "dag",
+    "hskip", "kern", "hbox", "vbox", "hsize", "smash", "nobreak",
+    "allowbreak", "rlap", "llap", "hfil", "raisebox", "textcolor",
 }
 
 

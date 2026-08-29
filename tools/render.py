@@ -312,7 +312,10 @@ class Book(object):
             for n in str(text).split("-"):
                 pc = theory.parse_note(n)
                 notes.append(theory.spell(pc, prefer_flat))
-            return "-".join(
+            # Spaces, not dashes, to match the piano pages. Wider than a
+            # thin space: at six and a half points the notes need visible
+            # air between them or they read as one word.
+            return r"\hskip0.34em ".join(
                 tex_escape(n[:1]) + "".join(
                     r"$\flat$" if a == "b" else r"$\sharp$" for a in n[1:])
                 for n in notes)

@@ -154,9 +154,9 @@
   % into the middle of the line instead of spreading across it.
   \hbox to \linewidth{%
     \rule[-1.9mm]{0pt}{6.6mm}%
-    \rlap{\raisebox{0.6mm}{\footnotesize\color{faint}#1}}%
+    \rlap{\raisebox{0.6mm}{\footnotesize\bfseries\color{faint}#1}}%
     \hfil\smash{\fontsize{21}{21}\selectfont\bfseries\color{keyred}#2}\hfil
-    \llap{\raisebox{0.6mm}{\footnotesize\color{faint}#3}}}%
+    \llap{\raisebox{0.6mm}{\footnotesize\bfseries\color{faint}#3}}}%
   \par}
 \newcommand{\pagesubtitle}[1]{%
   \vspace{-1pt}{\footnotesize\color{faint}#1\par}\pagerule}
@@ -362,13 +362,15 @@
 % Where to catch the 5th string for this key. Most keys want the same
 % drone whether the tune is major or minor, and saying so twice just makes
 % the line longer to read.
+% Set at the size of the instrument name in the header above it: this is
+% a note about the page, not one of the chords on it.
 \newcommand{\dronenote}[2]{%
-  \par{\scriptsize\color{faint}%
+  \par{\footnotesize\color{faint}%
     Drone spike --- major \textbf{#1}\quad minor \textbf{#2}}%
   \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
 
 \newcommand{\dronenoteboth}[1]{%
-  \par{\scriptsize\color{faint}Drone spike --- \textbf{#1}}%
+  \par{\footnotesize\color{faint}Drone spike --- \textbf{#1}}%
   \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
 
 % -------------------------------------------------------------- bass pages
