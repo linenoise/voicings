@@ -130,7 +130,7 @@ patterns:
   - degree: '8'
     string: 2
     offset: 2
-  - degree: 3b
+  - degree: b3
     string: 3
     offset: 0
 - name: Dominant seventh
@@ -142,7 +142,7 @@ patterns:
   - degree: '5'
     string: 1
     offset: 2
-  - degree: 7b
+  - degree: b7
     string: 2
     offset: 0
   - degree: '3'
@@ -157,10 +157,10 @@ patterns:
   - degree: '5'
     string: 1
     offset: 2
-  - degree: 7b
+  - degree: b7
     string: 2
     offset: 0
-  - degree: 3b
+  - degree: b3
     string: 3
     offset: 0
 - name: Walking approach
@@ -175,7 +175,7 @@ patterns:
   - degree: '6'
     string: 1
     offset: 4
-  - degree: 7b
+  - degree: b7
     string: 2
     offset: 0
 note: Fret at which each root note falls, per string. The B string is the fifth string of a five-string

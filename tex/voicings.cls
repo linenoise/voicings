@@ -297,7 +297,10 @@
 % left, its voicings running right. Rows are ruled faintly so the eye can
 % track across on a dark stage.
 \newlength{\chord@name}\setlength{\chord@name}{20mm}
-\newlength{\chord@rowsep}\setlength{\chord@rowsep}{1.10mm}
+\newlength{\chord@rowsep}\setlength{\chord@rowsep}{0.10mm}
+% Tall enough to clear a degree ring and a sharp, so no glyph ever
+% pushes its own row taller than its neighbors.
+\newcommand{\chord@strut}{\vrule height 3.24mm depth 0.58mm width 0pt}
 
 \setlength{\columnsep}{3mm}
 % The space between a page heading and the first row. It has to be set
@@ -330,7 +333,15 @@
 % \nobreak first: it makes the glue that follows an illegal breakpoint,
 % so a column can never break immediately before a group and leave that
 % group's rule stranded at the top of the next column.
-\newcommand{\chordgap}{\par\nobreak\vskip0.55\baselineskip}
+% The group rule sits centered in the gap it opens: 0.85 above and 0.15
+% below, which after the rule's own thickness and the ascent of the line
+% under it comes out even on both sides. The two numbers look lopsided
+% because they measure different things -- the one above is glue alone,
+% the one below is glue plus the height of the first line of the group.
+\newcommand{\chordgap}{\par\nobreak\vskip0.93\baselineskip}
+% The piano rows are \footnotesize and sit on a wider row separation,
+% so the same rule needs different glue on either side of it there.
+\newcommand{\pianogap}{\par\nobreak\vskip0.69\baselineskip}
 
 % The first row of a group carries the rule that heads it. Drawing the rule
 % between rows instead would leave it stranded at the top of a column
@@ -339,8 +350,8 @@
 \newcommand{\chordrowfirst}[2]{%
   \par\vskip\chord@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
-    {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
-    \makebox[\chord@name][l]{\small\bfseries #1}#2\par}}
+    {\color{rule}\hrule height 0.4pt}\vskip0.07\baselineskip
+    \chord@strut\makebox[\chord@name][l]{\small\bfseries #1}#2\chord@strut\par}}
 
 % Tight enough that a whole key -- around thirty chords -- lands on one
 % page. Two half-empty pages per key would double the sheet count, and
@@ -387,11 +398,11 @@
 \newcommand{\chordrow}[2]{%
   \par\vskip\chord@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
-    \makebox[\chord@name][l]{\small\bfseries #1}#2\par}}
+    \chord@strut\makebox[\chord@name][l]{\small\bfseries #1}#2\chord@strut\par}}
 
 %% An alternate voicing goes under the first, pulled up tight so the pair
 % reads as one chord rather than drifting toward the next one.
-\newcommand{\voicingnext}{\par\vspace{-1.1mm}\hspace*{\chord@name}}
+\newcommand{\voicingnext}{\chord@strut\par\vspace{-1.11mm}\hspace*{\chord@name}\chord@strut}
 
 % ------------------------------------------------------- circle of fifths
 % Twelve segments, major on the outside, relative minor inside. Drawn
@@ -498,10 +509,20 @@
 % the line longer to read.
 % Set at the size of the instrument name in the header above it: this is
 % a note about the page, not one of the chords on it.
+% Where major and minor disagree, minor goes on its own line with its "m"
+% under the "m" of major, so the two answers read as a short column rather
+% than one run-on sentence. The hanging indent is the width of the label,
+% measured at the size it is actually set in.
+% Two stacked boxes rather than a hanging indent: the label sets the width
+% of a column, and both answers start at its right edge, so the "m" of minor
+% lands under the "m" of major.
+\newlength{\drone@lead}
 \newcommand{\dronenote}[2]{%
   \par{\footnotesize\color{faint}%
-    Drone spike: major \textbf{#1}\quad minor \textbf{#2}}%
-  \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
+    \settowidth{\drone@lead}{Drone spike: }%
+    \hbox to \linewidth{\makebox[\drone@lead][l]{Drone spike:}major \textbf{#1}\hfil}%
+    \hbox to \linewidth{\hskip\drone@lead minor \textbf{#2}\hfil}}%
+  \vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
 
 \newcommand{\dronenoteboth}[1]{%
   \par{\footnotesize\color{faint}Drone spike: \textbf{#1}}%
@@ -533,16 +554,25 @@
 \newenvironment{patternlist}{%
   \pagerule
   \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{1.6mm}
+    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0.5mm}
     \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
 }{\end{list}}
 
 % Two lines apiece, not three: the name carries what the pattern is for,
 % and the degrees go underneath. Six patterns then fit on one page at the
 % book's size.
+% Every step twice over: the string it falls on, counted from the root's,
+% and the fret, counted from the root's. A bass is tuned in fourths, so
+% 1+R is already five semitones up before the fret offset applies, which
+% is why b7 at 2+R sits at the root's own fret rather than above it.
+% The "when to use it" note runs on after the name and wraps back to the
+% margin. Hanging it under itself reads better but costs a line per wrap,
+% and the page has 4.8mm of slack, not the 7mm that would take.
 \newcommand{\patternitem}[3]{%
   \item[]{\small\bfseries#1}\quad{\scriptsize\color{faint}#3}%
-  \par\vspace{0.4mm}{\footnotesize#2}}
+  \par\vspace{0.2mm}{\renewcommand{\arraystretch}{0.82}#2}}
+\newcommand{\patternrow}[1]{{\scriptsize\color{faint}#1}}
+\newcommand{\patterncell}[1]{{\scriptsize#1}}
 
 % -------------------------------------------------------------- piano
 % Note names rather than fret numbers, so they need room to breathe and a
@@ -578,7 +608,11 @@
 \newlength{\piano@name}\setlength{\piano@name}{20mm}
 % Wider than the chord pages' because the type is smaller: a note list
 % at eight points needs proportionally more air to read as its own row.
-\newlength{\piano@rowsep}\setlength{\piano@rowsep}{2.0mm}
+\newlength{\piano@rowsep}\setlength{\piano@rowsep}{1.60mm}
+% Kept under \scriptsize's baselineskip: a taller strut than the line
+% spacing makes TeX fall back to \lineskip and a wrapped voicing drifts
+% away from its own chord name.
+\newcommand{\piano@strut}{\vrule height 2.6mm depth 0.45mm width 0pt}
 % A voicing may wrap inside its own column -- there is no room not to --
 % but never across columns, which would leave half a chord at the foot of
 % one and half at the head of the next with no name on it. The vbox is
@@ -599,16 +633,18 @@
   \par\vskip\piano@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
     \hangindent=\piano@name\hangafter=1
-    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}}
+    {\footnotesize\piano@strut\makebox[\piano@name][l]{\bfseries #1}%
+     \scriptsize #2\piano@strut\par}}}
 
 % As \chordrowfirst: the rule heading a group rides inside that group's
 % first row, so a column break cannot strand it at the top of a column.
 \newcommand{\pianorowfirst}[2]{%
   \par\vskip\piano@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
-    {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
+    {\color{rule}\hrule height 0.4pt}\vskip0.34\baselineskip
     \hangindent=\piano@name\hangafter=1
-    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}}
+    {\footnotesize\piano@strut\makebox[\piano@name][l]{\bfseries #1}%
+     \scriptsize #2\piano@strut\par}}}
 
 % ------------------------------------------------------- bass vocabulary
 % Twenty-six kinds of chord will not fit one column at a size worth
@@ -633,7 +669,7 @@
 \newcommand{\degreerowfirst}[2]{%
   \par\vskip\degree@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
-    {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
+    {\color{rule}\hrule height 0.4pt}\vskip0.15\baselineskip
     \hangindent=15mm\hangafter=1
     \makebox[15mm][l]{\bfseries #1}#2\par}}
 

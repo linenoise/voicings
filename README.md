@@ -18,7 +18,7 @@ e-reader. **4-up** is US Letter, four pages to a sheet, for printing and
 sewing. Per-instrument editions carry that instrument's circle of fifths,
 its chords, and the credits. Nothing else.
 
-<img src="assets/qr.png" alt="QR code linking to https://github.com/linenoise/voicings" width="120">
+<img src="assets/qr.png" alt="QR code linking to https://github.com/linenoise/voicings" width="360">
 
 ## Build it yourself
 

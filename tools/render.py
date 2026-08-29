@@ -508,7 +508,7 @@ class Book(object):
                     g = group_index(entry["chord"])
                     starts_group = last is not None and g != last
                     if starts_group:
-                        self.w(r"  \chordgap")
+                        self.w(r"  \pianogap")
                     last = g
                     self.w(r"  \pianorow%s{%s}{%s}" % (
                         "first" if starts_group else "",
@@ -577,7 +577,7 @@ class Book(object):
         self.w(r"\sectiondivider{Bass}{%s}"
                % tex_escape(self.tuning_label("bass")))
         self.circle_of_fifths("bass")
-        self.w(r"\begin{bookpage}{Where the Roots Are}")
+        self.w(r"\begin{bookpage}{Root Positions}")
         self.w(r"\pagesubtitle{Bass}")
         self.w(r"\begin{rootmap}")
         strings = self.bass["root_map"]["strings"]
@@ -598,16 +598,38 @@ class Book(object):
 
         self.bass_vocabulary()
         self.w(r"\begin{bookpage}{Patterns}")
-        self.w(r"\pagesubtitle{Bass}")
+        self.w(r"\pagesubtitle{Bass \quad counted from the root}")
         self.w(r"\begin{patternlist}")
         for p in self.bass["patterns"]:
-            degs = ", ".join(
-                r"\frets{%s}~%s" % (d["degree"], self.offset_phrase(d))
-                for d in p["degrees"])
             self.w(r"\patternitem{%s}{%s}{%s}"
-                   % (tex_escape(p["name"]), degs, tex_escape(p["use"])))
+                   % (tex_escape(p["name"]), self.pattern_grid(p),
+                      tex_escape(p["use"])))
         self.w(r"\end{patternlist}")
         self.w(r"\end{bookpage}")
+
+    def pattern_grid(self, pattern):
+        """One pattern as three aligned rows: degree, string, fret.
+
+        Naming the string and the fret separately is what makes the shape
+        movable. The degree alone doesn't say where to put a finger, and a
+        fret alone doesn't either, because the same fret on the next string
+        is a different note.
+        """
+        degrees = pattern["degrees"]
+        cells = [(d["degree"],
+                  "R" if d["string"] == 0 else "%d+R" % d["string"],
+                  "R%d" % d["offset"]) for d in degrees]
+        spec = ("@{}r@{\\hskip 2mm}"
+                + "l@{\\hskip 3mm}" * (len(cells) - 1) + "l@{}")
+        rows = [
+            r"\patternrow{degree} & " + " & ".join(
+                r"\frets{%s}" % tex_escape(c[0]) for c in cells),
+            r"\patternrow{string} & " + " & ".join(
+                r"\patterncell{%s}" % c[1] for c in cells),
+            r"\patternrow{fret} & " + " & ".join(
+                r"\patterncell{%s}" % c[2] for c in cells)]
+        return (r"\begin{tabular}{%s}%s\end{tabular}"
+                % (spec, ("\\\\\n".join(rows)) + "\n"))
 
     def bass_vocabulary(self):
         """Which degrees to play under every chord in the book.

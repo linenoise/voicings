@@ -2515,13 +2515,34 @@ The rest belongs to whoever is playing chords.
 \begin{bookpage}{Patterns}
 \pagesubtitle{Bass}
 \begin{patternlist}
-\patternitem{Root + fifth + octave}{\frets{R}~(same string), \frets{5}~(+2, next string), \frets{8}~(+2, two over from root)}{The default. Works under anything in the key.}
-\patternitem{Major arpeggio}{\frets{R}~(same string), \frets{5}~(+2, next string), \frets{8}~(+2, two over from root), \frets{3}~(+1, three over from root)}{Major, maj7, 6.}
-\patternitem{Minor arpeggio}{\frets{R}~(same string), \frets{5}~(+2, next string), \frets{8}~(+2, two over from root), \frets{3b}~(three over from root)}{Minor, m7, m6.}
-\patternitem{Dominant seventh}{\frets{R}~(same string), \frets{5}~(+2, next string), \frets{7b}~(two over from root), \frets{3}~(+1, three over from root)}{Any 7 chord. The b7 pulls to the four.}
-\patternitem{Minor seventh}{\frets{R}~(same string), \frets{5}~(+2, next string), \frets{7b}~(two over from root), \frets{3b}~(three over from root)}{The two and the six chord.}
-\patternitem{Walking approach}{\frets{R}~(same string), \frets{5}~(+2, next string), \frets{6}~(+4, next string), \frets{7b}~(two over from root)}{Leading into the next chord.}
+\patternitem{Root + fifth + octave}{\begin{tabular}{@{}r@{\hskip 2mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{}}\patternrow{degree} & \frets{R} & \frets{5} & \frets{8}\\
+\patternrow{string} & \patterncell{R} & \patterncell{1+R} & \patterncell{2+R}\\
+\patternrow{fret} & \patterncell{R0} & \patterncell{R2} & \patterncell{R2}
+\end{tabular}}{The default. Works under anything in the key.}
+\patternitem{Major arpeggio}{\begin{tabular}{@{}r@{\hskip 2mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{}}\patternrow{degree} & \frets{R} & \frets{5} & \frets{8} & \frets{3}\\
+\patternrow{string} & \patterncell{R} & \patterncell{1+R} & \patterncell{2+R} & \patterncell{3+R}\\
+\patternrow{fret} & \patterncell{R0} & \patterncell{R2} & \patterncell{R2} & \patterncell{R1}
+\end{tabular}}{Major, maj7, 6.}
+\patternitem{Minor arpeggio}{\begin{tabular}{@{}r@{\hskip 2mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{}}\patternrow{degree} & \frets{R} & \frets{5} & \frets{8} & \frets{b3}\\
+\patternrow{string} & \patterncell{R} & \patterncell{1+R} & \patterncell{2+R} & \patterncell{3+R}\\
+\patternrow{fret} & \patterncell{R0} & \patterncell{R2} & \patterncell{R2} & \patterncell{R0}
+\end{tabular}}{Minor, m7, m6.}
+\patternitem{Dominant seventh}{\begin{tabular}{@{}r@{\hskip 2mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{}}\patternrow{degree} & \frets{R} & \frets{5} & \frets{b7} & \frets{3}\\
+\patternrow{string} & \patterncell{R} & \patterncell{1+R} & \patterncell{2+R} & \patterncell{3+R}\\
+\patternrow{fret} & \patterncell{R0} & \patterncell{R2} & \patterncell{R0} & \patterncell{R1}
+\end{tabular}}{Any 7 chord. The b7 pulls to the four.}
+\patternitem{Minor seventh}{\begin{tabular}{@{}r@{\hskip 2mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{}}\patternrow{degree} & \frets{R} & \frets{5} & \frets{b7} & \frets{b3}\\
+\patternrow{string} & \patterncell{R} & \patterncell{1+R} & \patterncell{2+R} & \patterncell{3+R}\\
+\patternrow{fret} & \patterncell{R0} & \patterncell{R2} & \patterncell{R0} & \patterncell{R0}
+\end{tabular}}{The two and the six chord.}
+\patternitem{Walking approach}{\begin{tabular}{@{}r@{\hskip 2mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{\hskip 3mm}l@{}}\patternrow{degree} & \frets{R} & \frets{5} & \frets{6} & \frets{b7}\\
+\patternrow{string} & \patterncell{R} & \patterncell{1+R} & \patterncell{1+R} & \patterncell{2+R}\\
+\patternrow{fret} & \patterncell{R0} & \patterncell{R2} & \patterncell{R4} & \patterncell{R0}
+\end{tabular}}{Leading into the next chord.}
 \end{patternlist}
+\begin{rootmapnote}
+Read down each column: the degree, the string it lands on, and the fret. Strings and frets are both counted from the root, so 1+R is the next string over and R2 is two frets above the root's fret. A bass is tuned in fourths: crossing one string is already five semitones, which is why b7 sits at 2+R, R0 rather than anywhere higher up the neck.
+\end{rootmapnote}
 \end{bookpage}
 \begin{backsheet}{Fancy Chords and Their Voicings}
 \tuningrow{Mandolin}{G D A E}{Tuned in fifths. Fiddle and tenor banjo share it, so the mandolin pages serve all three.}
