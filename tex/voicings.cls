@@ -56,16 +56,23 @@
 \raggedright
 
 % ------------------------------------------------------------------ color
-% Chosen to stay legible on a mono laser printer: everything carries in
-% gray value alone, color only reinforces it.
+% Matched contrast is exactly what makes colors identical in grayscale, so
+% on a mono printer these six all land on much the same gray. Nothing
+% depends on color alone: every page names its instrument in the header.
 \definecolor{ink}{HTML}{1A1A1A}
 \definecolor{keyred}{HTML}{AA0019}      % key titles, and piano
 % One pen per instrument, matching the notebook: green for mandolin, blue
-% for guitar, purple for ukulele, red for piano, orange for banjo. These
-% are ordinary pen inks rather than a designed palette, but each is dark
-% enough to clear 4.5:1 against the page -- the threshold for 12pt bold --
-% because a chord book gets read in bad light. The orange is a shade
-% deeper than a gel pen for exactly that reason.
+% for guitar, purple for ukulele, red for piano, orange for banjo, yellow
+% for bass. These are colors you can buy a fineliner in, so the same
+% coding works when writing voicings onto a sheet of music by hand.
+%
+% Each is picked for two things at once: legible on the page, and telling
+% apart from the other five. Every pair is at least 0.13 apart in OKLab.
+% Five clear 4.5:1 against the page, the threshold for 12pt bold, because
+% a chord book gets read in bad light. Yellow clears only 3.5:1: contrast
+% here is a matter of darkness, and yellow stops looking yellow well
+% before it gets dark enough, so the bass pen trades a little rather than
+% turn olive.
 \definecolor{fretgreen}{HTML}{00873C}   % mandolin, green pen
 \definecolor{fretblue}{HTML}{0060BB}    % guitar, blue pen
 \definecolor{fretpurple}{HTML}{9600D5}  % ukulele, purple pen
@@ -79,6 +86,41 @@
 \fi
 \pagecolor{paper}
 \color{ink}
+
+% ------------------------------------------------------------- punch guides
+% Five targets down the binding edge, at the holes of the pamphlet stitch
+% in the README.
+%
+% Holes 1, 3 and 5 sit where a US three-ring binder punches, scaled to this
+% page. A binder puts its holes 4.25in apart on an 11in sheet, half an inch
+% in, so the ratios are 1.25/11, 5.5/11 and 9.75/11 down and 0.5/8.5 across.
+% On a 3.5in by 5.5in page that is 15.875mm, 69.85mm and 123.825mm from the
+% head, 5.23mm from the fold. Holes 2 and 4 fall halfway between, which
+% makes all four gaps 26.9875mm and the whole set evenly spaced.
+%
+% The inset stays inside the 8.5mm inner margin, so the marks never touch a
+% text block.
+%
+% The binding edge alternates, so these follow the page parity rather than
+% sitting on a fixed side. On a sheet printed both ways the recto mark and
+% the verso mark land on the same physical spot, which is what lets a
+% single punch serve both faces.
+\newlength{\punch@in}  \setlength{\punch@in}{5.23mm}
+\newlength{\punch@gap} \setlength{\punch@gap}{26.9875mm}
+
+\newcommand{\punchguides}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \ifodd\value{page}
+      \coordinate (punch@base) at ([xshift=\punch@in]current page.west);
+    \else
+      \coordinate (punch@base) at ([xshift=-\punch@in]current page.east);
+    \fi
+    \foreach \punch@i in {-2,-1,0,1,2}{%
+      \draw[color=faint, line width=0.3pt]
+        ([yshift={\punch@i*\punch@gap}]punch@base) circle (0.75mm);}
+  \end{tikzpicture}}
+
+\AddToHook{shipout/background}{\punchguides}
 
 % ------------------------------------------------------------------- fonts
 % Sans throughout. A chord book is read in glances, on a stand, in bad

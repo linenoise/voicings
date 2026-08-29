@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="900" height="440"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 452" width="900" height="452"
      font-family="Helvetica, Arial, sans-serif">
-  <rect width="900" height="440" fill="#FDFCF8"/>
+  <rect width="900" height="452" fill="#FDFCF8"/>
 
   <!-- ============ outside of the spine ============ -->
   <text x="50" y="38" font-size="17" font-weight="bold" fill="#1A1A1A">Outside</text>
@@ -25,8 +25,9 @@
     <text x="82" y="291">4</text><text x="82" y="351">5</text>
   </g>
   <text x="146" y="231" font-size="12" fill="#6E6E6E">center</text>
-  <text x="50" y="400" font-size="12" fill="#6E6E6E">holes 6mm in from the fold,</text>
-  <text x="50" y="416" font-size="12" fill="#6E6E6E">20mm apart</text>
+  <text x="50" y="400" font-size="12" fill="#6E6E6E">holes 5.2mm in from the fold,</text>
+  <text x="50" y="416" font-size="12" fill="#6E6E6E">27mm apart, at scaled</text>
+  <text x="50" y="432" font-size="12" fill="#6E6E6E">three-ring positions</text>
 
   <!-- ============ inside of the spine ============ -->
   <text x="290" y="38" font-size="17" font-weight="bold" fill="#1A1A1A">Inside</text>

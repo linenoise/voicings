@@ -55,17 +55,40 @@ sudo apt install texlive-xetex texlive-latex-extra   # Debian
    tall is exactly 11in, so there's no waste top or bottom.
 3. Stack the rectangles in the order they came off the sheet: top-left,
    top-right, bottom-left, bottom-right.
-4. Sew the left edge. A five-hole pamphlet stitch about 6mm in holds well;
-   the inner margin is 8.5mm to leave room.
+4. Punch the five holes. Every page carries five small gray circles down
+   its binding edge, so there is nothing to measure: square up the stack,
+   punch through the marks, sew.
+5. Sew a five-hole pamphlet stitch. The inner margin is 8.5mm, which leaves
+   room for the thread.
 
 ![Five-hole pamphlet stitch: the spine outside, the spine inside, and the order of the six passes](images/pamphlet-stitch.svg)
 
-Punch the five holes 20mm apart, centered on the height of the block, and
-work them in the order above. Step 4 is the only long one: it runs the whole
-spine on the outside, passing over three holes without entering them. Both
-ends finish inside at the center hole, where they knot to each other and get
-trimmed. Waxed linen thread holds better than cotton and does not need a
-second pass.
+Work the passes in the order shown. The fourth is the only long one: it runs
+the whole spine on the outside, passing over three holes without entering
+them.
+Both ends finish inside at the center hole, where they knot to each other
+and get trimmed. Waxed linen thread holds better than cotton and does not
+need a second pass.
+
+An office hole punch will not do this. It makes a 6mm hole, reaches about
+12mm in, and has its own fixed spacing. Use an awl, a pin vise, or a 1.5mm
+bookbinding screw punch: the printed circles are 1.5mm across, sized to be
+covered by the hole rather than to survive beside it.
+
+Holes 1, 3 and 5 sit where a three-ring binder punches, scaled to the page.
+A binder works on an 11in sheet: holes 4.25in apart, half an inch in. Those
+same ratios on a 3.5in by 5.5in page put the marks 15.9mm, 69.9mm and
+123.8mm down, 5.2mm from the fold. Holes 2 and 4 fall halfway between, so
+all four gaps come out at 27mm and the set reads as evenly spaced.
+
+The marks are on the binding edge, which alternates sides, so on a sheet
+printed both ways the front mark and the back mark land on the same spot.
+Punch once and both faces line up.
+
+Both editions carry the same five marks. The print edition is an imposition
+of the screen pages rather than a separate typesetting, so whatever is on a
+screen page is on the printed one. To sew a three-hole pamphlet stitch
+instead, use holes 1, 3 and 5 and ignore the other two.
 
 Consecutive pages land on the two faces of each rectangle, so the stack
 collates with no folding. `make print SCHEME=saddle` gives folded
