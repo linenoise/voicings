@@ -522,10 +522,11 @@ class Book(object):
                 " ".join(r"\frets{%s}" % tex_escape(d) for d in degrees)))
         self.w(r"\end{degreetable}")
         self.w(r"\begin{rootmapnote}")
-        self.w(r"Play the root, and the fifth if there is one. Add the tone "
-               r"that names the chord --- the \frets{3b}, the \frets{7b} "
-               r"--- only when it wants hearing. The rest belongs to "
-               r"whoever is playing chords.")
+        # One sentence per line: three separate rules, not a paragraph.
+        self.w(r"Play the root, and the fifth if there is one.\\")
+        self.w(r"Add the tone that names the chord --- the \frets{3b}, "
+               r"the \frets{7b} --- only when it wants hearing.\\")
+        self.w(r"The rest belongs to whoever is playing chords.")
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 
