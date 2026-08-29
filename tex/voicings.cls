@@ -255,6 +255,7 @@
 % left, its voicings running right. Rows are ruled faintly so the eye can
 % track across on a dark stage.
 \newlength{\chord@name}\setlength{\chord@name}{20mm}
+\newlength{\chord@rowsep}\setlength{\chord@rowsep}{1.10mm}
 
 \setlength{\columnsep}{3mm}
 % The space between a page heading and the first row. It has to be set
@@ -291,13 +292,11 @@
 % whenever the break fell there: an \hrule is not discardable, and glue is.
 % Same weight and color as the rule under the page heading.
 \newcommand{\chordrowfirst}[2]{%
-  \par
+  \par\nointerlineskip
   \vtop{\hsize=\linewidth
     {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
     \makebox[\chord@name][l]{\small\bfseries #1}#2\par}%
-  \nobreak\vskip0.30mm
-  {\color{rule!45}\hrule height 0.2pt}%
-  \vskip0.30mm}
+  \vskip\chord@rowsep}
 
 % Tight enough that a whole key -- around thirty chords -- lands on one
 % page. Two half-empty pages per key would double the sheet count, and
@@ -335,13 +334,17 @@
 % chord with two voicings hung higher than its neighbors and the top of a
 % column came out ragged. A \vtop sits on its FIRST baseline, which is
 % what top-justifying a cell means.
+% Rows are separated by space alone. A hairline under every chord turned
+% a page of thirty into a ledger; the group rules carry the structure, and
+% the rows only need enough air to read as separate.
+% \nointerlineskip because the rule that used to sit between rows also
+% suppressed TeX's interline glue. Take the rule away and that glue comes
+% back, silently adding a couple of points to every row.
 \newcommand{\chordrow}[2]{%
-  \par
+  \par\nointerlineskip
   \vtop{\hsize=\linewidth
     \makebox[\chord@name][l]{\small\bfseries #1}#2\par}%
-  \nobreak\vskip0.30mm
-  {\color{rule!45}\hrule height 0.2pt}%
-  \vskip0.30mm}
+  \vskip\chord@rowsep}
 
 %% An alternate voicing goes under the first, pulled up tight so the pair
 % reads as one chord rather than drifting toward the next one.
@@ -504,6 +507,9 @@
 % run wider than the page in the flat keys, so the second wraps under the
 % name rather than off the edge.
 \newlength{\piano@name}\setlength{\piano@name}{20mm}
+% Wider than the chord pages' because the type is smaller: a note list
+% at eight points needs proportionally more air to read as its own row.
+\newlength{\piano@rowsep}\setlength{\piano@rowsep}{2.4mm}
 % A voicing may wrap inside its own column -- there is no room not to --
 % but never across columns, which would leave half a chord at the foot of
 % one and half at the head of the next with no name on it. The vbox is
@@ -516,12 +522,26 @@
 % while \scriptsize is still active keeps the two lines tight together,
 % and the space that separates one chord from the next then sits below the
 % pair, where it belongs.
+% Separated by space, like the chord pages: no hairline under every row.
+% \nointerlineskip because the rule that used to sit between rows also
+% suppressed TeX's interline glue, and taking it away lets that glue back
+% in unnoticed.
 \newcommand{\pianorow}[2]{%
-  \par\noindent\vtop{\hsize=\linewidth
+  \par\nointerlineskip
+  \vtop{\hsize=\linewidth
     \hangindent=\piano@name\hangafter=1
     {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}%
-  \nobreak
-  \par\vspace{0.30mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.30mm}}
+  \vskip\piano@rowsep}
+
+% As \chordrowfirst: the rule heading a group rides inside that group's
+% first row, so a column break cannot strand it at the top of a column.
+\newcommand{\pianorowfirst}[2]{%
+  \par\nointerlineskip
+  \vtop{\hsize=\linewidth
+    {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
+    \hangindent=\piano@name\hangafter=1
+    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}%
+  \vskip\piano@rowsep}
 
 % ------------------------------------------------------- bass vocabulary
 % Twenty-six kinds of chord will not fit one column at a size worth

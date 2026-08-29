@@ -472,8 +472,15 @@ class Book(object):
             for n, chunk in enumerate(paginate(ordered, PIANO_PER_PAGE)):
                 self.w(r"\begin{pianopage}{%s}{%s}"
                        % (self.key_heading(key), "cont" if n else ""))
+                last = None
                 for entry in chunk:
-                    self.w(r"  \pianorow{%s}{%s}" % (
+                    g = group_index(entry["chord"])
+                    starts_group = last is not None and g != last
+                    if starts_group:
+                        self.w(r"  \chordgap")
+                    last = g
+                    self.w(r"  \pianorow%s{%s}{%s}" % (
+                        "first" if starts_group else "",
                         tex_escape(entry["chord"]),
                         r" \voicingsep ".join(
                             notes_tex(f) for f in entry["frets"])))
