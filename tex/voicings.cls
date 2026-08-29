@@ -379,6 +379,12 @@
 \newcommand{\usecofsize}[1]{\renewcommand{\cof@fretsize}{#1}}
 \newcommand{\cof@frets}{%
   \fontsize{\cof@fretsize}{\cof@fretsize}\bfseries\selectfont}
+
+% A voicing that runs to two lines -- the bass circle gives a five-string
+% position with the four-string one beneath it -- has to restate its face
+% after the break: a tikz node typesets each line on its own, so the font
+% and color set before the \\ do not carry across it.
+\newcommand{\cofline}{\cof@frets\ttfamily\color{\voicingcolor}}
 \newcommand{\cof@minor}{\fontsize{7.2}{7.6}\selectfont}
 \newcommand{\cof@sig}{\fontsize{6}{6.4}\selectfont}
 

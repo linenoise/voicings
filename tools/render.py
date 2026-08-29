@@ -168,25 +168,35 @@ class Book(object):
         """Where a bassist actually puts this root.
 
         Every root is available on more than one string, and the choice is
-        not "whichever fret is lowest" -- that lands G on the open G string,
-        an octave up and thin, when the whole point of the instrument is the
-        bottom. Work up from the lowest string and take the first one that
-        falls inside first position: C at the third fret of the A string,
-        not the eighth of the E; G at the third fret of the E, not the open
-        G. Name the string as well as the fret, since a bare number says
-        nothing on its own.
+        not "whichever fret is lowest" -- that lands G on the open G
+        string, an octave up and thin, when the whole point of the
+        instrument is the bottom. Work up from the lowest string and take
+        the first that falls inside first position.
+
+        A five-string's low B wins that race for most of the circle, so
+        wherever the answer lands on the B string the four-string position
+        follows in parentheses: C is B1, or A3 if you have four strings.
+        The two are stacked rather than run together, because a wedge is
+        only about eleven millimetres across.
         """
         root, _, _ = theory.parse_chord(symbol)
         name = theory.spell(root)
         row = self.bass["root_map"]["notes"].get(name)
         if not row:
             return None
-        strings = self.bass["root_map"]["strings"]
-        for string, fret in zip(strings, row):
-            if fret <= FIRST_POSITION:
-                return "%s%d" % (string, fret)
-        string, fret = min(zip(strings, row), key=lambda sf: sf[1])
-        return "%s%d" % (string, fret)
+        pairs = list(zip(self.bass["root_map"]["strings"], row))
+
+        def pick(options):
+            for string, fret in options:
+                if fret <= FIRST_POSITION:
+                    return string, fret
+            return min(options, key=lambda sf: sf[1])
+
+        best = pick(pairs)
+        if best[0] != "B":
+            return "%s%d" % best
+        four = pick([p for p in pairs if p[0] != "B"])
+        return "%s%d (%s%d)" % (best[0], best[1], four[0], four[1])
 
     def voicing_for(self, instrument, symbol):
         if instrument == "bass":
@@ -241,7 +251,7 @@ class Book(object):
                 names = [r"\textcolor{%s}{%s}"
                          % (INK[i], tex_escape(self.instruments[i]["name"]))
                          for i in row]
-                lines.append(r"{\large %s\par}"
+                lines.append(r"{\large\bfseries %s\par}"
                              % r"\, $\cdot$\, ".join(names))
             listing = r"\vspace{2.5mm}".join(lines)
         self.w(r"\coverpage{%s}{%s}" % (subject, listing))
@@ -311,11 +321,15 @@ class Book(object):
         title = self.instruments[instrument]["name"]
         self.w(r"\usevoicingcolor{%s}" % INK[instrument])
         # Guitar fingerings run to six digits and piano voicings to five
-        # notes, so those keep the small setting. For the rest, 10pt is as
-        # large as the inner ring takes: a wedge there is 10.7mm across and
-        # four digits at the body's 12pt measure 10.2mm, which touches.
-        self.w(r"\usecofsize{%s}"
-               % ("6.4" if instrument in ("guitar", "piano") else "10"))
+        # notes, so those keep the small setting. For the rest, 9pt is as
+        # large as the rings take with air left around it: a wedge at the
+        # inner ring is 10.7mm across, and four digits measure 7.6mm at
+        # 9pt against 10.2mm at the body's 12pt, which touched the lines.
+        # Bass labels carry a five-string position and a four-string one
+        # in parentheses -- "B1 (A3)" is seven characters where a mandolin
+        # fingering is four -- so they set smaller to clear the wedge.
+        self.w(r"\usecofsize{%s}" % {
+            "guitar": "6.4", "piano": "6.4", "bass": "7"}.get(instrument, "9"))
         self.w(r"\begin{circlepage}{%s}" % tex_escape(title))
         self.w(r"\begin{circleoffifths}{%s}" % tex_escape(title))
         for i, key in enumerate(CIRCLE):
@@ -340,9 +354,10 @@ class Book(object):
                    r"Inner ring: relative minor.\\ "
                    r"Spike the drone as shown on the banjo pages.}")
         elif instrument == "bass":
-            self.w(r"\circlefootnote{String and fret for each root.\\ "
+            self.w(r"\circlefootnote{String and fret for each root: "
                    r"\frets{A3} is the third fret of the A string.\\ "
-                   r"Whichever sits lowest on the neck.}")
+                   r"Lowest that falls under the hand.\\ "
+                   r"Five-string first, four-string in parentheses.}")
         else:
             self.w(r"\circlefootnote{Outer ring: major.\\ "
                    r"Inner ring: relative minor.\\ "
