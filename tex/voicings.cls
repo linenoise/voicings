@@ -268,6 +268,7 @@
   \pageheader{#1}{#2}{\ifthenelse{\equal{#3}{cont}}{continued}{}}%
   \pagerule
   #4%
+  \vspace{\baselineskip}%
   \raggedright
   \begin{multicols}{2}%
 }{\end{multicols}}
@@ -294,19 +295,33 @@
 % voicings could take the column break between them, leaving 0000 at the
 % foot of one column and 2555 at the head of the next with no label -- it
 % reads as a different chord entirely. A vbox cannot be broken.
-% \nobreak binds the rule to the row above it. Without it a column break
-% could fall between them, stranding the rule at the top of the next
-% column -- which is why column two used to start lower than column one.
-% The rule stays outside the vbox on purpose: inside, it would change the
-% box's depth and cost a couple of points on every row.
+% \vtop, not \vbox. A \vbox sits on the baseline of its LAST line, so a
+% chord with two voicings hung higher than its neighbors and the top of a
+% column came out ragged wherever the first row happened to have an
+% alternate. \vtop sits on the baseline of its FIRST line, which is what
+% top-justifying a cell means: every row starts level whatever it holds.
+% Banjo and ukulele never showed the fault because no chord of theirs has
+% a second voicing.
 %
-% The space that follows the rule is ordinary glue, and glue at the top of
-% a column is discarded, so both columns now start level.
+% The box is placed in VERTICAL mode: no \noindent, which would wrap it in
+% a paragraph and put a legal breakpoint in the interline glue before the
+% \nobreak could stop it. That is how a rule ended up stranded at the head
+% of column two. In vertical mode the order reads exactly as it behaves:
+% box, then a penalty that welds the rule to it, then the rule, then
+% ordinary glue -- and glue at the top of a column is discarded, so both
+% columns start level.
+%
+% \vtop, not \vbox: a \vbox sits on the baseline of its LAST line, so a
+% chord with two voicings hung higher than its neighbors and the top of a
+% column came out ragged. A \vtop sits on its FIRST baseline, which is
+% what top-justifying a cell means.
 \newcommand{\chordrow}[2]{%
-  \par\noindent\vbox{\hsize=\linewidth
+  \par
+  \vtop{\hsize=\linewidth
     \makebox[\chord@name][l]{\small\bfseries #1}#2\par}%
-  \nobreak
-  \par\vspace{0.40mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.40mm}}
+  \nobreak\vskip0.30mm
+  {\color{rule!45}\hrule height 0.2pt}%
+  \vskip0.30mm}
 
 %% An alternate voicing goes under the first, pulled up tight so the pair
 % reads as one chord rather than drifting toward the next one.
@@ -454,6 +469,7 @@
   \clearpage
   \pageheader{Piano}{#1}{\ifthenelse{\equal{#2}{cont}}{continued}{}}%
   \pagerule
+  \vspace{\baselineskip}%
   \raggedright
   \begin{multicols}{2}%
 }{\end{multicols}}
@@ -482,11 +498,11 @@
 % and the space that separates one chord from the next then sits below the
 % pair, where it belongs.
 \newcommand{\pianorow}[2]{%
-  \par\noindent\vbox{\hsize=\linewidth
+  \par\noindent\vtop{\hsize=\linewidth
     \hangindent=\piano@name\hangafter=1
     {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}%
   \nobreak
-  \par\vspace{0.7mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.7mm}}
+  \par\vspace{0.30mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.30mm}}
 
 % ------------------------------------------------------- bass vocabulary
 % Twenty-six kinds of chord will not fit one column at a size worth
@@ -498,9 +514,11 @@
 }{\end{multicols}}
 
 \newcommand{\degreerow}[2]{%
-  \par\noindent\vbox{\hsize=\linewidth
-    \makebox[15mm][l]{\bfseries #1}#2\par}%
-  \par\vspace{1.1mm}{\color{rule!45}\hrule height 0.2pt}\vspace{1.1mm}}
+  \par
+  \vtop{\hsize=\linewidth\makebox[15mm][l]{\bfseries #1}#2\par}%
+  \nobreak\vskip1.1mm
+  {\color{rule!45}\hrule height 0.2pt}%
+  \vskip1.1mm}
 
 % -------------------------------------------------------------- back sheet
 % Everything that is reference rather than content lives here, so the
