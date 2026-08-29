@@ -67,8 +67,8 @@
 % because a chord book gets read in bad light. The orange is a shade
 % deeper than a gel pen for exactly that reason.
 \definecolor{fretgreen}{HTML}{00873C}   % mandolin, green pen
-\definecolor{fretblue}{HTML}{0073DF}    % guitar, blue pen
-\definecolor{fretpurple}{HTML}{A200E6}  % ukulele, purple pen
+\definecolor{fretblue}{HTML}{0060BB}    % guitar, blue pen
+\definecolor{fretpurple}{HTML}{9A00DB}  % ukulele, purple pen
 \definecolor{fretorange}{HTML}{C05500}  % banjo, orange pen
 \definecolor{fretyellow}{HTML}{9A8800}  % bass, darkest legible yellow
 \definecolor{rule}{HTML}{B8B8B8}
