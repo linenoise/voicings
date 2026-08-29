@@ -42,6 +42,7 @@ guitar:
     with the lowest two muted transfer directly.
 
 bass:
+  tuning_label: "(B) E A D G"
   # Longest scale of the lot.
   max_span: 3        # frets covered without shifting
   max_diagonal: 5    # more, when it is one finger per string
@@ -68,6 +69,7 @@ ukulele:
   reentrant: true
 
 banjo:
+  tuning_label: "(G) D G B D"
   # Guitar-ish scale but only four strings fretted.
   max_span: 4        # frets covered without shifting
   max_diagonal: 6    # more, when it is one finger per string

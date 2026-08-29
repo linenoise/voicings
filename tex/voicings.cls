@@ -59,18 +59,18 @@
 % Chosen to stay legible on a mono laser printer: everything carries in
 % gray value alone, color only reinforces it.
 \definecolor{ink}{HTML}{1A1A1A}
-\definecolor{keyred}{HTML}{B3261E}      % key titles, and piano
+\definecolor{keyred}{HTML}{AA0019}      % key titles, and piano
 % One pen per instrument, matching the notebook: green for mandolin, blue
 % for guitar, purple for ukulele, red for piano, orange for banjo. These
 % are ordinary pen inks rather than a designed palette, but each is dark
 % enough to clear 4.5:1 against the page -- the threshold for 12pt bold --
 % because a chord book gets read in bad light. The orange is a shade
 % deeper than a gel pen for exactly that reason.
-\definecolor{fretgreen}{HTML}{1B7F45}   % mandolin, green pen
-\definecolor{fretblue}{HTML}{1D3F94}    % guitar, blue pen
-\definecolor{fretpurple}{HTML}{6D3BA8}  % ukulele, purple pen
-\definecolor{fretorange}{HTML}{B0570A}  % banjo, orange pen
-\definecolor{fretyellow}{HTML}{7A6100}  % bass, darkest legible yellow
+\definecolor{fretgreen}{HTML}{00873C}   % mandolin, green pen
+\definecolor{fretblue}{HTML}{0073DF}    % guitar, blue pen
+\definecolor{fretpurple}{HTML}{A200E6}  % ukulele, purple pen
+\definecolor{fretorange}{HTML}{C05500}  % banjo, orange pen
+\definecolor{fretyellow}{HTML}{9A8800}  % bass, darkest legible yellow
 \definecolor{rule}{HTML}{B8B8B8}
 \definecolor{faint}{HTML}{6E6E6E}
 \definecolor{paper}{HTML}{FFFFFF}

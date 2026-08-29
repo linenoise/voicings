@@ -476,7 +476,16 @@ class Book(object):
         return tex_escape(key)
 
     def tuning_label(self, instrument):
-        return " ".join(t[:-1] for t in self.instruments[instrument]["tuning"])
+        """How the tuning is written on the page.
+
+        Usually just the open strings, but the banjo and the five-string
+        bass each have a string the fret numbers do not cover -- the drone
+        and the low B -- so those are named in parentheses.
+        """
+        meta = self.instruments[instrument]
+        if "tuning_label" in meta:
+            return meta["tuning_label"]
+        return " ".join(t[:-1] for t in meta["tuning"])
 
     # -- piano -----------------------------------------------------------
 
@@ -519,7 +528,8 @@ class Book(object):
         that is the thing you need before you play a note in it.
         """
         self.w(r"\usevoicingcolor{%s}" % INK["banjo"])
-        self.w(r"\sectiondivider{Banjo Chords}{gDGBD, open G}")
+        self.w(r"\sectiondivider{Banjo Chords}{%s}"
+               % tex_escape(self.tuning_label("banjo")))
         self.circle_of_fifths("banjo")
         doc = self.voicings["banjo"]
         by_key = {k["key"]: k for k in doc["keys"]}
@@ -564,7 +574,8 @@ class Book(object):
 
     def bass_section(self):
         self.w(r"\usevoicingcolor{%s}" % INK["bass"])
-        self.w(r"\sectiondivider{Bass}{E A D G}")
+        self.w(r"\sectiondivider{Bass}{%s}"
+               % tex_escape(self.tuning_label("bass")))
         self.circle_of_fifths("bass")
         self.w(r"\begin{bookpage}{Where the Roots Are}")
         self.w(r"\pagesubtitle{Bass}")
@@ -580,7 +591,7 @@ class Book(object):
                       "}{".join(str(f) for f in frets)))
         self.w(r"\end{rootmap}")
         self.w(r"\begin{rootmapnote}")
-        self.w(r"Fret numbers for the root of each key on each string.\\")
+        self.w(r"Fret for the root of each key on each string.\\")
         self.w(r"Everything else is measured from there.")
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
@@ -621,7 +632,7 @@ class Book(object):
             last = g
             label = ("major" if quality == "" else
                      quality.replace("o", "°"))
-            degrees = [self.degree_name(i)
+            degrees = [self.degree_name(i, quality)
                        for i in theory.QUALITIES[quality]]
             self.w(r"\degreerow%s{%s}{%s}" % (
                 "first" if starts_group else "",
@@ -642,11 +653,19 @@ class Book(object):
     DEGREE_NAMES = {0: "R", 1: "b9", 2: "9", 3: "b3", 4: "3", 5: "4",
                     6: "b5", 7: "5", 8: "#5", 9: "6", 10: "b7", 11: "7"}
 
-    def degree_name(self, interval):
-        return self.DEGREE_NAMES[interval % 12]
+    # A suspension replaces the third rather than stacking above the
+    # seventh, so its added tone is a 2, not a 9 -- the same reason sus4
+    # is written 4 and never 11.
+    DEGREE_OVERRIDES = {"sus2": {2: "2"}}
+
+    def degree_name(self, interval, quality=None):
+        interval %= 12
+        override = self.DEGREE_OVERRIDES.get(quality, {})
+        return override.get(interval, self.DEGREE_NAMES[interval])
 
     def offset_phrase(self, d):
-        names = ["same string", "next string", "two over", "three over"]
+        names = ["same string", "next string",
+                 "two over from root", "three over from root"]
         where = names[d["string"]] if d["string"] < len(names) else ""
         if d["offset"] == 0:
             return "(%s)" % where
