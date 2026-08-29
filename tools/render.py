@@ -586,12 +586,22 @@ class Book(object):
         self.w(r"\begin{bookpage}{What to Play Under}")
         self.w(r"\pagesubtitle{Bass \quad degrees from the root}")
         self.w(r"\begin{degreetable}")
+        # Grouped like the chord pages: triads, sixths, sevenths, ninths,
+        # so a bass player finds the row in the same place they would find
+        # the chord on any other instrument's page.
+        last = None
         for quality in theory.VOCABULARY:
+            g = GROUP_OF.get(quality, SLASH_GROUP - 1)
+            starts_group = last is not None and g != last
+            if starts_group:
+                self.w(r"  \chordgap")
+            last = g
             label = ("major" if quality == "" else
                      quality.replace("o", "°"))
             degrees = [self.degree_name(i)
                        for i in theory.QUALITIES[quality]]
-            self.w(r"\degreerow{%s}{%s}" % (
+            self.w(r"\degreerow%s{%s}{%s}" % (
+                "first" if starts_group else "",
                 tex_escape(label),
                 " ".join(r"\frets{%s}" % tex_escape(d) for d in degrees)))
         self.w(r"\end{degreetable}")

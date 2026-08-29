@@ -366,7 +366,7 @@
 
 % Absolute sizes: a diagram this dense cannot follow the body size.
 \newcommand{\cof@name}{\fontsize{8}{8.6}\selectfont}
-\newcommand{\cof@frets}{\fontsize{6.4}{6.8}\selectfont}
+\newcommand{\cof@frets}{\fontsize{6.4}{6.8}\bfseries\selectfont}
 \newcommand{\cof@minor}{\fontsize{7.2}{7.6}\selectfont}
 \newcommand{\cof@sig}{\fontsize{6}{6.4}\selectfont}
 
@@ -552,12 +552,22 @@
   \begin{multicols}{2}%
 }{\end{multicols}}
 
+% Set like the chord pages: space between rows rather than a hairline
+% under each, a rule heading every group, and \nointerlineskip so the
+% spacing below is the only thing separating them.
+\newlength{\degree@rowsep}\setlength{\degree@rowsep}{1.6mm}
+
 \newcommand{\degreerow}[2]{%
-  \par
+  \par\nointerlineskip
   \vtop{\hsize=\linewidth\makebox[15mm][l]{\bfseries #1}#2\par}%
-  \nobreak\vskip1.1mm
-  {\color{rule!45}\hrule height 0.2pt}%
-  \vskip1.1mm}
+  \vskip\degree@rowsep}
+
+\newcommand{\degreerowfirst}[2]{%
+  \par\nointerlineskip
+  \vtop{\hsize=\linewidth
+    {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
+    \makebox[15mm][l]{\bfseries #1}#2\par}%
+  \vskip\degree@rowsep}
 
 % -------------------------------------------------------------- back sheet
 % Everything that is reference rather than content lives here, so the
