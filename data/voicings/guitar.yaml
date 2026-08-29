@@ -1,6 +1,4 @@
 # Guitar voicings.
-# Entries marked `derived` were generated to complete
-# the vocabulary; the rest came from the notebook.
 instrument: guitar
 source: notebook pages 25-36
 keys:

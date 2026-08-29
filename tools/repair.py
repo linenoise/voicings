@@ -113,8 +113,14 @@ def candidates_for(position, current):
     return vals
 
 
-def repair(instrument, tuning, key, symbol, frets_text, max_changes):
-    """Return (best_frets_text, n_changed) or (None, None)."""
+def repair(instrument, tuning, key, symbol, frets_text, max_changes,
+           siblings=()):
+    """Return (best_frets_text, n_changed) or (None, None).
+
+    `siblings` are the chord's other voicings. A repair that lands on one
+    of them is rejected: it would leave the chord listing the same
+    fingering twice, which reads as an error on the page.
+    """
     n = len(tuning)
     try:
         original = theory.parse_frets(frets_text, n)
@@ -132,6 +138,8 @@ def repair(instrument, tuning, key, symbol, frets_text, max_changes):
                 if cand == original or not playable(cand):
                     continue
                 text = render(cand)
+                if text in siblings:
+                    continue
                 if not is_clean(instrument, tuning, key, symbol, text):
                     continue
                 gaps = incompleteness(instrument, tuning, key, symbol, text)
@@ -182,9 +190,10 @@ def main():
                     if is_clean(name, tuning, keyblock["key"],
                                 entry["chord"], frets_text):
                         continue
+                    siblings = [t for t in entry["frets"] if t != frets_text]
                     fixed, changed = repair(
                         name, tuning, keyblock["key"], entry["chord"],
-                        frets_text, args.max_changes,
+                        frets_text, args.max_changes, siblings,
                     )
                     row = (name, source, keyblock.get("pages",
                            keyblock.get("page")), keyblock["key"],

@@ -24,83 +24,62 @@ string is a single mis-copied digit, which is the overwhelming majority.
 | banjo | 43 | Bb | `Bb7` | `3334` | `3336` | 1 |
 | guitar | 28 | C | `Csus2` | `x30010` | `x30013` | 1 |
 | guitar | 28 | C | `C°7` | `x34241` | `x34242` | 1 |
-| guitar | 28 | C | `C7b5` | `x32213` | `x32312` | 2 |
 | guitar | 29 | Db | `Db+` | `x43222` | `x43221` | 1 |
 | guitar | 29 | Db | `Dbm6` | `x43324` | `x42324` | 1 |
 | guitar | 29 | Db | `Db°7` | `x45354` | `x45353` | 1 |
-| guitar | 29 | Db | `Db7b5` | `x45464` | `x45463` | 1 |
-| guitar | 29 | Db | `Db7#5` | `x43454` | `x43465` | 2 |
 | guitar | 31 | Eb | `Ebm6` | `x65546` | `x64546` | 1 |
-| guitar | 31 | Eb | `Eb7b5` | `x67686` | `x67685` | 1 |
-| guitar | 31 | Eb | `Eb7#5` | `x65676` | `x65687` | 2 |
 | guitar | 32 | E | `Esus2` | `024100` | `024400` | 1 |
 | guitar | 32 | E | `E7b5` | `010100` | `010130` | 1 |
 | guitar | 32 | E | `E7#5` | `032120` | `032130` | 1 |
 | guitar | 33 | F | `F7b5` | `xx3424` | `xx3445` | 2 |
 | guitar | 33 | F | `F7#5` | `xx3244` | `xx3645` | 2 |
-| guitar | 34 | Gb | `Gbsus2` | `244422` | `244122` | 1 |
 | guitar | 34 | Gb | `Gb6` | `2x4442` | `2x4342` | 1 |
-| guitar | 34 | Gb | `Gb7b5` | `2x2323` | `2x2312` | 2 |
-| guitar | 34 | Gb | `Gb7#5` | `2x2345` | `2x2336` | 2 |
-| guitar | 35 | G | `G7b5` | `3x3443` | `3x3423` | 1 |
-| guitar | 36 | Ab | `Absus2` | `466644` | `466344` | 1 |
 | guitar | 36 | Ab | `Ab6` | `4x6644` | `4x6564` | 2 |
-| guitar | 36 | Ab | `Ab7b5` | `4x4545` | `4x4534` | 2 |
-| guitar | 36 | Ab | `Ab7#5` | `464567` | `474558` | 3 |
 | guitar | 27 | B | `Bm6` | `x20212` | `x20102` | 2 |
 | mandolin | [7, 8] | C | `C6` | `5560` | `5770` | 2 |
 | mandolin | [7, 8] | C | `Cm6` | `0155` | `0135` | 1 |
 | mandolin | [7, 8] | C | `Cmaj9` | `5750` | `5950` | 1 |
 | mandolin | [7, 8] | C | `Cmadd9` | `8556` | `8558` | 1 |
 | mandolin | [7, 8] | C | `C7#9` | `5843` | `5860` | 2 |
-| mandolin | [7, 8] | C | `C/E` | `0233` | `x233` | 1 |
 | mandolin | [9, 10] | Db | `Dbm6` | `3241` | `3240` | 1 |
 | mandolin | [9, 10] | Db | `Db6/9` | `5355` | `6346` | 3 |
 | mandolin | [9, 10] | Db | `Db9` | `4145` | `4141` | 1 |
-| mandolin | [9, 10] | Db | `Db9` | `4145` | `4141` | 1 |
-| mandolin | [9, 10] | Db | `Dbmaj9` | `4146` | `5344` | 3 |
+| mandolin | [9, 10] | Db | `Dbmaj9` | `4146` | `5144` | 2 |
 | mandolin | [9, 10] | Db | `Dbadd9` | `4142` | `1141` | 2 |
 | mandolin | [11, 12] | D | `D` | `2355` | `2455` | 1 |
 | mandolin | [11, 12] | D | `D9` | `7440` | `7430` | 1 |
-| mandolin | [11, 12] | D | `D9` | `2040` | `2032` | 2 |
-| mandolin | [11, 12] | D | `Dmaj9` | `7378` | `7099` | 3 |
+| mandolin | [11, 12] | D | `D9` | `2040` | `5450` | 3 |
+| mandolin | [11, 12] | D | `Dmaj9` | `7378` | `[11]079` | 3 |
 | mandolin | [11, 12] | D | `Dmadd9` | `5160` | `7080` | 3 |
 | mandolin | [11, 12] | D | `D7b9` | `7466` | `7468` | 1 |
-| mandolin | [11, 12] | D | `D/F#` | `2002` | `x402` | 2 |
 | mandolin | [11, 12] | D | `D/A` | `2032` | `2052` | 1 |
 | mandolin | [13, 14] | Eb | `Eb` | `3503` | `3113` | 2 |
 | mandolin | [13, 14] | Eb | `Ebsus2` | `8806` | `88x6` | 1 |
 | mandolin | [13, 14] | Eb | `Eb6` | `5366` | `5566` | 1 |
 | mandolin | [13, 14] | Eb | `Ebm6` | `8698` | `8898` | 1 |
 | mandolin | [13, 14] | Eb | `Eb7` | `5213` | `3143` | 3 |
-| mandolin | [13, 14] | Eb | `Eb7` | `5213` | `3143` | 3 |
 | mandolin | [13, 14] | Eb | `Eb7#9` | `7488` | `6466` | 3 |
 | mandolin | [15, 16] | E | `E°7` | `3143` | `3243` | 1 |
 | mandolin | [15, 16] | E | `Eadd9` | `1333` | `1222` | 3 |
-| mandolin | [15, 16] | E | `E7b9` | `8579` | `[10]67[10]` | 3 |
 | mandolin | [15, 16] | E | `Esus4/G#` | `2240` | `1200` | 2 |
 | mandolin | [17, 18] | F | `F5` | `0033` | `x331` | 3 |
 | mandolin | [17, 18] | F | `Fsus2` | `5888` | `5588` | 1 |
 | mandolin | [17, 18] | F | `F9` | `0300` | `0101` | 2 |
-| mandolin | [17, 18] | F | `F9` | `0300` | `0101` | 2 |
-| mandolin | [17, 18] | F | `F7#9` | `5566` | `5364` | 2 |
+| mandolin | [17, 18] | F | `F7#9` | `5566` | `2364` | 3 |
 | mandolin | [19, 20] | Gb | `Gb2` | `1512` | `1412` | 1 |
 | mandolin | [19, 20] | Gb | `Gbmadd9` | `3101` | `1402` | 3 |
-| mandolin | [19, 20] | Gb | `Gb7b9` | `2444` | `0440` | 2 |
+| mandolin | [19, 20] | Gb | `Gb7b9` | `2444` | `3473` | 3 |
 | mandolin | [21, 22] | G | `G6/9` | `6777` | `7577` | 2 |
-| mandolin | [21, 22] | G | `Gmaj9` | `0314` | `0423` | 3 |
-| mandolin | [21, 22] | G | `G7b9` | `0213` | `1323` | 3 |
+| mandolin | [21, 22] | G | `Gmaj9` | `0314` | `0425` | 3 |
 | mandolin | [21, 22] | G | `G7b9` | `0213` | `1323` | 3 |
 | mandolin | [23, 24] | Ab | `Ab6` | `6466` | `5364` | 3 |
 | mandolin | [1, 2] | A | `A5` | `2779` | `x775` | 2 |
 | mandolin | [1, 2] | A | `Aadd9` | `2204` | `4245` | 3 |
-| mandolin | [1, 2] | A | `A/C#` | `2240` | `6240` | 1 |
 | mandolin | [3, 4] | Bb | `Bbm7` | `2011` | `1311` | 2 |
 | mandolin | [3, 4] | Bb | `Bbmaj9` | `5657` | `5756` | 2 |
 | mandolin | [3, 4] | Bb | `Bb7b9` | `3124` | `3024` | 1 |
 | mandolin | [3, 4] | Bb | `Bb7#9` | `3144` | `3044` | 1 |
 | mandolin | [5, 6] | B | `B°` | `4567` | `4357` | 2 |
-| mandolin | [5, 6] | B | `Bmaj7` | `4578` | `4466` | 3 |
 | mandolin | [5, 6] | B | `Bmaj7` | `4578` | `4466` | 3 |
 | mandolin | [5, 6] | B | `B7sus4` | `4212` | `4202` | 1 |
 | ukulele | 39 | Db | `Dbm` | `1111` | `1104` | 2 |
@@ -118,7 +97,7 @@ string is a single mis-copied digit, which is the overwhelming majority.
 | ukulele | 37 | Bb | `Bbsus2` | `0311` | `3011` | 2 |
 | ukulele | 37 | Bb | `Bb9` | `3143` | `3243` | 1 |
 | ukulele | 38 | B | `Bsus2` | `1422` | `4122` | 2 |
-| ukulele | 38 | B | `B9` | `2132` | `2322` | 2 |
+| ukulele | 38 | B | `B9` | `2132` | `6352` | 3 |
 
 ## Needs proofreading against the paper notebook
 
@@ -140,32 +119,6 @@ The only voicing given, so a canonical fingering was generated from theory. Thes
 
 | Instrument | Page | Key | Chord | As read | Printed |
 |---|---|---|---|---|---|
-| guitar | 32 | E | `E°7` | `x23132` | `012020` |
-| guitar | 36 | Ab | `Ab°7` | `4x2323` | `420101` |
-| mandolin | [19, 20] | Gb | `Gb5` | `9911` | `x442` |
-
-
-## Could not be read from the photograph
-
-These entries could not be brought into line by moving one or two strings, which almost always means the photograph of the page was misread rather than the notebook being wrong. Guessing further would invent a fingering and print it as though it were the author's, so instead:
-
-### Dropped, another voicing of the chord kept
-
-| Instrument | Page | Key | Chord | As read |
-|---|---|---|---|---|
-| guitar | 35 | G | `G6` | `3x2433` |
-| mandolin | [7, 8] | C | `Cm9` | `5156` |
-| mandolin | [9, 10] | Db | `Dbm9` | `6267` |
-| mandolin | [11, 12] | D | `Dmaj9` | `7490` |
-| mandolin | [23, 24] | Ab | `Abadd9` | `1136` |
-| mandolin | [23, 24] | Ab | `Abmadd9` | `1126` |
-
-### Replaced with a generated shape
-
-The only voicing given, so a canonical fingering was generated from theory. These are the ones worth checking against the paper notebook first.
-
-| Instrument | Page | Key | Chord | As read | Printed |
-|---|---|---|---|---|---|
 | guitar | 28 | C | `C7b5` | `x32312` | `014310` |
 | guitar | 28 | C | `C7#5` | `x32314` | `012110` |
 | guitar | 28 | C | `C9` | `x32333` | `010010` |
@@ -176,12 +129,14 @@ The only voicing given, so a canonical fingering was generated from theory. Thes
 | guitar | 31 | Eb | `Eb7b5` | `x67685` | `301023` |
 | guitar | 31 | Eb | `Eb7#5` | `x65687` | `341003` |
 | guitar | 31 | Eb | `Eb9` | `x65666` | `111023` |
+| guitar | 32 | E | `E°7` | `x23132` | `012020` |
 | guitar | 34 | Gb | `Gbsus2` | `244122` | `444122` |
 | guitar | 34 | Gb | `Gb7b5` | `2x2312` | `014310` |
 | guitar | 34 | Gb | `Gb7#5` | `2x2336` | `210330` |
 | guitar | 35 | G | `Gm6` | `3x2333` | `010030` |
 | guitar | 35 | G | `G7b5` | `3x3423` | `343001` |
 | guitar | 36 | Ab | `Absus2` | `466344` | `411144` |
+| guitar | 36 | Ab | `Ab°7` | `4x2323` | `420101` |
 | guitar | 36 | Ab | `Ab7b5` | `4x4534` | `430112` |
 | guitar | 36 | Ab | `Ab7#5` | `474558` | `034110` |
 | guitar | 26 | Bb | `Bbm6` | `113323` | `113023` |
@@ -190,6 +145,7 @@ The only voicing given, so a canonical fingering was generated from theory. Thes
 | mandolin | [11, 12] | D | `Dm9` | `7378` | `2231` |
 | mandolin | [13, 14] | Eb | `Ebm9` | `8489` | `3441` |
 | mandolin | [15, 16] | E | `Emaj9` | `1460` | `1122` |
+| mandolin | [19, 20] | Gb | `Gb5` | `9911` | `6442` |
 | mandolin | [1, 2] | A | `A7#9` | `2548` | `6233` |
 | mandolin | [5, 6] | B | `Bmaj9` | `4146` | `3142` |
 

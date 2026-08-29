@@ -189,7 +189,14 @@ def main():
             for entry in keyblock["chords"]:
                 if entry.get("check") is False:
                     continue
+                seen = set()
                 for frets_text in entry["frets"]:
+                    if frets_text in seen:
+                        findings.append(Finding(
+                            WARNING, name, keyblock["key"], entry["chord"],
+                            frets_text, "listed twice"))
+                        counts[WARNING] += 1
+                    seen.add(frets_text)
                     n_voicings += 1
                     for f in check_voicing(name, tuning, keyblock["key"],
                                            entry["chord"], frets_text, kind,

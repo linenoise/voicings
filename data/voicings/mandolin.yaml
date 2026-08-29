@@ -1,6 +1,4 @@
 # Mandolin voicings.
-# Entries marked `derived` were generated to complete
-# the vocabulary; the rest came from the notebook.
 instrument: mandolin
 source: notebook pages 1-24
 keys:
@@ -114,7 +112,7 @@ keys:
     derived: true
   - chord: C/E
     frets:
-    - x233
+    - '0233'
   - chord: C7/E
     frets:
     - '5510'
@@ -206,10 +204,9 @@ keys:
   - chord: Db9
     frets:
     - '4141'
-    - '4141'
   - chord: Dbmaj9
     frets:
-    - '5344'
+    - '5144'
   - chord: Dbm9
     frets:
     - '9969'
@@ -330,10 +327,10 @@ keys:
     frets:
     - '7478'
     - '7430'
-    - '2032'
+    - '5450'
   - chord: Dmaj9
     frets:
-    - '7099'
+    - '[11]079'
   - chord: Dm9
     frets:
     - '2231'
@@ -362,7 +359,7 @@ keys:
     derived: true
   - chord: D/F#
     frets:
-    - x402
+    - '2002'
   - chord: D7/F#
     frets:
     - '5002'
@@ -425,7 +422,6 @@ keys:
     - '8588'
   - chord: Eb7
     frets:
-    - '3143'
     - '3143'
   - chord: Ebmaj7
     frets:
@@ -707,7 +703,6 @@ keys:
   - chord: F9
     frets:
     - '0101'
-    - '0101'
   - chord: Fmaj9
     frets:
     - '0201'
@@ -730,7 +725,7 @@ keys:
   - chord: F7#9
     frets:
     - '1101'
-    - '5364'
+    - '2364'
   - chord: Fm11
     frets:
     - '1111'
@@ -772,7 +767,7 @@ keys:
     - '2445'
   - chord: Gb5
     frets:
-    - x442
+    - '6442'
   - chord: Gb+
     frets:
     - '3456'
@@ -856,7 +851,7 @@ keys:
   - chord: Gb7b9
     frets:
     - '0212'
-    - '0440'
+    - '3473'
   - chord: Gb7#9
     frets:
     - '3400'
@@ -965,7 +960,7 @@ keys:
     frets:
     - '2423'
     - '0022'
-    - '0423'
+    - '0425'
   - chord: Gm9
     frets:
     - '0315'
@@ -982,7 +977,6 @@ keys:
     - '3003'
   - chord: G7b9
     frets:
-    - '1323'
     - '1323'
   - chord: G7#9
     frets:
@@ -1240,7 +1234,7 @@ keys:
     derived: true
   - chord: A/C#
     frets:
-    - '6240'
+    - '2240'
   - chord: A7/C#
     frets:
     - '6203'
@@ -1425,7 +1419,6 @@ keys:
     - '4102'
   - chord: Bmaj7
     frets:
-    - '4466'
     - '4466'
   - chord: Bm7
     frets:

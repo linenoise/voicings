@@ -67,7 +67,10 @@ PDF targets still works.
   and minor, repeated on each banjo page and collected in one table.
 - **Piano**: one voicing per chord — close root position, the chord as you
   spell it at a keyboard. The open worship voicings from `piano.pdf` are
-  kept in `data/piano-shapes.yaml` rather than printed beside them.
+  kept in `data/piano-shapes.yaml` rather than printed beside them. Note
+  lists are set on one line and never wrapped: a chord broken across two
+  lines reads as two chords, so the piano pages stay single-column and a
+  key runs to two pages.
 - **Bass**: where every root sits on each string, the movable arpeggio
   patterns measured from it, and which degrees to play under every chord in
   the book. Bass players don't finger chord grids.
@@ -264,7 +267,7 @@ fingering actually sounds on that instrument's tuning and compares:
   purpose. Reported and allowed.
 - **Note** — wide stretches and other things worth an eyebrow.
 
-The current state is **2,127 voicings, 0 errors, 291 warnings** — 103 entries corrected (48 needed one string moved, 36 two, 19 three), and 6 left for proofreading.
+The current state is **2,122 voicings, 0 errors, 288 warnings** — 103 entries corrected (48 needed one string moved, 36 two, 19 three), and 6 left for proofreading.
 
 Where a voicing failed, `tools/repair.py` searched the neighbourhood of what
 was written for the closest playable fingering that does spell the chord —

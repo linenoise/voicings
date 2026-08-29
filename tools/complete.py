@@ -95,7 +95,7 @@ def main():
         instruments = yaml.safe_load(fh)
     record = provenance.load_record()
 
-    added, failed = [], []
+    added, failed, deduped = [], [], []
 
     for path in sorted(glob.glob(os.path.join(args.data, "voicings", "*.yaml"))):
         doc = yaml.safe_load(open(path))
@@ -140,6 +140,16 @@ def main():
                 added.append((name, key, sym, shape))
 
         for block in doc["keys"]:
+            # A chord listing the same fingering twice reads as a mistake.
+            for entry in block["chords"]:
+                seen, unique = set(), []
+                for t in entry["frets"]:
+                    if t not in seen:
+                        unique.append(t)
+                        seen.add(t)
+                if len(unique) != len(entry["frets"]):
+                    deduped.append((name, block["key"], entry["chord"]))
+                entry["frets"] = unique
             block["chords"].sort(key=sort_key)
         doc["keys"].sort(key=lambda b: KEYS.index(b["key"]))
 
@@ -159,7 +169,10 @@ def main():
         print("%-9s +%d generated" % (name, counts[name]))
     for name, key, sym in failed:
         print("CANNOT VOICE: %-9s %-3s %s" % (name, key, sym))
-    print("\n%d added, %d could not be voiced" % (len(added), len(failed)))
+    for name, key, chord in deduped:
+        print("DEDUPED: %-9s %-3s %s" % (name, key, chord))
+    print("\n%d added, %d deduplicated, %d could not be voiced"
+          % (len(added), len(deduped), len(failed)))
     return 0
 
 
