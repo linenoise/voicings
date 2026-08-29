@@ -8,7 +8,12 @@
 # `courses` documents doubled strings (mandolin/12-string). They are irrelevant
 # to pitch-class validation, so the tuning lists one entry per *course*.
 
+# `kind` says how a voicing is written: `frets` means one number per string,
+# `notes` means note names low to high. Everything else in the pipeline
+# branches on this and nothing else.
+
 mandolin:
+  kind: frets
   name: Mandolin
   also_covers: [Fiddle, "Tenor banjo"]
   tuning: [G3, D4, A4, E5]
@@ -21,6 +26,7 @@ mandolin:
     section serves all three instruments.
 
 guitar:
+  kind: frets
   name: Guitar
   tuning: [E2, A2, D3, G3, B3, E4]
   courses: 1
@@ -30,6 +36,7 @@ guitar:
     so any guitar shape with its lowest two strings muted transfers directly.
 
 bass:
+  kind: frets
   name: Bass
   tuning: [E1, A1, D2, G2]
   courses: 1
@@ -38,6 +45,7 @@ bass:
     Standard four-string bass: the guitar's lowest four strings, one octave down.
 
 ukulele:
+  kind: frets
   name: Ukulele
   tuning: [G4, C4, E4, A4]
   courses: 1
@@ -49,6 +57,7 @@ ukulele:
   reentrant: true
 
 banjo:
+  kind: frets
   name: Banjo
   tuning: [D3, G3, B3, D4]
   drone: G4
@@ -58,3 +67,12 @@ banjo:
     Five-string banjo in open G (gDGBD). The 5th (drone) string is not
     fretted in these shapes; it rings G and is omitted from the fret
     numbers, which cover the four long strings only.
+
+piano:
+  kind: notes
+  name: Piano
+  frets: 0
+  note: >-
+    Voicings are note names, low to high, for the right hand with the root
+    in the left. Fifths stay open and the third sits high, out of the bass
+    player's way. Shapes come from data/piano-shapes.yaml; edit there.

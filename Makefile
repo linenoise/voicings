@@ -11,6 +11,12 @@
 # checked in; `make` rebuilds them from data/ in one step.
 
 PYTHON      ?= python3
+
+# MacTeX and BasicTeX install here but only add it to interactive shells,
+# so find it ourselves rather than failing in a fresh make.
+TEXBIN      := $(firstword $(wildcard /Library/TeX/texbin /usr/local/texlive/*/bin/*))
+export PATH := $(if $(TEXBIN),$(TEXBIN):,)$(PATH)
+
 LATEX       ?= xelatex
 BUILD       ?= build
 DATA        ?= data
@@ -31,8 +37,8 @@ ifeq ($(CROP_MARKS),1)
   IMPOSEOPTS := --crop-marks
 endif
 
-.PHONY: all screen print validate lint repair resolve revert spikes clean \
-        check-latex help
+.PHONY: all screen print validate lint repair resolve revert spikes \
+        piano complete pagecheck clean check-latex help
 
 all: validate screen print
 
@@ -61,14 +67,28 @@ revert:
 spikes:
 	@$(PYTHON) tools/spikes.py
 
+## Regenerate the piano pages from data/piano-shapes.yaml.
+piano:
+	@$(PYTHON) tools/piano.py
+
+## Give every instrument the full chord vocabulary in all twelve keys,
+## generating whatever the notebook doesn't have. `APPLY=1` writes it.
+complete:
+	@$(PYTHON) tools/complete.py --data $(DATA) $(if $(APPLY),--apply,)
+
 ## Catch undefined macros in the generated LaTeX before TeX buries them in
 ## a hundred lines of noise.
 lint: $(BODY)
 	@$(PYTHON) tools/lint_tex.py
 
+## Check no page overflowed onto an unheaded continuation. Runs as part of
+## `make screen`; the row counts in tools/render.py are tuned against it.
+pagecheck: $(SCREEN)
+	@$(PYTHON) tools/pagecheck.py $(BODY) $(SCREEN)
+
 # -- generated LaTeX ------------------------------------------------------
 
-$(BODY): $(SOURCES) tools/render.py tools/theory.py
+$(BODY): $(SOURCES) tools/render.py tools/theory.py data/piano-shapes.yaml
 	@mkdir -p $(BUILD)
 	@$(PYTHON) tools/render.py --data $(DATA) --out $@
 
@@ -82,6 +102,7 @@ $(SCREEN): $(BODY) $(TEXSRC) | lint check-latex
 	@cp $(TEXSRC) $(BUILD)/
 	@cd $(BUILD) && $(LATEX) $(LATEXOPTS) -jobname=voicings-screen screen.tex >/dev/null
 	@cd $(BUILD) && $(LATEX) $(LATEXOPTS) -jobname=voicings-screen screen.tex >/dev/null
+	@$(PYTHON) tools/pagecheck.py $(BODY) $@
 	@echo "built $@ ($$($(PYTHON) tools/pagecount.py $@) pages)"
 
 ## The same pages laid 4-up on US Letter for double-sided printing.

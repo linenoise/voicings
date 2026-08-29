@@ -57,10 +57,16 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=True):
         lowest_i, lowest_f = sounding[0]
         if require_root_bass and (open_pcs[lowest_i] + lowest_f) % 12 != want_bass:
             continue
+        # A chord book wants the shape a player would actually grab: as
+        # many strings ringing as the chord can fill, low on the neck,
+        # without a stretch. Ranking narrowness first produced things like
+        # x-x-x-0-1-0 for C/E, which is technically a C/E and nothing
+        # anyone would play.
         rank = (
+            0 if len(sounding) >= len(tuning) - 1 else 1,     # full-ish
             min(fretted) if fretted else 0,                   # low position
-            (max(fretted) - min(fretted)) if fretted else 0,  # easy stretch
             -len(sounding),                                   # ring out
+            (max(fretted) - min(fretted)) if fretted else 0,  # easy stretch
             sum(1 for f in fretted),                          # fewer fingers
         )
         if best is None or rank < best[0]:

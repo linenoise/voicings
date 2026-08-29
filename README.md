@@ -1,9 +1,13 @@
 # Fancy Chords and their Voicings
 
 A pocket chord book for the instruments in a church band — mandolin, fiddle,
-banjo, guitar, bass, and ukulele — typeset from a handwritten notebook into
-something you can print on an ordinary duplex printer, cut apart with
+banjo, guitar, bass, ukulele, and piano — typeset from a handwritten notebook
+into something you can print on an ordinary duplex printer, cut apart with
 scissors, and sew by hand.
+
+Every instrument carries the same 29 kinds of chord in all twelve keys, so
+whatever you are holding when the singer calls a flat-six major-nine, it is
+on the page.
 
 Two PDFs come out of the build:
 
@@ -36,15 +40,21 @@ PDF targets still works.
 - **Circle of fifths**, one per instrument (mandolin, banjo, guitar, bass,
   ukulele), each showing the most common voicing of every major key on the
   outer ring and its relative minor on the inner ring.
+- **Core worship voicings** — the eighteen shapes that carry most of a set,
+  shown in C with what each is for, four of them starred.
 - **Nashville number chart**, one per instrument: twelve keys down the side,
   the seven diatonic degrees across, each cell carrying both the chord name
   and its fingering.
-- **Chord sections** — mandolin (301 chords), guitar (178), ukulele (144),
-  banjo (36), in all twelve keys.
+- **Chord sections** — mandolin, guitar, ukulele, banjo, and piano, each
+  covering the full vocabulary in all twelve keys: around 350 voicings per
+  instrument, 1,934 in all.
 - **Banjo drone spikes**: where to spike the 5th string for every key, major
   and minor, repeated on each banjo page and collected in one table.
-- **Bass**: where every root sits on each string, plus the movable arpeggio
-  patterns measured from it. Bass players don't finger chord grids.
+- **Piano**: note names low to high, in the open worship idiom — root and
+  fifth low, colour above, the third high and out of the bass player's way.
+- **Bass**: where every root sits on each string, the movable arpeggio
+  patterns measured from it, and which degrees to play under every chord in
+  the book. Bass players don't finger chord grids.
 - **Back sheet**: every tuning, the credit line, and the download URL.
 
 Fiddle and tenor banjo share the mandolin's GDAE tuning, so the mandolin
@@ -57,20 +67,45 @@ transfer directly.
 1. **Print** `build/voicings-print.pdf` on US Letter, **double-sided, flipped
    on the long edge**, at 100% scale — no "fit to page", which would shrink
    the pages and throw the cut lines off.
-2. **Cut** each sheet into four 3.5″ × 5.5″ rectangles. Trim the 1.5″ waste
-   strip off the right-hand side first, then cut once down the middle and
-   once across. A guillotine trimmer is faster than scissors and squarer,
-   but scissors work.
+2. **Cut** each sheet into four 3.5″ × 5.5″ rectangles: trim ¾″ of waste off
+   each side, then one cut down the middle and one across. Two pages tall by
+   two wide is exactly 11″, so there is no waste top or bottom. A guillotine
+   trimmer is squarer than scissors, but scissors work.
 3. **Stack** the rectangles in the order they came off the sheet — top-left,
    top-right, bottom-left, bottom-right — keeping the sheets in order.
 4. **Sew** along the left edge. A three- or five-hole pamphlet stitch about
    6 mm in from the spine holds well; the inner margin is 9 mm to leave room
    for it.
 
+Run `make print CROP_MARKS=1` to draw a box around each rectangle to cut
+along.
+
+Because the pages stack two-high to exactly 11″, they run to the top and
+bottom edges of the paper. The book's own top and bottom margins (8 mm and
+7 mm) are wider than the unprintable border on a typical laser printer — a
+Brother HL-2270DW reserves about 4.2 mm — so nothing is clipped, but don't
+let the driver scale the page to "fit".
+
 The imposition puts consecutive pages on the two faces of each rectangle, so
 the stack collates in reading order with no folding. Run `make print
 SCHEME=saddle` instead if you'd rather fold sheets into signatures and sew
-through the fold, and `make print CROP_MARKS=1` to draw lines to cut along.
+through the fold.
+
+At present the book is **93 pages — 12 sheets of Letter**, one key to a page
+for every instrument.
+
+## Layout and typography
+
+One LaTeX page is one notebook page, 3.5″ × 5.5″ — the trim size of the
+paper original. `tex/voicings.cls` owns geometry and type; `tools/render.py`
+owns what goes on which page.
+
+Rows per page are tuned against the *compiled* PDF, not guessed:
+`tools/pagecheck.py` compares the pages the renderer intended against the
+pages TeX produced, and fails if any of them overflowed. A `tabular` can't
+break across pages, so an over-tall Nashville chart doesn't wrap — it jumps
+whole to the next page and leaves its heading stranded, which is exactly the
+kind of silent breakage that check exists to catch.
 
 ## The build pipeline
 
@@ -95,10 +130,13 @@ aren't checked in.
 | `make print` | Just the imposed Letter edition |
 | `make validate` | Check every voicing against the chord it names |
 | `make lint` | Check the generated LaTeX for undefined macros |
+| `make pagecheck` | Verify no page overflowed onto an unheaded continuation |
 | `make repair` | Propose fixes for anything that fails (add `APPLY=1` to write them) |
 | `make resolve` | Drop or regenerate what repair couldn't reach (`APPLY=1`) |
 | `make revert` | Restore the data to its transcription, to replay the pass |
 | `make spikes` | Regenerate the banjo drone positions |
+| `make piano` | Regenerate the piano pages from the shape table |
+| `make complete` | Fill every instrument out to the full vocabulary (`APPLY=1`) |
 | `make clean` | Remove `build/` |
 
 ### Layout
@@ -108,6 +146,7 @@ data/
   instruments.yaml     tunings, string counts, fret ranges
   banjo-spikes.yaml    generated by tools/spikes.py
   bass-patterns.yaml   root map and movable arpeggio patterns
+  piano-shapes.yaml    piano voicings as interval patterns
   voicings/            one file per instrument: chord → fingerings
 tools/
   theory.py            pitch classes, chord formulas, fret arithmetic
@@ -116,9 +155,12 @@ tools/
   resolve.py           drop or regenerate what repair couldn't reach
   generate.py          canonical voicing for a chord, from theory
   spikes.py            banjo 5th-string spike positions per key
+  piano.py             expands piano-shapes.yaml into all twelve keys
+  complete.py          fills every instrument out to the full vocabulary
   render.py            data → LaTeX
   impose.py            page order for printing; verified arithmetic
   lint_tex.py          catch undefined macros before TeX does
+  pagecheck.py         verify nothing overflowed its page
   revert.py            restore the data to its transcription
 tex/
   voicings.cls         page geometry, type, chord and circle macros
@@ -130,7 +172,10 @@ notebook/              photographs of the original pages
 ### Requirements
 
 - Python 3 with PyYAML (`pip install pyyaml`)
-- XeLaTeX, for the PDF targets only
+- XeLaTeX, for the PDF targets only. The Makefile finds MacTeX and BasicTeX
+  in `/Library/TeX/texbin` on its own.
+- Poppler (`brew install poppler`) or Ghostscript, so the build can count
+  pages in its own output. Optional; only `make pagecheck` needs it.
 
 ```bash
 # macOS
@@ -155,7 +200,7 @@ fingering actually sounds on that instrument's tuning and compares:
   purpose. Reported and allowed.
 - **Note** — wide stretches and other things worth an eyebrow.
 
-The current state is **848 voicings, 0 errors, 32 warnings** — 103 entries corrected (48 needed one string moved, 36 two, 19 three), and 6 left for proofreading.
+The current state is **1,934 voicings, 0 errors, 32 warnings** — 103 entries corrected (48 needed one string moved, 36 two, 19 three), and 6 left for proofreading.
 
 Where a voicing failed, `tools/repair.py` searched the neighbourhood of what
 was written for the closest playable fingering that does spell the chord —
@@ -183,6 +228,34 @@ Because the pipeline records what was originally transcribed,
 That's what makes the repair heuristics tunable: changing how a fix is scored
 doesn't mean re-reading the photographs.
 
+## The chord vocabulary
+
+The notebook grew unevenly — twenty-nine kinds of chord on the mandolin
+pages, eighteen on the guitar, twelve on the ukulele, three on the banjo.
+That's fine in a notebook you wrote yourself; it's useless in a reference
+someone else picks up mid-song.
+
+`theory.VOCABULARY` is the union of what the mandolin pages, the piano
+worksheet, and the core worship voicings use, and `make complete` makes sure
+every instrument has all of it in all twelve keys. Anything transcribed from
+the notebook is left exactly as written; anything missing is generated from
+theory and printed with a dagger (†).
+
+Generated shapes are chosen the way a player would: as many strings ringing
+as the chord can fill, low on the neck, without a stretch. Slash voicings are
+skipped for the ukulele — it's re-entrant, so its fourth string sounds above
+its third and there is no bass to put a bass note in.
+
+### Spelling
+
+Notes are spelled by their function in the chord, not by whatever is
+convenient. The augmented fifth of `C+` is G♯, not A♭. The diminished fifth
+of `C°` is G♭, not F♯. Three semitones above C is the flat third of `Cm9`
+and the sharp ninth of `C7♯9`, and gets written E♭ in one and D♯ in the
+other. A minor seventh above G♭ is B𝄫. These sound identical and mean
+different things, and a chord chart that gets them wrong is telling you the
+wrong thing about the harmony. `theory.DEGREE_MAP` carries this per quality.
+
 ## Adding an instrument
 
 1. Add its tuning to `data/instruments.yaml`, low string first.
@@ -191,8 +264,9 @@ doesn't mean re-reading the photographs.
 4. Add it to `CHART_INSTRUMENTS` in `tools/render.py` if it should get its
    own circle of fifths and Nashville chart.
 
-Piano would need a different diagram than a fret grid; everything upstream of
-`render.py` is instrument-agnostic and would carry over.
+An instrument whose voicings are note names rather than fret numbers — as
+the piano's are — sets `kind: notes` in `data/instruments.yaml`. Everything
+in the pipeline branches on that and nothing else.
 
 ## Credits
 

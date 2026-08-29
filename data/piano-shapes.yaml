@@ -1,0 +1,54 @@
+# Piano voicings, as interval patterns.
+#
+# Every voicing on the keyboard pages is one of these shapes transposed, so
+# they live here once rather than being written out twelve times. Numbers
+# are semitones above the root, low to high; anything over 11 is in the next
+# octave up. `C-G-D-E` is therefore [0, 7, 14, 16].
+#
+# The idiom is the one the worship worksheet uses: root and fifth low for
+# weight, colour tones stacked above, the third placed high where it stays
+# out of the bass player's way. Fifths stay open. Nothing is voiced as a
+# tight triad.
+#
+# Source: piano.pdf in this repository, plus the core worship voicings.
+
+source: piano.pdf and core worship voicings
+
+shapes:
+  # -- the core worship set ------------------------------------------------
+  "":       {intervals: [0, 7, 12, 16],      note: "Basic open major"}
+  add9:     {intervals: [0, 7, 12, 14, 16],  note: "Very common"}
+  "2":      {intervals: [0, 7, 14, 16],      note: "Signature worship sound", star: true}
+  sus2:     {intervals: [0, 7, 14],          note: "Open, unresolved"}
+  sus4:     {intervals: [0, 7, 17, 24],      note: "Suspended",
+             also: [[0, 5, 7, 12]]}
+  "5":      {intervals: [0, 7, 12],          note: "Huge / open"}
+  maj7:     {intervals: [0, 7, 11, 16],      note: "Tender / reflective"}
+  maj9:     {intervals: [0, 7, 11, 14, 16],  note: "Very spacious", star: true}
+  m:        {intervals: [0, 7, 12, 15],      note: "Basic minor"}
+  m7:       {intervals: [0, 7, 10, 15],      note: "Warm / soulful"}
+  m9:       {intervals: [0, 7, 10, 14, 15],  note: "Modern worship", star: true}
+  madd9:    {intervals: [0, 7, 14, 15],      note: "Dark but open"}
+  "7":      {intervals: [0, 7, 10, 16],      note: "Gospel / blues colour"}
+  "6":      {intervals: [0, 7, 9, 16],       note: "Gentle"}
+  "6/9":    {intervals: [0, 7, 9, 14, 16],   note: "Rich worship / gospel", star: true}
+
+  # -- the rest of the vocabulary, voiced in the same idiom -----------------
+  m6:       {intervals: [0, 7, 9, 15],       note: "Minor, gentle"}
+  "9":      {intervals: [0, 7, 10, 14, 16],  note: "Dominant, spacious"}
+  7sus4:    {intervals: [0, 7, 10, 17],      note: "Hangs before resolving"}
+  "+":      {intervals: [0, 8, 16],          note: "Lifts into the next chord"}
+  o:        {intervals: [0, 3, 6, 12],       note: "Passing, unsettled"}
+  o7:       {intervals: [0, 3, 6, 9],        note: "Passing, symmetrical"}
+  m7b5:     {intervals: [0, 6, 10, 15],      note: "The two chord in a minor key"}
+  7b5:      {intervals: [0, 6, 10, 16],      note: "Altered dominant"}
+  "7#5":    {intervals: [0, 8, 10, 16],      note: "Altered dominant"}
+  7b9:      {intervals: [0, 7, 10, 13, 16],  note: "Tense dominant"}
+  "7#9":    {intervals: [0, 7, 10, 15, 16],  note: "Gospel dominant"}
+  m11:      {intervals: [0, 7, 10, 15, 17],  note: "Suspended minor wash"}
+
+# Slash voicings. `bass` is the interval that goes underneath.
+slashes:
+  - {quality: "",     bass: 4,  intervals: [4, 7, 12, 16],  note: "Smooth bass movement"}
+  - {quality: "",     bass: 7,  intervals: [7, 12, 16, 19], note: "Strong / open"}
+  - {quality: sus2,   bass: 4,  intervals: [4, 7, 12, 14],  note: "Suspended bass colour"}

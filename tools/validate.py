@@ -48,14 +48,37 @@ class Finding(object):
         )
 
 
-def check_voicing(instrument, tuning, key, symbol, frets_text):
-    """Yield Findings for one written voicing."""
-    n = len(tuning)
-    try:
-        frets = theory.parse_frets(frets_text, n)
-    except theory.ChordError as exc:
-        yield Finding(ERROR, instrument, key, symbol, frets_text, str(exc))
-        return
+def check_voicing(instrument, tuning, key, symbol, frets_text, kind="frets",
+                  reentrant=False):
+    """Yield Findings for one written voicing.
+
+    A voicing is either fret numbers against a tuning, or -- for a keyboard
+    -- note names low to high. Both come down to a list of pitch classes and
+    a lowest note, so the checks below are shared.
+    """
+    if kind == "notes":
+        try:
+            names = [t for t in str(frets_text).split("-") if t]
+            sounded = [theory.parse_note(t) for t in names]
+        except (theory.ChordError, KeyError) as exc:
+            yield Finding(ERROR, instrument, key, symbol, frets_text,
+                          "cannot read note list: %s" % exc)
+            return
+        frets = None
+        lowest_pc = sounded[0] if sounded else None
+    else:
+        n = len(tuning)
+        try:
+            frets = theory.parse_frets(frets_text, n)
+        except theory.ChordError as exc:
+            yield Finding(ERROR, instrument, key, symbol, frets_text, str(exc))
+            return
+        sounded = theory.sounded_pitch_classes(tuning, frets)
+        lowest_pc = None
+        for open_note, fret in zip(tuning, frets):
+            if fret is not None:
+                lowest_pc = (theory.parse_note(open_note) + fret) % 12
+                break
 
     try:
         root, quality, bass_pc = theory.parse_chord(symbol)
@@ -64,7 +87,6 @@ def check_voicing(instrument, tuning, key, symbol, frets_text):
         return
 
     wanted = {(root + i) % 12 for i in theory.QUALITIES[quality]}
-    sounded = theory.sounded_pitch_classes(tuning, frets)
 
     if not sounded:
         yield Finding(ERROR, instrument, key, symbol, frets_text,
@@ -106,10 +128,14 @@ def check_voicing(instrument, tuning, key, symbol, frets_text):
                       "rootless")
 
     # Slash chords: the named bass must actually be the lowest sounding note.
-    if bass_pc is not None:
-        lowest = next((f for f in frets if f is not None), None)
-        idx = frets.index(lowest)
-        actual = (theory.parse_note(tuning[idx]) + lowest) % 12
+    # Except on a re-entrant instrument, where the lowest-pitched string is
+    # not the first one -- a ukulele's 4th string sounds above its 3rd, so
+    # "in the bass" has no meaning there and the bass player has the note
+    # anyway.
+    if reentrant:
+        bass_pc = None
+    if bass_pc is not None and lowest_pc is not None:
+        actual = lowest_pc
         if actual != bass_pc:
             yield Finding(
                 ERROR, instrument, key, symbol, frets_text,
@@ -117,7 +143,7 @@ def check_voicing(instrument, tuning, key, symbol, frets_text):
                 % (theory.spell(actual), theory.spell(bass_pc)),
             )
 
-    fretted = [f for f in frets if f]
+    fretted = [f for f in (frets or []) if f]
     if fretted and max(fretted) - min(fretted) > MAX_STRETCH:
         yield Finding(INFO, instrument, key, symbol, frets_text,
                       "spans %d frets" % (max(fretted) - min(fretted)))
@@ -143,7 +169,10 @@ def main():
         with open(path) as fh:
             doc = yaml.safe_load(fh)
         name = doc["instrument"]
-        tuning = instruments[name]["tuning"]
+        meta = instruments[name]
+        tuning = meta.get("tuning", [])
+        kind = meta.get("kind", "frets")
+        reentrant = bool(meta.get("reentrant"))
         for keyblock in doc["keys"]:
             for entry in keyblock["chords"]:
                 if entry.get("check") is False:
@@ -151,7 +180,8 @@ def main():
                 for frets_text in entry["frets"]:
                     n_voicings += 1
                     for f in check_voicing(name, tuning, keyblock["key"],
-                                           entry["chord"], frets_text):
+                                           entry["chord"], frets_text, kind,
+                                           reentrant):
                         findings.append(f)
                         counts[f.severity] += 1
 

@@ -32,7 +32,12 @@ DEGREE_LABELS = ["1", "2m", "3m", "4", "5", "6m", "7°"]
 # Instruments that get their own circle of fifths and Nashville chart.
 CHART_INSTRUMENTS = ["mandolin", "banjo", "guitar", "bass", "ukulele"]
 
-CHORDS_PER_PAGE = 16
+# Rows per page. These are tuned against the real compiled PDF -- see
+# `make pagecheck`, which fails if any page overflows onto an unheaded
+# continuation. Change the type size in voicings.cls and these move.
+CHORDS_PER_PAGE = 34      # fret grids, one line each
+PIANO_PER_PAGE = 34       # note lists, one line each
+WORSHIP_PER_PAGE = 8      # name, notes, and a line of description
 
 
 def tex_escape(s):
@@ -45,6 +50,36 @@ def tex_escape(s):
 def frets_tex(text):
     """Set a fret string in the monospaced chord face."""
     return r"\frets{%s}" % text.replace("[", r"{\smaller[").replace("]", "]}")
+
+
+def notes_tex(text):
+    """Set a note list, with real flat and sharp signs."""
+    parts = []
+    for note in str(text).split("-"):
+        body = tex_escape(note[:1])
+        accidentals = "".join(r"\flat" if a == "b" else r"\sharp"
+                              for a in note[1:])
+        if accidentals:
+            # One math group, so a double flat sets as a pair rather than
+            # two separately spaced glyphs.
+            body += "$%s$" % accidentals
+        parts.append(body)
+    return r"\notes{%s}" % "\,--\,".join(parts)
+
+
+def paginate(items, capacity):
+    """Split into as few pages as fit, then even them out.
+
+    Filling each page to capacity and letting the remainder spill leaves a
+    key with twenty-eight chords on one page and one lonely chord on the
+    next. Splitting the same key fifteen and fourteen reads better and
+    costs nothing.
+    """
+    if not items:
+        return [[]]
+    n_pages = max(1, -(-len(items) // capacity))
+    per = -(-len(items) // n_pages)
+    return [items[i:i + per] for i in range(0, len(items), per)]
 
 
 class Book(object):
@@ -106,9 +141,11 @@ class Book(object):
             self.circle_of_fifths(inst)
         for inst in CHART_INSTRUMENTS:
             self.nashville(inst)
+        self.worship_page()
         for inst in ["mandolin", "guitar", "ukulele"]:
             self.chord_section(inst)
         self.banjo_section()
+        self.piano_section()
         self.bass_section()
         self.back_matter()
         return "\n".join(self.out) + "\n"
@@ -124,10 +161,12 @@ class Book(object):
         self.w(r"\begin{tocdirectory}")
         self.w(r"\tocline{Circle of Fifths}{one per instrument}")
         self.w(r"\tocline{Nashville Numbers}{one per instrument}")
+        self.w(r"\tocline{Core Worship Voicings}{the ones to know}")
         for inst, label in [("mandolin", "Mandolin Chords"),
                             ("guitar", "Guitar Chords"),
                             ("ukulele", "Ukulele Chords"),
                             ("banjo", "Banjo Chords"),
+                            ("piano", "Piano Chords"),
                             ("bass", "Bass")]:
             self.w(r"\tocline{%s}{%s}" % (label, self.section_hint(inst)))
         self.w(r"\tocline{Tunings \& Credits}{back sheet}")
@@ -143,6 +182,8 @@ class Book(object):
     def section_hint(self, inst):
         if inst == "bass":
             return "roots \\& patterns"
+        if inst == "piano":
+            return "360 voicings, 12 keys"
         doc = self.voicings.get(inst)
         if not doc:
             return ""
@@ -155,7 +196,7 @@ class Book(object):
         title = self.instruments[instrument]["name"]
         self.w(r"\begin{bookpage}{Circle of Fifths}")
         self.w(r"\pagesubtitle{%s}" % tex_escape(title))
-        self.w(r"\begin{circleoffifths}")
+        self.w(r"\begin{circleoffifths}{%s}" % tex_escape(title))
         for i, key in enumerate(CIRCLE):
             major = key
             flat = key not in SHARP_KEYS
@@ -237,10 +278,8 @@ class Book(object):
             block = by_key.get(key)
             if not block:
                 continue
-            chords = block["chords"]
-            pages = [chords[i:i + CHORDS_PER_PAGE]
-                     for i in range(0, len(chords), CHORDS_PER_PAGE)] or [[]]
-            for n, chunk in enumerate(pages):
+            for n, chunk in enumerate(paginate(block["chords"],
+                                               CHORDS_PER_PAGE)):
                 self.chord_page(instrument, key, chunk,
                                 continued=(n > 0))
 
@@ -266,40 +305,109 @@ class Book(object):
     def tuning_label(self, instrument):
         return " ".join(t[:-1] for t in self.instruments[instrument]["tuning"])
 
+    # -- worship voicings ------------------------------------------------
+
+    def worship_page(self):
+        """The handful of shapes that carry most of a worship set.
+
+        These are the ones worth knowing cold, so they get their own pages
+        rather than being buried in the key-by-key tables. Shown in C,
+        because the shape is the point -- every key has them on its own page.
+        """
+        shapes = yaml.safe_load(open(
+            os.path.join(self.data, "piano-shapes.yaml")))
+        rows = []
+        for quality, shape in shapes["shapes"].items():
+            if not shape.get("note"):
+                continue
+            rows.append((("C" + quality.replace("o", "°")),
+                         shape["intervals"], shape["note"],
+                         shape.get("star", False), quality))
+        for slash in shapes["slashes"]:
+            q = slash["quality"]
+            bass = theory.spell_in_key("C", slash["bass"], q)
+            rows.append(("C%s/%s" % (q, bass),
+                         slash["intervals"], slash.get("note", ""), False, q))
+
+        pages = paginate(rows, WORSHIP_PER_PAGE)
+        for n, chunk in enumerate(pages):
+            self.w(r"\begin{bookpage}{Core Worship Voicings}")
+            self.w(r"\pagesubtitle{Shown in C%s}"
+                   % (", continued" if n else ""))
+            self.w(r"\begin{worshiplist}")
+            for symbol, intervals, note, star, quality in chunk:
+                self.w(r"\worshiprow{%s}{%s}{%s}{%s}" % (
+                    tex_escape(symbol),
+                    notes_tex("-".join(
+                        theory.spell_in_key("C", i, quality)
+                        for i in intervals)),
+                    tex_escape(note),
+                    "star" if star else ""))
+            self.w(r"\end{worshiplist}")
+            if n == len(pages) - 1:
+                self.w(r"\begin{tocnote}")
+                self.w(r"Root and fifth low, colour above, the third high "
+                       r"and out of the bass player's way. Leave room: a "
+                       r"three- or four-note voicing sounds larger than a "
+                       r"dense one. Every key has these on its own page.")
+                self.w(r"\end{tocnote}")
+            self.w(r"\end{bookpage}")
+
+    # -- piano -----------------------------------------------------------
+
+    def piano_section(self):
+        self.w(r"\sectiondivider{Piano Chords}{notes, low to high}")
+        doc = self.voicings["piano"]
+        by_key = {k["key"]: k for k in doc["keys"]}
+        for key in CHROMATIC:
+            block = by_key.get(key)
+            if not block:
+                continue
+            for n, chunk in enumerate(paginate(block["chords"],
+                                               PIANO_PER_PAGE)):
+                self.w(r"\begin{pianopage}{%s}{%s}"
+                       % (self.key_heading(key), "cont" if n else ""))
+                for entry in chunk:
+                    self.w(r"  \pianorow{%s}{%s}" % (
+                        tex_escape(entry["chord"]),
+                        r" \quad ".join(notes_tex(f) for f in entry["frets"])))
+                self.w(r"\end{pianopage}")
+
     # -- banjo -----------------------------------------------------------
 
     def banjo_section(self):
+        """Banjo pages, plus where to spike the drone for each key.
+
+        Paginated like the other instruments -- it carries the full
+        vocabulary now, which is far more than fits four keys to a page --
+        with the drone instruction repeated at the head of every key, since
+        that is the thing you need before you play a note in it.
+        """
         self.w(r"\sectiondivider{Banjo Chords}{gDGBD, open G}")
         doc = self.voicings["banjo"]
         by_key = {k["key"]: k for k in doc["keys"]}
         spikes = {r["key"]: r for r in self.spikes["keys"]}
 
-        # Chords, four keys to a page, each with its drone instruction.
-        group = []
         for key in CHROMATIC:
             block = by_key.get(key)
             if not block:
                 continue
-            group.append((key, block, spikes[key]))
-            if len(group) == 4:
-                self.banjo_page(group)
-                group = []
-        if group:
-            self.banjo_page(group)
+            for n, chunk in enumerate(paginate(block["chords"],
+                                               CHORDS_PER_PAGE)):
+                self.w(r"\begin{chordpage}{Banjo}{%s}{%s}"
+                       % (self.key_heading(key), "cont" if n else ""))
+                if n == 0:
+                    spike = spikes[key]
+                    self.w(r"\dronenote{%s}{%s}"
+                           % (self.spike_phrase(spike["major"]),
+                              self.spike_phrase(spike["minor"])))
+                for entry in chunk:
+                    marks = r"\derived" if entry.get("derived") else ""
+                    self.w(r"  \chordrow{%s%s}{%s}" % (
+                        tex_escape(entry["chord"]), marks,
+                        " ".join(frets_tex(f) for f in entry["frets"])))
+                self.w(r"\end{chordpage}")
         self.spike_page()
-
-    def banjo_page(self, group):
-        self.w(r"\begin{banjopage}")
-        for key, block, spike in group:
-            self.w(r"\banjokey{%s}" % self.key_heading(key))
-            for entry in block["chords"]:
-                self.w(r"  \chordrow{%s}{%s}" % (
-                    tex_escape(entry["chord"]),
-                    " ".join(frets_tex(f) for f in entry["frets"])))
-            self.w(r"  \dronerow{%s}{%s}" % (
-                self.spike_phrase(spike["major"]),
-                self.spike_phrase(spike["minor"])))
-        self.w(r"\end{banjopage}")
 
     def spike_phrase(self, s):
         if s["open"]:
@@ -357,6 +465,7 @@ class Book(object):
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 
+        self.bass_vocabulary()
         self.w(r"\begin{bookpage}{Patterns}")
         self.w(r"\pagesubtitle{Bass}")
         self.w(r"\begin{patternlist}")
@@ -368,6 +477,40 @@ class Book(object):
                    % (tex_escape(p["name"]), degs, tex_escape(p["use"])))
         self.w(r"\end{patternlist}")
         self.w(r"\end{bookpage}")
+
+    def bass_vocabulary(self):
+        """Which degrees to play under every chord in the book.
+
+        A bass player doesn't finger chord grids, so the other instruments'
+        page of shapes would be no use here. What is useful is knowing which
+        notes belong under a chord you have never seen called before, and
+        where they sit relative to the root.
+        """
+        self.w(r"\begin{bookpage}{What to Play Under}")
+        self.w(r"\pagesubtitle{Bass \quad degrees from the root}")
+        self.w(r"\begin{degreetable}")
+        for quality in theory.VOCABULARY:
+            label = ("major" if quality == "" else
+                     quality.replace("o", "°"))
+            degrees = [self.degree_name(i)
+                       for i in theory.QUALITIES[quality]]
+            self.w(r"\degreerow{%s}{%s}" % (
+                tex_escape(label),
+                " ".join(r"\frets{%s}" % tex_escape(d) for d in degrees)))
+        self.w(r"\end{degreetable}")
+        self.w(r"\begin{rootmapnote}")
+        self.w(r"Play the root, and the fifth if there is one. Add the tone "
+               r"that names the chord --- the \frets{b3}, the \frets{b7} "
+               r"--- only when it wants hearing. The rest belongs to "
+               r"whoever is playing chords.")
+        self.w(r"\end{rootmapnote}")
+        self.w(r"\end{bookpage}")
+
+    DEGREE_NAMES = {0: "R", 1: "b9", 2: "9", 3: "b3", 4: "3", 5: "4",
+                    6: "b5", 7: "5", 8: "#5", 9: "6", 10: "b7", 11: "7"}
+
+    def degree_name(self, interval):
+        return self.DEGREE_NAMES[interval % 12]
 
     def offset_phrase(self, d):
         names = ["same string", "next string", "two over", "three over"]

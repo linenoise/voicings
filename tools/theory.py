@@ -124,7 +124,59 @@ INTERVAL_DEGREE = {
 }
 
 
-def spell_in_key(root_name, interval):
+# Which scale degree each interval represents, per chord quality. Interval
+# alone is not enough: six semitones above C is G-flat in C diminished (a
+# flattened FIFTH) and F-sharp in a Lydian context (a raised fourth), and
+# eight semitones is G-sharp in C augmented, not A-flat. Three semitones is
+# the flat third of Cm9 but the sharp ninth of C7#9. Getting this wrong
+# doesn't change the sound, but it tells the reader the wrong thing about
+# what the chord is doing, which is most of what a chord chart is for.
+#
+# Values are letter-steps above the root: 0 = root, 1 = second, 2 = third,
+# 3 = fourth, 4 = fifth, 5 = sixth, 6 = seventh.
+DEGREE_MAP = {
+    "":      {0: 0, 4: 2, 7: 4},
+    "m":     {0: 0, 3: 2, 7: 4},
+    "+":     {0: 0, 4: 2, 8: 4},
+    "o":     {0: 0, 3: 2, 6: 4},
+    "o7":    {0: 0, 3: 2, 6: 4, 9: 6},
+    "5":     {0: 0, 7: 4},
+    "sus2":  {0: 0, 2: 1, 7: 4},
+    "sus4":  {0: 0, 5: 3, 7: 4},
+    "6":     {0: 0, 4: 2, 7: 4, 9: 5},
+    "m6":    {0: 0, 3: 2, 7: 4, 9: 5},
+    "6/9":   {0: 0, 2: 1, 4: 2, 7: 4, 9: 5},
+    "7":     {0: 0, 4: 2, 7: 4, 10: 6},
+    "maj7":  {0: 0, 4: 2, 7: 4, 11: 6},
+    "m7":    {0: 0, 3: 2, 7: 4, 10: 6},
+    "m7b5":  {0: 0, 3: 2, 6: 4, 10: 6},
+    "7sus4": {0: 0, 5: 3, 7: 4, 10: 6},
+    "7b5":   {0: 0, 4: 2, 6: 4, 10: 6},
+    "7#5":   {0: 0, 4: 2, 8: 4, 10: 6},
+    "9":     {0: 0, 2: 1, 4: 2, 7: 4, 10: 6},
+    "maj9":  {0: 0, 2: 1, 4: 2, 7: 4, 11: 6},
+    "m9":    {0: 0, 2: 1, 3: 2, 7: 4, 10: 6},
+    "add9":  {0: 0, 2: 1, 4: 2, 7: 4},
+    "2":     {0: 0, 2: 1, 4: 2, 7: 4},
+    "add2":  {0: 0, 2: 1, 4: 2, 7: 4},
+    "madd9": {0: 0, 2: 1, 3: 2, 7: 4},
+    "7b9":   {0: 0, 1: 1, 4: 2, 7: 4, 10: 6},
+    "7#9":   {0: 0, 3: 1, 4: 2, 7: 4, 10: 6},
+    "m11":   {0: 0, 2: 1, 3: 2, 5: 3, 7: 4, 10: 6},
+    "11":    {0: 0, 2: 1, 4: 2, 5: 3, 7: 4, 10: 6},
+    "13":    {0: 0, 2: 1, 4: 2, 7: 4, 9: 5, 10: 6},
+}
+
+
+def degree_for(quality, interval):
+    """Letter-steps above the root, for this interval in this chord."""
+    table = DEGREE_MAP.get(quality)
+    if table is not None and interval % 12 in table:
+        return table[interval % 12]
+    return INTERVAL_DEGREE[interval % 24 if interval > 11 else interval]
+
+
+def spell_in_key(root_name, interval, quality=None):
     """Name the note `interval` semitones above `root_name`, spelled properly.
 
     A minor seventh above G-flat is B-double-flat, not A: they sound the
@@ -138,7 +190,10 @@ def spell_in_key(root_name, interval):
     root = m.group(1)
     letter, accidental = root[0], root[1:]
 
-    steps = INTERVAL_DEGREE[interval % 24 if interval > 11 else interval]
+    if quality is not None:
+        steps = degree_for(quality, interval)
+    else:
+        steps = INTERVAL_DEGREE[interval % 24 if interval > 11 else interval]
     target_letter = LETTERS[(LETTERS.index(letter) + steps) % 7]
 
     want = (NOTE_TO_PC[root] + interval) % 12

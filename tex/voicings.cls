@@ -24,6 +24,7 @@
 \RequirePackage{array}
 \RequirePackage{calc}
 \RequirePackage{ifthen}
+\RequirePackage{amssymb}
 \RequirePackage[hidelinks]{hyperref}
 \usetikzlibrary{calc}
 
@@ -154,7 +155,8 @@
 \newcommand{\tocline}[2]{%
   \item[]\makebox[0pt][l]{\bfseries #1}\hfill{\footnotesize\color{faint}#2}}
 
-\newenvironment{tocnote}{\footnotesize\color{faint}}{\par\vspace{2mm}}
+\newenvironment{tocnote}{\par\vspace{2mm}\footnotesize\color{faint}}%
+  {\par\vspace{2mm}}
 
 % ------------------------------------------------------- section dividers
 \newcommand{\sectiondivider}[2]{%
@@ -183,25 +185,30 @@
     \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
 }{\end{list}}
 
+% Tight enough that a whole key -- around thirty chords -- lands on one
+% page. Two half-empty pages per key would double the sheet count, and
+% flipping mid-song is exactly what this book exists to avoid.
 \newcommand{\chordrow}[2]{%
-  \item[]\makebox[15mm][l]{\bfseries #1}#2%
-  \par\vspace{0.6mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.6mm}}
+  \item[]{\small\makebox[15mm][l]{\bfseries #1}#2}%
+  \par\vspace{0.35mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.35mm}}
 
 % ------------------------------------------------------- circle of fifths
 % Twelve segments, major on the outside, relative minor inside. Drawn
 % rather than tabulated because the whole point of the circle is that
 % neighbours are a fifth apart and you can see it.
-\newlength{\cof@outer}\setlength{\cof@outer}{31mm}
-\newlength{\cof@mid}\setlength{\cof@mid}{21mm}
-\newlength{\cof@inner}\setlength{\cof@inner}{11mm}
+\newlength{\cof@outer}\setlength{\cof@outer}{28mm}
+\newlength{\cof@mid}\setlength{\cof@mid}{19mm}
+\newlength{\cof@inner}\setlength{\cof@inner}{9.5mm}
 
-\newenvironment{circleoffifths}{%
+% #1 goes in the hub, where there is a hole and nothing else to put in it.
+\newenvironment{circleoffifths}[1]{%
   \vspace{1mm}
   \begin{center}
   \begin{tikzpicture}[every node/.style={inner sep=0pt}]
     \draw[rule,line width=0.4pt] (0,0) circle (\cof@outer);
     \draw[rule,line width=0.4pt] (0,0) circle (\cof@mid);
     \draw[rule,line width=0.4pt] (0,0) circle (\cof@inner);
+    \node[align=center] at (0,0) {\scriptsize\bfseries\color{faint}#1};
 }{%
   \end{tikzpicture}
   \end{center}}
@@ -213,21 +220,31 @@
   \pgfmathsetmacro{\cof@edge}{90 - 30*#1 - 15}%
   \draw[rule,line width=0.3pt]
     (\cof@edge:\cof@inner) -- (\cof@edge:\cof@outer);
-  \node at (\cof@a:27.6mm) {\scriptsize\bfseries\color{keyred}#2};
-  \node at (\cof@a:24.2mm) {\tiny#3};
-  \node at (\cof@a:17.8mm) {\scriptsize\bfseries#4};
-  \node at (\cof@a:14.2mm) {\tiny#5};
-  \node at (\cof@a:6.2mm)  {\tiny\color{faint}#6};}
+  % Name and fingering go in ONE node, stacked. Putting them at two radii
+  % made them collide at three and nine o'clock, where a radial gap of
+  % three millimetres is a horizontal gap of three millimetres and the
+  % fret numbers are six millimetres wide.
+  \node[align=center] at (\cof@a:23.4mm)
+    {\scriptsize\bfseries\color{keyred}#2\\[-1.5pt]\tiny\mdseries\color{ink}#3};
+  \node[align=center] at (\cof@a:14.2mm)
+    {\scriptsize\bfseries#4\\[-1.5pt]\tiny\mdseries#5};
+  % Key signatures sit outside the rim: twelve of them around a hub the
+  % size of a thumbnail was unreadable.
+  \node at (\cof@a:30.6mm) {\tiny\color{faint}#6};}
 
 \newcommand{\circlefootnote}[1]{%
   \vspace{1mm}{\footnotesize\color{faint}#1\par}}
 
 % ----------------------------------------------------- nashville numbers
 % Keys down the side, degrees across, exactly as the notebook has it.
+% A tabular cannot break across pages: if it does not fit, the whole thing
+% moves to the next one and leaves its heading stranded. Thirteen rows of
+% two-line cells has to stay under the text height, so the leading is set
+% tight here rather than left to \arraystretch.
 \newenvironment{nashvilletable}[1]{%
   \vspace{0.5mm}
-  \setlength{\tabcolsep}{2.2pt}
-  \renewcommand{\arraystretch}{1.3}
+  \setlength{\tabcolsep}{2.4pt}
+  \renewcommand{\arraystretch}{1.05}
   \begin{tabular}{@{}l|*{#1}{c}@{}}
 }{%
   \end{tabular}}
@@ -242,27 +259,15 @@
   {\scriptsize\bfseries\color{keyred}#1} #2 \\}
 
 \newcommand{\nashvillecell}[2]{%
-  & \begin{tabular}{@{}c@{}}{\scriptsize\bfseries#1}\\[-1pt]%
+  & \begin{tabular}{@{}c@{}}{\scriptsize\bfseries#1}\\[-3.5pt]%
     {\tiny#2}\end{tabular}}
 
 % ------------------------------------------------------------ banjo pages
-\newenvironment{banjopage}{%
-  \clearpage
-  \pagetitle{\color{keyred}Banjo}%
-  \vspace{-1mm}{\footnotesize\color{faint}gDGBD, open G\par}
-  \pagerule
-  \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0pt}
-    \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
-}{\end{list}}
-
-\newcommand{\banjokey}[1]{%
-  \item[]\vspace{0.8mm}{\bfseries\color{keyred}#1}\vspace{0.4mm}}
-
-\newcommand{\dronerow}[2]{%
-  \item[]{\scriptsize\color{faint}Drone: major \textbf{#1}\quad
-   minor \textbf{#2}}%
-  \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{0.4mm}}
+% Where to spike the 5th string for this key, at the head of its pages.
+\newcommand{\dronenote}[2]{%
+  \item[]{\scriptsize\color{faint}%
+    Drone: major \textbf{#1}\quad minor \textbf{#2}}%
+  \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
 
 % ------------------------------------------------------------ spike table
 \newenvironment{spikeintro}{\footnotesize\color{faint}}{\par\vspace{2mm}}
@@ -310,6 +315,59 @@
   \item[]{\bfseries#1}\par\vspace{0.5mm}
   {\scriptsize#2}\par\vspace{0.5mm}
   {\scriptsize\color{faint}#3}}
+
+% -------------------------------------------------------------- piano
+% Note names rather than fret numbers, so they need room to breathe and a
+% face that keeps accidentals legible. Not monospaced: the lists vary in
+% length and lining them up would waste the width.
+\newcommand{\notes}[1]{{\color{fretgreen}\bfseries #1}}
+
+\newenvironment{pianopage}[2]{%
+  \clearpage
+  \pagetitle{\color{keyred}#1}%
+  \vspace{-1mm}%
+  {\footnotesize\color{faint}Piano\ifthenelse{\equal{#2}{cont}}{, continued}{}%
+   \par}
+  \pagerule
+  \begin{list}{}{%
+    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
+}{\end{list}}
+
+% Name above, notes below: a five-note voicing in a flat key is too wide to
+% share a line with its name at this trim size.
+% Name and notes share a line where they fit; a five-note voicing in a
+% flat key is set below its name instead.
+\newcommand{\pianorow}[2]{%
+  \item[]{\footnotesize\makebox[16mm][l]{\bfseries #1}#2}%
+  \par\vspace{0.4mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.4mm}}
+
+% ------------------------------------------------------ worship voicings
+\newcommand{\stargl}{{\color{keyred}$\bigstar$}}
+
+\newenvironment{worshiplist}{%
+  \begin{list}{}{%
+    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{1.6mm}
+    \setlength{\parsep}{0pt}\setlength{\topsep}{1mm}}%
+}{\end{list}}
+
+\newcommand{\worshiprow}[4]{%
+  \item[]\makebox[16mm][l]{\bfseries\small #1}%
+  \ifthenelse{\equal{#4}{}}{}{\stargl}%
+  \par\vspace{0.4mm}
+  \hspace*{1mm}{\small #2}\par\vspace{0.2mm}
+  \hspace*{1mm}{\scriptsize\color{faint}#3}}
+
+% ------------------------------------------------------- bass vocabulary
+\newenvironment{degreetable}{%
+  \begin{list}{}{%
+    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
+}{\end{list}}
+
+\newcommand{\degreerow}[2]{%
+  \item[]\makebox[13mm][l]{\bfseries\footnotesize #1}{\footnotesize #2}%
+  \par\vspace{0.5mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.5mm}}
 
 % -------------------------------------------------------------- back sheet
 % Everything that is reference rather than content lives here, so the
