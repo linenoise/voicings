@@ -279,9 +279,18 @@
 % voicings could take the column break between them, leaving 0000 at the
 % foot of one column and 2555 at the head of the next with no label -- it
 % reads as a different chord entirely. A vbox cannot be broken.
+% \nobreak binds the rule to the row above it. Without it a column break
+% could fall between them, stranding the rule at the top of the next
+% column -- which is why column two used to start lower than column one.
+% The rule stays outside the vbox on purpose: inside, it would change the
+% box's depth and cost a couple of points on every row.
+%
+% The space that follows the rule is ordinary glue, and glue at the top of
+% a column is discarded, so both columns now start level.
 \newcommand{\chordrow}[2]{%
   \par\noindent\vbox{\hsize=\linewidth
     \makebox[\chord@name][l]{\small\bfseries #1}#2\par}%
+  \nobreak
   \par\vspace{0.40mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.40mm}}
 
 %% An alternate voicing goes under the first, pulled up tight so the pair
@@ -461,6 +470,7 @@
   \par\noindent\vbox{\hsize=\linewidth
     \hangindent=\piano@name\hangafter=1
     {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}%
+  \nobreak
   \par\vspace{0.7mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.7mm}}
 
 % ------------------------------------------------------- bass vocabulary

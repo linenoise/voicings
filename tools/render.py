@@ -198,8 +198,6 @@ class Book(object):
     def render(self):
         self.front_matter()
         self.contents()
-        for inst in CHART_INSTRUMENTS:
-            self.circle_of_fifths(inst)
         for inst in ["mandolin", "guitar", "ukulele"]:
             self.chord_section(inst)
         self.piano_section()
@@ -221,7 +219,6 @@ class Book(object):
     def contents(self):
         self.w(r"\begin{bookpage}{Table of Chords}")
         self.w(r"\begin{tocdirectory}")
-        self.w(r"\tocline{Circle of Fifths}{one per instrument}")
         for inst, label in [("mandolin", "Mandolin Chords"),
                             ("guitar", "Guitar Chords"),
                             ("ukulele", "Ukulele Chords"),
@@ -355,6 +352,7 @@ class Book(object):
         self.w(r"\sectiondivider{%s Chords}{%s}" % (
             tex_escape(meta["name"]), tex_escape(meta["tuning_label"])
             if "tuning_label" in meta else self.tuning_label(instrument)))
+        self.circle_of_fifths(instrument)
         by_key = {k["key"]: k for k in doc["keys"]}
         for key in CHROMATIC:
             block = by_key.get(key)
@@ -417,6 +415,7 @@ class Book(object):
     def piano_section(self):
         self.w(r"\usevoicingcolor{%s}" % INK["piano"])
         self.w(r"\sectiondivider{Piano Chords}{notes, low to high}")
+        self.circle_of_fifths("piano")
         doc = self.voicings["piano"]
         by_key = {k["key"]: k for k in doc["keys"]}
         for key in CHROMATIC:
@@ -446,6 +445,7 @@ class Book(object):
         """
         self.w(r"\usevoicingcolor{%s}" % INK["banjo"])
         self.w(r"\sectiondivider{Banjo Chords}{gDGBD, open G}")
+        self.circle_of_fifths("banjo")
         doc = self.voicings["banjo"]
         by_key = {k["key"]: k for k in doc["keys"]}
         spikes = {r["key"]: r for r in self.spikes["keys"]}
@@ -490,6 +490,7 @@ class Book(object):
     def bass_section(self):
         self.w(r"\usevoicingcolor{%s}" % INK["bass"])
         self.w(r"\sectiondivider{Bass}{E A D G}")
+        self.circle_of_fifths("bass")
         self.w(r"\begin{bookpage}{Where the Roots Are}")
         self.w(r"\pagesubtitle{Bass}")
         self.w(r"\begin{rootmap}")

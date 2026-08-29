@@ -48,8 +48,8 @@ PDF targets still works.
 
 - **Front cover**, with a QR code to this repository.
 - **Table of chords.**
-- **Circle of fifths**, one per instrument (mandolin, banjo, guitar, bass,
-  ukulele), each showing the most common voicing of every major key on the
+- **Circle of fifths**, one per instrument, on the first page of that
+  instrument's own section, showing the most common voicing of every major key on the
   outer ring and its relative minor on the inner ring. For bass it gives the
   string and fret a player actually uses — `A3`, the third fret of the A
   string, not the eighth of the E.
