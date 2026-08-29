@@ -1,14 +1,29 @@
-# Fancy Chords and their Voicings
+# Fancy Chords and Their Voicings
 
-**[⬇️ Read or print the book (PDF)](https://github.com/linenoise/voicings/blob/main/build/voicings-screen.pdf)** — 3.5″ × 5.5″, one key to a page. Good on a phone, a tablet, or an e-reader.
+A pocket chord book you can print, cut up, and sew.
 
-**[🖨️ Print-and-sew edition (PDF)](https://github.com/linenoise/voicings/blob/main/build/voicings-print.pdf)** — US Letter, four pages to a sheet. Print double-sided, cut into quarters, sew. See [Printing, cutting, and sewing](#printing-cutting-and-sewing).
+| Edition | Read | Print | Pages | Sheets | |
+|---|---|---|---|---|---|
+| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 79 | 10 | All six instruments |
+| Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also fiddle and tenor banjo |
+| Guitar | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also baritone ukulele |
+| Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
+| Piano | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
+| Banjo | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | With drone spikes |
+| Bass | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 7 | 1 | Roots and patterns |
 
-*Arrived here from the QR code on the cover? Those two links are what you want.*
+Every edition comes two ways. **Screen** is 3.5″ × 5.5″, one page per page —
+good on a phone, a tablet, or an e-reader. **4-up** is US Letter with four
+pages to a sheet, for printing double-sided and sewing; see
+[Printing, cutting, and sewing](#printing-cutting-and-sewing).
+
+The per-instrument editions carry that instrument's circle of fifths, its
+chords in all twelve keys, and the credits. Nothing else — if you only play
+ukulele there's no reason to carry ninety pages to find a chord.
+
+*Arrived from the QR code on the cover? The top row is the whole book.*
 
 <img src="assets/qr.png" alt="QR code linking to https://github.com/linenoise/voicings" width="140">
-
-*Point a phone at this to bring the repository up on it — the same code that's on the book's cover.*
 
 ---
 
@@ -111,8 +126,9 @@ the stack collates in reading order with no folding. Run `make print
 SCHEME=saddle` instead if you'd rather fold sheets into signatures and sew
 through the fold.
 
-At present the book is **78 pages — 10 sheets of Letter**, one key to a page
-for every instrument.
+At present the whole book is **79 pages — 10 sheets of Letter**, one key to
+a page for every instrument. The per-instrument editions are 16 pages, or 7
+for bass.
 
 ## Colour
 

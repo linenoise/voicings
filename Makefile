@@ -38,9 +38,9 @@ ifeq ($(CROP_MARKS),1)
 endif
 
 .PHONY: all screen print validate lint repair resolve revert spikes \
-        piano qr complete pagecheck clean check-latex help
+        piano qr complete editions pagecheck clean check-latex help
 
-all: validate screen print
+all: validate editions
 
 # -- checks ---------------------------------------------------------------
 
@@ -70,6 +70,11 @@ spikes:
 ## Regenerate the piano pages from data/piano-shapes.yaml.
 piano:
 	@$(PYTHON) tools/piano.py
+
+## Build all fourteen PDFs: the whole book and each instrument, screen and
+## print. This is what `make` does, and what lands in editions/.
+editions: $(SOURCES) $(TOOLS) $(TEXSRC) | check-latex
+	@$(PYTHON) tools/editions.py
 
 ## Regenerate the README's QR code from the same URL the cover uses.
 ## Committed, because GitHub cannot generate one at render time.
@@ -144,6 +149,10 @@ check-latex:
 
 clean:
 	rm -rf $(BUILD)
+
+## Also remove the published PDFs. `make editions` rebuilds them.
+distclean: clean
+	rm -rf editions
 
 help:
 	@grep -B1 -E '^[a-z-]+:' Makefile | grep -E '^##|^[a-z-]+:' | \

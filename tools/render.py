@@ -128,8 +128,11 @@ def paginate(items, capacity):
 
 
 class Book(object):
-    def __init__(self, data="data"):
+    def __init__(self, data="data", only=None):
         self.data = data
+        # When set, the book covers one instrument: its cover, its
+        # section, and the credits. Nothing else.
+        self.only = only
         with open(os.path.join(data, "instruments.yaml")) as fh:
             self.instruments = yaml.safe_load(fh)
         with open(os.path.join(data, "banjo-spikes.yaml")) as fh:
@@ -197,6 +200,10 @@ class Book(object):
 
     def render(self):
         self.front_matter()
+        if self.only:
+            self.one_instrument(self.only)
+            self.back_matter()
+            return "\n".join(self.out) + "\n"
         self.contents()
         for inst in ["mandolin", "guitar", "ukulele"]:
             self.chord_section(inst)
@@ -208,13 +215,47 @@ class Book(object):
 
     # -- front -----------------------------------------------------------
 
+    ALL_INSTRUMENTS = ["mandolin", "guitar", "ukulele",
+                       "piano", "banjo", "bass"]
+
     def front_matter(self):
         # No instrument owns the front matter, so its sample voicings are
         # set in plain ink rather than borrowing whichever colour happens
         # to be current -- a green x on the contents page reads as a
         # mandolin instruction.
         self.w(r"\usevoicingcolor{ink}")
-        self.w(r"\coverpage")
+        if self.only:
+            name = self.instruments[self.only]["name"]
+            subject = r"\coversubject{%s}{%s}" % (tex_escape(name),
+                                                  INK[self.only])
+            # The title already names the instrument; repeating it under
+            # the rule just says the same thing twice.
+            listing = ""
+        else:
+            subject = ""
+            # Each in its own pen, the way the notebook is written.
+            rows = [["mandolin", "guitar", "ukulele"],
+                    ["piano", "banjo", "bass"]]
+            lines = []
+            for row in rows:
+                names = [r"\textcolor{%s}{%s}"
+                         % (INK[i], tex_escape(self.instruments[i]["name"]))
+                         for i in row]
+                lines.append(r"{\large %s\par}"
+                             % r"\, $\cdot$\, ".join(names))
+            listing = r"\vspace{2.5mm}".join(lines)
+        self.w(r"\coverpage{%s}{%s}" % (subject, listing))
+
+    def one_instrument(self, inst):
+        """A single-instrument edition: that section and nothing else."""
+        if inst == "piano":
+            self.piano_section()
+        elif inst == "banjo":
+            self.banjo_section()
+        elif inst == "bass":
+            self.bass_section()
+        else:
+            self.chord_section(inst)
 
     def contents(self):
         self.w(r"\begin{bookpage}{Table of Chords}")
@@ -270,8 +311,7 @@ class Book(object):
     def circle_of_fifths(self, instrument):
         title = self.instruments[instrument]["name"]
         self.w(r"\usevoicingcolor{%s}" % INK[instrument])
-        self.w(r"\begin{bookpage}{Circle of Fifths}")
-        self.w(r"\pagesubtitle{%s}" % tex_escape(title))
+        self.w(r"\begin{circlepage}{%s}" % tex_escape(title))
         self.w(r"\begin{circleoffifths}{%s}" % tex_escape(title))
         for i, key in enumerate(CIRCLE):
             major = key
@@ -302,7 +342,7 @@ class Book(object):
             self.w(r"\circlefootnote{Outer ring: major.\\ "
                    r"Inner ring: relative minor.\\ "
                    r"Both show the most common voicing.}")
-        self.w(r"\end{bookpage}")
+        self.w(r"\end{circlepage}")
 
     def circle_voicing(self, instrument, text, prefer_flat=True):
         """A voicing as it goes inside the circle.
@@ -570,11 +610,20 @@ class Book(object):
     # -- back ------------------------------------------------------------
 
     def back_matter(self):
+        # A single-instrument edition carries its own tuning and no one
+        # else's: a mandolin booklet has no use for the bass tuning, and
+        # printing it there is the kind of thing that makes a small book
+        # feel like an offcut of a big one.
+        if self.only:
+            order = [self.only]
+        else:
+            order = ["mandolin", "guitar", "bass", "ukulele", "banjo", "piano"]
         rows = []
-        for name in ["mandolin", "guitar", "bass", "ukulele", "banjo"]:
+        for name in order:
             meta = self.instruments[name]
-            rows.append((meta["name"], self.tuning_label(name),
-                         meta.get("note", "")))
+            label = (self.tuning_label(name)
+                     if meta.get("kind", "frets") == "frets" else "")
+            rows.append((meta["name"], label, meta.get("note", "")))
         self.w(r"\begin{backsheet}")
         for name, tuning, note in rows:
             self.w(r"\tuningrow{%s}{%s}{%s}"
@@ -586,8 +635,11 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--data", default="data")
     ap.add_argument("--out", default="build/body.tex")
+    ap.add_argument("--only", choices=Book.ALL_INSTRUMENTS,
+                    help="render one instrument's edition instead of the "
+                         "whole book")
     args = ap.parse_args()
-    book = Book(args.data)
+    book = Book(args.data, args.only)
     text = book.render()
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     with open(args.out, "w") as fh:

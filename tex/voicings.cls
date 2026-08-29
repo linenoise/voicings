@@ -147,19 +147,34 @@
 % which costs two chords off the bottom of every key. The key is smashed
 % to zero height and the line given an explicit strut instead, so the
 % heading is as tall as it needs to look and no taller.
-\newcommand{\pageheader}[3]{%
+% #1 point size for the centred text, #2 left, #3 centre, #4 right.
+\newcommand{\pageheaderat}[4]{%
   \par\noindent
   % \hbox to, not \makebox: \makebox centres its own contents, so its
   % glue competes with the \hfil pair below and the whole heading bunches
   % into the middle of the line instead of spreading across it.
   \hbox to \linewidth{%
     \rule[-1.9mm]{0pt}{6.6mm}%
-    \rlap{\raisebox{0.6mm}{\footnotesize\bfseries\color{faint}#1}}%
-    \hfil\smash{\fontsize{21}{21}\selectfont\bfseries\color{keyred}#2}\hfil
-    \llap{\raisebox{0.6mm}{\footnotesize\bfseries\color{faint}#3}}}%
+    \rlap{\raisebox{0.6mm}{\footnotesize\bfseries\color{faint}#2}}%
+    \hfil\smash{\fontsize{#1}{#1}\selectfont\bfseries\color{keyred}#3}\hfil
+    \llap{\raisebox{0.6mm}{\footnotesize\bfseries\color{faint}#4}}}%
   \par}
+
+\newcommand{\pageheader}[3]{\pageheaderat{21}{#1}{#2}{#3}}
+
+% A circle-of-fifths page carries the same heading as a chord page --
+% instrument bold on the left, subject centred -- but "Circle of Fifths"
+% is sixteen characters where a key is at most seven. At 21pt it would run
+% straight over the instrument name, and even 18pt leaves under a point of
+% air. 16pt is as large as clears the label comfortably on both sides,
+% which is what keeps the two kinds of page looking like the same book.
+\newcommand{\circleheader}[1]{\pageheaderat{16}{#1}{Circle of Fifths}{}}
 \newcommand{\pagesubtitle}[1]{%
   \vspace{-1pt}{\footnotesize\color{faint}#1\par}\pagerule}
+
+\newenvironment{circlepage}[1]{%
+  \clearpage\circleheader{#1}\pagerule
+}{\par}
 
 \newenvironment{bookpage}[1]{%
   \clearpage\pagetitle{#1}%
@@ -168,28 +183,23 @@
 % ------------------------------------------------------------------- cover
 \newcommand{\bookurl}{https://github.com/linenoise/voicings}
 
-\newcommand{\coverpage}{%
+% #1 names the instrument for a single-instrument edition, or is empty for
+% the whole book. #2 is the line (or lines) of instrument names beneath the
+% rule. Both editions share one cover so they cannot drift apart.
+\newcommand{\coverpage}[2]{%
   \thispagestyle{empty}%
   \begin{center}
     \vspace*{6mm}
     {\fontsize{15}{17}\selectfont\bfseries Fancy\par}
+    #1%
     {\fontsize{30}{32}\selectfont\bfseries Chords\par}
     \vspace{1mm}
-    {\fontsize{13}{15}\selectfont and their Voicings\par}
+    {\fontsize{13}{15}\selectfont and Their Voicings\par}
     \vspace{5mm}
     {\color{ink}\rule{\linewidth}{5mm}}
     \vspace{6mm}
 
-    % Each in its own pen, the way the notebook is written.
-    {\large
-     \textcolor{fretgreen}{Mandolin}\, $\cdot$\,
-     \textcolor{fretblue}{Guitar}\, $\cdot$\,
-     \textcolor{fretpurple}{Ukulele}\par}
-    \vspace{2.5mm}
-    {\large
-     \textcolor{keyred}{Piano}\, $\cdot$\,
-     \textcolor{fretorange}{Banjo}\, $\cdot$\,
-     \textcolor{fretyellow}{Bass}\par}
+    #2%
     \vfill
     % Vector, generated at compile time by the qrcode package -- no image
     % file to keep in step with the URL beneath it, and it stays sharp at
@@ -202,6 +212,10 @@
     \vspace{3mm}
   \end{center}
   \clearpage}
+
+% The instrument name above "Chords", for a single-instrument edition.
+\newcommand{\coversubject}[2]{%
+  {\fontsize{22}{24}\selectfont\bfseries\color{#2}#1\par}\vspace{0.5mm}}
 
 % -------------------------------------------------------- table of contents
 \newenvironment{tocdirectory}{%
@@ -502,7 +516,7 @@
   {\color{rule}\hrule height 0.4pt}
   \vspace{1.5mm}
   {\footnotesize
-   \textbf{Fancy Chords and their Voicings}\par
+   \textbf{Fancy Chords and Their Voicings}\par
    \vspace{0.8mm}
    {\color{faint}%
     Danne Stayskal\\
