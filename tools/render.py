@@ -547,8 +547,9 @@ class Book(object):
         self.w(r"\begin{bookpage}{Where the Roots Are}")
         self.w(r"\pagesubtitle{Bass}")
         self.w(r"\begin{rootmap}")
+        strings = self.bass["root_map"]["strings"]
         self.w(r"\rootmaphead{%s}"
-               % "}{".join(self.bass["root_map"]["strings"]))
+               % "}{".join("(%s)" % n if n == "B" else n for n in strings))
         for note in ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A",
                      "Bb", "B"]:
             frets = self.bass["root_map"]["notes"][note]
@@ -608,17 +609,16 @@ class Book(object):
         self.w(r"\begin{rootmapnote}")
         # One sentence per line: three separate rules, not a paragraph.
         self.w(r"Play the root, and the fifth if there is one.\\")
-        self.w(r"Add the tone that names the chord, the \frets{3b} or "
-               r"the \frets{7b}, only when it wants hearing.\\")
+        self.w(r"Add the tone that names the chord, the \frets{b3} or "
+               r"the \frets{b7}, only when it wants hearing.\\")
         self.w(r"The rest belongs to whoever is playing chords.")
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 
-    # Number first, then the accidental that modifies it: 3b, not b3.
-    # Chord symbols keep their conventional spelling -- Am7b5 stays Am7b5 --
-    # this is only how the degrees are named on the bass pages.
-    DEGREE_NAMES = {0: "R", 1: "9b", 2: "9", 3: "3b", 4: "3", 5: "4",
-                    6: "5b", 7: "5", 8: "5#", 9: "6", 10: "7b", 11: "7"}
+    # Accidental first, the way a chord symbol writes it: b3, not 3b. This
+    # matches Am7b5, Gb, and every other symbol in the book.
+    DEGREE_NAMES = {0: "R", 1: "b9", 2: "9", 3: "b3", 4: "3", 5: "4",
+                    6: "b5", 7: "5", 8: "#5", 9: "6", 10: "b7", 11: "7"}
 
     def degree_name(self, interval):
         return self.DEGREE_NAMES[interval % 12]

@@ -285,18 +285,20 @@
 % rows that happen to sit slightly further apart.
 % Space below a finished group. Ordinary glue, so it vanishes if the group
 % happens to end a column.
-\newcommand{\chordgap}{\par\vskip0.55\baselineskip}
+% \nobreak first: it makes the glue that follows an illegal breakpoint,
+% so a column can never break immediately before a group and leave that
+% group's rule stranded at the top of the next column.
+\newcommand{\chordgap}{\par\nobreak\vskip0.55\baselineskip}
 
 % The first row of a group carries the rule that heads it. Drawing the rule
 % between rows instead would leave it stranded at the top of a column
 % whenever the break fell there: an \hrule is not discardable, and glue is.
 % Same weight and color as the rule under the page heading.
 \newcommand{\chordrowfirst}[2]{%
-  \par\nointerlineskip
+  \par\vskip\chord@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
     {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
-    \makebox[\chord@name][l]{\small\bfseries #1}#2\par}%
-  \vskip\chord@rowsep}
+    \makebox[\chord@name][l]{\small\bfseries #1}#2\par}}
 
 % Tight enough that a whole key -- around thirty chords -- lands on one
 % page. Two half-empty pages per key would double the sheet count, and
@@ -341,10 +343,9 @@
 % suppressed TeX's interline glue. Take the rule away and that glue comes
 % back, silently adding a couple of points to every row.
 \newcommand{\chordrow}[2]{%
-  \par\nointerlineskip
+  \par\vskip\chord@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
-    \makebox[\chord@name][l]{\small\bfseries #1}#2\par}%
-  \vskip\chord@rowsep}
+    \makebox[\chord@name][l]{\small\bfseries #1}#2\par}}
 
 %% An alternate voicing goes under the first, pulled up tight so the pair
 % reads as one chord rather than drifting toward the next one.
@@ -448,16 +449,18 @@
 \newenvironment{rootmap}{%
   \setlength{\tabcolsep}{7pt}
   \renewcommand{\arraystretch}{1.5}
-  \begin{tabular}{@{}l|*{4}{c}@{}}
+  \begin{tabular}{@{}l|*{5}{c}@{}}
 }{\end{tabular}}
 
-\newcommand{\rootmaphead}[4]{%
+% Five columns: the B is the fifth string of a five-string bass, marked
+% with parentheses so a four-string player knows to skip it.
+\newcommand{\rootmaphead}[5]{%
   {\bfseries} & {\bfseries#1} & {\bfseries#2} & {\bfseries#3} &
-  {\bfseries#4} \\[1pt] \hline}
+  {\bfseries#4} & {\bfseries#5} \\[1pt] \hline}
 
-\newcommand{\rootmaprow}[5]{%
+\newcommand{\rootmaprow}[6]{%
   {\bfseries\color{keyred}#1} & \frets{#2} & \frets{#3} &
-  \frets{#4} & \frets{#5} \\}
+  \frets{#4} & \frets{#5} & \frets{#6} \\}
 
 \newenvironment{rootmapnote}{\par\vspace{2mm}\footnotesize\color{faint}}{\par}
 
@@ -509,7 +512,7 @@
 \newlength{\piano@name}\setlength{\piano@name}{20mm}
 % Wider than the chord pages' because the type is smaller: a note list
 % at eight points needs proportionally more air to read as its own row.
-\newlength{\piano@rowsep}\setlength{\piano@rowsep}{2.4mm}
+\newlength{\piano@rowsep}\setlength{\piano@rowsep}{2.0mm}
 % A voicing may wrap inside its own column -- there is no room not to --
 % but never across columns, which would leave half a chord at the foot of
 % one and half at the head of the next with no name on it. The vbox is
@@ -527,21 +530,19 @@
 % suppressed TeX's interline glue, and taking it away lets that glue back
 % in unnoticed.
 \newcommand{\pianorow}[2]{%
-  \par\nointerlineskip
+  \par\vskip\piano@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
     \hangindent=\piano@name\hangafter=1
-    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}%
-  \vskip\piano@rowsep}
+    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}}
 
 % As \chordrowfirst: the rule heading a group rides inside that group's
 % first row, so a column break cannot strand it at the top of a column.
 \newcommand{\pianorowfirst}[2]{%
-  \par\nointerlineskip
+  \par\vskip\piano@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
     {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
     \hangindent=\piano@name\hangafter=1
-    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}%
-  \vskip\piano@rowsep}
+    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}}
 
 % ------------------------------------------------------- bass vocabulary
 % Twenty-six kinds of chord will not fit one column at a size worth
@@ -558,16 +559,17 @@
 \newlength{\degree@rowsep}\setlength{\degree@rowsep}{1.6mm}
 
 \newcommand{\degreerow}[2]{%
-  \par\nointerlineskip
-  \vtop{\hsize=\linewidth\makebox[15mm][l]{\bfseries #1}#2\par}%
-  \vskip\degree@rowsep}
+  \par\vskip\degree@rowsep\nointerlineskip
+  \vtop{\hsize=\linewidth
+    \hangindent=15mm\hangafter=1
+    \makebox[15mm][l]{\bfseries #1}#2\par}}
 
 \newcommand{\degreerowfirst}[2]{%
-  \par\nointerlineskip
+  \par\vskip\degree@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
     {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
-    \makebox[15mm][l]{\bfseries #1}#2\par}%
-  \vskip\degree@rowsep}
+    \hangindent=15mm\hangafter=1
+    \makebox[15mm][l]{\bfseries #1}#2\par}}
 
 % -------------------------------------------------------------- back sheet
 % Everything that is reference rather than content lives here, so the

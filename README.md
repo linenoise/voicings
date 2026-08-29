@@ -125,8 +125,8 @@ sharp ninth of `C7#9`. `theory.DEGREE_MAP` carries this per quality. The
 piano pages are the exception. They name the key you actually play, `A`
 rather than `Bbb`, because nobody hunts a keyboard for a double flat.
 
-**Degrees** are written number first: `3b`, `7b`, `5#`. Chord symbols keep
-their conventional spelling, so `Am7b5` stays `Am7b5`.
+**Degrees** are written accidental first: `b3`, `b7`, `#5`, matching how
+chord symbols spell them.
 
 ## Layout
 

@@ -1,68 +1,182 @@
 # Bass.
 #
-# The notebook has no bass chord section, and a bass player does not finger
-# chord grids -- so this section gives what is actually used: where every
-# root sits on each string, and the movable arpeggio patterns measured from
-# that root.
-#
-# Offsets are frets relative to the root, on the string named. Strings are
-# numbered from the low E as string 4, matching how bass players count.
-
+# The notebook has no bass chord section, and a bass player does not
+# finger chord grids -- so this section gives what is actually used:
+# where every root sits on each string, and the movable arpeggio
+# patterns measured from that root.
 instrument: bass
-tuning: [E1, A1, D2, G2]
-
-# Fret at which each root note falls, per string.
+tuning:
+- E1
+- A1
+- D2
+- G2
 root_map:
-  strings: [E, A, D, G]
+  strings:
+  - B
+  - E
+  - A
+  - D
+  - G
   notes:
-    C:  [8, 3, 10, 5]
-    Db: [9, 4, 11, 6]
-    D:  [10, 5, 0, 7]
-    Eb: [11, 6, 1, 8]
-    E:  [0, 7, 2, 9]
-    F:  [1, 8, 3, 10]
-    Gb: [2, 9, 4, 11]
-    G:  [3, 10, 5, 0]
-    Ab: [4, 11, 6, 1]
-    A:  [5, 0, 7, 2]
-    Bb: [6, 1, 8, 3]
-    B:  [7, 2, 9, 4]
-
-# Movable patterns, root on the E or A string. "+2 / next string" means
-# two frets up from the root, one string higher.
+    C:
+    - 1
+    - 8
+    - 3
+    - 10
+    - 5
+    Db:
+    - 2
+    - 9
+    - 4
+    - 11
+    - 6
+    D:
+    - 3
+    - 10
+    - 5
+    - 0
+    - 7
+    Eb:
+    - 4
+    - 11
+    - 6
+    - 1
+    - 8
+    E:
+    - 5
+    - 0
+    - 7
+    - 2
+    - 9
+    F:
+    - 6
+    - 1
+    - 8
+    - 3
+    - 10
+    Gb:
+    - 7
+    - 2
+    - 9
+    - 4
+    - 11
+    G:
+    - 8
+    - 3
+    - 10
+    - 5
+    - 0
+    Ab:
+    - 9
+    - 4
+    - 11
+    - 6
+    - 1
+    A:
+    - 10
+    - 5
+    - 0
+    - 7
+    - 2
+    Bb:
+    - 11
+    - 6
+    - 1
+    - 8
+    - 3
+    B:
+    - 0
+    - 7
+    - 2
+    - 9
+    - 4
 patterns:
-  - name: "Root + fifth + octave"
-    use: "The default. Works under anything in the key."
-    degrees: [{degree: "R", string: 0, offset: 0},
-              {degree: "5", string: 1, offset: 2},
-              {degree: "8", string: 2, offset: 2}]
-  - name: "Major arpeggio"
-    use: "Major, maj7, 6."
-    degrees: [{degree: "R", string: 0, offset: 0},
-              {degree: "5", string: 1, offset: 2},
-              {degree: "8", string: 2, offset: 2},
-              {degree: "3", string: 3, offset: 1}]
-  - name: "Minor arpeggio"
-    use: "Minor, m7, m6."
-    degrees: [{degree: "R", string: 0, offset: 0},
-              {degree: "5", string: 1, offset: 2},
-              {degree: "8", string: 2, offset: 2},
-              {degree: "3b", string: 3, offset: 0}]
-  - name: "Dominant seventh"
-    use: "Any 7 chord. The b7 pulls to the four."
-    degrees: [{degree: "R", string: 0, offset: 0},
-              {degree: "5", string: 1, offset: 2},
-              {degree: "7b", string: 2, offset: 0},
-              {degree: "3", string: 3, offset: 1}]
-  - name: "Minor seventh"
-    use: "The two and the six chord."
-    degrees: [{degree: "R", string: 0, offset: 0},
-              {degree: "5", string: 1, offset: 2},
-              {degree: "7b", string: 2, offset: 0},
-              {degree: "3b", string: 3, offset: 0}]
-  - name: "Walking approach"
-    use: "Leading into the next chord."
-    degrees: [{degree: "R", string: 0, offset: 0},
-              {degree: "5", string: 1, offset: 2},
-              {degree: "6", string: 1, offset: 4},
-              {degree: "7b", string: 2, offset: 0}]
+- name: Root + fifth + octave
+  use: The default. Works under anything in the key.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 2
+  - degree: '8'
+    string: 2
+    offset: 2
+- name: Major arpeggio
+  use: Major, maj7, 6.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 2
+  - degree: '8'
+    string: 2
+    offset: 2
+  - degree: '3'
+    string: 3
+    offset: 1
+- name: Minor arpeggio
+  use: Minor, m7, m6.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 2
+  - degree: '8'
+    string: 2
+    offset: 2
+  - degree: 3b
+    string: 3
+    offset: 0
+- name: Dominant seventh
+  use: Any 7 chord. The b7 pulls to the four.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 2
+  - degree: 7b
+    string: 2
+    offset: 0
+  - degree: '3'
+    string: 3
+    offset: 1
+- name: Minor seventh
+  use: The two and the six chord.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 2
+  - degree: 7b
+    string: 2
+    offset: 0
+  - degree: 3b
+    string: 3
+    offset: 0
+- name: Walking approach
+  use: Leading into the next chord.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 2
+  - degree: '6'
+    string: 1
+    offset: 4
+  - degree: 7b
+    string: 2
+    offset: 0
+note: Fret at which each root note falls, per string. The B string is the fifth string of a five-string
+  bass; four-string players can ignore that column.
