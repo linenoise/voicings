@@ -333,15 +333,16 @@
 % \nobreak first: it makes the glue that follows an illegal breakpoint,
 % so a column can never break immediately before a group and leave that
 % group's rule stranded at the top of the next column.
-% The group rule sits centered in the gap it opens: 0.85 above and 0.15
-% below, which after the rule's own thickness and the ascent of the line
-% under it comes out even on both sides. The two numbers look lopsided
-% because they measure different things -- the one above is glue alone,
-% the one below is glue plus the height of the first line of the group.
-\newcommand{\chordgap}{\par\nobreak\vskip0.93\baselineskip}
+% The rule sits centered in the white it opens, which is not the same as
+% centering it between the two baselines. Fret digits sit on the baseline
+% and rise about 2.9mm above it, so the space under the rule is nearly all
+% glyph while the space over it is nearly all air. These two numbers look
+% lopsided for that reason: the small one below is glue that the next row's
+% digits then fill. Measured ink to ink, the gap is even.
+\newcommand{\chordgap}{\par\nobreak\vskip0.46\baselineskip}
 % The piano rows are \footnotesize and sit on a wider row separation,
 % so the same rule needs different glue on either side of it there.
-\newcommand{\pianogap}{\par\nobreak\vskip0.69\baselineskip}
+\newcommand{\pianogap}{\par\nobreak\vskip0.33\baselineskip}
 
 % The first row of a group carries the rule that heads it. Drawing the rule
 % between rows instead would leave it stranded at the top of a column
@@ -350,7 +351,7 @@
 \newcommand{\chordrowfirst}[2]{%
   \par\vskip\chord@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
-    {\color{rule}\hrule height 0.4pt}\vskip0.07\baselineskip
+    {\color{rule}\hrule height 0.4pt}\vskip0.54\baselineskip
     \chord@strut\makebox[\chord@name][l]{\small\bfseries #1}#2\chord@strut\par}}
 
 % Tight enough that a whole key -- around thirty chords -- lands on one
@@ -522,11 +523,11 @@
     \settowidth{\drone@lead}{Drone spike: }%
     \hbox to \linewidth{\makebox[\drone@lead][l]{Drone spike:}major \textbf{#1}\hfil}%
     \hbox to \linewidth{\hskip\drone@lead minor \textbf{#2}\hfil}}%
-  \vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
+  \vspace{1.6mm}{\color{rule}\hrule height 0.3pt}\vspace{0.2mm}}
 
 \newcommand{\dronenoteboth}[1]{%
   \par{\footnotesize\color{faint}Drone spike: \textbf{#1}}%
-  \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
+  \par\vspace{1.6mm}{\color{rule}\hrule height 0.3pt}\vspace{0.2mm}}
 
 % -------------------------------------------------------------- bass pages
 % Twelve rows and five columns on a page that can hold far more, so the
@@ -641,7 +642,7 @@
 \newcommand{\pianorowfirst}[2]{%
   \par\vskip\piano@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
-    {\color{rule}\hrule height 0.4pt}\vskip0.34\baselineskip
+    {\color{rule}\hrule height 0.4pt}\vskip0.71\baselineskip
     \hangindent=\piano@name\hangafter=1
     {\footnotesize\piano@strut\makebox[\piano@name][l]{\bfseries #1}%
      \scriptsize #2\piano@strut\par}}}
