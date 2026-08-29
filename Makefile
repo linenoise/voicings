@@ -147,12 +147,16 @@ check-latex:
 	  echo "(validate, repair, spikes) works without LaTeX."; \
 	  exit 1; }
 
+## Remove what TeX leaves behind, but keep the generated .tex and the
+## PDFs: those are committed, and deleting them would show up as fourteen
+## deletions in git rather than as a clean tree.
 clean:
-	rm -rf $(BUILD)
+	@find $(BUILD) -type f ! -name '*.tex' ! -name '*.pdf' -delete 2>/dev/null || true
+	@echo "removed build intermediates; .tex and .pdf kept"
 
-## Also remove the published PDFs. `make editions` rebuilds them.
-distclean: clean
-	rm -rf editions
+## Remove build/ entirely, PDFs included. `make` rebuilds them.
+distclean:
+	rm -rf $(BUILD)
 
 help:
 	@grep -B1 -E '^[a-z-]+:' Makefile | grep -E '^##|^[a-z-]+:' | \

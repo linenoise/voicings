@@ -9,8 +9,9 @@ notebook/
 
 # In build/, keep the generated LaTeX and the PDFs; drop everything else
 # TeX leaves behind (.aux, .log, .out, the copied .cls). The published
-# copies under their display names live in editions/, which the README
-# links to and the cover's QR code leads to.
+# PDFs carry their display names ("Fancy Mandolin Chords and Their
+# Voicings.pdf"), which is what the README links to and what the cover's
+# QR code leads someone to download.
 build/*
 !build/*.tex
 !build/*.pdf

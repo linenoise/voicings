@@ -38,7 +38,7 @@ guitar:
   courses: 1
   frets: 12
   note: >-
-    Standard. A baritone ukulele is the top four strings, so guitar shapes
+    Standard. A baritone ukulele is the top four strings: guitar shapes
     with the lowest two muted transfer directly.
 
 bass:
@@ -63,8 +63,8 @@ ukulele:
   courses: 1
   frets: 12
   note: >-
-    Soprano, concert and tenor. Re-entrant: the 4th string sounds above the
-    3rd, so "lowest first" means leftmost. Low-G uses the same shapes.
+    Soprano, concert and tenor. Re-entrant: the 4th sounds above the 3rd,
+    so "lowest first" means leftmost. Low-G is the same.
   reentrant: true
 
 banjo:
@@ -86,5 +86,4 @@ piano:
   name: Piano
   frets: 0
   note: >-
-    Note names, low to high. Fifths open, the third high and out of the
-    bass player's way.
+    Note names, low to high, as played.

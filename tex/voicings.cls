@@ -168,7 +168,8 @@
 % straight over the instrument name, and even 18pt leaves under a point of
 % air. 16pt is as large as clears the label comfortably on both sides,
 % which is what keeps the two kinds of page looking like the same book.
-\newcommand{\circleheader}[1]{\pageheaderat{16}{#1}{Circle of Fifths}{}}
+\newcommand{\circleheader}[1]{%
+  \pageheaderat{16}{#1}{\textcolor{ink}{Circle of Fifths}}{}}
 \newcommand{\pagesubtitle}[1]{%
   \vspace{-1pt}{\footnotesize\color{faint}#1\par}\pagerule}
 
@@ -395,11 +396,11 @@
 % a note about the page, not one of the chords on it.
 \newcommand{\dronenote}[2]{%
   \par{\footnotesize\color{faint}%
-    Drone spike --- major \textbf{#1}\quad minor \textbf{#2}}%
+    Drone spike: major \textbf{#1}\quad minor \textbf{#2}}%
   \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
 
 \newcommand{\dronenoteboth}[1]{%
-  \par{\footnotesize\color{faint}Drone spike --- \textbf{#1}}%
+  \par{\footnotesize\color{faint}Drone spike: \textbf{#1}}%
   \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
 
 % -------------------------------------------------------------- bass pages
@@ -504,28 +505,30 @@
 % -------------------------------------------------------------- back sheet
 % Everything that is reference rather than content lives here, so the
 % inside front can be the recipient's.
-\newenvironment{backsheet}{%
+\newcommand{\backsheet@title}{}
+\newenvironment{backsheet}[1]{%
+  \renewcommand{\backsheet@title}{#1}%
   \clearpage\thispagestyle{empty}%
   \pagetitle{Tunings}\pagerule
   \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0.9mm}
+    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0.4mm}
     \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
 }{%
   \end{list}
   \vfill
   {\color{rule}\hrule height 0.4pt}
-  \vspace{1.5mm}
+  \vspace{1.2mm}
   {\footnotesize
-   \textbf{Fancy Chords and Their Voicings}\par
+   \textbf{\backsheet@title}\par
    \vspace{0.8mm}
    {\color{faint}%
     Danne Stayskal\\
     \href{mailto:danne@stayskal.com}{danne@stayskal.com}\\
     http://danne.stayskal.com/\par}
-   \vspace{1.2mm}
+   \vspace{0.9mm}
    {\color{faint}Source, corrections and a printable copy:\par}
    \bookurl\par
-   \vspace{1.2mm}
+   \vspace{0.9mm}
    {\color{faint}\scriptsize MIT licensed. Print it, cut it, sew it,
     give it away.\par}}
   \vspace{0.5mm}
@@ -533,4 +536,4 @@
 
 \newcommand{\tuningrow}[3]{%
   \item[]{\small\bfseries#1}\quad{\ttfamily\color{\voicingcolor}\bfseries\small#2}%
-  \par\vspace{0.5mm}{\scriptsize\color{faint}#3}}
+  \par\vspace{0.3mm}{\scriptsize\color{faint}#3}}

@@ -585,8 +585,8 @@ class Book(object):
         self.w(r"\begin{rootmapnote}")
         # One sentence per line: three separate rules, not a paragraph.
         self.w(r"Play the root, and the fifth if there is one.\\")
-        self.w(r"Add the tone that names the chord --- the \frets{3b}, "
-               r"the \frets{7b} --- only when it wants hearing.\\")
+        self.w(r"Add the tone that names the chord, the \frets{3b} or "
+               r"the \frets{7b}, only when it wants hearing.\\")
         self.w(r"The rest belongs to whoever is playing chords.")
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
@@ -624,7 +624,10 @@ class Book(object):
             label = (self.tuning_label(name)
                      if meta.get("kind", "frets") == "frets" else "")
             rows.append((meta["name"], label, meta.get("note", "")))
-        self.w(r"\begin{backsheet}")
+        # The credits name this edition, not the series: someone holding
+        # the bass booklet should see what they are holding.
+        name = self.instruments[self.only]["name"] + " " if self.only else ""
+        self.w(r"\begin{backsheet}{Fancy %sChords and Their Voicings}" % name)
         for name, tuning, note in rows:
             self.w(r"\tuningrow{%s}{%s}{%s}"
                    % (tex_escape(name), tex_escape(tuning), tex_escape(note)))

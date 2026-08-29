@@ -4,13 +4,13 @@ A pocket chord book you can print, cut up, and sew.
 
 | Edition | Read | Print | Pages | Sheets | |
 |---|---|---|---|---|---|
-| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 79 | 10 | All six instruments |
-| Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also fiddle and tenor banjo |
-| Guitar | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also baritone ukulele |
-| Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
-| Piano | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
-| Banjo | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | With drone spikes |
-| Bass | [screen](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/editions/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 7 | 1 | Roots and patterns |
+| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 79 | 10 | All six instruments |
+| Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also fiddle and tenor banjo |
+| Guitar | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also baritone ukulele |
+| Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
+| Piano | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
+| Banjo | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | With drone spikes |
+| Bass | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 7 | 1 | Roots and patterns |
 
 Every edition comes two ways. **Screen** is 3.5″ × 5.5″, one page per page —
 good on a phone, a tablet, or an e-reader. **4-up** is US Letter with four
@@ -36,13 +36,10 @@ Every instrument carries the same 29 kinds of chord in all twelve keys, so
 whatever you are holding when the singer calls a flat-six major-nine, it is
 on the page.
 
-Two PDFs come out of the build, and both are checked in under `build/` so
-they can be read or printed without installing anything:
-
-| File | Size | For |
-|---|---|---|
-| [`build/voicings-screen.pdf`](https://github.com/linenoise/voicings/blob/main/build/voicings-screen.pdf) | 3.5″ × 5.5″, one page per page | Reading on a phone, tablet, or e-reader |
-| [`build/voicings-print.pdf`](https://github.com/linenoise/voicings/blob/main/build/voicings-print.pdf) | US Letter, 4-up double-sided | Printing, cutting, and sewing |
+Fourteen PDFs come out of the build -- a screen and a print edition of the
+whole book and of each instrument -- and all are checked in under `build/`
+under their display names, so they can be read or printed without
+installing anything. The table at the top of this file links to every one.
 
 3.5″ × 5.5″ is the trim size of the original notebook, so the screen edition
 is the book at actual size.
@@ -99,7 +96,7 @@ transfer directly.
 
 ## Printing, cutting, and sewing
 
-1. **Print** `build/voicings-print.pdf` on US Letter, **double-sided, flipped
+1. **Print** the 4-up edition you want on US Letter, **double-sided, flipped
    on the long edge**, at 100% scale — no "fit to page", which would shrink
    the pages and throw the cut lines off.
 2. **Cut** each sheet into four 3.5″ × 5.5″ rectangles: trim ¾″ of waste off
@@ -188,10 +185,10 @@ fingering lands on top of its own key name.
 ```
 data/*.yaml ──▶ validate.py ──▶ render.py ──▶ body.tex ──┐
    │                 │                                    │
-   │                 └── repair.py ──▶ resolve.py         ├──▶ voicings-screen.pdf
+   │                 └── repair.py ──▶ resolve.py         ├──▶ screen editions
    │                          └──▶ CORRECTIONS.md         │            │
    └── spikes.py ──▶ banjo-spikes.yaml                    ┘            ▼
-                                                            impose.py ──▶ voicings-print.pdf
+                                                            impose.py ──▶ print editions
 ```
 
 The YAML under `data/` is the source of truth. The PDFs are generated, and
