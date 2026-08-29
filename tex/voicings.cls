@@ -257,6 +257,12 @@
 \newlength{\chord@name}\setlength{\chord@name}{20mm}
 
 \setlength{\columnsep}{3mm}
+% The space between a page heading and the first row. It has to be set
+% here: multicol discards glue placed just before the environment, so a
+% \vspace there does nothing and only \multicolsep is left holding it.
+% LaTeX's default of 12pt put 23pt between the heading and the first row;
+% this halves it.
+\setlength{\multicolsep}{0.5pt}
 \setlength{\columnseprule}{0pt}
 
 % Instrument on the left, key centered on the same line. The instrument is
@@ -268,7 +274,6 @@
   \pageheader{#1}{#2}{\ifthenelse{\equal{#3}{cont}}{continued}{}}%
   \pagerule
   #4%
-  \vspace{0.5\baselineskip}%
   \raggedright
   \begin{multicols}{2}%
 }{\end{multicols}}
@@ -277,7 +282,22 @@
 % One blank line between one kind of chord and the next -- the same height
 % a row would occupy, so the groups read as separate blocks rather than as
 % rows that happen to sit slightly further apart.
-\newcommand{\chordgap}{\par\vspace{\baselineskip}}
+% Space below a finished group. Ordinary glue, so it vanishes if the group
+% happens to end a column.
+\newcommand{\chordgap}{\par\vskip0.55\baselineskip}
+
+% The first row of a group carries the rule that heads it. Drawing the rule
+% between rows instead would leave it stranded at the top of a column
+% whenever the break fell there: an \hrule is not discardable, and glue is.
+% Same weight and color as the rule under the page heading.
+\newcommand{\chordrowfirst}[2]{%
+  \par
+  \vtop{\hsize=\linewidth
+    {\color{rule}\hrule height 0.4pt}\vskip0.45\baselineskip
+    \makebox[\chord@name][l]{\small\bfseries #1}#2\par}%
+  \nobreak\vskip0.30mm
+  {\color{rule!45}\hrule height 0.2pt}%
+  \vskip0.30mm}
 
 % Tight enough that a whole key -- around thirty chords -- lands on one
 % page. Two half-empty pages per key would double the sheet count, and
@@ -469,7 +489,6 @@
   \clearpage
   \pageheader{Piano}{#1}{\ifthenelse{\equal{#2}{cont}}{continued}{}}%
   \pagerule
-  \vspace{0.5\baselineskip}%
   \raggedright
   \begin{multicols}{2}%
 }{\end{multicols}}

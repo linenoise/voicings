@@ -632,6 +632,7 @@ keys:
   - chord: F
     frets:
     - '5301'
+    - '5335'
   - chord: Fm
     frets:
     - '1334'

@@ -412,16 +412,22 @@ class Book(object):
         self.w(r"\end{chordpage}")
 
     def emit_chords(self, chords):
-        """Rows, with a gap wherever the kind of chord changes."""
+        """Rows, grouped by the kind of chord.
+
+        Each group after the first opens with a ruled line, drawn as part
+        of its first row so a column break cannot separate the two.
+        """
         last = None
         for entry in chords:
             g = group_index(entry["chord"])
-            if last is not None and g != last:
+            starts_group = last is not None and g != last
+            if starts_group:
                 self.w(r"  \chordgap")
             last = g
             cells = r"\voicingnext ".join(
                 frets_tex(f) for f in entry["frets"])
-            self.w(r"  \chordrow{%s}{%s}" % (
+            self.w(r"  \chordrow%s{%s}{%s}" % (
+                "first" if starts_group else "",
                 tex_escape(entry["chord"]), cells))
 
     def ordered_chords(self, chords):
