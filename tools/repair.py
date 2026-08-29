@@ -167,7 +167,10 @@ def main():
         with open(path) as fh:
             doc = yaml.safe_load(fh)
         name = doc["instrument"]
-        tuning = instruments[name]["tuning"]
+        meta = instruments[name]
+        if meta.get("kind", "frets") != "frets":
+            continue  # note-based instruments are generated, not transcribed
+        tuning = meta["tuning"]
         source = doc.get("source", "")
         dirty = False
 

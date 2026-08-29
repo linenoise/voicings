@@ -11,7 +11,8 @@ So: take the union of what the mandolin pages, the piano worksheet and the
 core worship voicings use (theory.VOCABULARY), and make sure every
 instrument has all of it in all twelve keys. Anything already transcribed
 from the notebook is left exactly as it is. Anything missing is generated
-from theory and marked `derived: true`, which prints with a dagger.
+from theory and marked `derived: true` in the data. The book itself
+does not mark them: a player wants the chord, not its provenance.
 
 Slash voicings are skipped for the ukulele: it is re-entrant, so it has no
 bass string to put a bass note on.
@@ -81,6 +82,9 @@ def main():
     ap.add_argument("--data", default="data")
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--only", help="just this instrument")
+    ap.add_argument("--refresh", action="store_true",
+                    help="regenerate every derived entry, not just missing "
+                         "ones -- use after changing how generate.py ranks")
     args = ap.parse_args()
 
     with open(os.path.join(args.data, "instruments.yaml")) as fh:
@@ -106,6 +110,9 @@ def main():
                 block = {"key": key, "chords": []}
                 doc["keys"].append(block)
                 by_key[key] = block
+            if args.refresh:
+                block["chords"] = [c for c in block["chords"]
+                                   if not c.get("derived")]
             have = existing(block)
             for quality, bass_interval in required(reentrant):
                 root = theory.NOTE_TO_PC[key]

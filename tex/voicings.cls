@@ -14,7 +14,7 @@
 \DeclareOption{screen}{\voicings@screentrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
-\LoadClass[9pt]{extarticle}
+\LoadClass[12pt]{extarticle}
 
 \RequirePackage{geometry}
 \RequirePackage{tikz}
@@ -25,6 +25,8 @@
 \RequirePackage{calc}
 \RequirePackage{ifthen}
 \RequirePackage{amssymb}
+\RequirePackage{multicol}
+\RequirePackage{qrcode}
 \RequirePackage[hidelinks]{hyperref}
 \usetikzlibrary{calc}
 
@@ -36,7 +38,10 @@
 
 \geometry{
   paperwidth=\bookwidth, paperheight=\bookheight,
-  top=8mm, bottom=7mm, inner=9mm, outer=6mm,
+  % Tight, but every margin still clears the unprintable border of a
+  % typical laser printer (a Brother HL-2270DW reserves about 4.2mm), and
+  % the inner margin leaves room for the sewing.
+  top=6mm, bottom=5mm, inner=8.5mm, outer=5mm,
   twoside, includehead=false, includefoot=false,
 }
 
@@ -44,6 +49,11 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \raggedbottom
+
+% Ragged right throughout. At a 60mm measure, justification opens rivers
+% and forces overfull lines rather than admitting defeat; a ragged edge is
+% both more honest and easier to read at a glance.
+\raggedright
 
 % ------------------------------------------------------------------ colour
 % Chosen to stay legible on a mono laser printer: everything carries in
@@ -61,12 +71,21 @@
 \color{ink}
 
 % ------------------------------------------------------------------- fonts
-% Fall back gracefully: these are the families most likely to be installed,
-% and the book still sets if fontspec picks the default.
-\IfFontExistsTF{Charter}{\setmainfont{Charter}}{%
-  \IfFontExistsTF{Georgia}{\setmainfont{Georgia}}{}}
-\IfFontExistsTF{Menlo}{\setmonofont[Scale=0.92]{Menlo}}{%
-  \IfFontExistsTF{DejaVu Sans Mono}{\setmonofont[Scale=0.88]{DejaVu Sans Mono}}{}}
+% Sans throughout. A chord book is read in glances, on a stand, in bad
+% light -- serifs buy nothing at these sizes and cost clarity in the fret
+% digits, where 1 and 7 and 0 have to stay apart at six points.
+%
+% Falls back gracefully down a chain of families likely to be installed;
+% the book still sets, in the default face, if none of them are.
+\IfFontExistsTF{Helvetica Neue}{\setsansfont{Helvetica Neue}}{%
+  \IfFontExistsTF{Avenir Next}{\setsansfont{Avenir Next}}{%
+    \IfFontExistsTF{Arial}{\setsansfont{Arial}}{%
+      \IfFontExistsTF{TeX Gyre Heros}{\setsansfont{TeX Gyre Heros}}{}}}}
+\IfFontExistsTF{Menlo}{\setmonofont[Scale=0.94]{Menlo}}{%
+  \IfFontExistsTF{DejaVu Sans Mono}{\setmonofont[Scale=0.90]{DejaVu Sans Mono}}{}}
+
+% Sans is the body face, not an alternative to it.
+\renewcommand{\familydefault}{\sfdefault}
 
 \newcommand{\degsign}{\textsuperscript{o}}
 \newcommand{\smaller}[1]{{\footnotesize #1}}
@@ -75,11 +94,21 @@
 % which is most of what makes a chord book readable at arm's length.
 \newcommand{\frets}[1]{{\ttfamily\color{fretgreen}\bfseries #1}}
 \newcommand{\notlisted}{{\color{rule}\ttfamily--}}
-\newcommand{\derived}{\textsuperscript{\color{faint}\tiny$\dagger$}}
+
+% A fingering above the ninth fret needs two digits per string and runs
+% wider than a column allows, so it sets one size down. Rare enough that
+% the inconsistency costs nothing.
+\newcommand{\fretswide}[1]{{\small\ttfamily\color{fretgreen}\bfseries #1}}
+
+% Between alternate voicings of the same chord. A single space let 2200 and
+% 2245 read as one long number; this is a gap plus a faint divider, so the
+% eye stops without the page filling up with punctuation.
+\newcommand{\voicingsep}{%
+  \hspace{1.6mm}{\color{rule}\rule[-0.15ex]{0.4pt}{1.1ex}}\hspace{1.6mm}}
 
 % ------------------------------------------------------------- page frames
-\newcommand{\pagerule}{\par\vspace{2pt}%
-  {\color{rule}\hrule height 0.4pt}\par\vspace{4pt}}
+\newcommand{\pagerule}{\par\vspace{1.5pt}%
+  {\color{rule}\hrule height 0.4pt}\par\vspace{3pt}}
 
 \newcommand{\pagetitle}[1]{%
   {\large\bfseries\color{ink}#1\par}}
@@ -111,6 +140,13 @@
     \vspace{2mm}
     {\large Ukulele\par}
     \vfill
+    % Vector, generated at compile time by the qrcode package -- no image
+    % file to keep in step with the URL beneath it, and it stays sharp at
+    % any size a phone camera cares about. Error correction is left at the
+    % default: the code is small on the page and this book gets carried in
+    % a pocket, so it will be read creased and in poor light.
+    \qrcode[height=18mm,padding]{\bookurl}\par
+    \vspace{1.5mm}
     {\footnotesize\color{faint}\bookurl\par}
     \vspace{3mm}
   \end{center}
@@ -174,31 +210,61 @@
 % Two columns of the same shape as the notebook: the chord name on the
 % left, its voicings running right. Rows are ruled faintly so the eye can
 % track across on a dark stage.
-\newenvironment{chordpage}[3]{%
+\newlength{\chord@name}\setlength{\chord@name}{20mm}
+
+\setlength{\columnsep}{3mm}
+\setlength{\columnseprule}{0pt}
+
+\newenvironment{chordpage}[4]{%
   \clearpage
   \pagetitle{\color{keyred}#2}%
   \vspace{-1mm}%
   {\footnotesize\color{faint}#1\ifthenelse{\equal{#3}{cont}}{, continued}{}\par}
   \pagerule
-  \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0pt}
-    \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
-}{\end{list}}
+  #4%
+  \raggedright
+  \begin{multicols}{2}%
+}{\end{multicols}}
 
 % Tight enough that a whole key -- around thirty chords -- lands on one
 % page. Two half-empty pages per key would double the sheet count, and
 % flipping mid-song is exactly what this book exists to avoid.
+% In a column this narrow a chord and two alternates will not share a
+% line at any size worth reading, so alternates stack under the first
+% instead of running on. That also settles the question of whether
+% "2200 2245" is one fingering or two: they are on separate lines.
+% The name is set a size down from the fingering. The fingering is what
+% you read at a glance from a music stand; the name is what you scan for
+% once. Names run to nine characters (Bbsus2/D), fingerings to six
+% (x13321), and at 12pt both will not fit a 36mm column -- so the name
+% gives way and the numbers stay full size.
 \newcommand{\chordrow}[2]{%
-  \item[]{\small\makebox[15mm][l]{\bfseries #1}#2}%
-  \par\vspace{0.35mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.35mm}}
+  \par\makebox[\chord@name][l]{\small\bfseries #1}#2%
+  \par\vspace{0.6mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.6mm}}
+
+%% An alternate voicing goes under the first, pulled up tight so the pair
+% reads as one chord rather than drifting toward the next one.
+\newcommand{\voicingnext}{\par\vspace{-1.1mm}\hspace*{\chord@name}}
 
 % ------------------------------------------------------- circle of fifths
 % Twelve segments, major on the outside, relative minor inside. Drawn
 % rather than tabulated because the whole point of the circle is that
 % neighbours are a fifth apart and you can see it.
-\newlength{\cof@outer}\setlength{\cof@outer}{28mm}
-\newlength{\cof@mid}\setlength{\cof@mid}{19mm}
-\newlength{\cof@inner}\setlength{\cof@inner}{9.5mm}
+% Sized to the page, not to habit. The binding constraint is width: a
+% six-character fingering like xx0231 is eight millimetres wide, and the
+% ring it sits in has to give it more arc than that. The circle was drawn
+% at 62mm across on a page that allows 72mm, which is where the guitar
+% page's collisions came from. Signatures move back inside the hub, since
+% "1b" is two characters and needs almost nothing.
+\newlength{\cof@outer}\setlength{\cof@outer}{36mm}
+\newlength{\cof@mid}\setlength{\cof@mid}{24mm}
+\newlength{\cof@inner}\setlength{\cof@inner}{13mm}
+
+% Absolute sizes: a diagram this dense cannot follow the body size.
+\newcommand{\cof@name}{\fontsize{8}{8.6}\selectfont}
+\newcommand{\cof@frets}{\fontsize{6.4}{6.8}\selectfont}
+\newcommand{\cof@minor}{\fontsize{7.2}{7.6}\selectfont}
+\newcommand{\cof@sig}{\fontsize{6}{6.4}\selectfont}
 
 % #1 goes in the hub, where there is a hole and nothing else to put in it.
 \newenvironment{circleoffifths}[1]{%
@@ -208,14 +274,15 @@
     \draw[rule,line width=0.4pt] (0,0) circle (\cof@outer);
     \draw[rule,line width=0.4pt] (0,0) circle (\cof@mid);
     \draw[rule,line width=0.4pt] (0,0) circle (\cof@inner);
-    \node[align=center] at (0,0) {\scriptsize\bfseries\color{faint}#1};
+    \node[align=center] at (0,0) {\cof@sig\bfseries\color{faint}#1};
 }{%
   \end{tikzpicture}
   \end{center}}
 
 % #1 index 0-11 (0 = C at twelve o'clock)  #2 major  #3 major frets
-% #4 minor  #5 minor frets  #6 key signature
-\newcommand{\cofsegment}[6]{%
+% #4 minor  #5 minor frets  #6 key signature  #7 "up" or "down": which way
+% the outward side of this wedge points, so the stack can be ordered.
+\newcommand{\cofsegment}[7]{%
   \pgfmathsetmacro{\cof@a}{90 - 30*#1}%
   \pgfmathsetmacro{\cof@edge}{90 - 30*#1 - 15}%
   \draw[rule,line width=0.3pt]
@@ -224,13 +291,32 @@
   % made them collide at three and nine o'clock, where a radial gap of
   % three millimetres is a horizontal gap of three millimetres and the
   % fret numbers are six millimetres wide.
-  \node[align=center] at (\cof@a:23.4mm)
-    {\scriptsize\bfseries\color{keyred}#2\\[-1.5pt]\tiny\mdseries\color{ink}#3};
-  \node[align=center] at (\cof@a:14.2mm)
-    {\scriptsize\bfseries#4\\[-1.5pt]\tiny\mdseries#5};
+  % Name and voicing stay in one node so the pair occupies a single compact
+  % block, but the stack is ordered so the voicing falls on the outward
+  % side of the band -- where the wedge is wider, and where the longer of
+  % the two strings needs the room.
+  %
+  % They are not placed at two different radii, which is the obvious way to
+  % do it and is wrong: at three and nine o'clock "further out" is
+  % sideways, so radial separation puts the two items on the same
+  % horizontal line and xx0231 lands on top of its own key name. Ordering
+  % within one node buys the same thing at top and bottom and costs nothing
+  % at the sides.
+  \node[align=center] at (\cof@a:30.2mm) {%
+    \ifthenelse{\equal{#7}{up}}%
+      {\cof@frets\ttfamily\color{fretgreen}#3\\[-2.4pt]%
+       \cof@name\bfseries\color{keyred}#2}%
+      {\cof@name\bfseries\color{keyred}#2\\[-2.4pt]%
+       \cof@frets\ttfamily\color{fretgreen}#3}};
+  \node[align=center] at (\cof@a:18.6mm) {%
+    \ifthenelse{\equal{#7}{up}}%
+      {\cof@frets\ttfamily\color{fretgreen}#5\\[-2.4pt]%
+       \cof@minor\bfseries#4}%
+      {\cof@minor\bfseries#4\\[-2.4pt]%
+       \cof@frets\ttfamily\color{fretgreen}#5}};
   % Key signatures sit outside the rim: twelve of them around a hub the
   % size of a thumbnail was unreadable.
-  \node at (\cof@a:30.6mm) {\tiny\color{faint}#6};}
+  \node at (\cof@a:8.4mm) {\cof@sig\color{faint}#6};}
 
 \newcommand{\circlefootnote}[1]{%
   \vspace{1mm}{\footnotesize\color{faint}#1\par}}
@@ -265,7 +351,7 @@
 % ------------------------------------------------------------ banjo pages
 % Where to spike the 5th string for this key, at the head of its pages.
 \newcommand{\dronenote}[2]{%
-  \item[]{\scriptsize\color{faint}%
+  \par{\scriptsize\color{faint}%
     Drone: major \textbf{#1}\quad minor \textbf{#2}}%
   \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
 
@@ -275,7 +361,7 @@
 
 \newenvironment{spiketable}{%
   \setlength{\tabcolsep}{2pt}
-  \renewcommand{\arraystretch}{1.25}
+  \renewcommand{\arraystretch}{1.1}
   \begin{tabular}{@{}l l l@{}}
   {\scriptsize\bfseries Key} & {\scriptsize\bfseries Major} &
   {\scriptsize\bfseries Minor} \\ \hline
@@ -307,14 +393,16 @@
 \newenvironment{patternlist}{%
   \pagerule
   \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{2.4mm}
+    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{1.6mm}
     \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
 }{\end{list}}
 
+% Two lines apiece, not three: the name carries what the pattern is for,
+% and the degrees go underneath. Six patterns then fit on one page at the
+% book's size.
 \newcommand{\patternitem}[3]{%
-  \item[]{\bfseries#1}\par\vspace{0.5mm}
-  {\scriptsize#2}\par\vspace{0.5mm}
-  {\scriptsize\color{faint}#3}}
+  \item[]{\small\bfseries#1}\quad{\scriptsize\color{faint}#3}%
+  \par\vspace{0.4mm}{\footnotesize#2}}
 
 % -------------------------------------------------------------- piano
 % Note names rather than fret numbers, so they need room to breathe and a
@@ -338,9 +426,12 @@
 % share a line with its name at this trim size.
 % Name and notes share a line where they fit; a five-note voicing in a
 % flat key is set below its name instead.
+% Note names run wider than fret digits -- two four-note sus4 shapes in a
+% flat key is the widest thing in the book -- so they set one step down
+% from the chord names beside them, which keeps every row on one line.
 \newcommand{\pianorow}[2]{%
-  \item[]{\footnotesize\makebox[16mm][l]{\bfseries #1}#2}%
-  \par\vspace{0.4mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.4mm}}
+  \item[]{\small\makebox[20mm][l]{\bfseries #1}\footnotesize #2}%
+  \par\vspace{0.1mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.1mm}}
 
 % ------------------------------------------------------ worship voicings
 \newcommand{\stargl}{{\color{keyred}$\bigstar$}}
@@ -376,29 +467,29 @@
   \clearpage\thispagestyle{empty}%
   \pagetitle{Tunings}\pagerule
   \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{2.2mm}
+    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0.9mm}
     \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
 }{%
   \end{list}
   \vfill
   {\color{rule}\hrule height 0.4pt}
-  \vspace{2mm}
+  \vspace{1.5mm}
   {\footnotesize
    \textbf{Fancy Chords and their Voicings}\par
-   \vspace{1mm}
+   \vspace{0.8mm}
    {\color{faint}%
     Danne Stayskal, Orcas Island\\
     \href{mailto:danne@stayskal.com}{danne@stayskal.com}\\
     http://danne.stayskal.com/\par}
-   \vspace{2mm}
+   \vspace{1.2mm}
    {\color{faint}Source, corrections and a printable copy:\par}
    \bookurl\par
-   \vspace{2mm}
+   \vspace{1.2mm}
    {\color{faint}\scriptsize MIT licensed. Print it, cut it, sew it,
     give it away.\par}}
-  \vspace{1mm}
+  \vspace{0.5mm}
   \clearpage}
 
 \newcommand{\tuningrow}[3]{%
-  \item[]{\bfseries#1}\quad{\ttfamily\color{fretgreen}\bfseries#2}%
-  \par\vspace{0.6mm}{\scriptsize\color{faint}#3}}
+  \item[]{\small\bfseries#1}\quad{\ttfamily\color{fretgreen}\bfseries\small#2}%
+  \par\vspace{0.5mm}{\scriptsize\color{faint}#3}}

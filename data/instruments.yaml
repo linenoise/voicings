@@ -22,8 +22,8 @@ mandolin:
   # Fiddle is fretless but tuned identically; the numbers read as
   # semitones above the open string.
   note: >-
-    Tuned in fifths. Fiddle and tenor banjo share this tuning, so this
-    section serves all three instruments.
+    Tuned in fifths. Fiddle and tenor banjo share it, so the mandolin
+    pages serve all three.
 
 guitar:
   kind: frets
@@ -32,8 +32,8 @@ guitar:
   courses: 1
   frets: 12
   note: >-
-    Standard tuning. A baritone ukulele is the top four strings (D G B E),
-    so any guitar shape with its lowest two strings muted transfers directly.
+    Standard. A baritone ukulele is the top four strings, so guitar shapes
+    with the lowest two muted transfer directly.
 
 bass:
   kind: frets
@@ -42,7 +42,7 @@ bass:
   courses: 1
   frets: 12
   note: >-
-    Standard four-string bass: the guitar's lowest four strings, one octave down.
+    The guitar's lowest four strings, an octave down.
 
 ukulele:
   kind: frets
@@ -51,9 +51,8 @@ ukulele:
   courses: 1
   frets: 12
   note: >-
-    Soprano, concert and tenor re-entrant tuning. The 4th string sounds
-    ABOVE the 3rd, so "lowest string first" here means leftmost, not lowest
-    pitched. Low-G ukuleles use the same shapes.
+    Soprano, concert and tenor. Re-entrant: the 4th string sounds above the
+    3rd, so "lowest first" means leftmost. Low-G uses the same shapes.
   reentrant: true
 
 banjo:
@@ -64,15 +63,13 @@ banjo:
   courses: 1
   frets: 12
   note: >-
-    Five-string banjo in open G (gDGBD). The 5th (drone) string is not
-    fretted in these shapes; it rings G and is omitted from the fret
-    numbers, which cover the four long strings only.
+    Open G (gDGBD). Numbers cover the four long strings; the 5th is a
+    drone, spiked rather than fretted.
 
 piano:
   kind: notes
   name: Piano
   frets: 0
   note: >-
-    Voicings are note names, low to high, for the right hand with the root
-    in the left. Fifths stay open and the third sits high, out of the bass
-    player's way. Shapes come from data/piano-shapes.yaml; edit there.
+    Note names, low to high. Fifths open, the third high and out of the
+    bass player's way.

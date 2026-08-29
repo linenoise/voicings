@@ -1,5 +1,13 @@
 # Fancy Chords and their Voicings
 
+**[⬇️ Read or print the book (PDF)](https://github.com/linenoise/voicings/blob/main/build/voicings-screen.pdf)** — 3.5″ × 5.5″, one key to a page. Good on a phone, a tablet, or an e-reader.
+
+**[🖨️ Print-and-sew edition (PDF)](https://github.com/linenoise/voicings/blob/main/build/voicings-print.pdf)** — US Letter, four pages to a sheet. Print double-sided, cut into quarters, sew. See [Printing, cutting, and sewing](#printing-cutting-and-sewing).
+
+*Arrived here from the QR code on the cover? Those two links are what you want.*
+
+---
+
 A pocket chord book for the instruments in a church band — mandolin, fiddle,
 banjo, guitar, bass, ukulele, and piano — typeset from a handwritten notebook
 into something you can print on an ordinary duplex printer, cut apart with
@@ -9,12 +17,13 @@ Every instrument carries the same 29 kinds of chord in all twelve keys, so
 whatever you are holding when the singer calls a flat-six major-nine, it is
 on the page.
 
-Two PDFs come out of the build:
+Two PDFs come out of the build, and both are checked in under `build/` so
+they can be read or printed without installing anything:
 
 | File | Size | For |
 |---|---|---|
-| `build/voicings-screen.pdf` | 3.5″ × 5.5″, one page per page | Reading on a phone, tablet, or e-reader |
-| `build/voicings-print.pdf` | US Letter, 4-up double-sided | Printing, cutting, and sewing |
+| [`build/voicings-screen.pdf`](https://github.com/linenoise/voicings/blob/main/build/voicings-screen.pdf) | 3.5″ × 5.5″, one page per page | Reading on a phone, tablet, or e-reader |
+| [`build/voicings-print.pdf`](https://github.com/linenoise/voicings/blob/main/build/voicings-print.pdf) | US Letter, 4-up double-sided | Printing, cutting, and sewing |
 
 3.5″ × 5.5″ is the trim size of the original notebook, so the screen edition
 is the book at actual size.
@@ -39,15 +48,15 @@ PDF targets still works.
 - **Table of chords.**
 - **Circle of fifths**, one per instrument (mandolin, banjo, guitar, bass,
   ukulele), each showing the most common voicing of every major key on the
-  outer ring and its relative minor on the inner ring.
-- **Core worship voicings** — the eighteen shapes that carry most of a set,
-  shown in C with what each is for, four of them starred.
+  outer ring and its relative minor on the inner ring. For bass it gives the
+  string and fret a player actually uses — `A3`, the third fret of the A
+  string, not the eighth of the E.
 - **Nashville number chart**, one per instrument: twelve keys down the side,
   the seven diatonic degrees across, each cell carrying both the chord name
   and its fingering.
 - **Chord sections** — mandolin, guitar, ukulele, banjo, and piano, each
   covering the full vocabulary in all twelve keys: around 350 voicings per
-  instrument, 1,934 in all.
+  instrument, 1,934 in all. One key to a page, two columns.
 - **Banjo drone spikes**: where to spike the 5th string for every key, major
   and minor, repeated on each banjo page and collected in one table.
 - **Piano**: note names low to high, in the open worship idiom — root and
@@ -91,7 +100,7 @@ the stack collates in reading order with no folding. Run `make print
 SCHEME=saddle` instead if you'd rather fold sheets into signatures and sew
 through the fold.
 
-At present the book is **93 pages — 12 sheets of Letter**, one key to a page
+At present the book is **79 pages — 10 sheets of Letter**, one key to a page
 for every instrument.
 
 ## Layout and typography
@@ -100,12 +109,34 @@ One LaTeX page is one notebook page, 3.5″ × 5.5″ — the trim size of the
 paper original. `tex/voicings.cls` owns geometry and type; `tools/render.py`
 owns what goes on which page.
 
+The body is set in **12pt sans**, two columns on the chord pages. That size
+is not a preference — it is the largest the class offers at which nothing
+overflows, found by building the book at each size and checking. 14pt is the
+next step `extarticle` supports and it fails badly. In two columns the
+binding constraint is *width*, not height: a nine-character name like
+`Bbsus2/D` beside a six-character fingering like `x13321` is all a 36 mm
+column will take. So the chord name sets one size down and the fingering
+stays full size — the fingering is what you read from a music stand, the
+name is what you scan for once.
+
+Alternate voicings stack under the first rather than running on beside it.
+At this measure `2200 2245` on one line reads as a single eight-digit
+fingering, which is the opposite of helpful.
+
 Rows per page are tuned against the *compiled* PDF, not guessed:
 `tools/pagecheck.py` compares the pages the renderer intended against the
 pages TeX produced, and fails if any of them overflowed. A `tabular` can't
-break across pages, so an over-tall Nashville chart doesn't wrap — it jumps
-whole to the next page and leaves its heading stranded, which is exactly the
-kind of silent breakage that check exists to catch.
+break across pages, so an over-tall table doesn't wrap — it jumps whole to
+the next page and leaves its heading stranded, which is exactly the kind of
+silent breakage that check exists to catch.
+
+The circle of fifths is a fixed diagram, so its labels are sized in points
+rather than following the body. Within each ring the name and fingering sit
+in one node, ordered so the fingering falls on the outward side of the wedge
+where there is more arc. They are deliberately *not* placed at two different
+radii: at three and nine o'clock "further out" is sideways, so radial
+separation puts both items on the same horizontal line and a six-character
+fingering lands on top of its own key name.
 
 ## The build pipeline
 
@@ -118,8 +149,9 @@ data/*.yaml ──▶ validate.py ──▶ render.py ──▶ body.tex ──�
                                                             impose.py ──▶ voicings-print.pdf
 ```
 
-The YAML under `data/` is the source of truth. The PDFs are generated and
-aren't checked in.
+The YAML under `data/` is the source of truth. The PDFs are generated, and
+are committed under `build/` so the QR code on the cover leads somewhere
+readable — rerun `make` and commit the result after changing the data.
 
 ### `make` targets
 
@@ -219,9 +251,8 @@ Six entries couldn't be repaired at all. At that distance the search is
 guessing rather than repairing, and it would print an invented fingering as
 though the author had written it. Those were either dropped in favour of
 another voicing of the same chord, or — where they were the only one given
-— replaced with a shape generated from theory and marked with a dagger
-(†) in the book. They're listed at the end of `CORRECTIONS.md` and are the
-first things to check against the paper.
+— replaced with a shape generated from theory. They're listed at the end of
+`CORRECTIONS.md` and are the first things to check against the paper.
 
 Because the pipeline records what was originally transcribed,
 `tools/revert.py` can restore the data and replay the whole correction pass.
@@ -239,7 +270,9 @@ someone else picks up mid-song.
 worksheet, and the core worship voicings use, and `make complete` makes sure
 every instrument has all of it in all twelve keys. Anything transcribed from
 the notebook is left exactly as written; anything missing is generated from
-theory and printed with a dagger (†).
+theory. The book doesn't mark which is which -- a player wants the chord,
+not its provenance -- but the data records it and `CORRECTIONS.md` lists
+every one.
 
 Generated shapes are chosen the way a player would: as many strings ringing
 as the chord can fill, low on the neck, without a stretch. Slash voicings are

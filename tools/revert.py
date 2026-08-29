@@ -46,25 +46,31 @@ def originals():
 def main():
     table = originals()
     restored = 0
+    instruments = yaml.safe_load(open("data/instruments.yaml"))
     for path in sorted(glob.glob("data/voicings/*.yaml")):
         doc = yaml.safe_load(open(path))
         inst = doc["instrument"]
+        if instruments[inst].get("kind", "frets") != "frets":
+            continue
         for keyblock in doc["keys"]:
             for entry in keyblock["chords"]:
-                new = []
+                new, changed = [], False
                 for f in entry["frets"]:
                     was = table.get((inst, keyblock["key"], entry["chord"], f))
                     new.append(was if was else f)
                     if was:
                         restored += 1
+                        changed = True
                 back = table.get(("+drop", inst, keyblock["key"],
                                   entry["chord"]), [])
                 for f in back:
                     if f not in new:
                         new.append(f)
                         restored += 1
+                        changed = True
                 entry["frets"] = new
-                entry.pop("derived", None)
+                if changed:
+                    entry.pop("derived", None)
         with open(path, "w") as fh:
             fh.write("# Restored by tools/revert.py to the transcription.\n")
             yaml.safe_dump(doc, fh, sort_keys=False, allow_unicode=True,

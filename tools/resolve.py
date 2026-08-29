@@ -51,7 +51,10 @@ def main():
         with open(path) as fh:
             doc = yaml.safe_load(fh)
         name = doc["instrument"]
-        tuning = instruments[name]["tuning"]
+        meta = instruments[name]
+        if meta.get("kind", "frets") != "frets":
+            continue  # note-based instruments are generated, not transcribed
+        tuning = meta["tuning"]
         changed = False
 
         for keyblock in doc["keys"]:
@@ -133,9 +136,8 @@ def append_to_corrections(actions, path="CORRECTIONS.md"):
         if derived:
             fh.write("### Replaced with a generated shape\n\n")
             fh.write("The only voicing given, so a canonical fingering was"
-                     " generated from theory. These print with a dagger"
-                     " (\\dag) in the book and are the ones worth checking"
-                     " against the paper notebook first.\n\n")
+                     " generated from theory. These are the ones worth"
+                     " checking against the paper notebook first.\n\n")
             fh.write("| Instrument | Page | Key | Chord | As read | Printed |\n")
             fh.write("|---|---|---|---|---|---|\n")
             for a in derived:
