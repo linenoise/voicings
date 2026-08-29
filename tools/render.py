@@ -234,14 +234,14 @@ class Book(object):
         total = sum(self.voicing_count(i) for i in
                     ("mandolin", "guitar", "ukulele", "piano", "banjo"))
         self.w(r"\begin{toctotal}")
-        self.w(r"All twelve keys, for every chord, on every instrument.\\")
         self.w(r"\textbf{%s chord voicings} in all." % "{,}".join(
             [str(total)[:-3], str(total)[-3:]] if total >= 1000 else [str(total)]))
         self.w(r"\end{toctotal}")
         self.w(r"\vfill")
         self.w(r"\begin{tocnote}")
-        # One sentence per line: three short rules read as three rules
-        # when they are stacked, and as a paragraph when they are not.
+        # One sentence per line: four short rules read as four rules when
+        # they are stacked, and as a paragraph when they are not.
+        self.w(r"Twelve keys for every chord on each instrument.\\")
         self.w(r"Fret numbers read from the lowest string.\\")
         self.w(r"\frets{x} means don't play that string.\\")
         self.w(r"Tunings are on the back sheet.")

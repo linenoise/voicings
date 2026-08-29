@@ -217,11 +217,11 @@
 \newenvironment{tocnote}{\par\vspace{2mm}\footnotesize\color{faint}}%
   {\par\vspace{2mm}}
 
-% Sits under the contents list: what is true of every line above it, said
-% once instead of six times, and the size of the whole book.
+% Sits under the contents list, at the size of the entries above it: it is
+% the last line of the same table, not a footnote.
 \newenvironment{toctotal}{%
-  \par\vspace{3mm}{\color{rule}\hrule height 0.4pt}\par\vspace{2mm}
-  \footnotesize\color{ink}}{\par}
+  \par\vspace{3mm}{\color{rule}\hrule height 0.4pt}\par\vspace{2.5mm}
+  \color{ink}}{\par}
 
 % ------------------------------------------------------- section dividers
 \newcommand{\sectiondivider}[2]{%
