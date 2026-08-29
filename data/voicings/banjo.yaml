@@ -1,0 +1,148 @@
+# Repaired by tools/repair.py -- see CORRECTIONS.md.
+instrument: banjo
+source: notebook page 43
+keys:
+- key: C
+  page: 43
+  chords:
+  - chord: C
+    frets:
+    - '2012'
+  - chord: Cm
+    frets:
+    - '1011'
+  - chord: C7
+    frets:
+    - '2312'
+- key: Db
+  page: 43
+  chords:
+  - chord: Db
+    frets:
+    - '3123'
+  - chord: Dbm
+    frets:
+    - '2122'
+  - chord: Db7
+    frets:
+    - '3423'
+- key: D
+  page: 43
+  chords:
+  - chord: D
+    frets:
+    - '0234'
+  - chord: Dm
+    frets:
+    - '0233'
+  - chord: D7
+    frets:
+    - '0214'
+- key: Eb
+  page: 43
+  chords:
+  - chord: Eb
+    frets:
+    - '5345'
+  - chord: Ebm
+    frets:
+    - '4344'
+  - chord: Eb7
+    frets:
+    - '1325'
+- key: E
+  page: 43
+  chords:
+  - chord: E
+    frets:
+    - '2102'
+  - chord: Em
+    frets:
+    - '2002'
+  - chord: E7
+    frets:
+    - '2100'
+- key: F
+  page: 43
+  chords:
+  - chord: F
+    frets:
+    - '3213'
+  - chord: Fm
+    frets:
+    - '3113'
+  - chord: F7
+    frets:
+    - '3211'
+- key: Gb
+  page: 43
+  chords:
+  - chord: Gb
+    frets:
+    - '4324'
+  - chord: Gbm
+    frets:
+    - '4224'
+  - chord: Gb7
+    frets:
+    - '4322'
+- key: G
+  page: 43
+  chords:
+  - chord: G
+    frets:
+    - '0000'
+  - chord: Gm
+    frets:
+    - '0335'
+  - chord: G7
+    frets:
+    - '0003'
+- key: Ab
+  page: 43
+  chords:
+  - chord: Ab
+    frets:
+    - '1111'
+  - chord: Abm
+    frets:
+    - '1101'
+  - chord: Ab7
+    frets:
+    - '1114'
+- key: A
+  page: 43
+  chords:
+  - chord: A
+    frets:
+    - '2222'
+  - chord: Am
+    frets:
+    - '2212'
+  - chord: A7
+    frets:
+    - '2225'
+- key: Bb
+  page: 43
+  chords:
+  - chord: Bb
+    frets:
+    - '3333'
+  - chord: Bbm
+    frets:
+    - '3323'
+  - chord: Bb7
+    frets:
+    - '3336'
+- key: B
+  page: 43
+  chords:
+  - chord: B
+    frets:
+    - '4444'
+  - chord: Bm
+    frets:
+    - '4434'
+  - chord: B7
+    frets:
+    - '1201'

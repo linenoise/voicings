@@ -1,0 +1,14 @@
+% The book itself: one PDF page per notebook page, at the notebook's own
+% trim size of 3.5in x 5.5in.
+%
+% This is the source for BOTH outputs:
+%   * build/voicings-screen.pdf is this file, unchanged -- for reading on a
+%     phone, tablet or e-reader, where a 3.5x5.5 page fills the screen.
+%   * build/voicings-print.pdf is this file run through tex/impose.tex,
+%     which lays it 4-up on US Letter for double-sided printing.
+%
+% Compile with xelatex (fontspec needs it).
+\documentclass{voicings}
+\begin{document}
+\input{body}
+\end{document}

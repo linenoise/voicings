@@ -1,0 +1,60 @@
+# Instrument definitions.
+#
+# `tuning` is written LOW string first, using scientific pitch notation, and is
+# the order fret digits appear in throughout data/voicings/*.yaml.
+#
+# `frets` is the highest fret number the printed diagrams need to accommodate.
+#
+# `courses` documents doubled strings (mandolin/12-string). They are irrelevant
+# to pitch-class validation, so the tuning lists one entry per *course*.
+
+mandolin:
+  name: Mandolin
+  also_covers: [Fiddle, "Tenor banjo"]
+  tuning: [G3, D4, A4, E5]
+  courses: 2
+  frets: 12
+  # Fiddle is fretless but tuned identically; the numbers read as
+  # semitones above the open string.
+  note: >-
+    Tuned in fifths. Fiddle and tenor banjo share this tuning, so this
+    section serves all three instruments.
+
+guitar:
+  name: Guitar
+  tuning: [E2, A2, D3, G3, B3, E4]
+  courses: 1
+  frets: 12
+  note: >-
+    Standard tuning. A baritone ukulele is the top four strings (D G B E),
+    so any guitar shape with its lowest two strings muted transfers directly.
+
+bass:
+  name: Bass
+  tuning: [E1, A1, D2, G2]
+  courses: 1
+  frets: 12
+  note: >-
+    Standard four-string bass: the guitar's lowest four strings, one octave down.
+
+ukulele:
+  name: Ukulele
+  tuning: [G4, C4, E4, A4]
+  courses: 1
+  frets: 12
+  note: >-
+    Soprano, concert and tenor re-entrant tuning. The 4th string sounds
+    ABOVE the 3rd, so "lowest string first" here means leftmost, not lowest
+    pitched. Low-G ukuleles use the same shapes.
+  reentrant: true
+
+banjo:
+  name: Banjo
+  tuning: [D3, G3, B3, D4]
+  drone: G4
+  courses: 1
+  frets: 12
+  note: >-
+    Five-string banjo in open G (gDGBD). The 5th (drone) string is not
+    fretted in these shapes; it rings G and is omitted from the fret
+    numbers, which cover the four long strings only.

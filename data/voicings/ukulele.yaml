@@ -1,0 +1,472 @@
+# Repaired by tools/repair.py -- see CORRECTIONS.md.
+instrument: ukulele
+source: notebook pages 37-42
+keys:
+- key: A
+  page: 37
+  chords:
+  - chord: A
+    frets:
+    - '2100'
+  - chord: Am
+    frets:
+    - '2000'
+  - chord: A+
+    frets:
+    - '2110'
+  - chord: A°7
+    frets:
+    - '2323'
+  - chord: A6
+    frets:
+    - '2120'
+  - chord: A9
+    frets:
+    - '2132'
+  - chord: A7
+    frets:
+    - '0100'
+  - chord: Am6
+    frets:
+    - '2020'
+  - chord: Amaj7
+    frets:
+    - '1100'
+  - chord: Am7
+    frets:
+    - '0000'
+  - chord: Asus2
+    frets:
+    - '4400'
+  - chord: Asus4
+    frets:
+    - '2200'
+- key: Bb
+  page: 37
+  chords:
+  - chord: Bb
+    frets:
+    - '3211'
+  - chord: Bbm
+    frets:
+    - '3111'
+  - chord: Bb+
+    frets:
+    - '3221'
+  - chord: Bb°7
+    frets:
+    - '0101'
+  - chord: Bb6
+    frets:
+    - '0211'
+  - chord: Bb9
+    frets:
+    - '3243'
+  - chord: Bb7
+    frets:
+    - '1211'
+  - chord: Bbm6
+    frets:
+    - '0111'
+  - chord: Bbmaj7
+    frets:
+    - '3210'
+  - chord: Bbm7
+    frets:
+    - '1111'
+  - chord: Bbsus2
+    frets:
+    - '3011'
+  - chord: Bbsus4
+    frets:
+    - '3311'
+- key: B
+  page: 38
+  chords:
+  - chord: B
+    frets:
+    - '4322'
+  - chord: Bm
+    frets:
+    - '4222'
+  - chord: B+
+    frets:
+    - '4332'
+  - chord: B°7
+    frets:
+    - '1212'
+  - chord: B6
+    frets:
+    - '1322'
+  - chord: B9
+    frets:
+    - '2322'
+  - chord: B7
+    frets:
+    - '2322'
+  - chord: Bm6
+    frets:
+    - '1222'
+  - chord: Bmaj7
+    frets:
+    - '4321'
+  - chord: Bm7
+    frets:
+    - '2222'
+  - chord: Bsus2
+    frets:
+    - '4122'
+  - chord: Bsus4
+    frets:
+    - '4422'
+- key: C
+  page: 38
+  chords:
+  - chord: C
+    frets:
+    - '0003'
+  - chord: Cm
+    frets:
+    - '0333'
+  - chord: C+
+    frets:
+    - '1003'
+  - chord: C°7
+    frets:
+    - '2323'
+  - chord: C6
+    frets:
+    - '0000'
+  - chord: C9
+    frets:
+    - '0201'
+  - chord: C7
+    frets:
+    - '0001'
+  - chord: Cm6
+    frets:
+    - '2333'
+  - chord: Cmaj7
+    frets:
+    - '0002'
+  - chord: Cm7
+    frets:
+    - '3333'
+  - chord: Csus2
+    frets:
+    - '0233'
+  - chord: Csus4
+    frets:
+    - '0013'
+- key: Db
+  page: 39
+  chords:
+  - chord: Db
+    frets:
+    - '1114'
+  - chord: Dbm
+    frets:
+    - '1104'
+  - chord: Db+
+    frets:
+    - '2110'
+  - chord: Db°7
+    frets:
+    - '0101'
+  - chord: Db6
+    frets:
+    - '1111'
+  - chord: Db9
+    frets:
+    - '1312'
+  - chord: Db7
+    frets:
+    - '1112'
+  - chord: Dbm6
+    frets:
+    - '3444'
+  - chord: Dbmaj7
+    frets:
+    - '1113'
+  - chord: Dbm7
+    frets:
+    - '4444'
+  - chord: Dbsus2
+    frets:
+    - '1344'
+  - chord: Dbsus4
+    frets:
+    - '1124'
+- key: D
+  page: 39
+  chords:
+  - chord: D
+    frets:
+    - '2220'
+  - chord: Dm
+    frets:
+    - '2210'
+  - chord: D+
+    frets:
+    - '3221'
+  - chord: D°7
+    frets:
+    - '1212'
+  - chord: D6
+    frets:
+    - '2222'
+  - chord: D9
+    frets:
+    - '2423'
+  - chord: D7
+    frets:
+    - '2223'
+  - chord: Dm6
+    frets:
+    - '2212'
+  - chord: Dmaj7
+    frets:
+    - '2224'
+  - chord: Dm7
+    frets:
+    - '2213'
+  - chord: Dsus2
+    frets:
+    - '2200'
+  - chord: Dsus4
+    frets:
+    - '0230'
+- key: Eb
+  page: 40
+  chords:
+  - chord: Eb
+    frets:
+    - '0331'
+  - chord: Ebm
+    frets:
+    - '3321'
+  - chord: Eb+
+    frets:
+    - '4332'
+  - chord: Eb°7
+    frets:
+    - '2323'
+  - chord: Eb6
+    frets:
+    - '3333'
+  - chord: Eb9
+    frets:
+    - '0111'
+  - chord: Eb7
+    frets:
+    - '3334'
+  - chord: Ebm6
+    frets:
+    - '3323'
+  - chord: Ebmaj7
+    frets:
+    - '3231'
+  - chord: Ebm7
+    frets:
+    - '3324'
+  - chord: Ebsus2
+    frets:
+    - '3311'
+  - chord: Ebsus4
+    frets:
+    - '1341'
+- key: E
+  page: 40
+  chords:
+  - chord: E
+    frets:
+    - '4442'
+  - chord: Em
+    frets:
+    - '0432'
+  - chord: E+
+    frets:
+    - '1003'
+  - chord: E°7
+    frets:
+    - '0101'
+  - chord: E6
+    frets:
+    - '4444'
+  - chord: E9
+    frets:
+    - '1222'
+  - chord: E7
+    frets:
+    - '1202'
+  - chord: Em6
+    frets:
+    - '0102'
+  - chord: Emaj7
+    frets:
+    - '4342'
+  - chord: Em7
+    frets:
+    - '0202'
+  - chord: Esus2
+    frets:
+    - '4422'
+  - chord: Esus4
+    frets:
+    - '2402'
+- key: F
+  page: 41
+  chords:
+  - chord: F
+    frets:
+    - '2010'
+  - chord: Fm
+    frets:
+    - '1013'
+  - chord: F+
+    frets:
+    - '2110'
+  - chord: F°7
+    frets:
+    - '1212'
+  - chord: F6
+    frets:
+    - '2213'
+  - chord: F9
+    frets:
+    - '2333'
+  - chord: F7
+    frets:
+    - '2310'
+  - chord: Fm6
+    frets:
+    - '1213'
+  - chord: Fmaj7
+    frets:
+    - '2400'
+  - chord: Fm7
+    frets:
+    - '1313'
+  - chord: Fsus2
+    frets:
+    - '0533'
+  - chord: Fsus4
+    frets:
+    - '3011'
+- key: Gb
+  page: 41
+  chords:
+  - chord: Gb
+    frets:
+    - '3121'
+  - chord: Gbm
+    frets:
+    - '2120'
+  - chord: Gb+
+    frets:
+    - '3221'
+  - chord: Gb°7
+    frets:
+    - '2323'
+  - chord: Gb6
+    frets:
+    - '3324'
+  - chord: Gb9
+    frets:
+    - '3444'
+  - chord: Gb7
+    frets:
+    - '3424'
+  - chord: Gbm6
+    frets:
+    - '2324'
+  - chord: Gbmaj7
+    frets:
+    - '3111'
+  - chord: Gbm7
+    frets:
+    - '2424'
+  - chord: Gbsus2
+    frets:
+    - '1124'
+  - chord: Gbsus4
+    frets:
+    - '4122'
+- key: G
+  page: 42
+  chords:
+  - chord: G
+    frets:
+    - '0232'
+  - chord: Gm
+    frets:
+    - '0231'
+  - chord: G+
+    frets:
+    - '4332'
+  - chord: G°7
+    frets:
+    - '0101'
+  - chord: G6
+    frets:
+    - '0202'
+  - chord: G9
+    frets:
+    - '4210'
+  - chord: G7
+    frets:
+    - '0212'
+  - chord: Gm6
+    frets:
+    - '0201'
+  - chord: Gmaj7
+    frets:
+    - '0222'
+  - chord: Gm7
+    frets:
+    - '0211'
+  - chord: Gsus2
+    frets:
+    - '0230'
+  - chord: Gsus4
+    frets:
+    - '0233'
+- key: Ab
+  page: 42
+  chords:
+  - chord: Ab
+    frets:
+    - '5343'
+  - chord: Abm
+    frets:
+    - '4342'
+  - chord: Ab+
+    frets:
+    - '1003'
+  - chord: Ab°7
+    frets:
+    - '1212'
+  - chord: Ab6
+    frets:
+    - '1313'
+  - chord: Ab9
+    frets:
+    - '1021'
+  - chord: Ab7
+    frets:
+    - '1323'
+  - chord: Abm6
+    frets:
+    - '1312'
+  - chord: Abmaj7
+    frets:
+    - '1333'
+  - chord: Abm7
+    frets:
+    - '1322'
+  - chord: Absus2
+    frets:
+    - '3346'
+  - chord: Absus4
+    frets:
+    - '1344'

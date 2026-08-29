@@ -1,0 +1,584 @@
+# Guitar voicings, from the notebook (pages 25-36).
+# Fret digits low string first: E A D G B E.
+# Rewritten by tools/resolve.py -- see CORRECTIONS.md.
+instrument: guitar
+source: notebook pages 25-36
+keys:
+- key: A
+  page: 25
+  chords:
+  - chord: A
+    frets:
+    - '002220'
+  - chord: Am
+    frets:
+    - '002210'
+  - chord: A6
+    frets:
+    - '002222'
+  - chord: A7
+    frets:
+    - '002223'
+  - chord: Amaj7
+    frets:
+    - '002120'
+  - chord: Am7
+    frets:
+    - '002010'
+  - chord: Asus2
+    frets:
+    - x22255
+  - chord: Asus4
+    frets:
+    - x02230
+  - chord: A+
+    frets:
+    - x03221
+  - chord: A°7
+    frets:
+    - x01212
+  - chord: A9
+    frets:
+    - '002423'
+  - chord: Am6
+    frets:
+    - '002212'
+  - chord: A7b5
+    frets:
+    - x01223
+  - chord: A7#5
+    frets:
+    - x03223
+  - chord: A/C#
+    frets:
+    - x42220
+  - chord: A/B
+    frets:
+    - x22220
+- key: Bb
+  page: 26
+  chords:
+  - chord: Bb
+    frets:
+    - '113331'
+  - chord: Bbm
+    frets:
+    - '113321'
+  - chord: Bb6
+    frets:
+    - '113333'
+  - chord: Bb7
+    frets:
+    - '113334'
+  - chord: Bbmaj7
+    frets:
+    - '113231'
+  - chord: Bbm7
+    frets:
+    - '113324'
+  - chord: Bbsus2
+    frets:
+    - x13311
+  - chord: Bbsus4
+    frets:
+    - x11341
+  - chord: Bb+
+    frets:
+    - x14332
+  - chord: Bb°7
+    frets:
+    - x12323
+  - chord: Bb9
+    frets:
+    - xx0111
+  - chord: Bbm6
+    frets:
+    - '113323'
+  - chord: Bb7b5
+    frets:
+    - x12334
+  - chord: Bb7#5
+    frets:
+    - x14334
+- key: B
+  page: 27
+  chords:
+  - chord: B
+    frets:
+    - x24442
+  - chord: Bm
+    frets:
+    - x24432
+  - chord: B6
+    frets:
+    - x24444
+  - chord: B7
+    frets:
+    - x21202
+  - chord: Bmaj7
+    frets:
+    - x24342
+  - chord: Bm7
+    frets:
+    - x20202
+  - chord: Bsus2
+    frets:
+    - x24422
+  - chord: Bsus4
+    frets:
+    - x24452
+  - chord: B+
+    frets:
+    - x21003
+  - chord: B°7
+    frets:
+    - x20101
+  - chord: B9
+    frets:
+    - x21222
+  - chord: Bm6
+    frets:
+    - x20102
+  - chord: B7b5
+    frets:
+    - x21201
+  - chord: B7#5
+    frets:
+    - x21203
+- key: C
+  page: 28
+  chords:
+  - chord: C
+    frets:
+    - x32010
+  - chord: Cm
+    frets:
+    - x35543
+  - chord: C6
+    frets:
+    - x32210
+  - chord: C7
+    frets:
+    - x32310
+  - chord: Cmaj7
+    frets:
+    - x32000
+  - chord: Cm7
+    frets:
+    - x35343
+  - chord: Csus2
+    frets:
+    - x30013
+  - chord: Csus4
+    frets:
+    - x33011
+  - chord: C+
+    frets:
+    - x32110
+  - chord: C°7
+    frets:
+    - x34242
+  - chord: C9
+    frets:
+    - x32333
+  - chord: Cm6
+    frets:
+    - x31213
+  - chord: C7b5
+    frets:
+    - x32312
+  - chord: C7#5
+    frets:
+    - x32314
+  - chord: C/G
+    frets:
+    - '332010'
+  - chord: C/E
+    frets:
+    - '032010'
+- key: Db
+  page: 29
+  chords:
+  - chord: Db
+    frets:
+    - x46664
+  - chord: Dbm
+    frets:
+    - x46654
+  - chord: Db6
+    frets:
+    - x46666
+  - chord: Db7
+    frets:
+    - x46464
+  - chord: Dbmaj7
+    frets:
+    - x46564
+  - chord: Dbm7
+    frets:
+    - x46454
+  - chord: Dbsus2
+    frets:
+    - x46644
+  - chord: Dbsus4
+    frets:
+    - x46674
+  - chord: Db+
+    frets:
+    - x43221
+  - chord: Db°7
+    frets:
+    - x45353
+  - chord: Db9
+    frets:
+    - x43444
+  - chord: Dbm6
+    frets:
+    - x42324
+  - chord: Db7b5
+    frets:
+    - x45463
+  - chord: Db7#5
+    frets:
+    - x43465
+- key: D
+  page: 30
+  chords:
+  - chord: D
+    frets:
+    - xx0232
+  - chord: Dm
+    frets:
+    - xx0231
+  - chord: D6
+    frets:
+    - xx0202
+  - chord: D7
+    frets:
+    - xx0212
+  - chord: Dmaj7
+    frets:
+    - xx0222
+  - chord: Dm7
+    frets:
+    - xx0211
+  - chord: Dsus2
+    frets:
+    - xx0230
+  - chord: Dsus4
+    frets:
+    - xx0233
+  - chord: D+
+    frets:
+    - xx0332
+  - chord: D°7
+    frets:
+    - xx0101
+  - chord: D9
+    frets:
+    - x54555
+  - chord: Dm6
+    frets:
+    - xx0201
+  - chord: D7b5
+    frets:
+    - xx0112
+  - chord: D7#5
+    frets:
+    - xx0312
+  - chord: D/F#
+    frets:
+    - '200232'
+  - chord: Dm7/G
+    frets:
+    - 3x0211
+- key: Eb
+  page: 31
+  chords:
+  - chord: Eb
+    frets:
+    - x68886
+  - chord: Ebm
+    frets:
+    - x68876
+  - chord: Eb6
+    frets:
+    - x68888
+  - chord: Eb7
+    frets:
+    - x68686
+  - chord: Ebmaj7
+    frets:
+    - x68786
+  - chord: Ebm7
+    frets:
+    - x68676
+  - chord: Ebsus2
+    frets:
+    - x68866
+  - chord: Ebsus4
+    frets:
+    - x68896
+  - chord: Eb+
+    frets:
+    - x65447
+  - chord: Eb°7
+    frets:
+    - x67575
+  - chord: Eb9
+    frets:
+    - x65666
+  - chord: Ebm6
+    frets:
+    - x64546
+  - chord: Eb7b5
+    frets:
+    - x67685
+  - chord: Eb7#5
+    frets:
+    - x65687
+- key: E
+  page: 32
+  chords:
+  - chord: E
+    frets:
+    - '022100'
+  - chord: Em
+    frets:
+    - '022000'
+  - chord: E6
+    frets:
+    - '022120'
+  - chord: E7
+    frets:
+    - '020100'
+  - chord: Emaj7
+    frets:
+    - '021100'
+  - chord: Em7
+    frets:
+    - '020000'
+  - chord: Esus2
+    frets:
+    - '024400'
+  - chord: Esus4
+    frets:
+    - '022200'
+  - chord: E+
+    frets:
+    - '032110'
+  - chord: E°7
+    frets:
+    - '012020'
+    derived: true
+  - chord: E9
+    frets:
+    - '020102'
+  - chord: Em6
+    frets:
+    - '022020'
+  - chord: E7b5
+    frets:
+    - '010130'
+  - chord: E7#5
+    frets:
+    - '032130'
+  - chord: Em7/A
+    frets:
+    - x00000
+- key: F
+  page: 33
+  chords:
+  - chord: F
+    frets:
+    - '133211'
+  - chord: Fm
+    frets:
+    - '133111'
+  - chord: F6
+    frets:
+    - 1x3231
+  - chord: F7
+    frets:
+    - '131211'
+  - chord: Fmaj7
+    frets:
+    - 1x2210
+  - chord: Fm7
+    frets:
+    - '131111'
+  - chord: Fsus2
+    frets:
+    - xx3011
+  - chord: Fsus4
+    frets:
+    - '133311'
+  - chord: F+
+    frets:
+    - xx3221
+  - chord: F°7
+    frets:
+    - 1x0101
+    derived: true
+  - chord: F9
+    frets:
+    - '131213'
+  - chord: Fm6
+    frets:
+    - xx3131
+  - chord: F7b5
+    frets:
+    - xx3445
+  - chord: F7#5
+    frets:
+    - xx3645
+- key: Gb
+  page: 34
+  chords:
+  - chord: Gb
+    frets:
+    - '244322'
+  - chord: Gbm
+    frets:
+    - '244222'
+  - chord: Gb6
+    frets:
+    - 2x4342
+  - chord: Gb7
+    frets:
+    - '242322'
+  - chord: Gbmaj7
+    frets:
+    - 2x3321
+  - chord: Gbm7
+    frets:
+    - '242222'
+  - chord: Gbsus2
+    frets:
+    - '244122'
+  - chord: Gbsus4
+    frets:
+    - '244422'
+  - chord: Gb+
+    frets:
+    - 2x4332
+  - chord: Gb°7
+    frets:
+    - 2x1212
+  - chord: Gb9
+    frets:
+    - '242324'
+  - chord: Gbm6
+    frets:
+    - 2x4242
+  - chord: Gb7b5
+    frets:
+    - 2x2312
+  - chord: Gb7#5
+    frets:
+    - 2x2336
+  - chord: Gbm/A
+    frets:
+    - x04222
+- key: G
+  page: 35
+  chords:
+  - chord: G
+    frets:
+    - '320003'
+    - '355433'
+  - chord: Gm
+    frets:
+    - '355333'
+  - chord: G6
+    frets:
+    - '320000'
+    - 3x2433
+  - chord: G7
+    frets:
+    - '320001'
+    - '353433'
+  - chord: Gmaj7
+    frets:
+    - '320002'
+    - '354433'
+  - chord: Gm7
+    frets:
+    - '353333'
+  - chord: Gsus2
+    frets:
+    - '300033'
+  - chord: Gsus4
+    frets:
+    - '330013'
+  - chord: G+
+    frets:
+    - '321003'
+  - chord: G°7
+    frets:
+    - 3x2323
+  - chord: G9
+    frets:
+    - '300201'
+    - '353435'
+  - chord: Gm6
+    frets:
+    - 3x2333
+  - chord: G7b5
+    frets:
+    - 3x3423
+  - chord: G7#5
+    frets:
+    - 3x344x
+  - chord: G/A
+    frets:
+    - x00003
+  - chord: G7/F
+    frets:
+    - '120001'
+- key: Ab
+  page: 36
+  chords:
+  - chord: Ab
+    frets:
+    - '466544'
+  - chord: Abm
+    frets:
+    - '466444'
+  - chord: Ab6
+    frets:
+    - 4x6564
+  - chord: Ab7
+    frets:
+    - '464544'
+  - chord: Abmaj7
+    frets:
+    - 4x5543
+  - chord: Abm7
+    frets:
+    - '464444'
+  - chord: Absus2
+    frets:
+    - '466344'
+  - chord: Absus4
+    frets:
+    - '466644'
+  - chord: Ab+
+    frets:
+    - 4x6554
+  - chord: Ab°7
+    frets:
+    - '420101'
+    derived: true
+  - chord: Ab9
+    frets:
+    - '464546'
+  - chord: Abm6
+    frets:
+    - 4x6464
+  - chord: Ab7b5
+    frets:
+    - 4x4534
+  - chord: Ab7#5
+    frets:
+    - '474558'
