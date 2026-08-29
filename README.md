@@ -61,8 +61,8 @@ PDF targets still works.
   the seven diatonic degrees across, each cell carrying both the chord name
   and its fingering.
 - **Chord sections** — mandolin, guitar, ukulele, piano, and banjo, each
-  covering the full vocabulary in all twelve keys: around 350 voicings per
-  instrument, 1,934 in all. One key to a page, two columns.
+  covering the full vocabulary in all twelve keys: 2,122 chord voicings in
+  all. One key to a page, two columns.
 - **Banjo drone spikes**: where to spike the 5th string for every key, major
   and minor, repeated on each banjo page and collected in one table.
 - **Piano**: one voicing per chord — close root position, the chord as you

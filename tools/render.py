@@ -231,6 +231,13 @@ class Book(object):
             self.w(r"\tocline{%s}{%s}" % (label, self.section_hint(inst)))
         self.w(r"\tocline{Tunings \& Credits}{back sheet}")
         self.w(r"\end{tocdirectory}")
+        total = sum(self.voicing_count(i) for i in
+                    ("mandolin", "guitar", "ukulele", "piano", "banjo"))
+        self.w(r"\begin{toctotal}")
+        self.w(r"All twelve keys, for every chord, on every instrument.\\")
+        self.w(r"\textbf{%s chord voicings} in all." % "{,}".join(
+            [str(total)[:-3], str(total)[-3:]] if total >= 1000 else [str(total)]))
+        self.w(r"\end{toctotal}")
         self.w(r"\vfill")
         self.w(r"\begin{tocnote}")
         # One sentence per line: three short rules read as three rules
@@ -241,16 +248,25 @@ class Book(object):
         self.w(r"\end{tocnote}")
         self.w(r"\end{bookpage}")
 
-    def section_hint(self, inst):
-        if inst == "bass":
-            return "roots \\& patterns"
-        if inst == "piano":
-            return "360 voicings, 12 keys"
+    def voicing_count(self, inst):
+        """How many fingerings this instrument's pages carry.
+
+        Chords with more than one voicing count once per voicing: the
+        number is what the reader can look up, not how many chord names
+        there are.
+        """
         doc = self.voicings.get(inst)
         if not doc:
-            return ""
-        n = sum(len(k["chords"]) for k in doc["keys"])
-        return "%d chords, 12 keys" % n
+            return 0
+        return sum(len(c["frets"]) for k in doc["keys"] for c in k["chords"])
+
+    def section_hint(self, inst):
+        # Every instrument covers all twelve keys, so saying so on each
+        # line is six repetitions of the same fact. It is stated once,
+        # under the list.
+        if inst == "bass":
+            return "roots \\& patterns"
+        return "%d chord voicings" % self.voicing_count(inst)
 
     # -- circle of fifths ------------------------------------------------
 

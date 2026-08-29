@@ -217,6 +217,12 @@
 \newenvironment{tocnote}{\par\vspace{2mm}\footnotesize\color{faint}}%
   {\par\vspace{2mm}}
 
+% Sits under the contents list: what is true of every line above it, said
+% once instead of six times, and the size of the whole book.
+\newenvironment{toctotal}{%
+  \par\vspace{3mm}{\color{rule}\hrule height 0.4pt}\par\vspace{2mm}
+  \footnotesize\color{ink}}{\par}
+
 % ------------------------------------------------------- section dividers
 \newcommand{\sectiondivider}[2]{%
   \clearpage\thispagestyle{empty}%
