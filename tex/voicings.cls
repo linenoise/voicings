@@ -411,12 +411,12 @@
 % length and lining them up would waste the width.
 \newcommand{\notes}[1]{{\color{\voicingcolor}\bfseries #1}}
 
-% Between two notes of a voicing. A long list has to be allowed to wrap in
-% a narrow column, but only in one place: after the dash. Breaking before
-% it strands a dash at the head of the next line, and breaking between a
-% note and its dash makes the first line look finished when it is not.
-% \nobreak shuts the gap before the dash; \allowbreak opens the one after.
-\newcommand{\notesep}{\nobreak\,--\,\allowbreak}
+% Between two notes of a voicing: a space, wide enough to separate the
+% notes without a dash doing the work. It is glue rather than a kern, so a
+% long list can still wrap here in a narrow column -- and between notes is
+% the only place it can, since an accidental is set as one token with the
+% letter it belongs to.
+\newcommand{\notesep}{\hskip 0.62em plus 0.12em minus 0.04em\relax}
 
 \newenvironment{pianopage}[2]{%
   \clearpage
@@ -442,11 +442,18 @@
 % one and half at the head of the next with no name on it. The vbox is
 % what forbids it: TeX cannot break one. Continuation lines hang under the
 % name so the notes stay in a block.
+% The \par sits INSIDE the size group on purpose. TeX sets each line with
+% the \baselineskip in force when that line ends, so closing the group
+% first left the final line of a wrapped voicing taking the 12pt body's
+% leading -- a visible hole above the continuation. Ending the paragraph
+% while \scriptsize is still active keeps the two lines tight together,
+% and the space that separates one chord from the next then sits below the
+% pair, where it belongs.
 \newcommand{\pianorow}[2]{%
   \par\noindent\vbox{\hsize=\linewidth
     \hangindent=\piano@name\hangafter=1
-    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2}\par}%
-  \par\vspace{0.05mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.05mm}}
+    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2\par}}%
+  \par\vspace{0.7mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.7mm}}
 
 % ------------------------------------------------------- bass vocabulary
 % Twenty-six kinds of chord will not fit one column at a size worth

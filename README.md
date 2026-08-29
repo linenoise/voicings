@@ -68,10 +68,10 @@ PDF targets still works.
 - **Piano**: one voicing per chord — close root position, the chord as you
   spell it at a keyboard. The open worship voicings from `piano.pdf` are
   kept in `data/piano-shapes.yaml` rather than printed beside them. Notes
-  are named by the key you actually play: `A`, not `B♭♭`. Lists are set in
-  two columns and may wrap inside a column -- only ever after a dash, never
-  between a note and the dash that follows it -- but a chord can never
-  break across columns.
+  are named by the key you actually play: `A`, not `B♭♭`, and separated by
+  spaces rather than dashes. Lists are set in two columns and may wrap
+  inside a column -- between notes, never inside one -- but a chord can
+  never break across columns.
 - **Bass**: where every root sits on each string, the movable arpeggio
   patterns measured from it, and which degrees to play under every chord in
   the book. Bass players don't finger chord grids.
