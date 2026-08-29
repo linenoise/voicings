@@ -67,10 +67,11 @@ PDF targets still works.
   and minor, repeated on each banjo page and collected in one table.
 - **Piano**: one voicing per chord — close root position, the chord as you
   spell it at a keyboard. The open worship voicings from `piano.pdf` are
-  kept in `data/piano-shapes.yaml` rather than printed beside them. Note
-  lists are set in two columns and may wrap inside a column -- only ever
-  after a dash, never between a note and the dash that follows it -- but a
-  chord can never break across columns.
+  kept in `data/piano-shapes.yaml` rather than printed beside them. Notes
+  are named by the key you actually play: `A`, not `B♭♭`. Lists are set in
+  two columns and may wrap inside a column -- only ever after a dash, never
+  between a note and the dash that follows it -- but a chord can never
+  break across columns.
 - **Bass**: where every root sits on each string, the movable arpeggio
   patterns measured from it, and which degrees to play under every chord in
   the book. Bass players don't finger chord grids.
@@ -110,9 +111,8 @@ the stack collates in reading order with no folding. Run `make print
 SCHEME=saddle` instead if you'd rather fold sheets into signatures and sew
 through the fold.
 
-At present the book is **90 pages — 12 sheets of Letter**, one key to a page
-for the fretted instruments and two for the piano, whose note names run much
-longer in the flat keys.
+At present the book is **78 pages — 10 sheets of Letter**, one key to a page
+for every instrument.
 
 ## Colour
 
@@ -345,12 +345,14 @@ named when the page is telling a bass player which notes to reach for.
 
 ### Spelling on the circle
 
-The piano circle of fifths respells its notes to the key you actually put a
-finger on, matching whichever side of the circle the label is on: `G#m` shows
-`G#-B-D#`, not `Ab-Cb-Eb`. The chord pages keep the strict spelling -- the
-minor third of G-flat minor is B-double-flat and saying so is the point of
-those pages -- but a circle is read at a glance, and nobody hunts a keyboard
-for B-double-flat.
+The piano pages name every note by the key you actually put a finger on:
+`Gbm7` is `Gb-A-Db-E`, not `Gb-Bbb-Db-Fb`. Strict spelling is right about the
+harmony -- the minor third of G-flat minor really is B-double-flat -- but
+nobody hunts a keyboard for one, and a four-character name costs room a
+two-column table does not have. Flat keys take flats and sharp keys take
+sharps, so a voicing never mixes the two arbitrarily.
+
+The fretted instruments are unaffected: they name frets, not notes.
 
 ### Spelling
 

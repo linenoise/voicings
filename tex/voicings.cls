@@ -436,11 +436,17 @@
 % Two voicings per chord -- the close spelling and the open worship one --
 % run wider than the page in the flat keys, so the second wraps under the
 % name rather than off the edge.
-\newlength{\piano@name}\setlength{\piano@name}{17mm}
+\newlength{\piano@name}\setlength{\piano@name}{20mm}
+% A voicing may wrap inside its own column -- there is no room not to --
+% but never across columns, which would leave half a chord at the foot of
+% one and half at the head of the next with no name on it. The vbox is
+% what forbids it: TeX cannot break one. Continuation lines hang under the
+% name so the notes stay in a block.
 \newcommand{\pianorow}[2]{%
-  \par\hangindent=\piano@name\hangafter=1
-  {\small\makebox[\piano@name][l]{\bfseries #1}\footnotesize #2}%
-  \par\vspace{0.85mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.85mm}}
+  \par\noindent\vbox{\hsize=\linewidth
+    \hangindent=\piano@name\hangafter=1
+    {\footnotesize\makebox[\piano@name][l]{\bfseries #1}\scriptsize #2}\par}%
+  \par\vspace{0.05mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.05mm}}
 
 % ------------------------------------------------------- bass vocabulary
 % Twenty-six kinds of chord will not fit one column at a size worth

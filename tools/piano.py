@@ -23,13 +23,26 @@ import theory  # noqa: E402
 KEYS = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
 
 
-def voice(root, intervals, quality=None):
+# Keys a guitarist and a pianist both write with sharps. Everything else
+# takes flats.
+SHARP_KEYS = {"G", "D", "A", "E", "B"}
+
+
+def voice(root, intervals, quality=None, key=None):
     """A shape in one key, as a note list low to high.
 
-    The quality is passed through so each note is spelled by its function
-    in the chord: the augmented fifth of C+ is G-sharp, not A-flat.
+    Notes are named by the key you actually put a finger on: A, not
+    B-double-flat. Strict spelling is right about the harmony -- the minor
+    third of G-flat minor really is B-double-flat -- but nobody hunts a
+    keyboard for one, and a four-character name in a two-column table
+    costs room the page does not have.
+
+    Flat keys are spelled with flats and sharp keys with sharps, so a
+    voicing never mixes the two arbitrarily.
     """
-    return "-".join(theory.spell_in_key(root, i, quality) for i in intervals)
+    flat = (key or root) not in SHARP_KEYS
+    base = theory.parse_note(root)
+    return "-".join(theory.spell(base + i, flat) for i in intervals)
 
 
 def build(shapes_path="data/piano-shapes.yaml"):
@@ -48,20 +61,21 @@ def build(shapes_path="data/piano-shapes.yaml"):
             # open to. The open worship voicings stay in piano-shapes.yaml
             # rather than crowding the page beside them.
             entry = {"chord": symbol,
-                     "frets": [voice(key, shape["close"], quality)]}
+                     "frets": [voice(key, shape["close"], quality, key)]}
             if shape.get("note"):
                 entry["note"] = shape["note"]
             if shape.get("star"):
                 entry["star"] = True
             chords.append(entry)
         for slash in spec["slashes"]:
-            bass = theory.spell_in_key(key, slash["bass"], slash["quality"])
+            flat = key not in SHARP_KEYS
+            bass = theory.spell(theory.parse_note(key) + slash["bass"], flat)
             symbol = "%s%s/%s" % (key, slash["quality"], bass)
             chords.append({
                 "chord": symbol,
                 "frets": [voice(key,
                                 slash.get("close", slash["open"]),
-                                slash["quality"])],
+                                slash["quality"], key)],
                 "note": slash.get("note", ""),
             })
         doc["keys"].append({"key": key, "chords": chords})
