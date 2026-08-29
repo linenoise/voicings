@@ -117,8 +117,8 @@ def check_voicing(instrument, tuning, key, symbol, frets_text, kind="frets",
         if (root + i) % 12 not in present
     ]
     if missing:
-        names = {1: "b9", 2: "9", 3: "b3", 4: "3", 5: "4", 6: "b5",
-                 8: "#5", 9: "6", 10: "b7", 11: "maj7"}
+        names = {1: "9b", 2: "9", 3: "3b", 4: "3", 5: "4", 6: "5b",
+                 8: "5#", 9: "6", 10: "7b", 11: "maj7"}
         yield Finding(
             WARNING, instrument, key, symbol, frets_text,
             "omits the %s" % ", ".join(names.get(i, str(i)) for i in missing),

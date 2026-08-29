@@ -239,7 +239,10 @@
 }{\end{multicols}}
 
 % Between one kind of chord and the next.
-\newcommand{\chordgap}{\par\vspace{1.7mm}}
+% One blank line between one kind of chord and the next -- the same height
+% a row would occupy, so the groups read as separate blocks rather than as
+% rows that happen to sit slightly further apart.
+\newcommand{\chordgap}{\par\vspace{\baselineskip}}
 
 % Tight enough that a whole key -- around thirty chords -- lands on one
 % page. Two half-empty pages per key would double the sheet count, and

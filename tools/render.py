@@ -467,14 +467,17 @@ class Book(object):
         self.w(r"\end{degreetable}")
         self.w(r"\begin{rootmapnote}")
         self.w(r"Play the root, and the fifth if there is one. Add the tone "
-               r"that names the chord --- the \frets{b3}, the \frets{b7} "
+               r"that names the chord --- the \frets{3b}, the \frets{7b} "
                r"--- only when it wants hearing. The rest belongs to "
                r"whoever is playing chords.")
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 
-    DEGREE_NAMES = {0: "R", 1: "b9", 2: "9", 3: "b3", 4: "3", 5: "4",
-                    6: "b5", 7: "5", 8: "#5", 9: "6", 10: "b7", 11: "7"}
+    # Number first, then the accidental that modifies it: 3b, not b3.
+    # Chord symbols keep their conventional spelling -- Am7b5 stays Am7b5 --
+    # this is only how the degrees are named on the bass pages.
+    DEGREE_NAMES = {0: "R", 1: "9b", 2: "9", 3: "3b", 4: "3", 5: "4",
+                    6: "5b", 7: "5", 8: "5#", 9: "6", 10: "7b", 11: "7"}
 
     def degree_name(self, interval):
         return self.DEGREE_NAMES[interval % 12]

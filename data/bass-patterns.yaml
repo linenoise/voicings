@@ -47,22 +47,22 @@ patterns:
     degrees: [{degree: "R", string: 0, offset: 0},
               {degree: "5", string: 1, offset: 2},
               {degree: "8", string: 2, offset: 2},
-              {degree: "b3", string: 3, offset: 0}]
+              {degree: "3b", string: 3, offset: 0}]
   - name: "Dominant seventh"
     use: "Any 7 chord. The b7 pulls to the four."
     degrees: [{degree: "R", string: 0, offset: 0},
               {degree: "5", string: 1, offset: 2},
-              {degree: "b7", string: 2, offset: 0},
+              {degree: "7b", string: 2, offset: 0},
               {degree: "3", string: 3, offset: 1}]
   - name: "Minor seventh"
     use: "The two and the six chord."
     degrees: [{degree: "R", string: 0, offset: 0},
               {degree: "5", string: 1, offset: 2},
-              {degree: "b7", string: 2, offset: 0},
-              {degree: "b3", string: 3, offset: 0}]
+              {degree: "7b", string: 2, offset: 0},
+              {degree: "3b", string: 3, offset: 0}]
   - name: "Walking approach"
     use: "Leading into the next chord."
     degrees: [{degree: "R", string: 0, offset: 0},
               {degree: "5", string: 1, offset: 2},
               {degree: "6", string: 1, offset: 4},
-              {degree: "b7", string: 2, offset: 0}]
+              {degree: "7b", string: 2, offset: 0}]

@@ -311,6 +311,13 @@ as the chord can fill, low on the neck, without a stretch. Slash voicings are
 skipped for the ukulele — it's re-entrant, so its fourth string sounds above
 its third and there is no bass to put a bass note in.
 
+### Degree labels
+
+On the bass pages the degrees are written number first, accidental second --
+`3b`, `7b`, `5#`. Chord *symbols* keep their conventional spelling, so a
+half-diminished chord is still `Am7b5`; this is only how the intervals are
+named when the page is telling a bass player which notes to reach for.
+
 ### Spelling
 
 Notes are spelled by their function in the chord, not by whatever is
