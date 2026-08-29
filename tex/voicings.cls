@@ -229,8 +229,8 @@
 \newcommand{\tocline}[2]{%
   \item[]\makebox[0pt][l]{\bfseries #1}\hfill{\footnotesize\color{faint}#2}}
 
-\newenvironment{tocnote}{\par\vspace{2mm}\footnotesize\color{faint}}%
-  {\par\vspace{2mm}}
+\newenvironment{tocnote}{\par\vfill\footnotesize\color{faint}}%
+  {\par\vspace*{\note@floor}}
 
 % Sits under the contents list, at the size of the entries above it: it is
 % the last line of the same table, not a footnote.
@@ -361,13 +361,24 @@
 % at 62mm across on a page that allows 72mm, which is where the guitar
 % page's collisions came from. Signatures move back inside the hub, since
 % "1b" is two characters and needs almost nothing.
+% The bands are sized by arc, not by looks. A wedge is 30 degrees, so the
+% room a label has is 2*pi*r/12: the inner ring has to sit far enough out
+% that four digits at body size still fit across it. Pushing the middle
+% circle out from 24mm to 26mm and shrinking the hub buys the minor ring
+% the millimetre it was short.
 \newlength{\cof@outer}\setlength{\cof@outer}{36mm}
-\newlength{\cof@mid}\setlength{\cof@mid}{24mm}
-\newlength{\cof@inner}\setlength{\cof@inner}{13mm}
+\newlength{\cof@mid}\setlength{\cof@mid}{26mm}
+\newlength{\cof@inner}\setlength{\cof@inner}{12mm}
 
 % Absolute sizes: a diagram this dense cannot follow the body size.
 \newcommand{\cof@name}{\fontsize{8}{8.6}\selectfont}
-\newcommand{\cof@frets}{\fontsize{6.4}{6.8}\bfseries\selectfont}
+% Voicings inside a circle. Four frets or a two-character string-and-fret
+% fit at the body size; six guitar digits and a five-note piano list do
+% not, so those keep the small setting. \usecofsize picks per instrument.
+\newcommand{\cof@fretsize}{6.4}
+\newcommand{\usecofsize}[1]{\renewcommand{\cof@fretsize}{#1}}
+\newcommand{\cof@frets}{%
+  \fontsize{\cof@fretsize}{\cof@fretsize}\bfseries\selectfont}
 \newcommand{\cof@minor}{\fontsize{7.2}{7.6}\selectfont}
 \newcommand{\cof@sig}{\fontsize{6}{6.4}\selectfont}
 
@@ -407,13 +418,13 @@
   % horizontal line and xx0231 lands on top of its own key name. Ordering
   % within one node buys the same thing at top and bottom and costs nothing
   % at the sides.
-  \node[align=center] at (\cof@a:30.2mm) {%
+  \node[align=center] at (\cof@a:31.2mm) {%
     \ifthenelse{\equal{#7}{up}}%
       {\cof@frets\ttfamily\color{\voicingcolor}#3\\[-2.4pt]%
        \cof@name\bfseries\color{keyred}#2}%
       {\cof@name\bfseries\color{keyred}#2\\[-2.4pt]%
        \cof@frets\ttfamily\color{\voicingcolor}#3}};
-  \node[align=center] at (\cof@a:18.6mm) {%
+  \node[align=center] at (\cof@a:20.4mm) {%
     \ifthenelse{\equal{#7}{up}}%
       {\cof@frets\ttfamily\color{\voicingcolor}#5\\[-2.4pt]%
        \cof@minor\bfseries#4}%
@@ -421,10 +432,16 @@
        \cof@frets\ttfamily\color{\voicingcolor}#5}};
   % Key signatures sit outside the rim: twelve of them around a hub the
   % size of a thumbnail was unreadable.
-  \node at (\cof@a:8.4mm) {\cof@sig\color{faint}#6};}
+  \node at (\cof@a:7.8mm) {\cof@sig\color{faint}#6};}
+
+% Footnotes are bottom-justified: pushed to the floor of the page, with
+% the same space beneath the last line as there is between the text and
+% the left edge of the page. The page's bottom margin is 5mm and its inner
+% margin 8.5mm, so 3.5mm makes up the difference.
+\newlength{\note@floor}\setlength{\note@floor}{3.5mm}
 
 \newcommand{\circlefootnote}[1]{%
-  \vspace{1mm}{\footnotesize\color{faint}#1\par}}
+  \vfill{\footnotesize\color{faint}#1\par}\vspace*{\note@floor}}
 
 % ------------------------------------------------------------ banjo pages
 % Where to spike the 5th string for this key, at the head of its pages.
@@ -462,7 +479,8 @@
   {\bfseries\color{keyred}#1} & \frets{#2} & \frets{#3} &
   \frets{#4} & \frets{#5} & \frets{#6} \\}
 
-\newenvironment{rootmapnote}{\par\vspace{2mm}\footnotesize\color{faint}}{\par}
+\newenvironment{rootmapnote}{\par\vfill\footnotesize\color{faint}}%
+  {\par\vspace*{\note@floor}}
 
 \newenvironment{patternlist}{%
   \pagerule

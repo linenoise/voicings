@@ -275,7 +275,6 @@ class Book(object):
         self.w(r"\textbf{%s chord voicings} in all." % "{,}".join(
             [str(total)[:-3], str(total)[-3:]] if total >= 1000 else [str(total)]))
         self.w(r"\end{toctotal}")
-        self.w(r"\vfill")
         self.w(r"\begin{tocnote}")
         # One sentence per line: four short rules read as four rules when
         # they are stacked, and as a paragraph when they are not.
@@ -311,6 +310,12 @@ class Book(object):
     def circle_of_fifths(self, instrument):
         title = self.instruments[instrument]["name"]
         self.w(r"\usevoicingcolor{%s}" % INK[instrument])
+        # Guitar fingerings run to six digits and piano voicings to five
+        # notes, so those keep the small setting. For the rest, 10pt is as
+        # large as the inner ring takes: a wedge there is 10.7mm across and
+        # four digits at the body's 12pt measure 10.2mm, which touches.
+        self.w(r"\usecofsize{%s}"
+               % ("6.4" if instrument in ("guitar", "piano") else "10"))
         self.w(r"\begin{circlepage}{%s}" % tex_escape(title))
         self.w(r"\begin{circleoffifths}{%s}" % tex_escape(title))
         for i, key in enumerate(CIRCLE):
@@ -375,7 +380,9 @@ class Book(object):
         return tex_escape(str(text))
 
     def signature(self, key):
-        sharps = {"C": "", "G": "1\\#", "D": "2\\#", "A": "3\\#", "E": "4\\#",
+        # C has neither sharps nor flats; the natural sign marks the top of
+        # the circle so the eye has something to start from.
+        sharps = {"C": r"$\natural$", "G": "1\\#", "D": "2\\#", "A": "3\\#", "E": "4\\#",
                   "B": "5\\#", "Gb": "6$\\flat$", "Db": "5$\\flat$",
                   "Ab": "4$\\flat$", "Eb": "3$\\flat$", "Bb": "2$\\flat$",
                   "F": "1$\\flat$"}
