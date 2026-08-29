@@ -211,6 +211,11 @@ class Book(object):
     # -- front -----------------------------------------------------------
 
     def front_matter(self):
+        # No instrument owns the front matter, so its sample voicings are
+        # set in plain ink rather than borrowing whichever colour happens
+        # to be current -- a green x on the contents page reads as a
+        # mandolin instruction.
+        self.w(r"\usevoicingcolor{ink}")
         self.w(r"\coverpage")
 
     def contents(self):
@@ -228,9 +233,11 @@ class Book(object):
         self.w(r"\end{tocdirectory}")
         self.w(r"\vfill")
         self.w(r"\begin{tocnote}")
-        self.w(r"Fret numbers read from the lowest string. "
-               r"\frets{x} means don't play that string. "
-               r"Tunings are on the back sheet.")
+        # One sentence per line: three short rules read as three rules
+        # when they are stacked, and as a paragraph when they are not.
+        self.w(r"Fret numbers read from the lowest string.\\")
+        self.w(r"\frets{x} means don't play that string.\\")
+        self.w(r"Tunings are on the back sheet.")
         self.w(r"\end{tocnote}")
         self.w(r"\end{bookpage}")
 
@@ -430,9 +437,15 @@ class Book(object):
             for n, chunk in enumerate(paginate(block["chords"],
                                                CHORDS_PER_PAGE)):
                 spike = spikes[key]
-                drone = (r"\dronenote{%s}{%s}"
-                         % (self.spike_phrase(spike["major"]),
-                            self.spike_phrase(spike["minor"]))) if n == 0 else ""
+                major = self.spike_phrase(spike["major"])
+                minor = self.spike_phrase(spike["minor"])
+                if n:
+                    drone = ""
+                elif major == minor:
+                    # Same answer either way, so say it once.
+                    drone = r"\dronenoteboth{%s}" % major
+                else:
+                    drone = r"\dronenote{%s}{%s}" % (major, minor)
                 self.w(r"\begin{chordpage}{Banjo}{%s}{%s}{%s}"
                        % (self.key_heading(key), "cont" if n else "", drone))
                 self.emit_chords(chunk)

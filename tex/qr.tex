@@ -1,0 +1,11 @@
+% The QR code for the README, generated from the same URL as the cover's.
+%
+% Rendered to assets/qr.png by `make qr`, which is the only way it should
+% ever be produced: a hand-made image would drift from \bookurl the first
+% time the repository moves.
+\documentclass[border=2pt]{standalone}
+\usepackage{qrcode}
+\newcommand{\bookurl}{https://github.com/linenoise/voicings}
+\begin{document}
+\qrcode[height=40mm,padding]{\bookurl}
+\end{document}

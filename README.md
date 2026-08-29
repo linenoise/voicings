@@ -6,6 +6,10 @@
 
 *Arrived here from the QR code on the cover? Those two links are what you want.*
 
+<img src="assets/qr.png" alt="QR code linking to https://github.com/linenoise/voicings" width="140">
+
+*Point a phone at this to bring the repository up on it — the same code that's on the book's cover.*
+
 ---
 
 A pocket chord book for the instruments in a church band — mandolin, fiddle,

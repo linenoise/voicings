@@ -359,9 +359,16 @@
 
 % ------------------------------------------------------------ banjo pages
 % Where to spike the 5th string for this key, at the head of its pages.
+% Where to catch the 5th string for this key. Most keys want the same
+% drone whether the tune is major or minor, and saying so twice just makes
+% the line longer to read.
 \newcommand{\dronenote}[2]{%
   \par{\scriptsize\color{faint}%
     Drone spike --- major \textbf{#1}\quad minor \textbf{#2}}%
+  \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
+
+\newcommand{\dronenoteboth}[1]{%
+  \par{\scriptsize\color{faint}Drone spike --- \textbf{#1}}%
   \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
 
 % -------------------------------------------------------------- bass pages

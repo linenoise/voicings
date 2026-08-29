@@ -38,7 +38,7 @@ ifeq ($(CROP_MARKS),1)
 endif
 
 .PHONY: all screen print validate lint repair resolve revert spikes \
-        piano complete pagecheck clean check-latex help
+        piano qr complete pagecheck clean check-latex help
 
 all: validate screen print
 
@@ -70,6 +70,15 @@ spikes:
 ## Regenerate the piano pages from data/piano-shapes.yaml.
 piano:
 	@$(PYTHON) tools/piano.py
+
+## Regenerate the README's QR code from the same URL the cover uses.
+## Committed, because GitHub cannot generate one at render time.
+qr: | check-latex
+	@mkdir -p $(BUILD) assets
+	@cp tex/qr.tex $(BUILD)/
+	@cd $(BUILD) && $(LATEX) $(LATEXOPTS) -jobname=qr qr.tex >/dev/null
+	@pdftoppm -png -r 220 -singlefile $(BUILD)/qr.pdf assets/qr
+	@echo "wrote assets/qr.png"
 
 ## Give every instrument the full chord vocabulary in all twelve keys,
 ## generating whatever the notebook doesn't have. `APPLY=1` writes it.
