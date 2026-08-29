@@ -13,6 +13,9 @@
 # branches on this and nothing else.
 
 mandolin:
+  # Short scale, four courses -- diagonals reach a long way.
+  max_span: 4        # frets covered without shifting
+  max_diagonal: 7    # more, when it is one finger per string
   kind: frets
   name: Mandolin
   also_covers: [Fiddle, "Tenor banjo"]
@@ -26,6 +29,9 @@ mandolin:
     pages serve all three.
 
 guitar:
+  # Long scale: four frets in one hand position, no more.
+  max_span: 3        # frets covered without shifting
+  max_diagonal: 5    # more, when it is one finger per string
   kind: frets
   name: Guitar
   tuning: [E2, A2, D3, G3, B3, E4]
@@ -36,6 +42,9 @@ guitar:
     with the lowest two muted transfer directly.
 
 bass:
+  # Longest scale of the lot.
+  max_span: 3        # frets covered without shifting
+  max_diagonal: 5    # more, when it is one finger per string
   kind: frets
   name: Bass
   tuning: [E1, A1, D2, G2]
@@ -45,6 +54,9 @@ bass:
     The guitar's lowest four strings, an octave down.
 
 ukulele:
+  # Short scale, four strings.
+  max_span: 4        # frets covered without shifting
+  max_diagonal: 6    # more, when it is one finger per string
   kind: frets
   name: Ukulele
   tuning: [G4, C4, E4, A4]
@@ -56,6 +68,9 @@ ukulele:
   reentrant: true
 
 banjo:
+  # Guitar-ish scale but only four strings fretted.
+  max_span: 4        # frets covered without shifting
+  max_diagonal: 6    # more, when it is one finger per string
   kind: frets
   name: Banjo
   tuning: [D3, G3, B3, D4]

@@ -1,54 +1,397 @@
 # Piano voicings, as interval patterns.
-#
-# Every voicing on the keyboard pages is one of these shapes transposed, so
-# they live here once rather than being written out twelve times. Numbers
-# are semitones above the root, low to high; anything over 11 is in the next
-# octave up. `C-G-D-E` is therefore [0, 7, 14, 16].
-#
-# The idiom is the one the worship worksheet uses: root and fifth low for
-# weight, colour tones stacked above, the third placed high where it stays
-# out of the bass player's way. Fifths stay open. Nothing is voiced as a
-# tight triad.
-#
-# Source: piano.pdf in this repository, plus the core worship voicings.
-
+# Edit here and rerun `make piano`; the twelve keys are generated.
 source: piano.pdf and core worship voicings
-
 shapes:
-  # -- the core worship set ------------------------------------------------
-  "":       {intervals: [0, 7, 12, 16],      note: "Basic open major"}
-  add9:     {intervals: [0, 7, 12, 14, 16],  note: "Very common"}
-  "2":      {intervals: [0, 7, 14, 16],      note: "Signature worship sound", star: true}
-  sus2:     {intervals: [0, 7, 14],          note: "Open, unresolved"}
-  sus4:     {intervals: [0, 7, 17, 24],      note: "Suspended",
-             also: [[0, 5, 7, 12]]}
-  "5":      {intervals: [0, 7, 12],          note: "Huge / open"}
-  maj7:     {intervals: [0, 7, 11, 16],      note: "Tender / reflective"}
-  maj9:     {intervals: [0, 7, 11, 14, 16],  note: "Very spacious", star: true}
-  m:        {intervals: [0, 7, 12, 15],      note: "Basic minor"}
-  m7:       {intervals: [0, 7, 10, 15],      note: "Warm / soulful"}
-  m9:       {intervals: [0, 7, 10, 14, 15],  note: "Modern worship", star: true}
-  madd9:    {intervals: [0, 7, 14, 15],      note: "Dark but open"}
-  "7":      {intervals: [0, 7, 10, 16],      note: "Gospel / blues colour"}
-  "6":      {intervals: [0, 7, 9, 16],       note: "Gentle"}
-  "6/9":    {intervals: [0, 7, 9, 14, 16],   note: "Rich worship / gospel", star: true}
-
-  # -- the rest of the vocabulary, voiced in the same idiom -----------------
-  m6:       {intervals: [0, 7, 9, 15],       note: "Minor, gentle"}
-  "9":      {intervals: [0, 7, 10, 14, 16],  note: "Dominant, spacious"}
-  7sus4:    {intervals: [0, 7, 10, 17],      note: "Hangs before resolving"}
-  "+":      {intervals: [0, 8, 16],          note: "Lifts into the next chord"}
-  o:        {intervals: [0, 3, 6, 12],       note: "Passing, unsettled"}
-  o7:       {intervals: [0, 3, 6, 9],        note: "Passing, symmetrical"}
-  m7b5:     {intervals: [0, 6, 10, 15],      note: "The two chord in a minor key"}
-  7b5:      {intervals: [0, 6, 10, 16],      note: "Altered dominant"}
-  "7#5":    {intervals: [0, 8, 10, 16],      note: "Altered dominant"}
-  7b9:      {intervals: [0, 7, 10, 13, 16],  note: "Tense dominant"}
-  "7#9":    {intervals: [0, 7, 10, 15, 16],  note: "Gospel dominant"}
-  m11:      {intervals: [0, 7, 10, 15, 17],  note: "Suspended minor wash"}
-
-# Slash voicings. `bass` is the interval that goes underneath.
+  ? ''
+  : close:
+    - 0
+    - 4
+    - 7
+    open:
+    - 0
+    - 7
+    - 12
+    - 16
+    note: Basic open major
+  add9:
+    close:
+    - 0
+    - 4
+    - 7
+    - 14
+    open:
+    - 0
+    - 7
+    - 12
+    - 14
+    - 16
+    note: Very common
+  '2':
+    close:
+    - 0
+    - 2
+    - 4
+    - 7
+    open:
+    - 0
+    - 7
+    - 14
+    - 16
+    note: Signature worship sound
+    star: true
+  sus2:
+    close:
+    - 0
+    - 2
+    - 7
+    open:
+    - 0
+    - 7
+    - 14
+    note: Open, unresolved
+  sus4:
+    close:
+    - 0
+    - 5
+    - 7
+    open:
+    - 0
+    - 7
+    - 17
+    - 24
+    also:
+    - - 0
+      - 5
+      - 7
+      - 12
+    note: Suspended
+  '5':
+    close:
+    - 0
+    - 7
+    - 12
+    open:
+    - 0
+    - 7
+    - 12
+    note: Huge / open
+  maj7:
+    close:
+    - 0
+    - 4
+    - 7
+    - 11
+    open:
+    - 0
+    - 7
+    - 11
+    - 16
+    note: Tender / reflective
+  maj9:
+    close:
+    - 0
+    - 4
+    - 7
+    - 11
+    - 14
+    open:
+    - 0
+    - 7
+    - 11
+    - 14
+    - 16
+    note: Very spacious
+    star: true
+  m:
+    close:
+    - 0
+    - 3
+    - 7
+    open:
+    - 0
+    - 7
+    - 12
+    - 15
+    note: Basic minor
+  m7:
+    close:
+    - 0
+    - 3
+    - 7
+    - 10
+    open:
+    - 0
+    - 7
+    - 10
+    - 15
+    note: Warm / soulful
+  m9:
+    close:
+    - 0
+    - 3
+    - 7
+    - 10
+    - 14
+    open:
+    - 0
+    - 7
+    - 10
+    - 14
+    - 15
+    note: Modern worship
+    star: true
+  madd9:
+    close:
+    - 0
+    - 3
+    - 7
+    - 14
+    open:
+    - 0
+    - 7
+    - 14
+    - 15
+    note: Dark but open
+  '7':
+    close:
+    - 0
+    - 4
+    - 7
+    - 10
+    open:
+    - 0
+    - 7
+    - 10
+    - 16
+    note: Gospel / blues colour
+  '6':
+    close:
+    - 0
+    - 4
+    - 7
+    - 9
+    open:
+    - 0
+    - 7
+    - 9
+    - 16
+    note: Gentle
+  6/9:
+    close:
+    - 0
+    - 4
+    - 7
+    - 9
+    - 14
+    open:
+    - 0
+    - 7
+    - 9
+    - 14
+    - 16
+    note: Rich worship / gospel
+    star: true
+  m6:
+    close:
+    - 0
+    - 3
+    - 7
+    - 9
+    open:
+    - 0
+    - 7
+    - 9
+    - 15
+    note: Minor, gentle
+  '9':
+    close:
+    - 0
+    - 4
+    - 7
+    - 10
+    - 14
+    open:
+    - 0
+    - 7
+    - 10
+    - 14
+    - 16
+    note: Dominant, spacious
+  7sus4:
+    close:
+    - 0
+    - 5
+    - 7
+    - 10
+    open:
+    - 0
+    - 7
+    - 10
+    - 17
+    note: Hangs before resolving
+  +:
+    close:
+    - 0
+    - 4
+    - 8
+    open:
+    - 0
+    - 8
+    - 16
+    note: Lifts into the next chord
+  o:
+    close:
+    - 0
+    - 3
+    - 6
+    open:
+    - 0
+    - 3
+    - 6
+    - 12
+    note: Passing, unsettled
+  o7:
+    close:
+    - 0
+    - 3
+    - 6
+    - 9
+    open:
+    - 0
+    - 3
+    - 6
+    - 9
+    note: Passing, symmetrical
+  m7b5:
+    close:
+    - 0
+    - 3
+    - 6
+    - 10
+    open:
+    - 0
+    - 6
+    - 10
+    - 15
+    note: The two chord in a minor key
+  7b5:
+    close:
+    - 0
+    - 4
+    - 6
+    - 10
+    open:
+    - 0
+    - 6
+    - 10
+    - 16
+    note: Altered dominant
+  7#5:
+    close:
+    - 0
+    - 4
+    - 8
+    - 10
+    open:
+    - 0
+    - 8
+    - 10
+    - 16
+    note: Altered dominant
+  7b9:
+    close:
+    - 0
+    - 4
+    - 7
+    - 10
+    - 13
+    open:
+    - 0
+    - 7
+    - 10
+    - 13
+    - 16
+    note: Tense dominant
+  7#9:
+    close:
+    - 0
+    - 4
+    - 7
+    - 10
+    - 15
+    open:
+    - 0
+    - 7
+    - 10
+    - 15
+    - 16
+    note: Gospel dominant
+  m11:
+    close:
+    - 0
+    - 3
+    - 7
+    - 10
+    - 14
+    - 17
+    open:
+    - 0
+    - 7
+    - 10
+    - 15
+    - 17
+    note: Suspended minor wash
 slashes:
-  - {quality: "",     bass: 4,  intervals: [4, 7, 12, 16],  note: "Smooth bass movement"}
-  - {quality: "",     bass: 7,  intervals: [7, 12, 16, 19], note: "Strong / open"}
-  - {quality: sus2,   bass: 4,  intervals: [4, 7, 12, 14],  note: "Suspended bass colour"}
+- quality: ''
+  bass: 4
+  note: Smooth bass movement
+  open:
+  - 4
+  - 7
+  - 12
+  - 16
+- quality: ''
+  bass: 7
+  note: Strong / open
+  open:
+  - 7
+  - 12
+  - 16
+  - 19
+- quality: sus2
+  bass: 4
+  note: Suspended bass colour
+  open:
+  - 4
+  - 7
+  - 12
+  - 14
+- quality: m
+  bass: 3
+  open:
+  - 3
+  - 7
+  - 12
+  - 15
+  note: Minor, third in the bass
+- quality: m
+  bass: 7
+  open:
+  - 7
+  - 12
+  - 15
+  - 19
+  note: Minor, fifth in the bass
+- quality: '7'
+  bass: 4
+  open:
+  - 4
+  - 7
+  - 10
+  - 16
+  note: Dominant, third in the bass
+note: 'Two voicings per chord. `close` is root position, ascending, with any extension stacked above the
+  octave -- the chord as you spell it at a keyboard, and what the piano pages print first. `open` is the
+  worship voicing from piano.pdf: root and fifth low for weight, colour above, the third high and out
+  of the bass player''s way. Numbers are semitones above the root, low to high; over 11 means the next
+  octave up, so C-G-D-E is [0, 7, 14, 16].'

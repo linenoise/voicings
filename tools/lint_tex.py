@@ -18,6 +18,7 @@ PRIMITIVES = {
     "ttfamily", "color", "textbf", "textit", "makebox", "null", "item",
     "hrule", "rule", "linewidth", "href", "dagger", "cdot", "protect",
     "relax", "space", "thispagestyle", "pagestyle", "hline", "smaller",
+    "rightarrow", "flat", "sharp", "bigstar", "dag",
 }
 
 

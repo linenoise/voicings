@@ -144,3 +144,52 @@ The only voicing given, so a canonical fingering was generated from theory. Thes
 | guitar | 36 | Ab | `Ab°7` | `4x2323` | `420101` |
 | mandolin | [19, 20] | Gb | `Gb5` | `9911` | `x442` |
 
+
+## Could not be read from the photograph
+
+These entries could not be brought into line by moving one or two strings, which almost always means the photograph of the page was misread rather than the notebook being wrong. Guessing further would invent a fingering and print it as though it were the author's, so instead:
+
+### Dropped, another voicing of the chord kept
+
+| Instrument | Page | Key | Chord | As read |
+|---|---|---|---|---|
+| guitar | 35 | G | `G6` | `3x2433` |
+| mandolin | [7, 8] | C | `Cm9` | `5156` |
+| mandolin | [9, 10] | Db | `Dbm9` | `6267` |
+| mandolin | [11, 12] | D | `Dmaj9` | `7490` |
+| mandolin | [23, 24] | Ab | `Abadd9` | `1136` |
+| mandolin | [23, 24] | Ab | `Abmadd9` | `1126` |
+
+### Replaced with a generated shape
+
+The only voicing given, so a canonical fingering was generated from theory. These are the ones worth checking against the paper notebook first.
+
+| Instrument | Page | Key | Chord | As read | Printed |
+|---|---|---|---|---|---|
+| guitar | 28 | C | `C7b5` | `x32312` | `014310` |
+| guitar | 28 | C | `C7#5` | `x32314` | `012110` |
+| guitar | 28 | C | `C9` | `x32333` | `010010` |
+| guitar | 29 | Db | `Db7b5` | `x45463` | `143001` |
+| guitar | 29 | Db | `Db7#5` | `x43465` | `523225` |
+| guitar | 29 | Db | `Db9` | `x43444` | `121121` |
+| guitar | 30 | D | `D9` | `x54555` | `000212` |
+| guitar | 31 | Eb | `Eb7b5` | `x67685` | `301023` |
+| guitar | 31 | Eb | `Eb7#5` | `x65687` | `341003` |
+| guitar | 31 | Eb | `Eb9` | `x65666` | `111023` |
+| guitar | 34 | Gb | `Gbsus2` | `244122` | `444122` |
+| guitar | 34 | Gb | `Gb7b5` | `2x2312` | `014310` |
+| guitar | 34 | Gb | `Gb7#5` | `2x2336` | `210330` |
+| guitar | 35 | G | `Gm6` | `3x2333` | `010030` |
+| guitar | 35 | G | `G7b5` | `3x3423` | `343001` |
+| guitar | 36 | Ab | `Absus2` | `466344` | `411144` |
+| guitar | 36 | Ab | `Ab7b5` | `4x4534` | `430112` |
+| guitar | 36 | Ab | `Ab7#5` | `474558` | `034110` |
+| guitar | 26 | Bb | `Bbm6` | `113323` | `113023` |
+| guitar | 26 | Bb | `Bb°7` | `x12323` | `012020` |
+| guitar | 27 | B | `B9` | `x21222` | `244445` |
+| mandolin | [11, 12] | D | `Dm9` | `7378` | `2231` |
+| mandolin | [13, 14] | Eb | `Ebm9` | `8489` | `3441` |
+| mandolin | [15, 16] | E | `Emaj9` | `1460` | `1122` |
+| mandolin | [1, 2] | A | `A7#9` | `2548` | `6233` |
+| mandolin | [5, 6] | B | `Bmaj9` | `4146` | `3142` |
+

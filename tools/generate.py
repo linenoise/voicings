@@ -20,12 +20,13 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import theory  # noqa: E402
+import playability  # noqa: E402
 
-MAX_SPAN = 4
 MAX_FRET = 12
 
 
-def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None):
+def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
+             max_span=4, max_diagonal=None, require_bass_lowest=None):
     """Best playable voicing of `symbol` on `tuning`, or None.
 
     An explicitly named bass -- the E of C/E -- is a hard requirement: get
@@ -38,6 +39,8 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None):
     root, quality, bass_pc = theory.parse_chord(symbol)
     if require_root_bass is None:
         require_root_bass = bass_pc is not None
+    if require_bass_lowest is None:
+        require_bass_lowest = bass_pc is not None
     wanted = {(root + i) % 12 for i in theory.QUALITIES[quality]}
     allowed = set(wanted)
     if bass_pc is not None:
@@ -67,35 +70,70 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None):
         sounding = [(i, f) for i, f in enumerate(combo) if f is not None]
         if len(sounding) < max(2, len(tuning) - 2):
             continue
-        fretted = [f for _, f in sounding if f]
-        if fretted and max(fretted) - min(fretted) > MAX_SPAN:
+        shape = list(combo)
+        if not playability.is_playable(shape, max_span, 4, max_diagonal):
             continue
+        fretted = [f for _, f in sounding if f]
         pcs = {(open_pcs[i] + f) % 12 for i, f in sounding}
         if not needed <= pcs:
             continue
         lowest_i, lowest_f = sounding[0]
         in_bass = (open_pcs[lowest_i] + lowest_f) % 12 == want_bass
-        if require_root_bass and not in_bass:
+        # Putting the named bass underneath is a preference, not a rule.
+        # A mandolin can get E below C -- at the ninth fret. Nobody does
+        # that when 0-0-3-0 is sitting right there in first position, so
+        # this is ranked, not required, and an inversion wins when the
+        # in-bass option means climbing the neck.
+        if require_root_bass and require_bass_lowest and not in_bass:
+            if bass_pc is None:
+                continue
+        # A named bass note must at least be in the chord somewhere, even
+        # when the instrument cannot put it underneath.
+        if bass_pc is not None and bass_pc not in pcs:
             continue
-        # A chord book wants the shape a player would actually grab: as
-        # many strings ringing as the chord can fill, low on the neck,
-        # without a stretch. Ranking narrowness first produced things like
-        # x-x-x-0-1-0 for C/E, which is technically a C/E and nothing
-        # anyone would play.
+        # What makes a shape the one a player reaches for, in order:
+        #
+        #   full      as many strings ringing as the chord can fill --
+        #             muting half the instrument to save a finger gives
+        #             0-x-x-0-0-0 for E minor, which is thin and wrong
+        #   easy      how far up the neck plus how many fingers. Position
+        #             alone picked 5-2-5-0 for a mandolin Csus2/E over
+        #             0-0-3-0, three fingers against one; fingers alone
+        #             picks barre chords over open ones, which is worse.
+        #             The sum behaves on both counts.
+        #   low       ties broken downward
+        #   in bass   the named bass note underneath, where it can be
+        #
+        # This will not always reproduce the shape convention settled on --
+        # conventions are not derivable -- but the conventional shapes for
+        # the common chords come from the notebook. This only fills gaps.
+        position = min(fretted) if fretted else 0
+        n_fingers = playability.fingers_needed(shape)
+        n_muted = sum(1 for f in combo if f is None)
+        # Muting counts against a shape. Without that, silencing half the
+        # instrument is free and E minor comes out 0-x-x-0-0-0: no fingers,
+        # no effort, and far too thin to use.
+        difficulty = position + n_fingers + 2 * n_muted
         rank = (
-            0 if len(sounding) >= len(tuning) - 1 else 1,     # full-ish
-            min(fretted) if fretted else 0,                   # low position
-            0 if in_bass else 1,                              # then root low
-            -len(sounding),                                   # ring out
-            (max(fretted) - min(fretted)) if fretted else 0,  # easy stretch
-            sum(1 for f in fretted),                          # fewer fingers
+            difficulty,
+            -len(sounding),
+            position,
+            0 if in_bass else 1,
+            (max(fretted) - min(fretted)) if fretted else 0,
         )
         if best is None or rank < best[0]:
             best = (rank, combo)
 
     if best is None:
+        if require_bass_lowest:
+            # The named bass will not go underneath on this instrument --
+            # a mandolin's lowest string is G, so C/E has no E to sit on.
+            # Take an inversion that contains the note instead of nothing.
+            return generate(tuning, symbol, max_fret, require_root_bass,
+                            max_span, max_diagonal, require_bass_lowest=False)
         if require_root_bass:
-            return generate(tuning, symbol, max_fret, require_root_bass=False)
+            return generate(tuning, symbol, max_fret, False,
+                            max_span, max_diagonal, False)
         return None
 
     out = []
@@ -109,9 +147,16 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None):
     return "".join(out)
 
 
+def for_instrument(meta, symbol, max_fret=MAX_FRET):
+    """Generate using an instrument's own reach limits."""
+    return generate(meta["tuning"], symbol, max_fret,
+                    max_span=meta.get("max_span", 4),
+                    max_diagonal=meta.get("max_diagonal"))
+
+
 if __name__ == "__main__":
     import yaml
     with open("data/instruments.yaml") as fh:
         instruments = yaml.safe_load(fh)
     inst, chord = sys.argv[1], sys.argv[2]
-    print(generate(instruments[inst]["tuning"], chord))
+    print(for_instrument(instruments[inst], chord))

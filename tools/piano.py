@@ -43,9 +43,14 @@ def build(shapes_path="data/piano-shapes.yaml"):
         chords = []
         for quality, shape in spec["shapes"].items():
             symbol = key + quality.replace("o", "°")
-            voicings = [voice(key, shape["intervals"], quality)]
-            for alt in shape.get("also", []):
-                voicings.append(voice(key, alt, quality))
+            # Close position first -- it answers "what notes are in this
+            # chord", which is what someone reaches for the page to find
+            # out. The open worship voicing follows as the alternate.
+            voicings = [voice(key, shape["close"], quality)]
+            for extra in [shape["open"]] + list(shape.get("also", [])):
+                v = voice(key, extra, quality)
+                if v not in voicings:
+                    voicings.append(v)
             entry = {"chord": symbol, "frets": voicings}
             if shape.get("note"):
                 entry["note"] = shape["note"]
@@ -57,7 +62,7 @@ def build(shapes_path="data/piano-shapes.yaml"):
             symbol = "%s%s/%s" % (key, slash["quality"], bass)
             chords.append({
                 "chord": symbol,
-                "frets": [voice(key, slash["intervals"], slash["quality"])],
+                "frets": [voice(key, slash["open"], slash["quality"])],
                 "note": slash.get("note", ""),
             })
         doc["keys"].append({"key": key, "chords": chords})

@@ -28,6 +28,7 @@ import yaml
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import theory  # noqa: E402
 import generate as gen  # noqa: E402
+import provenance  # noqa: E402
 
 KEYS = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
 SHARP_KEYS = {"G", "D", "A", "E", "B"}
@@ -38,11 +39,14 @@ ALIASES = {"2": "add9", "add2": "add9"}
 
 
 def required(reentrant=False):
-    """(quality, bass_interval or None) pairs every key must carry."""
-    out = [(q, None) for q in theory.VOCABULARY]
-    if not reentrant:
-        out += [(q, b) for q, b in theory.SLASH_FORMS]
-    return out
+    """(quality, bass_interval or None) pairs every key must carry.
+
+    Slash chords are included for the ukulele too. It is re-entrant, so it
+    cannot put any note in the bass -- but the shape that contains the note
+    is what gets played regardless, and leaving the ukulele short of chords
+    the other instruments have is worse than labelling an inversion.
+    """
+    return [(q, None) for q in theory.VOCABULARY] + list(theory.SLASH_FORMS)
 
 
 def symbol_for(key, quality, bass_interval):
@@ -89,6 +93,7 @@ def main():
 
     with open(os.path.join(args.data, "instruments.yaml")) as fh:
         instruments = yaml.safe_load(fh)
+    record = provenance.load_record()
 
     added, failed = [], []
 
@@ -111,17 +116,21 @@ def main():
                 doc["keys"].append(block)
                 by_key[key] = block
             if args.refresh:
-                block["chords"] = [c for c in block["chords"]
-                                   if not c.get("derived")]
+                # Judge by the frozen record, not by the flag: the flag has
+                # been lost more than once and stale shapes then survived.
+                block["chords"] = [
+                    c for c in block["chords"]
+                    if provenance.from_notebook(record, name, key, c["chord"])
+                ]
             have = existing(block)
-            for quality, bass_interval in required(reentrant):
+            for quality, bass_interval in required():
                 root = theory.NOTE_TO_PC[key]
                 bass_pc = ((root + bass_interval) % 12
                            if bass_interval is not None else None)
                 if (quality, bass_pc) in have:
                     continue
                 sym = symbol_for(key, quality, bass_interval)
-                shape = gen.generate(tuning, sym)
+                shape = gen.for_instrument(meta, sym)
                 if shape is None:
                     failed.append((name, key, sym))
                     continue

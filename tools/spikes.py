@@ -26,31 +26,47 @@ import theory  # noqa: E402
 
 OPEN_FRET = 5           # where the 5th string starts
 OPEN_PC = theory.NOTE_TO_PC["G"]
-COMMON = {7, 9, 10}     # spikes on a typical neck
-ALSO_SEEN = {8, 12}     # often added
-SEARCH = range(5, 13)   # open g up to the octave
+# What this neck actually has. Everything else means retuning the string.
+AVAILABLE = [5, 7, 9]   # 5 is the string's own nut: open g
 
 KEYS = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
 
 
+def pitch_at(fret, detune=0):
+    """What the 5th string sounds, spiked here and tuned by `detune`."""
+    return (OPEN_PC + fret - OPEN_FRET + detune) % 12
+
+
 def options(root_pc, quality):
-    """Ranked drone choices for one key."""
+    """Ranked drone choices for one key.
+
+    Only three spikes exist on this neck, so for five of the twelve keys no
+    chord tone is reachable at all. Rather than send the player to a fret
+    that isn't there, those keys get told to move the string itself: a
+    half step off an existing spike is one peg turn, and it is what anyone
+    does in practice.
+    """
     third = 3 if quality == "minor" else 4
     degrees = [(0, "root"), (7, "fifth"), (third, "third")]
     out = []
     for interval, label in degrees:
         want = (root_pc + interval) % 12
-        for fret in SEARCH:
-            if (OPEN_PC + fret - OPEN_FRET) % 12 == want:
+        for fret in AVAILABLE:
+            for detune in (0, -1, 1):
+                if pitch_at(fret, detune) != want:
+                    continue
                 out.append({
                     "fret": fret,
                     "note": theory.spell(want),
                     "degree": label,
-                    "common": fret in COMMON or fret == OPEN_FRET,
-                    "open": fret == OPEN_FRET,
+                    "detune": detune,
+                    "open": fret == OPEN_FRET and detune == 0,
                 })
-    # A spike the neck already has beats one it does not.
-    out.sort(key=lambda o: (not o["common"], not o["open"]))
+    # A spike you can just drop into beats one you have to retune for; the
+    # root beats the fifth beats the third.
+    # No retune at all is best; then slackening rather than tightening,
+    # which is kinder to a string you are about to put back.
+    out.sort(key=lambda o: (o["detune"] != 0, o["detune"] > 0, not o["open"]))
     return out
 
 
@@ -67,9 +83,10 @@ def build():
                 "note": best["note"],
                 "degree": best["degree"],
                 "open": best["open"],
-                "common": best["common"],
+                "detune": best["detune"],
                 "alternates": [
-                    {"fret": o["fret"], "note": o["note"], "degree": o["degree"]}
+                    {"fret": o["fret"], "note": o["note"],
+                     "degree": o["degree"], "detune": o["detune"]}
                     for o in opts[1:3]
                 ],
             }
@@ -80,9 +97,12 @@ def build():
 if __name__ == "__main__":
     data = {
         "note": "Spike the 5th string at this fret. 'Open' means leave it "
-                "alone -- the open g is already a chord tone.",
+                "alone -- the open g is already a chord tone. A detune of "
+                "-1 or +1 means no spike on this neck reaches a chord tone, "
+                "so tune the string itself a half step from the nearest "
+                "one.",
         "open_fret": OPEN_FRET,
-        "common_spikes": sorted(COMMON),
+        "spikes": AVAILABLE,
         "keys": build(),
     }
     out = os.path.join("data", "banjo-spikes.yaml")
@@ -92,7 +112,13 @@ if __name__ == "__main__":
     print("wrote", out)
     for r in data["keys"]:
         M, m = r["major"], r["minor"]
-        f = lambda d: ("open g" if d["open"] else "fret %d" % d["fret"])
-        print("  %-2s  major: %-8s -> %-2s (%s)   minor: %-8s -> %-2s (%s)"
-              % (r["key"], f(M), M["note"], M["degree"],
-                 f(m), m["note"], m["degree"]))
+        def f(d):
+            base = "open g" if d["fret"] == OPEN_FRET else "fret %d" % d["fret"]
+            if d["detune"]:
+                base += ", tune %s a half step" % ("down" if d["detune"] < 0
+                                                  else "up")
+            return base
+        print("  %-2s  major: %-30s -> %-2s (%s)" %
+              (r["key"], f(M), M["note"], M["degree"]))
+        print("      minor: %-30s -> %-2s (%s)" %
+              (f(m), m["note"], m["degree"]))

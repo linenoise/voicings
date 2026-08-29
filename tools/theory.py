@@ -77,12 +77,16 @@ CHARACTERISTIC = {
     "maj7":  (4, 11),   "m7":    (3, 10),
     "o7":    (3, 6, 9), "m7b5":  (3, 6, 10),
     "7sus4": (5, 10),   "7b5":   (4, 6, 10),
-    "7#5":   (4, 8, 10), "9":    (4, 10),
-    "maj9":  (4, 11),   "m9":    (3, 10),
-    "add9":  (2, 4),    "madd9": (2, 3),
-    "2":     (2, 4),    "add2":  (2, 4),
-    "7b9":   (1, 10),   "7#9":   (3, 10),
-    "m11":   (3, 10),   "11":    (10,),
+    "7#5":   (4, 8, 10),
+    # An extension chord has to sound its extension. Leaving the 9 out of
+    # this table let the generator answer "Cmaj9" with C-E-G-B, which is a
+    # major seventh: the right notes for a different chord.
+    "9":     (2, 4, 10),
+    "maj9":  (2, 4, 11),  "m9":    (2, 3, 10),
+    "add9":  (2, 4),      "madd9": (2, 3),
+    "2":     (2, 4),      "add2":  (2, 4),
+    "7b9":   (1, 4, 10),  "7#9":   (3, 4, 10),
+    "m11":   (3, 5, 10),  "11":    (5, 10),
     "13":    (4, 9, 10),
     "5":     (),
 }
@@ -107,9 +111,17 @@ VOCABULARY = [
     "7b9", "7#9", "m11",
 ]
 
-# Slash voicings worship music leans on: the third in the bass for a smooth
-# line, the fifth for weight, and a suspended second over the third.
-SLASH_FORMS = [("", 4), ("", 7), ("sus2", 4)]
+# Slash voicings, the standard inversions plus the ones worship music leans
+# on: the third in the bass for a smooth line, the fifth for weight, a
+# suspended second over the third, and the same two inversions of a minor
+# and a dominant seventh. The mandolin pages of the notebook use all of
+# these, so every instrument carries them.
+SLASH_FORMS = [
+    ("", 4), ("", 7),
+    ("m", 3), ("m", 7),
+    ("7", 4),
+    ("sus2", 4),
+]
 
 # Letter names, for spelling a chord the way it is written rather than the
 # way it is most convenient.
@@ -239,7 +251,9 @@ def parse_chord(symbol):
     if "/" in sym:
         sym, bass = sym.rsplit("/", 1)
         # A slash chord names a bass note; "6/9" is a quality, not a slash.
-        if re.match(r"^[A-G][b#]?$", bass):
+        # The bass can carry a double accidental: the minor third of G-flat
+        # minor is B-double-flat, and the chord is properly Gbm/Bbb.
+        if re.match(r"^[A-G](?:bb|##|b|#)?$", bass):
             bass_pc = NOTE_TO_PC[bass]
         else:
             sym = sym + "/" + bass

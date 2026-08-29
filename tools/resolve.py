@@ -28,11 +28,23 @@ import generate as gen  # noqa: E402
 from validate import check_voicing, ERROR  # noqa: E402
 
 
-def is_clean(instrument, tuning, key, symbol, frets_text):
-    return not any(
-        f.severity == ERROR
-        for f in check_voicing(instrument, tuning, key, symbol, frets_text)
-    )
+def is_clean(instrument, tuning, key, symbol, frets_text, meta=None):
+    """Right notes, and a hand can make it.
+
+    Playability belongs here rather than in the validator's error list: a
+    shape that spells correctly but needs five fingers is still wrong for
+    a book someone plays from.
+    """
+    meta = meta or {}
+    for f in check_voicing(instrument, tuning, key, symbol, frets_text,
+                           meta.get("kind", "frets"),
+                           bool(meta.get("reentrant")),
+                           meta.get("max_span"), meta.get("max_diagonal")):
+        if f.severity == ERROR:
+            return False
+        if f.message.startswith("hard to finger"):
+            return False
+    return True
 
 
 def main():
@@ -64,7 +76,8 @@ def main():
                 good, bad = [], []
                 for t in entry["frets"]:
                     (good if is_clean(name, tuning, keyblock["key"],
-                                      entry["chord"], t) else bad).append(t)
+                                      entry["chord"], t, meta)
+                     else bad).append(t)
                 if not bad:
                     continue
                 page = keyblock.get("pages", keyblock.get("page"))
@@ -74,19 +87,19 @@ def main():
                         actions.append(dict(
                             instrument=name, page=page, key=keyblock["key"],
                             chord=entry["chord"], written=t, action="dropped",
-                            note="illegible in the photograph; "
-                                 "another voicing of this chord was kept",
+                            note="unusable as written -- misread, or a shape "
+                             "no hand can make; another voicing was kept",
                         ))
                 else:
-                    made = gen.generate(tuning, entry["chord"])
+                    made = gen.for_instrument(meta, entry["chord"])
                     entry["frets"] = [made] if made else []
                     entry["derived"] = True
                     actions.append(dict(
                         instrument=name, page=page, key=keyblock["key"],
                         chord=entry["chord"], written=bad[0],
                         action="derived", replacement=made,
-                        note="illegible in the photograph and the only "
-                             "voicing given; a canonical shape was generated",
+                        note="unusable as written and the only voicing "
+                             "given; a playable shape was generated",
                     ))
                 changed = True
 

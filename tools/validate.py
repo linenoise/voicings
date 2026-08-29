@@ -26,6 +26,7 @@ import yaml
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import theory  # noqa: E402
+import playability  # noqa: E402
 
 ERROR, WARNING, INFO = "ERROR", "WARNING", "INFO"
 
@@ -49,7 +50,7 @@ class Finding(object):
 
 
 def check_voicing(instrument, tuning, key, symbol, frets_text, kind="frets",
-                  reentrant=False):
+                  reentrant=False, max_span=None, max_diagonal=None):
     """Yield Findings for one written voicing.
 
     A voicing is either fret numbers against a tuning, or -- for a keyboard
@@ -134,19 +135,30 @@ def check_voicing(instrument, tuning, key, symbol, frets_text, kind="frets",
     # anyway.
     if reentrant:
         bass_pc = None
-    if bass_pc is not None and lowest_pc is not None:
-        actual = lowest_pc
-        if actual != bass_pc:
+    if bass_pc is not None:
+        # The named note has to be in the chord. Where it can be underneath
+        # it should be -- but a mandolin's lowest string is G, so C/E has
+        # no E to sit on, and an inversion that contains the E is what a
+        # player uses. That is a note, not an error.
+        if bass_pc not in set(sounded):
             yield Finding(
                 ERROR, instrument, key, symbol, frets_text,
-                "lowest note is %s, but the symbol says %s in the bass"
-                % (theory.spell(actual), theory.spell(bass_pc)),
+                "%s is not in this voicing at all"
+                % theory.spell(bass_pc),
+            )
+        elif lowest_pc is not None and lowest_pc != bass_pc:
+            yield Finding(
+                WARNING, instrument, key, symbol, frets_text,
+                "inversion: %s is present but %s is lowest"
+                % (theory.spell(bass_pc), theory.spell(lowest_pc)),
             )
 
-    fretted = [f for f in (frets or []) if f]
-    if fretted and max(fretted) - min(fretted) > MAX_STRETCH:
-        yield Finding(INFO, instrument, key, symbol, frets_text,
-                      "spans %d frets" % (max(fretted) - min(fretted)))
+    # Can a hand make this shape? Four fingers, and only so much reach.
+    if frets is not None and max_span is not None:
+        why = playability.unplayable_reason(frets, max_span, 4, max_diagonal)
+        if why:
+            yield Finding(WARNING, instrument, key, symbol, frets_text,
+                          "hard to finger: %s" % why)
 
 
 def main():
@@ -181,7 +193,8 @@ def main():
                     n_voicings += 1
                     for f in check_voicing(name, tuning, keyblock["key"],
                                            entry["chord"], frets_text, kind,
-                                           reentrant):
+                                           reentrant, meta.get("max_span"),
+                                           meta.get("max_diagonal")):
                         findings.append(f)
                         counts[f.severity] += 1
 

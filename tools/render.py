@@ -22,6 +22,35 @@ CIRCLE = ["C", "G", "D", "A", "E", "B", "Gb", "Db", "Ab", "Eb", "Bb", "F"]
 # Keys that a musician writes with sharps rather than flats.
 SHARP_KEYS = {"G", "D", "A", "E", "B"}
 
+# How chords group on a key page, in the order a player meets them. Slash
+# voicings come last: they are what you reach for to move a bass line, not
+# what you reach for to play the chord.
+CHORD_GROUPS = [
+    ("triads",   ["", "m", "5", "+", "o", "sus2", "sus4"]),
+    ("sixths",   ["6", "m6", "6/9"]),
+    ("sevenths", ["7", "maj7", "m7", "o7", "m7b5", "7sus4", "7b5", "7#5"]),
+    ("ninths",   ["9", "maj9", "m9", "add9", "2", "add2", "madd9",
+                  "7b9", "7#9", "m11", "11", "13"]),
+]
+
+GROUP_OF = {}
+for _n, (_name, _qs) in enumerate(CHORD_GROUPS):
+    for _q in _qs:
+        GROUP_OF[_q] = _n
+SLASH_GROUP = len(CHORD_GROUPS)
+
+
+def group_index(symbol):
+    """Which block on the page this chord belongs in."""
+    try:
+        _, quality, bass = theory.parse_chord(symbol)
+    except theory.ChordError:
+        return SLASH_GROUP
+    if bass is not None:
+        return SLASH_GROUP
+    return GROUP_OF.get(quality, SLASH_GROUP - 1)
+
+
 # Reading order for the chord sections: chromatic, as the notebook has it.
 CHROMATIC = ["A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"]
 
@@ -39,7 +68,7 @@ CHART_INSTRUMENTS = ["mandolin", "banjo", "guitar", "bass", "ukulele"]
 FIRST_POSITION = 7
 
 CHORDS_PER_PAGE = 34      # fret grids, one line each
-PIANO_PER_PAGE = 34       # note lists, one line each
+PIANO_PER_PAGE = 20       # two voicings each; a key takes two pages
 WORSHIP_PER_PAGE = 8      # name, notes, and a line of description
 
 
@@ -264,8 +293,8 @@ class Book(object):
             block = by_key.get(key)
             if not block:
                 continue
-            for n, chunk in enumerate(paginate(block["chords"],
-                                               CHORDS_PER_PAGE)):
+            ordered = self.ordered_chords(block["chords"])
+            for n, chunk in enumerate(paginate(ordered, CHORDS_PER_PAGE)):
                 self.chord_page(instrument, key, chunk,
                                 continued=(n > 0))
 
@@ -274,12 +303,37 @@ class Book(object):
         self.w(r"\begin{chordpage}{%s}{%s}{%s}{}" % (
             tex_escape(self.instruments[instrument]["name"]),
             heading, "cont" if continued else ""))
+        self.emit_chords(chords)
+        self.w(r"\end{chordpage}")
+
+    def emit_chords(self, chords):
+        """Rows, with a gap wherever the kind of chord changes."""
+        last = None
         for entry in chords:
+            g = group_index(entry["chord"])
+            if last is not None and g != last:
+                self.w(r"  \chordgap")
+            last = g
             cells = r"\voicingnext ".join(
                 frets_tex(f) for f in entry["frets"])
             self.w(r"  \chordrow{%s}{%s}" % (
                 tex_escape(entry["chord"]), cells))
-        self.w(r"\end{chordpage}")
+
+    def ordered_chords(self, chords):
+        """Group first, then the order the group lists them in."""
+        def rank(entry):
+            g = group_index(entry["chord"])
+            try:
+                _, quality, bass = theory.parse_chord(entry["chord"])
+            except theory.ChordError:
+                return (g, 99, entry["chord"])
+            if bass is not None:
+                return (g, bass, entry["chord"])
+            within = CHORD_GROUPS[g][1].index(quality) \
+                if g < len(CHORD_GROUPS) and quality in CHORD_GROUPS[g][1] \
+                else 99
+            return (g, within, entry["chord"])
+        return sorted(chords, key=rank)
 
     def key_heading(self, key):
         enh = {"Bb": "A\\#", "Db": "C\\#", "Eb": "D\\#",
@@ -301,8 +355,8 @@ class Book(object):
             block = by_key.get(key)
             if not block:
                 continue
-            for n, chunk in enumerate(paginate(block["chords"],
-                                               PIANO_PER_PAGE)):
+            ordered = self.ordered_chords(block["chords"])
+            for n, chunk in enumerate(paginate(ordered, PIANO_PER_PAGE)):
                 self.w(r"\begin{pianopage}{%s}{%s}"
                        % (self.key_heading(key), "cont" if n else ""))
                 for entry in chunk:
@@ -339,45 +393,22 @@ class Book(object):
                             self.spike_phrase(spike["minor"]))) if n == 0 else ""
                 self.w(r"\begin{chordpage}{Banjo}{%s}{%s}{%s}"
                        % (self.key_heading(key), "cont" if n else "", drone))
-                for entry in chunk:
-                    self.w(r"  \chordrow{%s}{%s}" % (
-                        tex_escape(entry["chord"]),
-                        r"\voicingnext ".join(
-                            frets_tex(f) for f in entry["frets"])))
+                self.emit_chords(chunk)
                 self.w(r"\end{chordpage}")
-        self.spike_page()
 
     def spike_phrase(self, s):
-        if s["open"]:
-            return r"open \frets{g}"
-        return r"fret~\frets{%d} (%s)" % (s["fret"], tex_escape(s["note"]))
+        """Where to catch the 5th string for this key.
 
-    def spike_page(self):
-        self.w(r"\begin{bookpage}{Spiking the Drone}")
-        self.w(r"\pagesubtitle{Banjo, 5th string}")
-        self.w(r"\begin{spikeintro}")
-        self.w(r"The 5th string rings open every time you brush it, so it "
-               r"has to belong to the chord. It isn't fretted --- catch it "
-               r"under a spike. The string starts at the 5th fret, so a "
-               r"spike at \frets{7} raises the open \frets{g} to "
-               r"\frets{A}.")
-        self.w(r"\end{spikeintro}")
-        self.w(r"\begin{spiketable}")
-        for row in self.spikes["keys"]:
-            self.w(r"\spikerow{%s}{%s}{%s}{%s}{%s}" % (
-                tex_escape(row["key"]),
-                self.spike_phrase(row["major"]),
-                tex_escape(row["major"]["degree"]),
-                self.spike_phrase(row["minor"]),
-                tex_escape(row["minor"]["degree"])))
-        self.w(r"\end{spiketable}")
-        self.w(r"\begin{spikenote}")
-        self.w(r"Most necks carry spikes at \frets{7}, \frets{9} and "
-               r"\frets{10}. Where the drone is the third of the key, "
-               r"move it to the root or the fifth if the tune crosses "
-               r"between major and minor.")
-        self.w(r"\end{spikenote}")
-        self.w(r"\end{bookpage}")
+        Only three spikes exist on this neck, so for some keys the answer
+        is to move the string instead: one peg turn off the nearest spike.
+        """
+        if s["open"]:
+            where = r"open \frets{g}"
+        else:
+            where = r"\frets{%d}" % s["fret"]
+        if s.get("detune"):
+            where += r", tune %s" % ("down" if s["detune"] < 0 else "up")
+        return r"%s $\rightarrow$ \frets{%s}" % (where, tex_escape(s["note"]))
 
     # -- bass ------------------------------------------------------------
 

@@ -112,6 +112,16 @@
 
 \newcommand{\pagetitle}[1]{%
   {\large\bfseries\color{ink}#1\par}}
+
+% Instrument on the left, key centred on the page, one line. Built from
+% fixed-width boxes rather than glue: \raggedright is on throughout the
+% book and \hfil under it does not centre reliably.
+\newcommand{\pageheader}[2]{%
+  \par\noindent
+  \makebox[0.3\linewidth][l]{\footnotesize\color{faint}#1}%
+  \makebox[0.4\linewidth][c]{\large\bfseries\color{keyred}#2}%
+  \makebox[0.3\linewidth][r]{}%
+  \par}
 \newcommand{\pagesubtitle}[1]{%
   \vspace{-1pt}{\footnotesize\color{faint}#1\par}\pagerule}
 
@@ -145,7 +155,7 @@
     % any size a phone camera cares about. Error correction is left at the
     % default: the code is small on the page and this book gets carried in
     % a pocket, so it will be read creased and in poor light.
-    \qrcode[height=18mm,padding]{\bookurl}\par
+    \qrcode[height=27mm,padding]{\bookurl}\par
     \vspace{1.5mm}
     {\footnotesize\color{faint}\bookurl\par}
     \vspace{3mm}
@@ -215,16 +225,21 @@
 \setlength{\columnsep}{3mm}
 \setlength{\columnseprule}{0pt}
 
+% Instrument on the left, key centred on the same line. The instrument is
+% set in a zero-width box so it does not push the key off centre: the key
+% is what the eye hunts for when flipping, and it should sit in the same
+% place on every page.
 \newenvironment{chordpage}[4]{%
   \clearpage
-  \pagetitle{\color{keyred}#2}%
-  \vspace{-1mm}%
-  {\footnotesize\color{faint}#1\ifthenelse{\equal{#3}{cont}}{, continued}{}\par}
+  \pageheader{#1\ifthenelse{\equal{#3}{cont}}{, continued}{}}{#2}%
   \pagerule
   #4%
   \raggedright
   \begin{multicols}{2}%
 }{\end{multicols}}
+
+% Between one kind of chord and the next.
+\newcommand{\chordgap}{\par\vspace{1.7mm}}
 
 % Tight enough that a whole key -- around thirty chords -- lands on one
 % page. Two half-empty pages per key would double the sheet count, and
@@ -238,8 +253,13 @@
 % once. Names run to nine characters (Bbsus2/D), fingerings to six
 % (x13321), and at 12pt both will not fit a 36mm column -- so the name
 % gives way and the numbers stay full size.
+% One chord, one unbreakable block. Without this a chord with two
+% voicings could take the column break between them, leaving 0000 at the
+% foot of one column and 2555 at the head of the next with no label -- it
+% reads as a different chord entirely. A vbox cannot be broken.
 \newcommand{\chordrow}[2]{%
-  \par\makebox[\chord@name][l]{\small\bfseries #1}#2%
+  \par\noindent\vbox{\hsize=\linewidth
+    \makebox[\chord@name][l]{\small\bfseries #1}#2\par}%
   \par\vspace{0.6mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.6mm}}
 
 %% An alternate voicing goes under the first, pulled up tight so the pair
@@ -321,71 +341,29 @@
 \newcommand{\circlefootnote}[1]{%
   \vspace{1mm}{\footnotesize\color{faint}#1\par}}
 
-% ----------------------------------------------------- nashville numbers
-% Keys down the side, degrees across, exactly as the notebook has it.
-% A tabular cannot break across pages: if it does not fit, the whole thing
-% moves to the next one and leaves its heading stranded. Thirteen rows of
-% two-line cells has to stay under the text height, so the leading is set
-% tight here rather than left to \arraystretch.
-\newenvironment{nashvilletable}[1]{%
-  \vspace{0.5mm}
-  \setlength{\tabcolsep}{2.4pt}
-  \renewcommand{\arraystretch}{1.05}
-  \begin{tabular}{@{}l|*{#1}{c}@{}}
-}{%
-  \end{tabular}}
-
-% Header cells arrive already concatenated, each starting with an ampersand.
-\newcommand{\nashvillehead}[1]{%
-  {\scriptsize\bfseries} #1 \\[1pt] \hline}
-
-\newcommand{\nashvillehcell}[1]{& {\scriptsize\bfseries #1}}
-
-\newcommand{\nashvillerow}[2]{%
-  {\scriptsize\bfseries\color{keyred}#1} #2 \\}
-
-\newcommand{\nashvillecell}[2]{%
-  & \begin{tabular}{@{}c@{}}{\scriptsize\bfseries#1}\\[-3.5pt]%
-    {\tiny#2}\end{tabular}}
-
 % ------------------------------------------------------------ banjo pages
 % Where to spike the 5th string for this key, at the head of its pages.
 \newcommand{\dronenote}[2]{%
   \par{\scriptsize\color{faint}%
-    Drone: major \textbf{#1}\quad minor \textbf{#2}}%
+    Drone spike --- major \textbf{#1}\quad minor \textbf{#2}}%
   \par\vspace{0.8mm}{\color{rule}\hrule height 0.3pt}\vspace{1mm}}
 
-% ------------------------------------------------------------ spike table
-\newenvironment{spikeintro}{\footnotesize\color{faint}}{\par\vspace{2mm}}
-\newenvironment{spikenote}{\par\vspace{2mm}\footnotesize\color{faint}}{\par}
-
-\newenvironment{spiketable}{%
-  \setlength{\tabcolsep}{2pt}
-  \renewcommand{\arraystretch}{1.1}
-  \begin{tabular}{@{}l l l@{}}
-  {\scriptsize\bfseries Key} & {\scriptsize\bfseries Major} &
-  {\scriptsize\bfseries Minor} \\ \hline
-}{\end{tabular}}
-
-\newcommand{\spikerow}[5]{%
-  {\scriptsize\bfseries\color{keyred}#1} &
-  {\scriptsize #2 {\color{faint}#3}} &
-  {\scriptsize #4 {\color{faint}#5}} \\}
-
 % -------------------------------------------------------------- bass pages
+% Twelve rows and five columns on a page that can hold far more, so the
+% type is set up to fill it: this is a lookup table read at a glance, and
+% there is no reason for it to sit small in the top third of the page.
 \newenvironment{rootmap}{%
-  \setlength{\tabcolsep}{3pt}
-  \renewcommand{\arraystretch}{1.2}
+  \setlength{\tabcolsep}{7pt}
+  \renewcommand{\arraystretch}{1.6}
   \begin{tabular}{@{}l|*{4}{c}@{}}
 }{\end{tabular}}
 
 \newcommand{\rootmaphead}[4]{%
-  {\scriptsize\bfseries} & {\scriptsize\bfseries#1} &
-  {\scriptsize\bfseries#2} & {\scriptsize\bfseries#3} &
-  {\scriptsize\bfseries#4} \\[1pt] \hline}
+  {\bfseries} & {\bfseries#1} & {\bfseries#2} & {\bfseries#3} &
+  {\bfseries#4} \\[1pt] \hline}
 
 \newcommand{\rootmaprow}[5]{%
-  {\scriptsize\bfseries\color{keyred}#1} & \frets{#2} & \frets{#3} &
+  {\bfseries\color{keyred}#1} & \frets{#2} & \frets{#3} &
   \frets{#4} & \frets{#5} \\}
 
 \newenvironment{rootmapnote}{\par\vspace{2mm}\footnotesize\color{faint}}{\par}
@@ -412,15 +390,10 @@
 
 \newenvironment{pianopage}[2]{%
   \clearpage
-  \pagetitle{\color{keyred}#1}%
-  \vspace{-1mm}%
-  {\footnotesize\color{faint}Piano\ifthenelse{\equal{#2}{cont}}{, continued}{}%
-   \par}
+  \pageheader{Piano\ifthenelse{\equal{#2}{cont}}{, continued}{}}{#1}%
   \pagerule
-  \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0pt}
-    \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
-}{\end{list}}
+  \raggedright
+}{\par}
 
 % Name above, notes below: a five-note voicing in a flat key is too wide to
 % share a line with its name at this trim size.
@@ -429,36 +402,28 @@
 % Note names run wider than fret digits -- two four-note sus4 shapes in a
 % flat key is the widest thing in the book -- so they set one step down
 % from the chord names beside them, which keeps every row on one line.
+% Two voicings per chord -- the close spelling and the open worship one --
+% run wider than the page in the flat keys, so the second wraps under the
+% name rather than off the edge.
+\newlength{\piano@name}\setlength{\piano@name}{20mm}
 \newcommand{\pianorow}[2]{%
-  \item[]{\small\makebox[20mm][l]{\bfseries #1}\footnotesize #2}%
-  \par\vspace{0.1mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.1mm}}
-
-% ------------------------------------------------------ worship voicings
-\newcommand{\stargl}{{\color{keyred}$\bigstar$}}
-
-\newenvironment{worshiplist}{%
-  \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{1.6mm}
-    \setlength{\parsep}{0pt}\setlength{\topsep}{1mm}}%
-}{\end{list}}
-
-\newcommand{\worshiprow}[4]{%
-  \item[]\makebox[16mm][l]{\bfseries\small #1}%
-  \ifthenelse{\equal{#4}{}}{}{\stargl}%
-  \par\vspace{0.4mm}
-  \hspace*{1mm}{\small #2}\par\vspace{0.2mm}
-  \hspace*{1mm}{\scriptsize\color{faint}#3}}
+  \par\hangindent=\piano@name\hangafter=1
+  {\small\makebox[\piano@name][l]{\bfseries #1}\footnotesize #2}%
+  \par\vspace{0.85mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.85mm}}
 
 % ------------------------------------------------------- bass vocabulary
+% Twenty-six kinds of chord will not fit one column at a size worth
+% reading, and they do not need the full measure -- "R 9 b3 4 5 b7" is
+% short. Two columns, and the type can be as large as the page allows.
 \newenvironment{degreetable}{%
-  \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0pt}
-    \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
-}{\end{list}}
+  \raggedright
+  \begin{multicols}{2}%
+}{\end{multicols}}
 
 \newcommand{\degreerow}[2]{%
-  \item[]\makebox[13mm][l]{\bfseries\footnotesize #1}{\footnotesize #2}%
-  \par\vspace{0.5mm}{\color{rule!45}\hrule height 0.2pt}\vspace{0.5mm}}
+  \par\noindent\vbox{\hsize=\linewidth
+    \makebox[15mm][l]{\bfseries #1}#2\par}%
+  \par\vspace{1.1mm}{\color{rule!45}\hrule height 0.2pt}\vspace{1.1mm}}
 
 % -------------------------------------------------------------- back sheet
 % Everything that is reference rather than content lives here, so the
@@ -478,7 +443,7 @@
    \textbf{Fancy Chords and their Voicings}\par
    \vspace{0.8mm}
    {\color{faint}%
-    Danne Stayskal, Orcas Island\\
+    Danne Stayskal\\
     \href{mailto:danne@stayskal.com}{danne@stayskal.com}\\
     http://danne.stayskal.com/\par}
    \vspace{1.2mm}
