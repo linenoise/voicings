@@ -268,7 +268,7 @@
   \pageheader{#1}{#2}{\ifthenelse{\equal{#3}{cont}}{continued}{}}%
   \pagerule
   #4%
-  \vspace{\baselineskip}%
+  \vspace{0.5\baselineskip}%
   \raggedright
   \begin{multicols}{2}%
 }{\end{multicols}}
@@ -469,7 +469,7 @@
   \clearpage
   \pageheader{Piano}{#1}{\ifthenelse{\equal{#2}{cont}}{continued}{}}%
   \pagerule
-  \vspace{\baselineskip}%
+  \vspace{0.5\baselineskip}%
   \raggedright
   \begin{multicols}{2}%
 }{\end{multicols}}
