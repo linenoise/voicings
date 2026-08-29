@@ -137,16 +137,26 @@
 % centre the key perfectly and then "Gb / F#" at this size would run
 % straight over "Piano, continued". The label is nudged up so it sits
 % against the middle of the key rather than on its baseline.
-\newcommand{\pageheader}[2]{%
+% Instrument hard left, key centred on the page, "continued" hard right.
+% The two labels sit in zero-width boxes so neither shifts the key: it
+% lands in the same place on every page, which is what makes the book
+% flippable. Putting "continued" on the right rather than after the
+% instrument name is what keeps it clear of a wide key like Gb / F#.
+%
+% A 21pt line would claim 8mm of a 129mm page just for its own leading,
+% which costs two chords off the bottom of every key. The key is smashed
+% to zero height and the line given an explicit strut instead, so the
+% heading is as tall as it needs to look and no taller.
+\newcommand{\pageheader}[3]{%
   \par\noindent
-  % A 21pt line would claim 8mm of a 129mm page just for its own leading,
-  % which costs two chords off the bottom of every key. The key is smashed
-  % to zero height and the line given an explicit strut instead, so the
-  % heading is as tall as it needs to look and no taller.
-  \makebox[\linewidth]{%
+  % \hbox to, not \makebox: \makebox centres its own contents, so its
+  % glue competes with the \hfil pair below and the whole heading bunches
+  % into the middle of the line instead of spreading across it.
+  \hbox to \linewidth{%
     \rule[-1.9mm]{0pt}{6.6mm}%
-    \raisebox{0.6mm}{\footnotesize\color{faint}#1}%
-    \hfil\smash{\fontsize{21}{21}\selectfont\bfseries\color{keyred}#2}\hfil}%
+    \rlap{\raisebox{0.6mm}{\footnotesize\color{faint}#1}}%
+    \hfil\smash{\fontsize{21}{21}\selectfont\bfseries\color{keyred}#2}\hfil
+    \llap{\raisebox{0.6mm}{\footnotesize\color{faint}#3}}}%
   \par}
 \newcommand{\pagesubtitle}[1]{%
   \vspace{-1pt}{\footnotesize\color{faint}#1\par}\pagerule}
@@ -234,7 +244,7 @@
 % place on every page.
 \newenvironment{chordpage}[4]{%
   \clearpage
-  \pageheader{#1\ifthenelse{\equal{#3}{cont}}{, continued}{}}{#2}%
+  \pageheader{#1}{#2}{\ifthenelse{\equal{#3}{cont}}{continued}{}}%
   \pagerule
   #4%
   \raggedright
@@ -396,7 +406,7 @@
 
 \newenvironment{pianopage}[2]{%
   \clearpage
-  \pageheader{Piano\ifthenelse{\equal{#2}{cont}}{, continued}{}}{#1}%
+  \pageheader{Piano}{#1}{\ifthenelse{\equal{#2}{cont}}{continued}{}}%
   \pagerule
   \raggedright
 }{\par}
