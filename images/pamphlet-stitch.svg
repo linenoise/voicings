@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="900" height="440"
+     font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="440" fill="#FDFCF8"/>
+
+  <!-- ============ outside of the spine ============ -->
+  <text x="50" y="38" font-size="17" font-weight="bold" fill="#1A1A1A">Outside</text>
+  <text x="50" y="58" font-size="12.5" fill="#6E6E6E">what shows on the spine</text>
+  <rect x="50" y="76" width="180" height="300" rx="4" fill="#FFFFFF" stroke="#B8B8B8" stroke-width="1.5"/>
+  <line x1="110" y1="76" x2="110" y2="376" stroke="#B8B8B8" stroke-width="1" stroke-dasharray="3 4"/>
+
+  <!-- step 4: the long stitch, bowed left so it reads apart from the short runs -->
+  <path d="M110 106 C 88 160, 88 292, 110 346" fill="none" stroke="#AA0019" stroke-width="3"/>
+  <!-- step 1 to 2 (hole 3 up to 2) and step 5 to 6 (hole 4 up to 3), bowed right -->
+  <path d="M110 226 C 132 208, 132 184, 110 166" fill="none" stroke="#AA0019" stroke-width="3"/>
+  <path d="M110 286 C 132 268, 132 244, 110 226" fill="none" stroke="#AA0019" stroke-width="3"/>
+
+  <g fill="#FDFCF8" stroke="#1A1A1A" stroke-width="1.5">
+    <circle cx="110" cy="106" r="5.5"/><circle cx="110" cy="166" r="5.5"/>
+    <circle cx="110" cy="226" r="6.5"/><circle cx="110" cy="286" r="5.5"/>
+    <circle cx="110" cy="346" r="5.5"/>
+  </g>
+  <g font-size="13" fill="#1A1A1A" text-anchor="end">
+    <text x="82" y="111">1</text><text x="82" y="171">2</text>
+    <text x="82" y="231" font-weight="bold">3</text>
+    <text x="82" y="291">4</text><text x="82" y="351">5</text>
+  </g>
+  <text x="146" y="231" font-size="12" fill="#6E6E6E">center</text>
+  <text x="50" y="400" font-size="12" fill="#6E6E6E">holes 6mm in from the fold,</text>
+  <text x="50" y="416" font-size="12" fill="#6E6E6E">20mm apart</text>
+
+  <!-- ============ inside of the spine ============ -->
+  <text x="290" y="38" font-size="17" font-weight="bold" fill="#1A1A1A">Inside</text>
+  <text x="290" y="58" font-size="12.5" fill="#6E6E6E">where the two ends meet</text>
+  <rect x="290" y="76" width="180" height="300" rx="4" fill="#FFFFFF" stroke="#B8B8B8" stroke-width="1.5"/>
+  <line x1="350" y1="76" x2="350" y2="376" stroke="#B8B8B8" stroke-width="1" stroke-dasharray="3 4"/>
+
+  <!-- step 2 to 3 (hole 2 up to 1) and step 4 to 5 (hole 5 up to 4) -->
+  <path d="M350 166 C 330 148, 330 124, 350 106" fill="none" stroke="#AA0019"
+        stroke-width="3" stroke-dasharray="7 5"/>
+  <path d="M350 346 C 330 328, 330 304, 350 286" fill="none" stroke="#AA0019"
+        stroke-width="3" stroke-dasharray="7 5"/>
+
+  <g fill="#FDFCF8" stroke="#1A1A1A" stroke-width="1.5">
+    <circle cx="350" cy="106" r="5.5"/><circle cx="350" cy="166" r="5.5"/>
+    <circle cx="350" cy="226" r="6.5"/><circle cx="350" cy="286" r="5.5"/>
+    <circle cx="350" cy="346" r="5.5"/>
+  </g>
+  <g font-size="13" fill="#1A1A1A" text-anchor="end">
+    <text x="322" y="111">1</text><text x="322" y="171">2</text>
+    <text x="322" y="231" font-weight="bold">3</text>
+    <text x="322" y="291">4</text><text x="322" y="351">5</text>
+  </g>
+
+  <path d="M350 226 c 18 -13, 32 -3, 15 9 c -15 11, -31 3, -15 -9 z"
+        fill="none" stroke="#AA0019" stroke-width="2.5"/>
+  <line x1="364" y1="240" x2="392" y2="258" stroke="#AA0019" stroke-width="2"/>
+  <line x1="359" y1="243" x2="378" y2="266" stroke="#AA0019" stroke-width="2"/>
+  <text x="398" y="242" font-size="12" fill="#6E6E6E">square knot,</text>
+  <text x="398" y="257" font-size="12" fill="#6E6E6E">trim to 15mm</text>
+
+  <!-- ============ the order ============ -->
+  <text x="540" y="38" font-size="17" font-weight="bold" fill="#1A1A1A">Order</text>
+  <text x="540" y="58" font-size="12.5" fill="#6E6E6E">starts inside, ends inside</text>
+  <g font-size="14" fill="#1A1A1A">
+    <text x="540" y="96">1.  out at 3</text>
+    <text x="540" y="122">2.  in at 2</text>
+    <text x="540" y="148">3.  out at 1</text>
+    <text x="540" y="174">4.  in at 5</text>
+    <text x="540" y="200">5.  out at 4</text>
+    <text x="540" y="226">6.  in at 3</text>
+    <text x="540" y="252">7.  knot the two ends</text>
+  </g>
+  <g font-size="12" fill="#6E6E6E">
+    <text x="540" y="294">Step 4 is the long stitch. It runs the</text>
+    <text x="540" y="310">whole spine on the outside, passing</text>
+    <text x="540" y="326">over holes 4, 3 and 2 without entering.</text>
+    <text x="540" y="356">Leave a 100mm tail at step 1, or there</text>
+    <text x="540" y="372">is nothing to tie at step 7.</text>
+  </g>
+
+  <g font-size="12" fill="#6E6E6E">
+    <path d="M540 408 h 26" stroke="#AA0019" stroke-width="3" fill="none"/>
+    <text x="574" y="412">outside</text>
+    <path d="M646 408 h 26" stroke="#AA0019" stroke-width="3" fill="none" stroke-dasharray="7 5"/>
+    <text x="680" y="412">inside</text>
+  </g>
+</svg>

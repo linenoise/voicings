@@ -68,7 +68,7 @@
 % deeper than a gel pen for exactly that reason.
 \definecolor{fretgreen}{HTML}{00873C}   % mandolin, green pen
 \definecolor{fretblue}{HTML}{0060BB}    % guitar, blue pen
-\definecolor{fretpurple}{HTML}{9A00DB}  % ukulele, purple pen
+\definecolor{fretpurple}{HTML}{9600D5}  % ukulele, purple pen
 \definecolor{fretorange}{HTML}{C05500}  % banjo, orange pen
 \definecolor{fretyellow}{HTML}{9A8800}  % bass, darkest legible yellow
 \definecolor{rule}{HTML}{B8B8B8}

@@ -55,8 +55,17 @@ sudo apt install texlive-xetex texlive-latex-extra   # Debian
    tall is exactly 11in, so there's no waste top or bottom.
 3. Stack the rectangles in the order they came off the sheet: top-left,
    top-right, bottom-left, bottom-right.
-4. Sew the left edge. A three- or five-hole pamphlet stitch about 6mm in
-   holds well; the inner margin is 8.5mm to leave room.
+4. Sew the left edge. A five-hole pamphlet stitch about 6mm in holds well;
+   the inner margin is 8.5mm to leave room.
+
+![Five-hole pamphlet stitch: the spine outside, the spine inside, and the order of the six passes](images/pamphlet-stitch.svg)
+
+Punch the five holes 20mm apart, centered on the height of the block, and
+work them in the order above. Step 4 is the only long one: it runs the whole
+spine on the outside, passing over three holes without entering them. Both
+ends finish inside at the center hole, where they knot to each other and get
+trimmed. Waxed linen thread holds better than cotton and does not need a
+second pass.
 
 Consecutive pages land on the two faces of each rectangle, so the stack
 collates with no folding. `make print SCHEME=saddle` gives folded
@@ -77,7 +86,7 @@ works out what a fingering actually sounds on that tuning, and compares.
 - **Warning:** every note belongs, but a defining tone is missing. A
   mandolin chop chord drops the fifth on purpose. Allowed.
 
-**2,122 voicings, 0 errors, 288 warnings.**
+**2,123 voicings, 0 errors, 288 warnings.**
 
 When a voicing failed, `tools/repair.py` looked for the nearest playable
 fingering that does spell the chord, preferring the fewest strings moved. Everything it changed is
@@ -143,11 +152,35 @@ Rows per page are tuned against the compiled PDF, not guessed:
 `tools/pagecheck.py` compares intended pages against what TeX produced and
 fails on overflow. `tools/editions.py` runs the same check on all fourteen.
 
-Each instrument has its own pen: green mandolin, blue guitar, purple
-ukulele, red piano, orange banjo, dark yellow bass. All six clear 4.5:1
-against the page. A true orange gel pen sits at 4.1:1 and misses, so the
-banjo ink is a shade deeper. On a mono printer they all come out as mid
-grays, but the headings still name the instrument.
+## The color palette
+
+Each instrument has its own pen.
+
+![The seven pen colors: green mandolin, blue guitar, purple ukulele, red piano, orange banjo, yellow bass, and black for words](images/palette.svg)
+
+These are not arbitrary. They are colors you can walk into a store and buy a
+fineliner in, which matters if you write voicings for more than one
+instrument onto the same sheet of music. The blue pen lives in the guitar
+case, the green one in the mandolin case, the orange one in the banjo case.
+Red and black are the two you want everywhere, so they get distributed: red
+for note and chord names, black for words. Piano shares the red, since a
+piano voicing is spelled with note names anyway.
+
+The constraint on the six is that they be legible on white paper and, more
+importantly, tellable apart from each other at a glance: you should know
+which instrument a page belongs to before you have read a word of it. Every
+pair is separated by at least 0.13 in OKLab, roughly twice what the first
+draft of this palette managed.
+
+Yellow is the hard one. Contrast against white is a matter of how dark a
+color is, and yellow stops reading as yellow long before it gets dark enough
+for 4.5:1: every candidate that passed came out olive. The bass pen sits at
+3.5:1 instead. The other five clear 4.5:1.
+
+One thing worth knowing before you print: matched contrast is exactly what
+makes colors indistinguishable in grayscale. On a mono laser printer all six
+land on nearly the same gray. The color coding works on screen or off a
+color printer; in mono, the heading on each page still names the instrument.
 
 ## Layout of the repository
 
