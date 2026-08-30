@@ -5,11 +5,11 @@ ukulele, piano, banjo, and bass. Every chord in all twelve keys.
 
 | Edition | Read | Print | Pages | Sheets | |
 |---|---|---|---|---|---|
-| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 101 | 13 | All six instruments |
+| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 98 | 13 | All six instruments |
 | Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | Also fiddle, tenor banjo |
 | Guitar | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | Also baritone ukulele |
 | Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 |  |
-| Piano | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 29 | 4 |  |
+| Piano | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 28 | 4 |  |
 | Banjo | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | With drone spikes |
 | Bass | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 7 | 1 | Roots and patterns |
 
@@ -18,7 +18,7 @@ e-reader. **4-up** is US Letter, four pages to a sheet, for printing and
 sewing. Per-instrument editions carry that instrument's circle of fifths,
 its reference pages, its chords, and the credits. Nothing else.
 
-Every fretted instrument gets four reference pages before its chords:
+Every fretted instrument gets two reference pages before its chords:
 
 - **Root Positions**, the fret of every key's root on every string. The
   bass has always had this; everything movable is measured from it.
@@ -26,20 +26,15 @@ Every fretted instrument gets four reference pages before its chords:
   each with the string carrying the root. Mandolin gets its five chop
   shapes; guitar gets the CAGED forms. Learn these and the chord pages
   become a lookup rather than a memorization.
-The Nashville charts, **Numbers, Major** and **Numbers, Minor**, sit at
-the back of the whole book, just before the tunings. They name chords
-rather than fingerings, so there is nothing on them that belongs to any
-one instrument, and the solo editions leave them out.
+
+Both are about where a shape sits on the neck, which is what a book of
+voicings is for. Nothing else goes in: a Nashville chart names chords
+without voicing them, and this is not a theory book.
 
 A solo edition has no contents page, so how to read a fingering goes on
 its back sheet above the credits: fret order, `x`, and the `r` and `i`
 marks. Only the lines that edition uses. The piano booklet gets none of
 them, because its voicings are note names and it has no marks at all.
-
-Piano gets **Shells and Inversions** instead of the fretted pages, in C,
-to move: a shell is the chord with its fifth taken out, an inversion is
-the same notes rotated. Both are mechanical on a keyboard, so they are
-stated once rather than repeated under twelve keys.
 
 <img src="assets/qr.png" alt="QR code linking to https://github.com/linenoise/voicings" width="360">
 

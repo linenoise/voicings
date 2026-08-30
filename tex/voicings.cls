@@ -579,22 +579,6 @@
   \multicolumn{4}{@{}l@{}}{\vrule height 3.6mm depth 1.4mm width 0pt
     {\bfseries\color{keyred}#1}} \\}
 
-% Nashville chart: a key per row, a scale degree per column. Eight narrow
-% columns on a 75mm page, so the padding goes to almost nothing and the
-% cells set one size down.
-\newenvironment{numberchart}{%
-  \setlength{\tabcolsep}{1.6pt}
-  \renewcommand{\arraystretch}{1.45}
-  \begin{tabular}{@{}l|*{7}{c}@{}}
-}{\end{tabular}}
-\newcommand{\numberhead}[7]{%
-  {} & {\bfseries\footnotesize#1} & {\bfseries\footnotesize#2} &
-  {\bfseries\footnotesize#3} & {\bfseries\footnotesize#4} &
-  {\bfseries\footnotesize#5} & {\bfseries\footnotesize#6} &
-  {\bfseries\footnotesize#7} \\[1pt] \hline}
-\newcommand{\numberrow}[2]{{\bfseries\color{keyred}\footnotesize#1} & #2 \\}
-\newcommand{\numbercell}[1]{{\footnotesize\color{\voicingcolor}\bfseries#1}}
-
 \newenvironment{rootmapnote}{\par\vfill\footnotesize\color{faint}}%
   {\par\vspace*{\note@floor}}
 
@@ -691,6 +675,12 @@
 % \nointerlineskip because the rule that used to sit between rows also
 % suppressed TeX's interline glue, and taking it away lets that glue back
 % in unnoticed.
+% The close voicing sits in a fixed box so the spread one beside it
+% starts at the same place on every row. Set flush, the divider
+% wandered with the length of whatever was to its left.
+\newlength{\piano@first}\setlength{\piano@first}{24mm}
+% Public: the body file is read with @ as an ordinary character.
+\newcommand{\pianoclose}[1]{\makebox[\piano@first][l]{#1}}
 \newlength{\piano@col}
 % Name in a fixed box, voicings in a parbox beside it. The parbox is what
 % makes every line after the first sit under the first one: a hanging

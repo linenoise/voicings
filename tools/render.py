@@ -249,7 +249,6 @@ class Book(object):
         self.piano_section()
         self.banjo_section()
         self.bass_section()
-        self.number_charts()
         self.back_matter()
         return "\n".join(self.out) + "\n"
 
@@ -618,64 +617,6 @@ class Book(object):
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 
-    # Degree, semitones from the tonic, and the quality that degree takes.
-    MAJOR_NUMBERS = [("1", 0, ""), ("2m", 2, "m"), ("3m", 4, "m"),
-                     ("4", 5, ""), ("5", 7, ""), ("6m", 9, "m"),
-                     ("7\\textdegree", 11, "o")]
-    MINOR_NUMBERS = [("1m", 0, "m"), ("2\\textdegree", 2, "o"),
-                     ("b3", 3, ""), ("4m", 5, "m"), ("5m", 7, "m"),
-                     ("b6", 8, ""), ("b7", 10, "")]
-
-    def number_chart(self, title, numbers, note):
-        """The same twelve keys the book already has, read sideways.
-
-        A chord book answers "what is Bbm7"; a number chart answers "what
-        is the four chord here", which is the question a band asks. Both
-        are the same twelve rows, so this costs two pages and saves
-        transposing in your head on a stage.
-        """
-        self.w(r"\begin{bookpage}{%s}" % title)
-        self.w(r"\pagesubtitle{Any instrument}")
-        self.w(r"\begin{numberchart}")
-        self.w(r"\numberhead{%s}" % "}{".join(n for n, _, _ in numbers))
-        for key in ROOT_KEYS:
-            cells = []
-            for _, interval, quality in numbers:
-                # Functional spelling, except where it needs a double
-                # accidental. The four chord of Gb major really is Cb and
-                # stays Cb; the flat six of Db minor is Bbb, which nobody
-                # writes and nobody reads, so it comes out as A.
-                name = theory.spell_in_key(key, interval)
-                if "bb" in name or "##" in name:
-                    flat = key not in PIANO_SHARP_KEYS
-                    name = theory.spell(
-                        (theory.NOTE_TO_PC[key] + interval) % 12, flat)
-                cells.append(r"\numbercell{%s}"
-                             % tex_escape(name + quality.replace("o", "\u00b0")))
-            self.w(r"\numberrow{%s}{%s}"
-                   % (tex_escape(key), " & ".join(cells)))
-        self.w(r"\end{numberchart}")
-        self.w(r"\begin{rootmapnote}")
-        self.w(note)
-        self.w(r"\end{rootmapnote}")
-        self.w(r"\end{bookpage}")
-
-    def number_charts(self):
-        """Chord names, not fingerings, so this is the same page for all
-        six instruments. It sits once at the back rather than four times
-        over, and the reader goes from a number to a name here and from a
-        name to a shape on the instrument's own pages."""
-        self.w(r"\usevoicingcolor{ink}")
-        self.number_chart(
-            "Numbers, Major", self.MAJOR_NUMBERS,
-            r"Read across: in the key on the left, the four chord is the "
-            r"column headed 4. Call a song in numbers and it transposes "
-            r"itself.")
-        self.number_chart(
-            "Numbers, Minor", self.MINOR_NUMBERS,
-            r"The natural minor. Players often raise the seventh of the "
-            r"five chord to make it dominant, which turns 5m into 5.")
-
     def voicing_marks(self, instrument, symbol, frets_text):
         """Superscript caveats: r for rootless, i for inversion.
 
@@ -728,7 +669,6 @@ class Book(object):
         self.w(r"\usevoicingcolor{%s}" % INK["piano"])
         self.w(r"\sectiondivider{Piano Chords}{notes, low to high}")
         self.circle_of_fifths("piano")
-        self.piano_shells()
         doc = self.voicings["piano"]
         by_key = {k["key"]: k for k in doc["keys"]}
         for key in CHROMATIC:
@@ -750,59 +690,18 @@ class Book(object):
                     spread = self.piano_open(entry["chord"], key)
                     if spread and spread not in shapes:
                         shapes.append(spread)
+                    # The close voicing goes in a fixed-width box, so the
+                    # spread one begins on the same vertical line all the
+                    # way down the page instead of tracking the length of
+                    # the voicing before it.
+                    cells = r"\pianoclose{%s}" % notes_tex(shapes[0])
+                    if len(shapes) > 1:
+                        cells += r"\voicingsep " + r" \voicingsep ".join(
+                            notes_tex(f) for f in shapes[1:])
                     self.w(r"  \pianorow%s{%s}{%s}" % (
                         "first" if starts_group else "",
-                        tex_escape(entry["chord"]),
-                        r" \voicingsep ".join(
-                            notes_tex(f) for f in shapes)))
+                        tex_escape(entry["chord"]), cells))
                 self.w(r"\end{pianopage}")
-
-    def piano_shells(self):
-        """Shells and inversions, given once as rules rather than per chord.
-
-        Both are mechanical on a keyboard: a shell is the chord with its
-        fifth taken out, an inversion is the same notes rotated. Printing
-        either one under all twelve keys would cost a dozen pages to say
-        the same thing a dozen times, so they are stated once, in C, and
-        the reader moves them.
-        """
-        self.w(r"\begin{bookpage}{Shells and Inversions}")
-        self.w(r"\pagesubtitle{Piano \quad shown in C, move them anywhere}")
-        rows = [
-            ("7",     "R 3 b7",  "C E Bb",  False),
-            ("maj7",  "R 3 7",   "C E B",   False),
-            ("m7",    "R b3 b7", "C Eb Bb", False),
-            ("m7b5",  "R b3 b7", "C Eb Bb", False),
-            ("9",     "3 b7 9",  "E Bb D",  False),
-            ("maj9",  "3 7 9",   "E B D",   False),
-        ]
-        for name, degrees, notes, first in rows:
-            self.w(r"  \pianorow%s{%s}{%s}" % (
-                "first" if first else "", tex_escape(name),
-                r"%s \voicingsep %s" % (
-                    r"\notes{%s}" % r"\notesep ".join(degrees.split()),
-                    notes_tex("-".join(notes.split())))))
-        self.w(r"  \pianogap")
-        for name, notes, first in [
-                ("root", "C-E-G", True),
-                ("1st", "E-G-C", False),
-                ("2nd", "G-C-E", False),
-                ("3rd", "Bb-C-E-G", False)]:
-            self.w(r"  \pianorow%s{%s}{%s}"
-                   % ("first" if first else "", name, notes_tex(notes)))
-        self.w(r"\begin{rootmapnote}")
-        self.w(r"A shell is the chord with its fifth taken out. The fifth "
-               r"says nothing about the chord, and leaving it out gets the "
-               r"third and the seventh, the two notes that do, under one "
-               r"hand.\\")
-        self.w(r"The ninth chords go further and drop the root as well: the "
-               r"bass has it. Third, seventh, ninth is the whole sound.\\")
-        self.w(r"For inversions, take whichever one moves least from the "
-               r"chord before it. Holding a common tone and stepping the "
-               r"rest is what makes a progression sound joined up rather "
-               r"than jumped between.")
-        self.w(r"\end{rootmapnote}")
-        self.w(r"\end{bookpage}")
 
     def piano_open(self, symbol, key=None):
         """The spread voicing for a chord, where the shape table has one.
