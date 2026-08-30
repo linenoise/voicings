@@ -224,3 +224,35 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def marks_for(tuning, symbol, frets_text, reentrant=False):
+    """Which caveats apply to one printed voicing: 'r', 'i', or neither.
+
+    The book prints these as superscripts. They are not defects: a four
+    string instrument physically cannot sound a five note chord, so a
+    rootless shape is the only shape there is, and it works under a band
+    where the bass has the root. What matters is that the page says so
+    rather than letting a player find out.
+    """
+    out = []
+    try:
+        root, quality, bass_pc = theory.parse_chord(symbol)
+        frets = theory.parse_frets(frets_text, len(tuning))
+        sounded = set(theory.sounded_pitch_classes(tuning, frets))
+    except theory.ChordError:
+        return out
+    if root not in sounded and bass_pc is None:
+        out.append("r")
+    # On a re-entrant instrument the lowest-pitched string is not the first
+    # one, so "in the bass" has no meaning and nothing is an inversion.
+    if bass_pc is not None and not reentrant:
+        lowest = None
+        for string, fret in zip(tuning, frets):
+            if fret is None:
+                continue
+            lowest = (theory.parse_note(string) + fret) % 12
+            break
+        if lowest is not None and lowest != bass_pc:
+            out.append("i")
+    return out

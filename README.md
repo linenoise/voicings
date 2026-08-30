@@ -5,18 +5,35 @@ ukulele, piano, banjo, and bass. Every chord in all twelve keys.
 
 | Edition | Read | Print | Pages | Sheets | |
 |---|---|---|---|---|---|
-| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 78 | 10 | All six instruments |
-| Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also fiddle, tenor banjo |
-| Guitar | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also baritone ukulele |
-| Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
-| Piano | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
-| Banjo | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | With drone spikes |
+| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 107 | 14 | All six instruments |
+| Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Also fiddle, tenor banjo |
+| Guitar | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Also baritone ukulele |
+| Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 |  |
+| Piano | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 29 | 4 |  |
+| Banjo | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | With drone spikes |
 | Bass | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 7 | 1 | Roots and patterns |
 
 **Screen** is 3.5in x 5.5in, one page per page: good on a phone or an
 e-reader. **4-up** is US Letter, four pages to a sheet, for printing and
 sewing. Per-instrument editions carry that instrument's circle of fifths,
-its chords, and the credits. Nothing else.
+its reference pages, its chords, and the credits. Nothing else.
+
+Every fretted instrument gets four reference pages before its chords:
+
+- **Root Positions**, the fret of every key's root on every string. The
+  bass has always had this; everything movable is measured from it.
+- **Movable Shapes**, the closed fingerings with no open string in them,
+  each with the string carrying the root. Mandolin gets its five chop
+  shapes; guitar gets the CAGED forms. Learn these and the chord pages
+  become a lookup rather than a memorization.
+- **Numbers, Major** and **Numbers, Minor**, the Nashville chart. A chord
+  book answers "what is Bbm"; these answer "what is the four chord here",
+  which is what a band asks.
+
+Piano gets **Shells and Inversions** instead of the fretted pages, in C,
+to move: a shell is the chord with its fifth taken out, an inversion is
+the same notes rotated. Both are mechanical on a keyboard, so they are
+stated once rather than repeated under twelve keys.
 
 <img src="assets/qr.png" alt="QR code linking to https://github.com/linenoise/voicings" width="360">
 
@@ -109,7 +126,19 @@ works out what a fingering actually sounds on that tuning, and compares.
 - **Warning:** every note belongs, but a defining tone is missing. A
   mandolin chop chord drops the fifth on purpose. Allowed.
 
-**2,123 voicings, 0 errors, 288 warnings.**
+**2,183 voicings, 0 errors, 167 warnings.**
+
+Two of those warnings reach the page as superscripts, because a player
+needs to know:
+
+- **r** for rootless. A five-note chord will not go on four strings, so
+  the root goes and the bass covers it. Fine for rhythm, wrong for
+  soloing.
+- **i** for inversion. The named bass note is in the chord but not
+  underneath it. Only three of these are left: `generate.py` now treats a
+  named bass as binding, and falls back to an inversion only where the
+  instrument genuinely cannot reach. All three are mandolin shapes from
+  the notebook, kept as played.
 
 When a voicing failed, `tools/repair.py` looked for the nearest playable
 fingering that does spell the chord, preferring the fewest strings moved. Everything it changed is
@@ -150,6 +179,13 @@ and the core worship voicings use between them. `make complete` gives every
 instrument all of it in all twelve keys. Transcribed voicings are left
 exactly as written. Missing ones are generated. Slash voicings on the
 ukulele are inversions, because it's re-entrant and has no bass.
+
+Guitar carries five more: `11`, `13`, `m13`, `maj13`, `7#11`, listed in
+`instruments.yaml` as `extra_vocabulary`. Six strings can spell a six-note
+chord; four courses would drop half of it and keep the name. These
+generate with the root in the bass, because without that the ranking finds
+the cheapest correct shape rather than the one a guitarist plays: `G13`
+came out as six open strings and a finger.
 
 **Spelling.** Notes are spelled by function: the augmented fifth of `C+` is
 G#, not Ab. Three semitones above C is the flat third of `Cm9` and the

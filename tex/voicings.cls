@@ -151,11 +151,21 @@
 
 \newcommand{\frets}[1]{{\ttfamily\color{\voicingcolor}\bfseries #1}}
 \newcommand{\notlisted}{{\color{rule}\ttfamily--}}
+% Caveats on a voicing, set as a superscript beside the fingering:
+% r where the shape has no root, i where a named bass is present but
+% not underneath. Explained on the contents page.
+\newcommand{\vmark}[1]{\raisebox{0.75ex}{\scriptsize\bfseries\color{faint}#1}}
+% The same mark in body ink, for the contents page, where it is being
+% named rather than applied and reads beside \frets{x}.
+\newcommand{\vmarkink}[1]{\raisebox{0.75ex}{\scriptsize\bfseries\color{ink}#1}}
 
 % A fingering above the ninth fret needs two digits per string and runs
 % wider than a column allows, so it sets one size down. Rare enough that
 % the inconsistency costs nothing.
 \newcommand{\fretswide}[1]{{\small\ttfamily\color{\voicingcolor}\bfseries #1}}
+% A two-digit fret, kept in its brackets so the string it belongs to
+% stays countable, and set down a size so the pair takes one column.
+\newcommand{\fretbig}[1]{{\fontsize{7}{7}\selectfont[#1]}}
 
 % Between alternate voicings of the same chord. A single space let 2200 and
 % 2245 read as one long number; this is a gap plus a faint divider, so the
@@ -540,21 +550,50 @@
 % Twelve rows and five columns on a page that can hold far more, so the
 % type is set up to fill it: this is a lookup table read at a glance, and
 % there is no reason for it to sit small in the top third of the page.
-\newenvironment{rootmap}{%
-  \setlength{\tabcolsep}{7pt}
+% One column per string, so the same table serves a four-course mandolin
+% and a six-string guitar. The caller passes the count and the column
+% padding, because six columns will not take the padding five will.
+\newenvironment{rootmap}[2]{%
+  \setlength{\tabcolsep}{#2}
   \renewcommand{\arraystretch}{1.5}
-  \begin{tabular}{@{}l|*{5}{c}@{}}
+  \begin{tabular}{@{}l|*{#1}{c}@{}}
 }{\end{tabular}}
 
-% Five columns: the B is the fifth string of a five-string bass, marked
-% with parentheses so a four-string player knows to skip it.
-\newcommand{\rootmaphead}[5]{%
-  {\bfseries} & {\bfseries#1} & {\bfseries#2} & {\bfseries#3} &
-  {\bfseries#4} & {\bfseries#5} \\[1pt] \hline}
+\newcommand{\rootmaphead}[1]{{\bfseries} & #1 \\[1pt] \hline}
+\newcommand{\rootmaprow}[2]{{\bfseries\color{keyred}#1} & #2 \\}
 
-\newcommand{\rootmaprow}[6]{%
-  {\bfseries\color{keyred}#1} & \frets{#2} & \frets{#3} &
-  \frets{#4} & \frets{#5} & \frets{#6} \\}
+% Movable shapes: the relative fingering, which string carries the root,
+% and one worked example. Four narrow columns rather than the root map's
+% grid, because the shape column is wide and the rest are not.
+\newenvironment{movablelist}{%
+  \setlength{\tabcolsep}{3pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}llll@{}}
+}{\end{tabular}}
+\newcommand{\movablehead}[4]{%
+  {\bfseries\footnotesize#1} & {\bfseries\footnotesize#2} &
+  {\bfseries\footnotesize#3} & {\bfseries\footnotesize#4} \\[1pt] \hline}
+\newcommand{\movablerow}[4]{%
+  \frets{#1} & {\footnotesize#2} & {\footnotesize#3} & \frets{#4} \\}
+\newcommand{\movablehdr}[1]{%
+  \multicolumn{4}{@{}l@{}}{\vrule height 3.6mm depth 1.4mm width 0pt
+    {\bfseries\color{keyred}#1}} \\}
+
+% Nashville chart: a key per row, a scale degree per column. Eight narrow
+% columns on a 75mm page, so the padding goes to almost nothing and the
+% cells set one size down.
+\newenvironment{numberchart}{%
+  \setlength{\tabcolsep}{1.6pt}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabular}{@{}l|*{7}{c}@{}}
+}{\end{tabular}}
+\newcommand{\numberhead}[7]{%
+  {} & {\bfseries\footnotesize#1} & {\bfseries\footnotesize#2} &
+  {\bfseries\footnotesize#3} & {\bfseries\footnotesize#4} &
+  {\bfseries\footnotesize#5} & {\bfseries\footnotesize#6} &
+  {\bfseries\footnotesize#7} \\[1pt] \hline}
+\newcommand{\numberrow}[2]{{\bfseries\color{keyred}\footnotesize#1} & #2 \\}
+\newcommand{\numbercell}[1]{{\footnotesize\color{\voicingcolor}\bfseries#1}}
 
 \newenvironment{rootmapnote}{\par\vfill\footnotesize\color{faint}}%
   {\par\vspace*{\note@floor}}
@@ -593,7 +632,19 @@
 % long list can still wrap here in a narrow column -- and between notes is
 % the only place it can, since an accidental is set as one token with the
 % letter it belongs to.
-\newcommand{\notesep}{\hskip 0.62em plus 0.12em minus 0.04em\relax}
+% A middot between notes rather than a bare gap. Sized so the pair of
+% thin spaces plus the dot comes to the width the plain space used to be,
+% because the column is only 36mm and any widening starts wrapping chords
+% that used to fit on their line.
+\newcommand{\notesep}{\hskip 0.16em plus 0.05em minus 0.02em
+  {\color{rule}\textperiodcentered}%
+  \hskip 0.16em plus 0.05em minus 0.02em\relax}
+
+% The spread voicing goes under the close one. A line break rather than a
+% new paragraph: the row's hanging indent already pushes every line after
+% the first past the name, and starting a paragraph would throw it away
+% and drop the wraps back to the margin.
+\newcommand{\pianonext}{\\}
 
 \newenvironment{pianopage}[2]{%
   \clearpage
@@ -616,11 +667,11 @@
 \newlength{\piano@name}\setlength{\piano@name}{20mm}
 % Wider than the chord pages' because the type is smaller: a note list
 % at eight points needs proportionally more air to read as its own row.
-\newlength{\piano@rowsep}\setlength{\piano@rowsep}{1.60mm}
+\newlength{\piano@rowsep}\setlength{\piano@rowsep}{0.18mm}
 % Kept under \scriptsize's baselineskip: a taller strut than the line
 % spacing makes TeX fall back to \lineskip and a wrapped voicing drifts
 % away from its own chord name.
-\newcommand{\piano@strut}{\vrule height 2.6mm depth 0.45mm width 0pt}
+\newcommand{\piano@strut}{\vrule height 3.24mm depth 0.58mm width 0pt}
 % A voicing may wrap inside its own column -- there is no room not to --
 % but never across columns, which would leave half a chord at the foot of
 % one and half at the head of the next with no name on it. The vbox is
@@ -637,22 +688,26 @@
 % \nointerlineskip because the rule that used to sit between rows also
 % suppressed TeX's interline glue, and taking it away lets that glue back
 % in unnoticed.
+\newlength{\piano@col}
+% Name in a fixed box, voicings in a parbox beside it. The parbox is what
+% makes every line after the first sit under the first one: a hanging
+% indent does not survive the \\ between the close voicing and the spread
+% one, and the second voicing was dropping back to the margin.
+\newcommand{\piano@body}[2]{%
+  \setlength{\piano@col}{\linewidth-\piano@name}%
+  \noindent{\footnotesize\makebox[\piano@name][l]{\bfseries #1}}%
+  \parbox[t]{\piano@col}{\scriptsize\baselineskip=11.34pt\raggedright
+    \piano@strut #2\piano@strut\par}\par}
+
 \newcommand{\pianorow}[2]{%
   \par\vskip\piano@rowsep\nointerlineskip
-  \vtop{\hsize=\linewidth
-    \hangindent=\piano@name\hangafter=1
-    {\footnotesize\piano@strut\makebox[\piano@name][l]{\bfseries #1}%
-     \scriptsize #2\piano@strut\par}}}
+  \vtop{\hsize=\linewidth\piano@body{#1}{#2}}}
 
-% As \chordrowfirst: the rule heading a group rides inside that group's
-% first row, so a column break cannot strand it at the top of a column.
 \newcommand{\pianorowfirst}[2]{%
   \par\vskip\piano@rowsep\nointerlineskip
   \vtop{\hsize=\linewidth
     {\color{rule}\hrule height 0.4pt}\vskip0.71\baselineskip
-    \hangindent=\piano@name\hangafter=1
-    {\footnotesize\piano@strut\makebox[\piano@name][l]{\bfseries #1}%
-     \scriptsize #2\piano@strut\par}}}
+    \piano@body{#1}{#2}}}
 
 % ------------------------------------------------------- bass vocabulary
 % Twenty-six kinds of chord will not fit one column at a size worth

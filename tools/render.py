@@ -8,13 +8,17 @@ asking tools/theory.py which chords sit in a key.
 
 import argparse
 import glob
+import itertools
 import os
+import re
 import sys
 
 import yaml
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import theory  # noqa: E402
+import theory
+import playability
+import validate  # noqa: E402
 
 # The order keys march around the circle of fifths, starting at C.
 CIRCLE = ["C", "G", "D", "A", "E", "B", "Gb", "Db", "Ab", "Eb", "Bb", "F"]
@@ -30,7 +34,11 @@ CHORD_GROUPS = [
     ("sixths",   ["6", "m6", "6/9"]),
     ("sevenths", ["7", "maj7", "m7", "o7", "m7b5", "7sus4", "7b5", "7#5"]),
     ("ninths",   ["9", "maj9", "m9", "add9", "2", "add2", "madd9",
-                  "7b9", "7#9", "m11", "11", "13"]),
+                  "7b9", "7#9", "m11"]),
+    # Five and six note chords, guitar only. Their own block: they are
+    # what you reach for when a four-course instrument has run out of
+    # strings, and grouping them with the ninths buried them.
+    ("extended", ["11", "13", "m13", "maj13", "7#11"]),
 ]
 
 GROUP_OF = {}
@@ -59,6 +67,9 @@ DEGREES = [(0, ""), (2, "m"), (4, "m"), (5, ""), (7, ""), (9, "m"), (11, "°")]
 DEGREE_LABELS = ["1", "2m", "3m", "4", "5", "6m", "7°"]
 
 # Instruments that get their own circle of fifths.
+ROOT_KEYS = ["C", "Db", "D", "Eb", "E", "F",
+             "Gb", "G", "Ab", "A", "Bb", "B"]
+
 CHART_INSTRUMENTS = ["mandolin", "guitar", "ukulele", "piano", "banjo", "bass"]
 
 # One pen per instrument, matching the notebook. Defined in voicings.cls.
@@ -77,8 +88,12 @@ INK = {
 # How far up the neck a bassist's hand reaches without shifting.
 FIRST_POSITION = 7
 
-CHORDS_PER_PAGE = 34      # fret grids, one line each
-PIANO_PER_PAGE = 34       # two columns; a key fits one page
+CHORDS_PER_PAGE = 34
+# Guitar carries five more qualities than the others, and 39 chords split
+# two ways leaves both pages half empty. A column holds more rows than
+# the shared figure assumed, so guitar gets its own.
+PER_PAGE = {"guitar": 40}      # fret grids, one line each
+PIANO_PER_PAGE = 32
 WORSHIP_PER_PAGE = 8      # name, notes, and a line of description
 
 
@@ -91,8 +106,12 @@ def tex_escape(s):
 
 def frets_tex(text):
     """Set a fret string in the monospaced chord face."""
-    body = text.replace("[", r"{\smaller[").replace("]", "]}")
-    # Two digits per string is wider than a column allows at full size.
+    # A fret above the ninth needs two digits, which the data brackets so
+    # 10-3-3-1 cannot be read as 1-0-3-3-1. Those digits go through a
+    # macro rather than inline: \smaller takes an optional argument, so
+    # "{\smaller[10]}" fed it the 10 and printed nothing at all, which
+    # turned a four string chord into a two string one on the page.
+    body = re.sub(r"\[(\d+)\]", r"\\fretbig{\1}", text)
     macro = r"\fretswide" if "[" in text else r"\frets"
     return r"%s{%s}" % (macro, body)
 
@@ -137,6 +156,8 @@ class Book(object):
             self.instruments = yaml.safe_load(fh)
         with open(os.path.join(data, "banjo-spikes.yaml")) as fh:
             self.spikes = yaml.safe_load(fh)
+        with open(os.path.join(data, "piano-shapes.yaml")) as fh:
+            self.piano_shapes = yaml.safe_load(fh)
         with open(os.path.join(data, "bass-patterns.yaml")) as fh:
             self.bass = yaml.safe_load(fh)
         self.voicings = {}
@@ -291,6 +312,9 @@ class Book(object):
         self.w(r"Twelve keys for every chord on each instrument.\\")
         self.w(r"Fret numbers read from the lowest string.\\")
         self.w(r"\frets{x} means don't play that string.\\")
+        self.w(r"\vmarkink{r} means rootless: for rhythm, "
+               r"not for soloing.\\")
+        self.w(r"\vmarkink{i} means the chord given is an inversion.\\")
         self.w(r"Tunings are on the back sheet.")
         self.w(r"\end{tocnote}")
         self.w(r"\end{bookpage}")
@@ -415,13 +439,17 @@ class Book(object):
             tex_escape(meta["name"]), tex_escape(meta["tuning_label"])
             if "tuning_label" in meta else self.tuning_label(instrument)))
         self.circle_of_fifths(instrument)
+        self.root_positions(instrument)
+        self.movable_shapes(instrument)
+        self.number_charts(instrument)
         by_key = {k["key"]: k for k in doc["keys"]}
         for key in CHROMATIC:
             block = by_key.get(key)
             if not block:
                 continue
             ordered = self.ordered_chords(block["chords"])
-            for n, chunk in enumerate(paginate(ordered, CHORDS_PER_PAGE)):
+            capacity = PER_PAGE.get(instrument, CHORDS_PER_PAGE)
+            for n, chunk in enumerate(paginate(ordered, capacity)):
                 self.chord_page(instrument, key, chunk,
                                 continued=(n > 0))
 
@@ -430,10 +458,10 @@ class Book(object):
         self.w(r"\begin{chordpage}{%s}{%s}{%s}{}" % (
             tex_escape(self.instruments[instrument]["name"]),
             heading, "cont" if continued else ""))
-        self.emit_chords(chords)
+        self.emit_chords(chords, instrument)
         self.w(r"\end{chordpage}")
 
-    def emit_chords(self, chords):
+    def emit_chords(self, chords, instrument):
         """Rows, grouped by the kind of chord.
 
         Each group after the first opens with a ruled line, drawn as part
@@ -447,10 +475,197 @@ class Book(object):
                 self.w(r"  \chordgap")
             last = g
             cells = r"\voicingnext ".join(
-                frets_tex(f) for f in entry["frets"])
+                frets_tex(f) + self.voicing_marks(instrument, entry["chord"], f)
+                for f in entry["frets"])
             self.w(r"  \chordrow%s{%s}{%s}" % (
                 "first" if starts_group else "",
                 tex_escape(entry["chord"]), cells))
+
+    def root_positions(self, instrument):
+        """Where the root of every key falls, string by string.
+
+        The bass has had this page from the start and it is the most
+        thumbed one there: everything else on the instrument is measured
+        from the root, so knowing where the root is turns a chord chart
+        into something you can move. The same is true of a mandolin neck.
+        """
+        meta = self.instruments[instrument]
+        tuning = meta["tuning"]
+        names = [t[:-1] for t in tuning]
+        self.w(r"\begin{bookpage}{Root Positions}")
+        self.w(r"\pagesubtitle{%s}" % tex_escape(meta["name"]))
+        self.w(r"\begin{rootmap}{%d}{%s}"
+               % (len(tuning), "4pt" if len(tuning) > 4 else "7pt"))
+        self.w(r"\rootmaphead{%s}"
+               % " & ".join(r"{\bfseries %s}" % tex_escape(n) for n in names))
+        for note in ROOT_KEYS:
+            pc = theory.NOTE_TO_PC[note]
+            cells = [(pc - theory.parse_note(t)) % 12 for t in tuning]
+            self.w(r"\rootmaprow{%s}{%s}"
+                   % (tex_escape(note),
+                      " & ".join(r"\frets{%d}" % f for f in cells)))
+        self.w(r"\end{rootmap}")
+        self.w(r"\begin{rootmapnote}")
+        self.w(r"Fret for the root of each key on each string.\\")
+        self.w(r"Everything else is measured from there.")
+        self.w(r"\end{rootmapnote}")
+        self.w(r"\end{bookpage}")
+
+    MOVABLE_QUALITIES = {
+        "mandolin": [("major", "", 5), ("minor", "m", 3), ("seventh", "7", 3)],
+        "guitar":   [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
+        "ukulele":  [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
+        "banjo":    [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
+    }
+
+    def closed_shapes(self, instrument, quality, want):
+        """Every shape with no open string in it, lowest positions first.
+
+        A shape that uses an open string is stuck in one key. A closed one
+        is the same five fingers in all twelve, which is the whole point:
+        learn the handful here and the rest of the book becomes a lookup
+        for the keys you have not moved to yet.
+        """
+        meta = self.instruments[instrument]
+        tuning = meta["tuning"]
+        span = meta.get("max_span", 4)
+        opens = [theory.parse_note(t) for t in tuning]
+        wanted = set(theory.QUALITIES[quality])
+        seen = {}
+        # Walk a base fret and the offsets above it rather than every
+        # fret on every string: a closed shape spans at most `span`, so
+        # the whole search is twelve positions by a handful of offsets
+        # instead of twelve to the power of six.
+        for base in range(1, 13):
+            # None is a muted string. Guitar shapes want it: the A-shape
+            # barre mutes the low E, and a search that insists on six
+            # ringing strings finds only the E-shape and calls that the
+            # whole of major.
+            options = list(range(span + 1)) + [None]
+            for offsets in itertools.product(options, repeat=len(tuning)):
+                live = [o for o in offsets if o is not None]
+                if len(live) < max(4, len(tuning) - 2) or min(live) != 0:
+                    continue
+                combo = tuple(None if o is None else base + o
+                              for o in offsets)
+                if not playability.is_playable(list(combo), span, 4,
+                                               meta.get("max_diagonal")):
+                    continue
+                pcs = {(o + f) % 12 for o, f in zip(opens, combo)
+                       if f is not None}
+                for root in range(12):
+                    if {(root + i) % 12 for i in wanted} != pcs:
+                        continue
+                    rel = tuple(offsets)
+                    if rel in seen:
+                        continue
+                    first = next(i for i, f in enumerate(combo)
+                                 if f is not None)
+                    low = (opens[first] + combo[first] - root) % 12
+                    degree = {0: "R", 3: "b3", 4: "3", 7: "5",
+                              10: "b7"}.get(low, "?")
+                    where = next((tuning[i][:-1]
+                                  for i, (o, f) in enumerate(zip(opens, combo))
+                                  if f is not None and (o + f) % 12 == root),
+                                 "?")
+                    seen[rel] = (base, degree, where,
+                                 "".join("x" if c is None else str(c)
+                                         for c in combo),
+                                 theory.spell(root))
+        # Lowest position first, then the least stretch, then the fewest
+        # muted strings: a shape that rings six is worth more than one
+        # that rings four at the same difficulty.
+        def cost(item):
+            rel, info = item
+            live = [r for r in rel if r is not None]
+            # Fewest muted strings first. Ranking by finger effort instead
+            # put x-2-0-0-0-x at the top of "major" on guitar and buried
+            # the barre forms, which are the shapes the page exists for.
+            return (sum(1 for r in rel if r is None), info[0], sum(live))
+        best = sorted(seen.items(), key=cost)
+        return best[:want]
+
+    def movable_shapes(self, instrument):
+        meta = self.instruments[instrument]
+        self.w(r"\begin{bookpage}{Movable Shapes}")
+        self.w(r"\pagesubtitle{%s \quad closed, so they move}"
+               % tex_escape(meta["name"]))
+        self.w(r"\begin{movablelist}")
+        self.w(r"\movablehead{shape}{root on}{bottom}{example}")
+        for label, quality, want in self.MOVABLE_QUALITIES[instrument]:
+            self.w(r"\movablehdr{%s}" % label)
+            for rel, (pos, degree, where, shape, root) in self.closed_shapes(
+                    instrument, quality, want):
+                self.w(r"\movablerow{%s}{%s}{%s}{%s}" % (
+                    "".join("x" if r is None else str(r) for r in rel),
+                    tex_escape(where),
+                    tex_escape(degree),
+                    "%s = %s" % (shape, tex_escape(root + quality))))
+        self.w(r"\end{movablelist}")
+        self.w(r"\begin{rootmapnote}")
+        self.w(r"Shape is the fingering above its lowest fret. Slide it "
+               r"one fret, the chord rises a semitone.\\")
+        self.w(r"Bottom is the degree on the lowest string. The page "
+               r"before gives the fret.")
+        self.w(r"\end{rootmapnote}")
+        self.w(r"\end{bookpage}")
+
+    # Degree, semitones from the tonic, and the quality that degree takes.
+    MAJOR_NUMBERS = [("1", 0, ""), ("2m", 2, "m"), ("3m", 4, "m"),
+                     ("4", 5, ""), ("5", 7, ""), ("6m", 9, "m"),
+                     ("7\\textdegree", 11, "o")]
+    MINOR_NUMBERS = [("1m", 0, "m"), ("2\\textdegree", 2, "o"),
+                     ("b3", 3, ""), ("4m", 5, "m"), ("5m", 7, "m"),
+                     ("b6", 8, ""), ("b7", 10, "")]
+
+    def number_chart(self, instrument, title, numbers, note):
+        """The same twelve keys the book already has, read sideways.
+
+        A chord book answers "what is Bbm7"; a number chart answers "what
+        is the four chord here", which is the question a band asks. Both
+        are the same twelve rows, so this costs two pages and saves
+        transposing in your head on a stage.
+        """
+        meta = self.instruments[instrument]
+        self.w(r"\begin{bookpage}{%s}" % title)
+        self.w(r"\pagesubtitle{%s}" % tex_escape(meta["name"]))
+        self.w(r"\begin{numberchart}")
+        self.w(r"\numberhead{%s}" % "}{".join(n for n, _, _ in numbers))
+        for key in ROOT_KEYS:
+            cells = []
+            for _, interval, quality in numbers:
+                name = theory.spell_in_key(key, interval)
+                cells.append(r"\numbercell{%s}"
+                             % tex_escape(name + quality.replace("o", "\u00b0")))
+            self.w(r"\numberrow{%s}{%s}"
+                   % (tex_escape(key), " & ".join(cells)))
+        self.w(r"\end{numberchart}")
+        self.w(r"\begin{rootmapnote}")
+        self.w(note)
+        self.w(r"\end{rootmapnote}")
+        self.w(r"\end{bookpage}")
+
+    def number_charts(self, instrument):
+        self.number_chart(
+            instrument, "Numbers, Major", self.MAJOR_NUMBERS,
+            r"Read across: in the key on the left, the four chord is the "
+            r"column headed 4. Call a song in numbers and it transposes "
+            r"itself.")
+        self.number_chart(
+            instrument, "Numbers, Minor", self.MINOR_NUMBERS,
+            r"The natural minor. Players often raise the seventh of the "
+            r"five chord to make it dominant, which turns 5m into 5.")
+
+    def voicing_marks(self, instrument, symbol, frets_text):
+        """Superscript caveats: r for rootless, i for inversion.
+
+        Printed next to the fingering rather than the chord name, because
+        a chord can have two voicings where only one of them is rootless.
+        """
+        meta = self.instruments[instrument]
+        marks = validate.marks_for(meta["tuning"], symbol, frets_text,
+                                   meta.get("reentrant", False))
+        return "".join(r"\vmark{%s}" % m for m in marks)
 
     def ordered_chords(self, chords):
         """Group first, then the order the group lists them in."""
@@ -493,6 +708,7 @@ class Book(object):
         self.w(r"\usevoicingcolor{%s}" % INK["piano"])
         self.w(r"\sectiondivider{Piano Chords}{notes, low to high}")
         self.circle_of_fifths("piano")
+        self.piano_shells()
         doc = self.voicings["piano"]
         by_key = {k["key"]: k for k in doc["keys"]}
         for key in CHROMATIC:
@@ -510,12 +726,87 @@ class Book(object):
                     if starts_group:
                         self.w(r"  \pianogap")
                     last = g
+                    shapes = list(entry["frets"])
+                    spread = self.piano_open(entry["chord"])
+                    if spread and spread not in shapes:
+                        shapes.append(spread)
                     self.w(r"  \pianorow%s{%s}{%s}" % (
                         "first" if starts_group else "",
                         tex_escape(entry["chord"]),
-                        r" \voicingsep ".join(
-                            notes_tex(f) for f in entry["frets"])))
+                        r" \pianonext ".join(
+                            notes_tex(f) for f in shapes)))
                 self.w(r"\end{pianopage}")
+
+    def piano_shells(self):
+        """Shells and inversions, given once as rules rather than per chord.
+
+        Both are mechanical on a keyboard: a shell is the chord with its
+        fifth taken out, an inversion is the same notes rotated. Printing
+        either one under all twelve keys would cost a dozen pages to say
+        the same thing a dozen times, so they are stated once, in C, and
+        the reader moves them.
+        """
+        self.w(r"\begin{bookpage}{Shells and Inversions}")
+        self.w(r"\pagesubtitle{Piano \quad shown in C, move them anywhere}")
+        rows = [
+            ("7",     "R 3 b7",  "C E Bb",  False),
+            ("maj7",  "R 3 7",   "C E B",   False),
+            ("m7",    "R b3 b7", "C Eb Bb", False),
+            ("m7b5",  "R b3 b7", "C Eb Bb", False),
+            ("9",     "3 b7 9",  "E Bb D",  False),
+            ("maj9",  "3 7 9",   "E B D",   False),
+        ]
+        for name, degrees, notes, first in rows:
+            self.w(r"  \pianorow%s{%s}{%s}" % (
+                "first" if first else "", tex_escape(name),
+                r"%s \voicingsep %s" % (
+                    r"\notes{%s}" % r"\notesep ".join(degrees.split()),
+                    notes_tex("-".join(notes.split())))))
+        self.w(r"  \pianogap")
+        for name, notes, first in [
+                ("root", "C-E-G", True),
+                ("1st", "E-G-C", False),
+                ("2nd", "G-C-E", False),
+                ("3rd", "Bb-C-E-G", False)]:
+            self.w(r"  \pianorow%s{%s}{%s}"
+                   % ("first" if first else "", name, notes_tex(notes)))
+        self.w(r"\begin{rootmapnote}")
+        self.w(r"A shell is the chord with its fifth taken out. The fifth "
+               r"says nothing about the chord, and leaving it out gets the "
+               r"third and the seventh, the two notes that do, under one "
+               r"hand.\\")
+        self.w(r"The ninth chords go further and drop the root as well: the "
+               r"bass has it. Third, seventh, ninth is the whole sound.\\")
+        self.w(r"For inversions, take whichever one moves least from the "
+               r"chord before it. Holding a common tone and stepping the "
+               r"rest is what makes a progression sound joined up rather "
+               r"than jumped between.")
+        self.w(r"\end{rootmapnote}")
+        self.w(r"\end{bookpage}")
+
+    def piano_open(self, symbol):
+        """The spread voicing for a chord, where the shape table has one.
+
+        These are the worship voicings the notebook was built from: the
+        same notes as the close shape, opened out across two hands so the
+        third sits on top and the fifth carries the middle. A pianist
+        reaches for these far more often than for a root position triad,
+        which is why they belong on the page and not only in the data.
+        """
+        try:
+            root, quality, bass = theory.parse_chord(symbol)
+        except theory.ChordError:
+            return None
+        if bass is not None:
+            return None
+        shape = self.piano_shapes["shapes"].get(quality)
+        if not shape or "open" not in shape:
+            return None
+        if shape["open"] == shape.get("close"):
+            return None
+        name = theory.spell(root)
+        return "-".join(theory.spell_in_key(name, i % 12, quality)
+                        for i in shape["open"])
 
     # -- banjo -----------------------------------------------------------
 
@@ -531,6 +822,9 @@ class Book(object):
         self.w(r"\sectiondivider{Banjo Chords}{%s}"
                % tex_escape(self.tuning_label("banjo")))
         self.circle_of_fifths("banjo")
+        self.root_positions("banjo")
+        self.movable_shapes("banjo")
+        self.number_charts("banjo")
         doc = self.voicings["banjo"]
         by_key = {k["key"]: k for k in doc["keys"]}
         spikes = {r["key"]: r for r in self.spikes["keys"]}
@@ -557,7 +851,7 @@ class Book(object):
                     self.w(r"\dronepage")
                 self.w(r"\begin{chordpage}{Banjo}{%s}{%s}{%s}"
                        % (self.key_heading(key), "cont" if n else "", drone))
-                self.emit_chords(chunk)
+                self.emit_chords(chunk, "banjo")
                 self.w(r"\end{chordpage}")
 
     def spike_phrase(self, s):
@@ -583,16 +877,16 @@ class Book(object):
         self.circle_of_fifths("bass")
         self.w(r"\begin{bookpage}{Root Positions}")
         self.w(r"\pagesubtitle{Bass}")
-        self.w(r"\begin{rootmap}")
         strings = self.bass["root_map"]["strings"]
+        self.w(r"\begin{rootmap}{%d}{7pt}" % len(strings))
         self.w(r"\rootmaphead{%s}"
-               % "}{".join("(%s)" % n if n == "B" else n for n in strings))
-        for note in ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A",
-                     "Bb", "B"]:
+               % " & ".join(r"{\bfseries %s}" % ("(%s)" % n if n == "B" else n)
+                            for n in strings))
+        for note in ROOT_KEYS:
             frets = self.bass["root_map"]["notes"][note]
             self.w(r"\rootmaprow{%s}{%s}"
                    % (tex_escape(note),
-                      "}{".join(str(f) for f in frets)))
+                      " & ".join(r"\frets{%d}" % f for f in frets)))
         self.w(r"\end{rootmap}")
         self.w(r"\begin{rootmapnote}")
         self.w(r"Fret for the root of each key on each string.\\")

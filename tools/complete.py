@@ -38,7 +38,7 @@ SHARP_KEYS = {"G", "D", "A", "E", "B"}
 ALIASES = {"2": "add9", "add2": "add9"}
 
 
-def required(reentrant=False):
+def required(reentrant=False, extra=()):
     """(quality, bass_interval or None) pairs every key must carry.
 
     Slash chords are included for the ukulele too. It is re-entrant, so it
@@ -46,7 +46,9 @@ def required(reentrant=False):
     is what gets played regardless, and leaving the ukulele short of chords
     the other instruments have is worse than labeling an inversion.
     """
-    return [(q, None) for q in theory.VOCABULARY] + list(theory.SLASH_FORMS)
+    return ([(q, None) for q in theory.VOCABULARY]
+            + [(q, None) for q in extra]
+            + list(theory.SLASH_FORMS))
 
 
 def symbol_for(key, quality, bass_interval):
@@ -54,7 +56,19 @@ def symbol_for(key, quality, bass_interval):
     sym = key + quality.replace("o", "°")
     if bass_interval is not None:
         root = theory.NOTE_TO_PC[key]
-        sym += "/" + theory.spell(root + bass_interval, flat)
+        # Spell the bass by its function where that is readable. G minor's
+        # third is Bb, never A#, and a chord symbol that says A# under a Gm
+        # reads as a mistake. The functional spelling is not always usable
+        # though: the third of Gbm is Bbb, and the third of Dbm is Fb. A
+        # double accidental, or a flat named onto a white key, costs more
+        # in confusion than the wrong letter does, so those keep the plain
+        # enharmonic.
+        JARRING = {"Fb", "Cb", "E#", "B#"}
+        functional = theory.spell_in_key(key, bass_interval, quality)
+        plain = theory.spell(root + bass_interval, flat)
+        usable = ("bb" not in functional and "##" not in functional
+                  and functional not in JARRING)
+        sym += "/" + (functional if usable else plain)
     return sym
 
 
@@ -123,7 +137,8 @@ def main():
                     if provenance.from_notebook(record, name, key, c["chord"])
                 ]
             have = existing(block)
-            for quality, bass_interval in required():
+            for quality, bass_interval in required(
+                    extra=meta.get("extra_vocabulary", ())):
                 root = theory.NOTE_TO_PC[key]
                 bass_pc = ((root + bass_interval) % 12
                            if bass_interval is not None else None)

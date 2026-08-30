@@ -24,6 +24,9 @@ import playability  # noqa: E402
 
 MAX_FRET = 12
 
+# Chords big enough that the shape is the point. See generate().
+EXTENDED_ROOTED = {"11", "13", "m13", "maj13", "7#11"}
+
 
 def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
              max_span=4, max_diagonal=None, require_bass_lowest=None):
@@ -40,7 +43,13 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
     if require_root_bass is None:
         require_root_bass = bass_pc is not None
     if require_bass_lowest is None:
-        require_bass_lowest = bass_pc is not None
+        # Five and six note chords get the root underneath by default.
+        # Without it the ranking finds the cheapest correct shape, which
+        # for these means open strings: G13 came out 0-0-0-0-0-1, every
+        # tone present and nothing a guitarist would recognize. Rooted,
+        # it comes out 3-0-2-0-0-1, which is the chord as it is played.
+        require_bass_lowest = (bass_pc is not None
+                               or quality in EXTENDED_ROOTED)
     wanted = {(root + i) % 12 for i in theory.QUALITIES[quality]}
     allowed = set(wanted)
     if bass_pc is not None:
@@ -84,9 +93,12 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
         # that when 0-0-3-0 is sitting right there in first position, so
         # this is ranked, not required, and an inversion wins when the
         # in-bass option means climbing the neck.
-        if require_root_bass and require_bass_lowest and not in_bass:
-            if bass_pc is None:
-                continue
+        # A named bass is binding. The inner test used to be inverted --
+        # it only rejected a shape when there was no named bass, which is
+        # the one case where the bass is a preference -- so F/A came out
+        # 1-3-3-2-1-1, which is F with F underneath and not F/A at all.
+        if require_bass_lowest and not in_bass:
+            continue
         # A named bass note must at least be in the chord somewhere, even
         # when the instrument cannot put it underneath.
         if bass_pc is not None and bass_pc not in pcs:
@@ -109,11 +121,17 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
         # the common chords come from the notebook. This only fills gaps.
         position = min(fretted) if fretted else 0
         n_fingers = playability.fingers_needed(shape)
-        n_muted = sum(1 for f in combo if f is None)
-        # Muting counts against a shape. Without that, silencing half the
-        # instrument is free and E minor comes out 0-x-x-0-0-0: no fingers,
-        # no effort, and far too thin to use.
-        difficulty = position + n_fingers + 2 * n_muted
+        # Muting counts against a shape, but not all mutes are equal.
+        # Damping the low string is something a player does without
+        # thinking, and a slash chord often wants it: G/B is x-2-0-0-0-3,
+        # not 7-5-0-0-0-3. A mute *between* two ringing strings is a
+        # different matter, and pricing every mute alike made E minor come
+        # out 0-x-x-0-0-0 -- no fingers, no effort, far too thin to use.
+        first = min(i for i, f in enumerate(combo) if f is not None)
+        last = max(i for i, f in enumerate(combo) if f is not None)
+        inner = sum(1 for i in range(first, last) if combo[i] is None)
+        edge = sum(1 for f in combo if f is None) - inner
+        difficulty = position + n_fingers + 3 * inner + edge
         rank = (
             difficulty,
             -len(sounding),

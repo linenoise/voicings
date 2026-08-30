@@ -62,6 +62,12 @@ QUALITIES = {
     "m11":     (0, 2, 3, 5, 7, 10),
     "11":      (0, 2, 4, 5, 7, 10),
     "13":      (0, 2, 4, 7, 9, 10),
+    # Six notes want six strings. These are a guitar extension rather than
+    # part of the common vocabulary: on four courses they would come out
+    # as two or three tones and a name that promised six.
+    "m13":     (0, 2, 3, 7, 9, 10),
+    "maj13":   (0, 2, 4, 7, 9, 11),
+    "7#11":    (0, 4, 6, 7, 10),
 }
 
 # The degree that gives each quality its identity. If a voicing omits this,
@@ -88,6 +94,8 @@ CHARACTERISTIC = {
     "7b9":   (1, 4, 10),  "7#9":   (3, 4, 10),
     "m11":   (3, 5, 10),  "11":    (5, 10),
     "13":    (4, 9, 10),
+    "m13":   (3, 9, 10), "maj13": (4, 9, 11),
+    "7#11":  (4, 6, 10),
     "5":     (),
 }
 
@@ -177,6 +185,9 @@ DEGREE_MAP = {
     "m11":   {0: 0, 2: 1, 3: 2, 5: 3, 7: 4, 10: 6},
     "11":    {0: 0, 2: 1, 4: 2, 5: 3, 7: 4, 10: 6},
     "13":    {0: 0, 2: 1, 4: 2, 7: 4, 9: 5, 10: 6},
+    "m13":   {0: 0, 2: 1, 3: 2, 7: 4, 9: 5, 10: 6},
+    "maj13": {0: 0, 2: 1, 4: 2, 7: 4, 9: 5, 11: 6},
+    "7#11":  {0: 0, 4: 2, 6: 3, 7: 4, 10: 6},
 }
 
 
