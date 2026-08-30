@@ -77,9 +77,11 @@ sudo apt install texlive-xetex texlive-latex-extra   # Debian
 
 1. Print the 4-up PDF on US Letter, **double-sided, flipped on the long
    edge**, at 100%. Don't let the driver fit to page.
-2. Cut each sheet into four 3.5in x 5.5in rectangles: trim 3/4in of waste
-   from each side, then one cut down the middle and one across. Two pages
-   tall is exactly 11in, so there's no waste top or bottom.
+2. Cut along the gray lines. Every sheet carries them: three down and one
+   across, marking the four 3.5in x 5.5in rectangles. That is 3/4in of
+   waste trimmed from each side, one cut down the middle and one across.
+   Two pages tall is exactly 11in, so there is no waste top or bottom and
+   no line to cut there.
 3. Stack the rectangles in the order they came off the sheet: top-left,
    top-right, bottom-left, bottom-right.
 4. Punch the five holes. Every page carries five small gray circles down
@@ -119,7 +121,14 @@ instead, use holes 1, 3 and 5 and ignore the other two.
 
 Consecutive pages land on the two faces of each rectangle, so the stack
 collates with no folding. `make print SCHEME=saddle` gives folded
-signatures instead; `CROP_MARKS=1` draws cut lines.
+signatures instead.
+
+The cut lines are a third of a point of mid gray, drawn by
+`tools/impose.py` rather than by `pdfpages`, whose own frame option is a
+black hairline with no way to soften it. Gray is enough to follow with
+scissors and faint enough that whatever survives the cut does not read as
+a border. `CROP_MARKS=1` adds the pdfpages frame on top, for anyone
+trimming with a guillotine who wants the harder edge.
 
 The pages run right to the top and bottom edges of the paper. That's fine:
 the book's own margins are 6mm and 5mm, and a typical laser printer reserves

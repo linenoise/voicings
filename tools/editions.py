@@ -98,7 +98,11 @@ def build_one(build, slug, only, title):
             pages=",".join("{}" if p is None else str(p) for p in order),
             source=screen + ".pdf", frame="false"))
     printed = "print-%s" % slug
-    run([LATEX] + OPTS + ["-jobname", printed, "impose-%s.tex" % slug], build)
+    # Twice, like the screen pass: the cut lines are positioned against
+    # the page node, and tikz only knows where that is on the second run.
+    for _ in range(2):
+        run([LATEX] + OPTS + ["-jobname", printed, "impose-%s.tex" % slug],
+            build)
     print_pdf = os.path.join(build, printed + ".pdf")
 
     # Rename to what a reader would want to see in a download folder.
