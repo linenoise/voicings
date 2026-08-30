@@ -1,12 +1,3 @@
-# The photographs of the paper notebook are deliberately NOT in version
-# control: the inside cover carries a home address. Keep them locally if
-# you want to check a transcription against the page, but they stay out
-# of the repository. data/notebook-source.yaml records what was on them.
-notebook/
-*.jpg
-*.jpeg
-*.heic
-
 # In build/, keep the generated LaTeX and the PDFs; drop everything else
 # TeX leaves behind (.aux, .log, .out, the copied .cls). The published
 # PDFs carry their display names ("Fancy Mandolin Chords and Their
