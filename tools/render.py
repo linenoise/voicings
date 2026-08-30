@@ -385,8 +385,10 @@ class Book(object):
         # Every instrument covers all twelve keys, so saying so on each
         # line is six repetitions of the same fact. It is stated once,
         # under the list.
-        if inst in NOTE_INSTRUMENTS:
+        if inst == "bass":
             return "roots \\& patterns"
+        if inst == "cello":
+            return "roots, patterns \\& chords"
         return "%d chord voicings" % self.voicing_count(inst)
 
     # -- circle of fifths ------------------------------------------------
@@ -972,6 +974,21 @@ class Book(object):
                       tex_escape(p["use"])))
         self.w(r"\end{patternlist}")
         self.w(r"\end{bookpage}")
+
+        # The chord pages come after all of that, not instead of it. A
+        # cellist reaches for a double stop far more often than a grip,
+        # so the reference pages lead; the grips are there for when the
+        # part calls for one.
+        doc = self.voicings["cello"]
+        by_key = {k["key"]: k for k in doc["keys"]}
+        for key in CHROMATIC:
+            block = by_key.get(key)
+            if not block:
+                continue
+            ordered = self.ordered_chords(block["chords"])
+            capacity = PER_PAGE.get("cello", CHORDS_PER_PAGE)
+            for n, chunk in enumerate(paginate(ordered, capacity)):
+                self.chord_page("cello", key, chunk, continued=(n > 0))
 
     def pattern_grid(self, pattern):
         """One pattern as three aligned rows: degree, string, fret.

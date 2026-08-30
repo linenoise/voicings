@@ -5,14 +5,14 @@ ukulele, piano, banjo, and bass. Every chord in all twelve keys.
 
 | Edition | Read | Print | Pages | Sheets | |
 |---|---|---|---|---|---|
-| **Everything** | [Fancy Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 107 | 14 | All seven instruments |
+| **Everything** | [Fancy Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 119 | 15 | All seven instruments |
 | Mandolin | [Fancy Mandolin Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Mandolin Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also fiddle / violin, tenor banjo |
 | Guitar | [Fancy Guitar Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Guitar Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also baritone ukulele |
 | Ukulele | [Fancy Ukulele Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Ukulele Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
 | Piano | [Fancy Piano Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Piano Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 27 | 4 |  |
 | Banjo | [Fancy Banjo Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Banjo Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | With drone spikes |
 | Bass | [Fancy Bass Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Bass Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 8 | 1 | Roots and patterns |
-| Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 8 | 1 | Roots and patterns; also viola |
+| Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Roots, patterns and chords; also viola |
 
 **Read** is 3.5in x 5.5in, one page per page: good on a phone or an
 e-reader. **Print** is the same book imposed 4-up on US Letter, four pages
@@ -33,15 +33,18 @@ before its chords:
 Both are about where a shape sits on the neck, which is what a book of
 voicings is for.
 
-**Bass and cello are built differently.** Neither is usually sounding four
-strings at once, so twelve pages of chord grips would be twelve pages
-nobody plays. They get the circle of fifths, movable shapes, a number
-chart, root positions, what to play under each chord quality, and
-patterns. Their movable shapes are double stops rather than grips, and
-their number chart resolves a degree to a *note* rather than to a chord,
-which is the thing being played. That is the line: a number chart on a
-guitar page would name chords without voicing them, and this is not a
-theory book.
+**Bass and cello lead with notes.** Neither is usually sounding four
+strings at once, so neither opens with chord grips. Both get the circle of
+fifths, movable shapes, a number chart, root positions, what to play under
+each chord quality, and patterns. Their movable shapes are double stops
+rather than grips, and their number chart resolves a degree to a *note*
+rather than to a chord, which is the thing being played. That is the line:
+a number chart on a guitar page would name chords without voicing them,
+and this is not a theory book.
+
+The cello then carries its twelve chord pages after all of that. The bass
+does not have any: a cellist does reach for a grip when the part calls for
+one, and a bassist essentially never does.
 
 The cello's patterns are not the bass's. Crossing a string on a cello is
 seven semitones, not five, so the fifth sits at the same position one
@@ -160,7 +163,7 @@ works out what a fingering actually sounds on that tuning, and compares.
 - **Warning:** every note belongs, but a defining tone is missing. A
   mandolin chop chord drops the fifth on purpose. Allowed.
 
-**2,274 voicings, 0 errors, 167 warnings.**
+**2,658 voicings, 0 errors, 232 warnings.**
 
 Two of those warnings reach the page as superscripts, because a player
 needs to know:

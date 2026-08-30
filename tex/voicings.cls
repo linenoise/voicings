@@ -269,10 +269,13 @@
     {\fontsize{13}{15}\selectfont and Their Voicings\par}
     \vspace{5mm}
     {\color{ink}\rule{\linewidth}{5mm}}
-    \vspace{6mm}
 
-    #2%
+    % Exactly one of these is ever set: the instrument list on the whole
+    % book, the tuning on a single-instrument edition. They share one slot
+    % so that whichever it is sits centered in the space between the rule
+    % and the QR code rather than hanging off the bottom of the rule.
     \vfill
+    #2%
     #3%
     \vfill
     % Vector, generated at compile time by the qrcode package -- no image
