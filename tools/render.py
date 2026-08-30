@@ -67,7 +67,9 @@ DEGREES = [(0, ""), (2, "m"), (4, "m"), (5, ""), (7, ""), (9, "m"), (11, "°")]
 DEGREE_LABELS = ["1", "2m", "3m", "4", "5", "6m", "7°"]
 
 # Instruments that get their own circle of fifths.
-NO_NUMBER_CHARTS = {"bass", "piano"}
+# Matching tools/piano.py: flat keys spelled with flats, sharp keys
+# with sharps, so a voicing never mixes the two.
+PIANO_SHARP_KEYS = {"G", "D", "A", "E", "B"}
 
 ROOT_KEYS = ["C", "Db", "D", "Eb", "E", "F",
              "Gb", "G", "Ab", "A", "Bb", "B"]
@@ -95,7 +97,7 @@ CHORDS_PER_PAGE = 34
 # two ways leaves both pages half empty. A column holds more rows than
 # the shared figure assumed, so guitar gets its own.
 PER_PAGE = {"guitar": 40}      # fret grids, one line each
-PIANO_PER_PAGE = 32
+PIANO_PER_PAGE = 17
 WORSHIP_PER_PAGE = 8      # name, notes, and a line of description
 
 
@@ -235,14 +237,10 @@ class Book(object):
         self.front_matter()
         if self.only:
             self.one_instrument(self.only)
-            # The number charts name chords rather than fingerings, so
-            # they belong to no instrument. They ride along in the solo
-            # editions that have room for them and are left out of the
-            # two that do not: a bass player carrying nine pages instead
-            # of seven is carrying a second sheet for a page that is not
-            # about the bass.
-            if self.only not in NO_NUMBER_CHARTS:
-                self.number_charts()
+            # No number charts in a solo edition. They name chords
+            # rather than fingerings, so there is nothing on them that
+            # belongs to the instrument the reader picked, and for the
+            # bass they cost a second sheet to say so.
             self.back_matter()
             return "\n".join(self.out) + "\n"
         self.contents()
@@ -643,7 +641,15 @@ class Book(object):
         for key in ROOT_KEYS:
             cells = []
             for _, interval, quality in numbers:
+                # Functional spelling, except where it needs a double
+                # accidental. The four chord of Gb major really is Cb and
+                # stays Cb; the flat six of Db minor is Bbb, which nobody
+                # writes and nobody reads, so it comes out as A.
                 name = theory.spell_in_key(key, interval)
+                if "bb" in name or "##" in name:
+                    flat = key not in PIANO_SHARP_KEYS
+                    name = theory.spell(
+                        (theory.NOTE_TO_PC[key] + interval) % 12, flat)
                 cells.append(r"\numbercell{%s}"
                              % tex_escape(name + quality.replace("o", "\u00b0")))
             self.w(r"\numberrow{%s}{%s}"
@@ -741,13 +747,13 @@ class Book(object):
                         self.w(r"  \pianogap")
                     last = g
                     shapes = list(entry["frets"])
-                    spread = self.piano_open(entry["chord"])
+                    spread = self.piano_open(entry["chord"], key)
                     if spread and spread not in shapes:
                         shapes.append(spread)
                     self.w(r"  \pianorow%s{%s}{%s}" % (
                         "first" if starts_group else "",
                         tex_escape(entry["chord"]),
-                        r" \pianonext ".join(
+                        r" \voicingsep ".join(
                             notes_tex(f) for f in shapes)))
                 self.w(r"\end{pianopage}")
 
@@ -798,7 +804,7 @@ class Book(object):
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 
-    def piano_open(self, symbol):
+    def piano_open(self, symbol, key=None):
         """The spread voicing for a chord, where the shape table has one.
 
         These are the worship voicings the notebook was built from: the
@@ -818,9 +824,13 @@ class Book(object):
             return None
         if shape["open"] == shape.get("close"):
             return None
-        name = theory.spell(root)
-        return "-".join(theory.spell_in_key(name, i % 12, quality)
-                        for i in shape["open"])
+        # Named by the key you put a finger on, never by function. The
+        # spread voicing of Gbm functionally contains a B-double-flat and
+        # the close voicing beside it says A: two spellings of one note in
+        # one row. Flat keys take flats, sharp keys sharps, matching how
+        # tools/piano.py wrote the close voicings.
+        flat = (key or theory.spell(root)) not in PIANO_SHARP_KEYS
+        return "-".join(theory.spell(root + i, flat) for i in shape["open"])
 
     # -- banjo -----------------------------------------------------------
 
@@ -1028,7 +1038,37 @@ class Book(object):
         for name, tuning, note in rows:
             self.w(r"\tuningrow{%s}{%s}{%s}"
                    % (tex_escape(name), tex_escape(tuning), tex_escape(note)))
+        notes = self.reading_notes()
+        if notes:
+            self.w(r"\readingnotes{%s}" % r"\\".join(notes))
         self.w(r"\end{backsheet}")
+
+    def reading_notes(self):
+        """How to read a fingering, for a booklet with no contents page.
+
+        Only the lines that apply. Derived from what this edition actually
+        emitted rather than from a list per instrument, so a mark that
+        stops appearing stops being explained: the piano pages carry note
+        names and no marks at all, and telling a pianist what x means on
+        a string would be noise."""
+        if not self.only:
+            return []
+        body = "\n".join(self.out)
+        lines = []
+        # \chordrow, not \frets: the bass pages are full of fret numbers
+        # too, but they sit in a table with a column per string, and
+        # telling that reader to read left to right explains nothing.
+        if r"\chordrow" in body:
+            lines.append(r"Fret numbers read from the lowest string.")
+        if r"\frets{x" in body:
+            lines.append(r"\frets{x} means don't play that string.")
+        if r"\vmark{r}" in body:
+            lines.append(r"\vmarkink{r} means rootless: for rhythm, "
+                         r"not for soloing.")
+        if r"\vmark{i}" in body:
+            lines.append(r"\vmarkink{i} means the chord given is an "
+                         r"inversion.")
+        return lines
 
 
 def main():

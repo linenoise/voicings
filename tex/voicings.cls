@@ -646,13 +646,16 @@
 % and drop the wraps back to the margin.
 \newcommand{\pianonext}{\\}
 
+% One column, not two. A six-note spread voicing needs about 50mm of
+% note names; a 36mm column gives it 16mm after the chord name and the
+% list wraps. Half as many rows to a page and twice the width fits every
+% voicing on its own line, which is the whole point of a lookup table.
 \newenvironment{pianopage}[2]{%
   \clearpage
   \pageheader{Piano}{#1}{\ifthenelse{\equal{#2}{cont}}{continued}{}}%
   \pagerule
   \raggedright
-  \begin{multicols}{2}%
-}{\end{multicols}}
+}{}
 
 % Name above, notes below: a five-note voicing in a flat key is too wide to
 % share a line with its name at this trim size.
@@ -667,7 +670,7 @@
 \newlength{\piano@name}\setlength{\piano@name}{20mm}
 % Wider than the chord pages' because the type is smaller: a note list
 % at eight points needs proportionally more air to read as its own row.
-\newlength{\piano@rowsep}\setlength{\piano@rowsep}{0.18mm}
+\newlength{\piano@rowsep}\setlength{\piano@rowsep}{2.0mm}
 % Kept under \scriptsize's baselineskip: a taller strut than the line
 % spacing makes TeX fall back to \lineskip and a wrapped voicing drifts
 % away from its own chord name.
@@ -740,6 +743,13 @@
 % Everything that is reference rather than content lives here, so the
 % inside front can be the recipient's.
 \newcommand{\backsheet@title}{}
+% How to read the fingerings, for the solo editions. The whole book says
+% this on its contents page; a single-instrument booklet has no contents
+% page, so it says it here instead, above the credits.
+\newcommand{\readingnotes}[1]{%
+  \item[]\vspace{1.4mm}{\color{rule}\hrule height 0.4pt}\vspace{1.6mm}
+  {\footnotesize\color{faint}#1\par}}
+
 \newenvironment{backsheet}[1]{%
   \renewcommand{\backsheet@title}{#1}%
   \clearpage\thispagestyle{empty}%

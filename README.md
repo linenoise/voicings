@@ -6,11 +6,11 @@ ukulele, piano, banjo, and bass. Every chord in all twelve keys.
 | Edition | Read | Print | Pages | Sheets | |
 |---|---|---|---|---|---|
 | **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 101 | 13 | All six instruments |
-| Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Also fiddle, tenor banjo |
-| Guitar | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Also baritone ukulele |
-| Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 |  |
+| Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | Also fiddle, tenor banjo |
+| Guitar | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | Also baritone ukulele |
+| Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 |  |
 | Piano | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 29 | 4 |  |
-| Banjo | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | With drone spikes |
+| Banjo | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | With drone spikes |
 | Bass | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 7 | 1 | Roots and patterns |
 
 **Screen** is 3.5in x 5.5in, one page per page: good on a phone or an
@@ -27,11 +27,14 @@ Every fretted instrument gets four reference pages before its chords:
   shapes; guitar gets the CAGED forms. Learn these and the chord pages
   become a lookup rather than a memorization.
 The Nashville charts, **Numbers, Major** and **Numbers, Minor**, sit at
-the back instead, just before the tunings. They name chords rather than
-fingerings, so they are the same page for every instrument and there is no
-reason to print them six times. The solo editions carry them where there
-is room; the bass and piano ones leave them out, because there they would
-cost a whole extra sheet.
+the back of the whole book, just before the tunings. They name chords
+rather than fingerings, so there is nothing on them that belongs to any
+one instrument, and the solo editions leave them out.
+
+A solo edition has no contents page, so how to read a fingering goes on
+its back sheet above the credits: fret order, `x`, and the `r` and `i`
+marks. Only the lines that edition uses. The piano booklet gets none of
+them, because its voicings are note names and it has no marks at all.
 
 Piano gets **Shells and Inversions** instead of the fretted pages, in C,
 to move: a shell is the chord with its fifth taken out, an inversion is
@@ -193,8 +196,12 @@ came out as six open strings and a finger.
 **Spelling.** Notes are spelled by function: the augmented fifth of `C+` is
 G#, not Ab. Three semitones above C is the flat third of `Cm9` and the
 sharp ninth of `C7#9`. `theory.DEGREE_MAP` carries this per quality. The
-piano pages are the exception. They name the key you actually play, `A`
-rather than `Bbb`, because nobody hunts a keyboard for a double flat.
+piano pages are the exception, in both directions. They name the key you
+actually play, `A` rather than `Bbb`, because nobody hunts a keyboard for
+a double flat, and the generated spread voicings follow the same rule as
+the transcribed close ones: flat keys spelled with flats, sharp keys with
+sharps, so a row never gives one note two names. They also run one column
+to a page, two pages to a key, so no voicing ever wraps.
 
 **Degrees** are written accidental first: `b3`, `b7`, `#5`, matching how
 chord symbols spell them.
