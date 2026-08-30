@@ -75,7 +75,7 @@ ROOT_KEYS = ["C", "Db", "D", "Eb", "E", "F",
              "Gb", "G", "Ab", "A", "Bb", "B"]
 
 CHART_INSTRUMENTS = ["mandolin", "guitar", "ukulele", "piano", "banjo",
-                     "cello", "bass"]
+                     "bass", "cello"]
 
 # One pen per instrument, matching the notebook. Defined in voicings.cls.
 INK = {
@@ -84,8 +84,8 @@ INK = {
     "ukulele":  "fretpurple",
     "piano":    "keyred",
     "banjo":    "fretorange",
-    "cello":    "fretteal",
     "bass":     "fretyellow",
+    "cello":    "fretbrown",
 }
 
 # Rows per page. These are tuned against the real compiled PDF -- see
@@ -250,15 +250,15 @@ class Book(object):
             self.chord_section(inst)
         self.piano_section()
         self.banjo_section()
-        self.chord_section("cello")
         self.bass_section()
+        self.chord_section("cello")
         self.back_matter()
         return "\n".join(self.out) + "\n"
 
     # -- front -----------------------------------------------------------
 
     ALL_INSTRUMENTS = ["mandolin", "guitar", "ukulele",
-                       "piano", "banjo", "cello", "bass"]
+                       "piano", "banjo", "bass", "cello"]
 
     def front_matter(self):
         # No instrument owns the front matter, so its sample voicings are
@@ -276,8 +276,11 @@ class Book(object):
         else:
             subject = ""
             # Each in its own pen, the way the notebook is written.
+            # Seven names will not sit three and four on a 75mm cover
+            # without crowding, so the seventh takes a line of its own.
             rows = [["mandolin", "guitar", "ukulele"],
-                    ["piano", "banjo", "bass"]]
+                    ["piano", "banjo", "bass"],
+                    ["cello"]]
             lines = []
             for row in rows:
                 names = [r"\textcolor{%s}{%s}"
@@ -316,8 +319,8 @@ class Book(object):
                             ("ukulele", "Ukulele Chords"),
                             ("piano", "Piano Chords"),
                             ("banjo", "Banjo Chords"),
-                            ("cello", "Cello Chords"),
-                            ("bass", "Bass")]:
+                            ("bass", "Bass"),
+                            ("cello", "Cello Chords")]:
             self.w(r"\tocline{%s}{%s}" % (label, self.section_hint(inst)))
         self.w(r"\tocline{Tunings \& Credits}{back sheet}")
         self.w(r"\end{tocdirectory}")
@@ -950,8 +953,8 @@ class Book(object):
         if self.only:
             order = [self.only]
         else:
-            order = ["mandolin", "cello", "guitar", "bass", "ukulele",
-                     "banjo", "piano"]
+            order = ["mandolin", "guitar", "bass", "ukulele",
+                     "banjo", "piano", "cello"]
         rows = []
         for name in order:
             meta = self.instruments[name]

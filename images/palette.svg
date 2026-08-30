@@ -9,42 +9,42 @@
     <text x="380" y="92" font-size="13" fill="#6E6E6E">green</text>
     <text x="470" y="92" font-size="13" fill="#6E6E6E">#00873C</text>
     <text x="580" y="92" font-size="13" fill="#6E6E6E">lives in the mandolin case</text>
-    <rect x="40" y="112" width="34" height="25" rx="3" fill="#0058D5"/>
-    <text x="88" y="130" font-weight="bold" fill="#0058D5">Guitar</text>
-    <text x="200" y="130" font-weight="bold" fill="#0058D5">3 2 0 0 0 3</text>
+    <rect x="40" y="112" width="34" height="25" rx="3" fill="#0060BB"/>
+    <text x="88" y="130" font-weight="bold" fill="#0060BB">Guitar</text>
+    <text x="200" y="130" font-weight="bold" fill="#0060BB">3 2 0 0 0 3</text>
     <text x="380" y="130" font-size="13" fill="#6E6E6E">blue</text>
-    <text x="470" y="130" font-size="13" fill="#6E6E6E">#0058D5</text>
+    <text x="470" y="130" font-size="13" fill="#6E6E6E">#0060BB</text>
     <text x="580" y="130" font-size="13" fill="#6E6E6E">lives in the guitar case</text>
-    <rect x="40" y="150" width="34" height="25" rx="3" fill="#007375"/>
-    <text x="88" y="168" font-weight="bold" fill="#007375">Cello</text>
-    <text x="200" y="168" font-weight="bold" fill="#007375">0 0 2 3</text>
-    <text x="380" y="168" font-size="13" fill="#6E6E6E">teal</text>
-    <text x="470" y="168" font-size="13" fill="#6E6E6E">#007375</text>
-    <text x="580" y="168" font-size="13" fill="#6E6E6E">also serves the viola</text>
-    <rect x="40" y="188" width="34" height="25" rx="3" fill="#9600D5"/>
-    <text x="88" y="206" font-weight="bold" fill="#9600D5">Ukulele</text>
-    <text x="200" y="206" font-weight="bold" fill="#9600D5">0 0 0 3</text>
-    <text x="380" y="206" font-size="13" fill="#6E6E6E">purple</text>
-    <text x="470" y="206" font-size="13" fill="#6E6E6E">#9600D5</text>
-    <text x="580" y="206" font-size="13" fill="#6E6E6E">lives in the ukulele case</text>
-    <rect x="40" y="226" width="34" height="25" rx="3" fill="#AA0019"/>
-    <text x="88" y="244" font-weight="bold" fill="#AA0019">Piano</text>
-    <text x="200" y="244" font-weight="bold" fill="#AA0019">C E G</text>
-    <text x="380" y="244" font-size="13" fill="#6E6E6E">red</text>
-    <text x="470" y="244" font-size="13" fill="#6E6E6E">#AA0019</text>
-    <text x="580" y="244" font-size="13" fill="#6E6E6E">also every chord name</text>
-    <rect x="40" y="264" width="34" height="25" rx="3" fill="#C05500"/>
-    <text x="88" y="282" font-weight="bold" fill="#C05500">Banjo</text>
-    <text x="200" y="282" font-weight="bold" fill="#C05500">0 0 0 0</text>
-    <text x="380" y="282" font-size="13" fill="#6E6E6E">orange</text>
-    <text x="470" y="282" font-size="13" fill="#6E6E6E">#C05500</text>
-    <text x="580" y="282" font-size="13" fill="#6E6E6E">lives in the banjo case</text>
-    <rect x="40" y="302" width="34" height="25" rx="3" fill="#9A8800"/>
-    <text x="88" y="320" font-weight="bold" fill="#9A8800">Bass</text>
-    <text x="200" y="320" font-weight="bold" fill="#9A8800">R 5 8</text>
-    <text x="380" y="320" font-size="13" fill="#6E6E6E">yellow</text>
-    <text x="470" y="320" font-size="13" fill="#6E6E6E">#9A8800</text>
-    <text x="580" y="320" font-size="13" fill="#6E6E6E">lives in the bass case</text>
+    <rect x="40" y="150" width="34" height="25" rx="3" fill="#9600D5"/>
+    <text x="88" y="168" font-weight="bold" fill="#9600D5">Ukulele</text>
+    <text x="200" y="168" font-weight="bold" fill="#9600D5">0 0 0 3</text>
+    <text x="380" y="168" font-size="13" fill="#6E6E6E">purple</text>
+    <text x="470" y="168" font-size="13" fill="#6E6E6E">#9600D5</text>
+    <text x="580" y="168" font-size="13" fill="#6E6E6E">lives in the ukulele case</text>
+    <rect x="40" y="188" width="34" height="25" rx="3" fill="#AA0019"/>
+    <text x="88" y="206" font-weight="bold" fill="#AA0019">Piano</text>
+    <text x="200" y="206" font-weight="bold" fill="#AA0019">C E G</text>
+    <text x="380" y="206" font-size="13" fill="#6E6E6E">red</text>
+    <text x="470" y="206" font-size="13" fill="#6E6E6E">#AA0019</text>
+    <text x="580" y="206" font-size="13" fill="#6E6E6E">also every chord name</text>
+    <rect x="40" y="226" width="34" height="25" rx="3" fill="#C05500"/>
+    <text x="88" y="244" font-weight="bold" fill="#C05500">Banjo</text>
+    <text x="200" y="244" font-weight="bold" fill="#C05500">0 0 0 0</text>
+    <text x="380" y="244" font-size="13" fill="#6E6E6E">orange</text>
+    <text x="470" y="244" font-size="13" fill="#6E6E6E">#C05500</text>
+    <text x="580" y="244" font-size="13" fill="#6E6E6E">lives in the banjo case</text>
+    <rect x="40" y="264" width="34" height="25" rx="3" fill="#9A8800"/>
+    <text x="88" y="282" font-weight="bold" fill="#9A8800">Bass</text>
+    <text x="200" y="282" font-weight="bold" fill="#9A8800">R 5 8</text>
+    <text x="380" y="282" font-size="13" fill="#6E6E6E">yellow</text>
+    <text x="470" y="282" font-size="13" fill="#6E6E6E">#9A8800</text>
+    <text x="580" y="282" font-size="13" fill="#6E6E6E">lives in the bass case</text>
+    <rect x="40" y="302" width="34" height="25" rx="3" fill="#63421F"/>
+    <text x="88" y="320" font-weight="bold" fill="#63421F">Cello</text>
+    <text x="200" y="320" font-weight="bold" fill="#63421F">0 0 2 3</text>
+    <text x="380" y="320" font-size="13" fill="#6E6E6E">brown</text>
+    <text x="470" y="320" font-size="13" fill="#6E6E6E">#63421F</text>
+    <text x="580" y="320" font-size="13" fill="#6E6E6E">also serves the viola</text>
     <rect x="40" y="340" width="34" height="25" rx="3" fill="#1A1A1A"/>
     <text x="88" y="358" font-weight="bold" fill="#1A1A1A">Words</text>
     <text x="200" y="358" font-weight="bold" fill="#1A1A1A">capo 2, swing it</text>

@@ -11,8 +11,8 @@ ukulele, piano, banjo, and bass. Every chord in all twelve keys.
 | Ukulele | [Fancy Ukulele Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Ukulele Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
 | Piano | [Fancy Piano Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Piano Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 27 | 4 |  |
 | Banjo | [Fancy Banjo Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Banjo Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | With drone spikes |
-| Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also viola |
 | Bass | [Fancy Bass Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Bass Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 6 | 1 | Roots and patterns |
+| Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also viola |
 
 **Read** is 3.5in x 5.5in, one page per page: good on a phone or an
 e-reader. **Print** is the same book imposed 4-up on US Letter, four pages
@@ -254,7 +254,7 @@ fails on overflow. `tools/editions.py` runs the same check on all fourteen.
 
 Each instrument has its own pen.
 
-![The eight pen colors: green mandolin, blue guitar, teal cello, purple ukulele, red piano, orange banjo, yellow bass, and black for words](images/palette.svg)
+![The eight pen colors: green mandolin, blue guitar, purple ukulele, red piano, orange banjo, yellow bass, brown cello, and black for words](images/palette.svg)
 
 These are not arbitrary. They are colors you can walk into a store and buy a
 fineliner in, which matters if you write voicings for more than one

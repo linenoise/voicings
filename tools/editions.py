@@ -27,16 +27,16 @@ sys.path.insert(0, HERE)
 import pagecount  # noqa: E402
 import impose as impose_mod  # noqa: E402
 
-INSTRUMENTS = ["mandolin", "guitar", "ukulele", "piano", "banjo", "cello",
-               "bass"]
+INSTRUMENTS = ["mandolin", "guitar", "ukulele", "piano", "banjo", "bass",
+               "cello"]
 TITLES = {
     "mandolin": "Fancy Mandolin Chords and Their Voicings",
     "guitar":   "Fancy Guitar Chords and Their Voicings",
     "ukulele":  "Fancy Ukulele Chords and Their Voicings",
     "piano":    "Fancy Piano Chords and Their Voicings",
     "banjo":    "Fancy Banjo Chords and Their Voicings",
-    "cello":    "Fancy Cello Chords and Their Voicings",
     "bass":     "Fancy Bass Chords and Their Voicings",
+    "cello":    "Fancy Cello Chords and Their Voicings",
     None:       "Fancy Chords and Their Voicings",
 }
 

@@ -62,11 +62,13 @@
 \definecolor{ink}{HTML}{1A1A1A}
 \definecolor{keyred}{HTML}{AA0019}      % key titles, and piano
 % One pen per instrument, matching the notebook: green for mandolin, blue
-% for guitar, teal for cello, purple for ukulele, red for piano, orange
-% for banjo, yellow for bass. These are colors you can buy a fineliner
-% in, so the same coding works when writing voicings onto a sheet of
-% music by hand. Teal is what made guitar move: blue and teal a hue
-% apart are two pens nobody can tell apart at a glance.
+% for guitar, purple for ukulele, red for piano, orange for banjo,
+% yellow for bass, brown for cello. These are colors you can buy a
+% fineliner in, so the same coding works when writing voicings onto a
+% sheet of music by hand. The cello's brown sits between the bass's
+% yellow and the black of the words, which is where a seventh pen has
+% room left: it is a long way from both in OKLab even though it looks
+% like a darker relative of each.
 %
 % Each is picked for two things at once: legible on the page, and telling
 % apart from the other five. Every pair is at least 0.13 apart in OKLab.
@@ -76,8 +78,8 @@
 % before it gets dark enough, so the bass pen trades a little rather than
 % turn olive.
 \definecolor{fretgreen}{HTML}{00873C}   % mandolin, green pen
-\definecolor{fretblue}{HTML}{0058D5}    % guitar, blue pen
-\definecolor{fretteal}{HTML}{007375}    % cello, teal pen
+\definecolor{fretblue}{HTML}{0060BB}    % guitar, blue pen
+\definecolor{fretbrown}{HTML}{63421F}   % cello, brown pen
 \definecolor{fretpurple}{HTML}{9600D5}  % ukulele, purple pen
 \definecolor{fretorange}{HTML}{C05500}  % banjo, orange pen
 \definecolor{fretyellow}{HTML}{9A8800}  % bass, darkest legible yellow
