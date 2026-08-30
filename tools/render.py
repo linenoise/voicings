@@ -67,6 +67,8 @@ DEGREES = [(0, ""), (2, "m"), (4, "m"), (5, ""), (7, ""), (9, "m"), (11, "°")]
 DEGREE_LABELS = ["1", "2m", "3m", "4", "5", "6m", "7°"]
 
 # Instruments that get their own circle of fifths.
+NO_NUMBER_CHARTS = {"bass", "piano"}
+
 ROOT_KEYS = ["C", "Db", "D", "Eb", "E", "F",
              "Gb", "G", "Ab", "A", "Bb", "B"]
 
@@ -233,7 +235,14 @@ class Book(object):
         self.front_matter()
         if self.only:
             self.one_instrument(self.only)
-            self.number_charts()
+            # The number charts name chords rather than fingerings, so
+            # they belong to no instrument. They ride along in the solo
+            # editions that have room for them and are left out of the
+            # two that do not: a bass player carrying nine pages instead
+            # of seven is carrying a second sheet for a page that is not
+            # about the bass.
+            if self.only not in NO_NUMBER_CHARTS:
+                self.number_charts()
             self.back_matter()
             return "\n".join(self.out) + "\n"
         self.contents()

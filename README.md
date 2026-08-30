@@ -5,7 +5,7 @@ ukulele, piano, banjo, and bass. Every chord in all twelve keys.
 
 | Edition | Read | Print | Pages | Sheets | |
 |---|---|---|---|---|---|
-| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 107 | 14 | All six instruments |
+| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 101 | 13 | All six instruments |
 | Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Also fiddle, tenor banjo |
 | Guitar | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Also baritone ukulele |
 | Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 |  |
@@ -26,9 +26,12 @@ Every fretted instrument gets four reference pages before its chords:
   each with the string carrying the root. Mandolin gets its five chop
   shapes; guitar gets the CAGED forms. Learn these and the chord pages
   become a lookup rather than a memorization.
-- **Numbers, Major** and **Numbers, Minor**, the Nashville chart. A chord
-  book answers "what is Bbm"; these answer "what is the four chord here",
-  which is what a band asks.
+The Nashville charts, **Numbers, Major** and **Numbers, Minor**, sit at
+the back instead, just before the tunings. They name chords rather than
+fingerings, so they are the same page for every instrument and there is no
+reason to print them six times. The solo editions carry them where there
+is room; the bass and piano ones leave them out, because there they would
+cost a whole extra sheet.
 
 Piano gets **Shells and Inversions** instead of the fretted pages, in C,
 to move: a shell is the chord with its fifth taken out, an inversion is
