@@ -233,6 +233,7 @@ class Book(object):
         self.front_matter()
         if self.only:
             self.one_instrument(self.only)
+            self.number_charts()
             self.back_matter()
             return "\n".join(self.out) + "\n"
         self.contents()
@@ -241,6 +242,7 @@ class Book(object):
         self.piano_section()
         self.banjo_section()
         self.bass_section()
+        self.number_charts()
         self.back_matter()
         return "\n".join(self.out) + "\n"
 
@@ -441,7 +443,6 @@ class Book(object):
         self.circle_of_fifths(instrument)
         self.root_positions(instrument)
         self.movable_shapes(instrument)
-        self.number_charts(instrument)
         by_key = {k["key"]: k for k in doc["keys"]}
         for key in CHROMATIC:
             block = by_key.get(key)
@@ -618,7 +619,7 @@ class Book(object):
                      ("b3", 3, ""), ("4m", 5, "m"), ("5m", 7, "m"),
                      ("b6", 8, ""), ("b7", 10, "")]
 
-    def number_chart(self, instrument, title, numbers, note):
+    def number_chart(self, title, numbers, note):
         """The same twelve keys the book already has, read sideways.
 
         A chord book answers "what is Bbm7"; a number chart answers "what
@@ -626,9 +627,8 @@ class Book(object):
         are the same twelve rows, so this costs two pages and saves
         transposing in your head on a stage.
         """
-        meta = self.instruments[instrument]
         self.w(r"\begin{bookpage}{%s}" % title)
-        self.w(r"\pagesubtitle{%s}" % tex_escape(meta["name"]))
+        self.w(r"\pagesubtitle{Any instrument}")
         self.w(r"\begin{numberchart}")
         self.w(r"\numberhead{%s}" % "}{".join(n for n, _, _ in numbers))
         for key in ROOT_KEYS:
@@ -645,14 +645,19 @@ class Book(object):
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 
-    def number_charts(self, instrument):
+    def number_charts(self):
+        """Chord names, not fingerings, so this is the same page for all
+        six instruments. It sits once at the back rather than four times
+        over, and the reader goes from a number to a name here and from a
+        name to a shape on the instrument's own pages."""
+        self.w(r"\usevoicingcolor{ink}")
         self.number_chart(
-            instrument, "Numbers, Major", self.MAJOR_NUMBERS,
+            "Numbers, Major", self.MAJOR_NUMBERS,
             r"Read across: in the key on the left, the four chord is the "
             r"column headed 4. Call a song in numbers and it transposes "
             r"itself.")
         self.number_chart(
-            instrument, "Numbers, Minor", self.MINOR_NUMBERS,
+            "Numbers, Minor", self.MINOR_NUMBERS,
             r"The natural minor. Players often raise the seventh of the "
             r"five chord to make it dominant, which turns 5m into 5.")
 
@@ -824,7 +829,6 @@ class Book(object):
         self.circle_of_fifths("banjo")
         self.root_positions("banjo")
         self.movable_shapes("banjo")
-        self.number_charts("banjo")
         doc = self.voicings["banjo"]
         by_key = {k["key"]: k for k in doc["keys"]}
         spikes = {r["key"]: r for r in self.spikes["keys"]}
