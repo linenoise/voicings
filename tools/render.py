@@ -71,6 +71,11 @@ DEGREE_LABELS = ["1", "2m", "3m", "4", "5", "6m", "7°"]
 # with sharps, so a voicing never mixes the two.
 PIANO_SHARP_KEYS = {"G", "D", "A", "E", "B"}
 
+# Instruments whose pages are about notes, not chord grips. They get
+# root positions, patterns and a number chart instead of twelve pages
+# of fingerings nobody would play on them.
+NOTE_INSTRUMENTS = {"bass", "cello"}
+
 ROOT_KEYS = ["C", "Db", "D", "Eb", "E", "F",
              "Gb", "G", "Ab", "A", "Bb", "B"]
 
@@ -166,6 +171,8 @@ class Book(object):
             self.piano_shapes = yaml.safe_load(fh)
         with open(os.path.join(data, "bass-patterns.yaml")) as fh:
             self.bass = yaml.safe_load(fh)
+        with open(os.path.join(data, "cello-patterns.yaml")) as fh:
+            self.cello = yaml.safe_load(fh)
         self.voicings = {}
         for path in sorted(glob.glob(os.path.join(data, "voicings", "*.yaml"))):
             with open(path) as fh:
@@ -225,9 +232,26 @@ class Book(object):
         four = pick([p for p in pairs if p[0] != "B"])
         return "%s%d (%s%d)" % (best[0], best[1], four[0], four[1])
 
+    def string_root(self, instrument, symbol):
+        """String and fret for a root, for an instrument that plays notes.
+
+        Same reasoning as the bass: work up from the lowest string and
+        take the first that falls under the hand, rather than whichever
+        fret happens to be smallest.
+        """
+        root, _, _ = theory.parse_chord(symbol)
+        tuning = self.instruments[instrument]["tuning"]
+        pairs = [(t[:-1], (root - theory.parse_note(t)) % 12) for t in tuning]
+        for name, fret in pairs:
+            if fret <= FIRST_POSITION:
+                return "%s%d" % (name, fret)
+        return "%s%d" % min(pairs, key=lambda sf: sf[1])
+
     def voicing_for(self, instrument, symbol):
         if instrument == "bass":
             return self.bass_root(symbol)
+        if instrument in NOTE_INSTRUMENTS:
+            return self.string_root(instrument, symbol)
         return self.lookup(instrument, symbol)
 
     # -- emit ------------------------------------------------------------
@@ -251,7 +275,7 @@ class Book(object):
         self.piano_section()
         self.banjo_section()
         self.bass_section()
-        self.chord_section("cello")
+        self.cello_section()
         self.back_matter()
         return "\n".join(self.out) + "\n"
 
@@ -308,6 +332,8 @@ class Book(object):
             self.banjo_section()
         elif inst == "bass":
             self.bass_section()
+        elif inst == "cello":
+            self.cello_section()
         else:
             self.chord_section(inst)
 
@@ -320,7 +346,7 @@ class Book(object):
                             ("piano", "Piano Chords"),
                             ("banjo", "Banjo Chords"),
                             ("bass", "Bass"),
-                            ("cello", "Cello Chords")]:
+                            ("cello", "Cello")]:
             self.w(r"\tocline{%s}{%s}" % (label, self.section_hint(inst)))
         self.w(r"\tocline{Tunings \& Credits}{back sheet}")
         self.w(r"\end{tocdirectory}")
@@ -359,7 +385,7 @@ class Book(object):
         # Every instrument covers all twelve keys, so saying so on each
         # line is six repetitions of the same fact. It is stated once,
         # under the list.
-        if inst == "bass":
+        if inst in NOTE_INSTRUMENTS:
             return "roots \\& patterns"
         return "%d chord voicings" % self.voicing_count(inst)
 
@@ -401,6 +427,10 @@ class Book(object):
             self.w(r"\circlefootnote{Outer ring: major.\\ "
                    r"Inner ring: relative minor.\\ "
                    r"Spike the drone as shown on the banjo pages.}")
+        elif instrument == "cello":
+            self.w(r"\circlefootnote{String and fret for each root: "
+                   r"\frets{G3} is the third position on the G string.\\ "
+                   r"Lowest that falls under the hand.}")
         elif instrument == "bass":
             self.w(r"\circlefootnote{String and fret for each root: "
                    r"\frets{A3} is the third fret of the A string.\\ "
@@ -545,8 +575,17 @@ class Book(object):
         "guitar":   [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
         "ukulele":  [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
         "banjo":    [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
-        "cello":    [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
+        "bass":     [("fifths", "5", 4), ("major", "", 3),
+                     ("minor", "m", 3)],
+        "cello":    [("fifths", "5", 4), ("major", "", 3),
+                     ("minor", "m", 3)],
     }
+
+    # How many strings a closed shape has to sound. Four on a guitar or a
+    # mandolin, where a shape is a grip. Two on a bass or a cello, where
+    # it is a double stop: those players are sounding notes, not chords,
+    # and a four-string barre is not a thing either of them reaches for.
+    MIN_SOUNDING = {"bass": 2, "cello": 2}
 
     def closed_shapes(self, instrument, quality, want):
         """Every shape with no open string in it, lowest positions first.
@@ -574,7 +613,9 @@ class Book(object):
             options = list(range(span + 1)) + [None]
             for offsets in itertools.product(options, repeat=len(tuning)):
                 live = [o for o in offsets if o is not None]
-                if len(live) < max(4, len(tuning) - 2) or min(live) != 0:
+                floor = self.MIN_SOUNDING.get(instrument,
+                                              max(4, len(tuning) - 2))
+                if len(live) < floor or min(live) != 0:
                     continue
                 combo = tuple(None if o is None else base + o
                               for o in offsets)
@@ -605,13 +646,24 @@ class Book(object):
         # Lowest position first, then the least stretch, then the fewest
         # muted strings: a shape that rings six is worth more than one
         # that rings four at the same difficulty.
+        sparse = instrument in self.MIN_SOUNDING
+
         def cost(item):
             rel, info = item
             live = [r for r in rel if r is not None]
-            # Fewest muted strings first. Ranking by finger effort instead
-            # put x-2-0-0-0-x at the top of "major" on guitar and buried
-            # the barre forms, which are the shapes the page exists for.
-            return (sum(1 for r in rel if r is None), info[0], sum(live))
+            muted = sum(1 for r in rel if r is None)
+            rooted = 0 if info[1] == "R" else 1
+            if sparse:
+                # A bass or cello wants the smallest shape that spells the
+                # thing, with the root underneath: a double stop, not four
+                # strings held down at once. Ranking these the other way
+                # offered 0-0-2-2 as a fifth, which is a barre.
+                return (-muted, rooted, info[0], sum(live))
+            # Everywhere else, fewest muted strings first. Ranking by
+            # finger effort instead put x-2-0-0-0-x at the top of "major"
+            # on guitar and buried the barre forms, which are the shapes
+            # the page exists for.
+            return (muted, info[0], sum(live))
         best = sorted(seen.items(), key=cost)
         return best[:want]
 
@@ -640,6 +692,40 @@ class Book(object):
         else:
             self.w(r"Bottom is the degree on the lowest string. The page "
                    r"before gives the fret.")
+        self.w(r"\end{rootmapnote}")
+        self.w(r"\end{bookpage}")
+
+    def number_chart(self, instrument):
+        """Which note is the four chord here.
+
+        This belongs to the bass and the cello and nowhere else. On the
+        fretted pages a number would have to resolve to a chord, and a
+        chord book that names chords without voicing them is a theory
+        book. On these two the number resolves to a note, which is the
+        thing being played, and the fret for it is on the page before.
+        """
+        meta = self.instruments[instrument]
+        self.w(r"\begin{bookpage}{Numbers}")
+        self.w(r"\pagesubtitle{%s \quad the major scale, degree by degree}"
+               % tex_escape(meta["name"]))
+        self.w(r"\begin{numberchart}")
+        self.w(r"\numberhead{%s}"
+               % " & ".join(r"{\bfseries\small %d}" % n for n in range(1, 8)))
+        for key in ROOT_KEYS:
+            cells = []
+            for interval in (0, 2, 4, 5, 7, 9, 11):
+                name = theory.spell_in_key(key, interval)
+                if "bb" in name or "##" in name:
+                    name = theory.spell((theory.NOTE_TO_PC[key] + interval) % 12,
+                                        key not in PIANO_SHARP_KEYS)
+                cells.append(r"\numbercell{%s}" % tex_escape(name))
+            self.w(r"\numberrow{%s}{%s}"
+                   % (tex_escape(key), " & ".join(cells)))
+        self.w(r"\end{numberchart}")
+        self.w(r"\begin{rootmapnote}")
+        self.w(r"Read across: in the key on the left, the four is the note "
+               r"under the 4. A minor key borrows the same row, starting "
+               r"from its six.")
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 
@@ -827,6 +913,8 @@ class Book(object):
             self.w(r"\sectiondivider{Bass}{%s}"
                    % tex_escape(self.tuning_label("bass")))
         self.circle_of_fifths("bass")
+        self.movable_shapes("bass")
+        self.number_chart("bass")
         self.w(r"\begin{bookpage}{Root Positions}")
         self.w(r"\pagesubtitle{Bass}")
         strings = self.bass["root_map"]["strings"]
@@ -857,6 +945,34 @@ class Book(object):
         self.w(r"\end{patternlist}")
         self.w(r"\end{bookpage}")
 
+    def cello_section(self):
+        """Built like the bass section, for the same reason.
+
+        A cellist is sounding one note at a time far more often than
+        stopping four strings at once, so twelve pages of chord grips
+        would be twelve pages nobody plays. What is useful is the same
+        thing the bass gets: where the roots are, what to put under a
+        chord, and the shapes for getting between them.
+        """
+        self.w(r"\usevoicingcolor{%s}" % INK["cello"])
+        if not self.only:
+            self.w(r"\sectiondivider{Cello}{%s}"
+                   % tex_escape(self.tuning_label("cello")))
+        self.circle_of_fifths("cello")
+        self.movable_shapes("cello")
+        self.number_chart("cello")
+        self.root_positions("cello")
+        self.bass_vocabulary("cello")
+        self.w(r"\begin{bookpage}{Patterns}")
+        self.w(r"\pagesubtitle{Cello \quad counted from the root}")
+        self.w(r"\begin{patternlist}")
+        for p in self.cello["patterns"]:
+            self.w(r"\patternitem{%s}{%s}{%s}"
+                   % (tex_escape(p["name"]), self.pattern_grid(p),
+                      tex_escape(p["use"])))
+        self.w(r"\end{patternlist}")
+        self.w(r"\end{bookpage}")
+
     def pattern_grid(self, pattern):
         """One pattern as three aligned rows: degree, string, fret.
 
@@ -881,7 +997,7 @@ class Book(object):
         return (r"\begin{tabular}{%s}%s\end{tabular}"
                 % (spec, ("\\\\\n".join(rows)) + "\n"))
 
-    def bass_vocabulary(self):
+    def bass_vocabulary(self, instrument="bass"):
         """Which degrees to play under every chord in the book.
 
         A bass player doesn't finger chord grids, so the other instruments'
@@ -890,7 +1006,8 @@ class Book(object):
         where they sit relative to the root.
         """
         self.w(r"\begin{bookpage}{What to Play Under}")
-        self.w(r"\pagesubtitle{Bass \quad degrees from the root}")
+        self.w(r"\pagesubtitle{%s \quad degrees from the root}"
+               % tex_escape(self.instruments[instrument]["name"]))
         self.w(r"\begin{degreetable}")
         # Grouped like the chord pages: triads, sixths, sevenths, ninths,
         # so a bass player finds the row in the same place they would find

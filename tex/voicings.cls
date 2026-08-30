@@ -599,6 +599,18 @@
   \multicolumn{4}{@{}l@{}}{\vrule height 3.6mm depth 1.4mm width 0pt
     {\bfseries\color{keyred}#1}} \\}
 
+% The number chart, for the instruments that play notes rather than
+% chords. Seven degrees across, twelve keys down, so the padding goes to
+% almost nothing and the cells set a size down.
+\newenvironment{numberchart}{%
+  \setlength{\tabcolsep}{2pt}
+  \renewcommand{\arraystretch}{1.32}
+  \begin{tabular}{@{}l|*{7}{c}@{}}
+}{\end{tabular}}
+\newcommand{\numberhead}[1]{{} & #1 \\[1pt] \hline}
+\newcommand{\numberrow}[2]{{\bfseries\color{keyred}\small#1} & #2 \\}
+\newcommand{\numbercell}[1]{{\small\color{\voicingcolor}\bfseries#1}}
+
 \newenvironment{rootmapnote}{\par\vfill\footnotesize\color{faint}}%
   {\par\vspace*{\note@floor}}
 

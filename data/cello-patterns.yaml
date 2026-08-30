@@ -1,0 +1,95 @@
+# Cello patterns. Same six shapes the bass page carries, recomputed for a
+# neck tuned in fifths: crossing a string here is seven semitones, not
+# five, so the fifth sits at the same position one string over and the
+# octave sits two below on the string after that.
+#
+# Degrees are checked by the same arithmetic the bass ones are: string
+# times seven, plus the offset, equals the interval from the root.
+patterns:
+- name: Root + fifth + octave
+  use: The default. Works under anything in the key.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 0
+  - degree: '8'
+    string: 2
+    offset: -2
+- name: Major arpeggio
+  use: Major, maj7, 6.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 0
+  - degree: '8'
+    string: 2
+    offset: -2
+  - degree: '3'
+    string: 2
+    offset: 2
+- name: Minor arpeggio
+  use: Minor, m7, m6.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 0
+  - degree: '8'
+    string: 2
+    offset: -2
+  - degree: b3
+    string: 2
+    offset: 1
+- name: Dominant seventh
+  use: Any 7 chord. The b7 pulls to the four.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 0
+  - degree: b7
+    string: 1
+    offset: 3
+  - degree: '3'
+    string: 2
+    offset: 2
+- name: Minor seventh
+  use: The two and the six chord.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 0
+  - degree: b7
+    string: 1
+    offset: 3
+  - degree: b3
+    string: 2
+    offset: 1
+- name: Walking approach
+  use: Leading into the next chord.
+  degrees:
+  - degree: R
+    string: 0
+    offset: 0
+  - degree: '5'
+    string: 1
+    offset: 0
+  - degree: '6'
+    string: 1
+    offset: 2
+  - degree: b7
+    string: 1
+    offset: 3
