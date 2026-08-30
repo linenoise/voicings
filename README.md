@@ -5,17 +5,18 @@ ukulele, piano, banjo, and bass. Every chord in all twelve keys.
 
 | Edition | Read | Print | Pages | Sheets | |
 |---|---|---|---|---|---|
-| **Everything** | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 98 | 13 | All six instruments |
-| Mandolin | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | Also fiddle, tenor banjo |
-| Guitar | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | Also baritone ukulele |
-| Ukulele | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 |  |
-| Piano | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 28 | 4 |  |
-| Banjo | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | With drone spikes |
-| Bass | [screen](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [4-up](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 7 | 1 | Roots and patterns |
+| **Everything** | [Fancy Chords and Their Voicings](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Chords and Their Voicings (print)](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 98 | 13 | All six instruments |
+| Mandolin | [Fancy Mandolin Chords and Their Voicings](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Mandolin Chords and Their Voicings (print)](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | Also fiddle, tenor banjo |
+| Guitar | [Fancy Guitar Chords and Their Voicings](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Guitar Chords and Their Voicings (print)](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | Also baritone ukulele |
+| Ukulele | [Fancy Ukulele Chords and Their Voicings](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Ukulele Chords and Their Voicings (print)](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 |  |
+| Piano | [Fancy Piano Chords and Their Voicings](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Piano Chords and Their Voicings (print)](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 28 | 4 |  |
+| Banjo | [Fancy Banjo Chords and Their Voicings](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Banjo Chords and Their Voicings (print)](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 18 | 3 | With drone spikes |
+| Bass | [Fancy Bass Chords and Their Voicings](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Bass Chords and Their Voicings (print)](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 7 | 1 | Roots and patterns |
 
-**Screen** is 3.5in x 5.5in, one page per page: good on a phone or an
-e-reader. **4-up** is US Letter, four pages to a sheet, for printing and
-sewing. Per-instrument editions carry that instrument's circle of fifths,
+**Read** is 3.5in x 5.5in, one page per page: good on a phone or an
+e-reader. **Print** is the same book imposed 4-up on US Letter, four pages
+to a sheet, for printing and sewing; those files carry `(print)` in the
+name. Per-instrument editions carry that instrument's circle of fifths,
 its reference pages, its chords, and the credits. Nothing else.
 
 Every fretted instrument gets two reference pages before its chords:
