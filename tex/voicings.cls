@@ -62,9 +62,11 @@
 \definecolor{ink}{HTML}{1A1A1A}
 \definecolor{keyred}{HTML}{AA0019}      % key titles, and piano
 % One pen per instrument, matching the notebook: green for mandolin, blue
-% for guitar, purple for ukulele, red for piano, orange for banjo, yellow
-% for bass. These are colors you can buy a fineliner in, so the same
-% coding works when writing voicings onto a sheet of music by hand.
+% for guitar, teal for cello, purple for ukulele, red for piano, orange
+% for banjo, yellow for bass. These are colors you can buy a fineliner
+% in, so the same coding works when writing voicings onto a sheet of
+% music by hand. Teal is what made guitar move: blue and teal a hue
+% apart are two pens nobody can tell apart at a glance.
 %
 % Each is picked for two things at once: legible on the page, and telling
 % apart from the other five. Every pair is at least 0.13 apart in OKLab.
@@ -74,7 +76,8 @@
 % before it gets dark enough, so the bass pen trades a little rather than
 % turn olive.
 \definecolor{fretgreen}{HTML}{00873C}   % mandolin, green pen
-\definecolor{fretblue}{HTML}{0060BB}    % guitar, blue pen
+\definecolor{fretblue}{HTML}{0058D5}    % guitar, blue pen
+\definecolor{fretteal}{HTML}{007375}    % cello, teal pen
 \definecolor{fretpurple}{HTML}{9600D5}  % ukulele, purple pen
 \definecolor{fretorange}{HTML}{C05500}  % banjo, orange pen
 \definecolor{fretyellow}{HTML}{9A8800}  % bass, darkest legible yellow
@@ -162,10 +165,14 @@
 % A fingering above the ninth fret needs two digits per string and runs
 % wider than a column allows, so it sets one size down. Rare enough that
 % the inconsistency costs nothing.
-\newcommand{\fretswide}[1]{{\small\ttfamily\color{\voicingcolor}\bfseries #1}}
+% A shape with two-digit positions in it. The cello reaches the tenth
+% and eleventh often enough -- its strings are a fifth apart and a
+% named bass can force the hand up -- that three of them in one row
+% overran a 36mm column, so this sets a size down again.
+\newcommand{\fretswide}[1]{{\footnotesize\ttfamily\color{\voicingcolor}\bfseries #1}}
 % A two-digit fret, kept in its brackets so the string it belongs to
 % stays countable, and set down a size so the pair takes one column.
-\newcommand{\fretbig}[1]{{\fontsize{7}{7}\selectfont[#1]}}
+\newcommand{\fretbig}[1]{{\fontsize{5.5}{5.5}\selectfont[#1]}}
 
 % Between alternate voicings of the same chord. A single space let 2200 and
 % 2245 read as one long number; this is a gap plus a faint divider, so the
@@ -756,7 +763,7 @@
   \clearpage\thispagestyle{empty}%
   \pagetitle{Tunings}\pagerule
   \begin{list}{}{%
-    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0.4mm}
+    \setlength{\leftmargin}{0pt}\setlength{\itemsep}{0.15mm}
     \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
 }{%
   \end{list}
@@ -779,6 +786,11 @@
   \vspace{0.5mm}
   \clearpage}
 
-\newcommand{\tuningrow}[3]{%
-  \item[]{\small\bfseries#1}\quad{\ttfamily\color{\voicingcolor}\bfseries\small#2}%
-  \par\vspace{0.3mm}{\scriptsize\color{faint}#3}}
+% #4 is the instrument's own pen. Without it the whole list inherited
+% whichever color the last section happened to leave current, so every
+% tuning on the back of the whole book came out in the bass's yellow.
+%
+% Set tight: seven instruments and the credits have to share one page.
+\newcommand{\tuningrow}[4]{%
+  \item[]{\small\bfseries#1}\quad{\ttfamily\color{#4}\bfseries\small#2}%
+  \par\vspace{0.15mm}{\scriptsize\color{faint}\linespread{0.86}\selectfont#3\par}}

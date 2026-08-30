@@ -5,12 +5,13 @@ ukulele, piano, banjo, and bass. Every chord in all twelve keys.
 
 | Edition | Read | Print | Pages | Sheets | |
 |---|---|---|---|---|---|
-| **Everything** | [Fancy Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 98 | 13 | All six instruments |
-| Mandolin | [Fancy Mandolin Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Mandolin Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also fiddle, tenor banjo |
+| **Everything** | [Fancy Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 114 | 15 | All seven instruments |
+| Mandolin | [Fancy Mandolin Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Mandolin Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also fiddle / violin, tenor banjo |
 | Guitar | [Fancy Guitar Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Guitar Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also baritone ukulele |
 | Ukulele | [Fancy Ukulele Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Ukulele Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
 | Piano | [Fancy Piano Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Piano Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 27 | 4 |  |
 | Banjo | [Fancy Banjo Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Banjo Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | With drone spikes |
+| Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also viola |
 | Bass | [Fancy Bass Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Bass Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 6 | 1 | Roots and patterns |
 
 **Read** is 3.5in x 5.5in, one page per page: good on a phone or an
@@ -145,7 +146,7 @@ works out what a fingering actually sounds on that tuning, and compares.
 - **Warning:** every note belongs, but a defining tone is missing. A
   mandolin chop chord drops the fifth on purpose. Allowed.
 
-**2,274 voicings, 0 errors, 167 warnings.**
+**2,658 voicings, 0 errors, 232 warnings.**
 
 Two of those warnings reach the page as superscripts, because a player
 needs to know:
@@ -253,7 +254,7 @@ fails on overflow. `tools/editions.py` runs the same check on all fourteen.
 
 Each instrument has its own pen.
 
-![The seven pen colors: green mandolin, blue guitar, purple ukulele, red piano, orange banjo, yellow bass, and black for words](images/palette.svg)
+![The eight pen colors: green mandolin, blue guitar, teal cello, purple ukulele, red piano, orange banjo, yellow bass, and black for words](images/palette.svg)
 
 These are not arbitrary. They are colors you can walk into a store and buy a
 fineliner in, which matters if you write voicings for more than one
@@ -263,7 +264,7 @@ Red and black are the two you want everywhere, so they get distributed: red
 for note and chord names, black for words. Piano shares the red, since a
 piano voicing is spelled with note names anyway.
 
-The constraint on the six is that they be legible on white paper and, more
+The constraint on the seven is that they be legible on white paper and, more
 importantly, tellable apart from each other at a glance: you should know
 which instrument a page belongs to before you have read a word of it. Every
 pair is separated by at least 0.13 in OKLab, roughly twice what the first

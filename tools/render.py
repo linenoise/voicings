@@ -74,7 +74,8 @@ PIANO_SHARP_KEYS = {"G", "D", "A", "E", "B"}
 ROOT_KEYS = ["C", "Db", "D", "Eb", "E", "F",
              "Gb", "G", "Ab", "A", "Bb", "B"]
 
-CHART_INSTRUMENTS = ["mandolin", "guitar", "ukulele", "piano", "banjo", "bass"]
+CHART_INSTRUMENTS = ["mandolin", "guitar", "ukulele", "piano", "banjo",
+                     "cello", "bass"]
 
 # One pen per instrument, matching the notebook. Defined in voicings.cls.
 INK = {
@@ -83,6 +84,7 @@ INK = {
     "ukulele":  "fretpurple",
     "piano":    "keyred",
     "banjo":    "fretorange",
+    "cello":    "fretteal",
     "bass":     "fretyellow",
 }
 
@@ -248,6 +250,7 @@ class Book(object):
             self.chord_section(inst)
         self.piano_section()
         self.banjo_section()
+        self.chord_section("cello")
         self.bass_section()
         self.back_matter()
         return "\n".join(self.out) + "\n"
@@ -255,7 +258,7 @@ class Book(object):
     # -- front -----------------------------------------------------------
 
     ALL_INSTRUMENTS = ["mandolin", "guitar", "ukulele",
-                       "piano", "banjo", "bass"]
+                       "piano", "banjo", "cello", "bass"]
 
     def front_matter(self):
         # No instrument owns the front matter, so its sample voicings are
@@ -313,6 +316,7 @@ class Book(object):
                             ("ukulele", "Ukulele Chords"),
                             ("piano", "Piano Chords"),
                             ("banjo", "Banjo Chords"),
+                            ("cello", "Cello Chords"),
                             ("bass", "Bass")]:
             self.w(r"\tocline{%s}{%s}" % (label, self.section_hint(inst)))
         self.w(r"\tocline{Tunings \& Credits}{back sheet}")
@@ -538,6 +542,7 @@ class Book(object):
         "guitar":   [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
         "ukulele":  [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
         "banjo":    [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
+        "cello":    [("major", "", 4), ("minor", "m", 3), ("seventh", "7", 3)],
     }
 
     def closed_shapes(self, instrument, quality, want):
@@ -945,20 +950,23 @@ class Book(object):
         if self.only:
             order = [self.only]
         else:
-            order = ["mandolin", "guitar", "bass", "ukulele", "banjo", "piano"]
+            order = ["mandolin", "cello", "guitar", "bass", "ukulele",
+                     "banjo", "piano"]
         rows = []
         for name in order:
             meta = self.instruments[name]
             label = (self.tuning_label(name)
                      if meta.get("kind", "frets") == "frets" else "")
-            rows.append((meta["name"], label, meta.get("note", "")))
+            rows.append((meta["name"], label, meta.get("note", ""),
+                         INK[name]))
         # The credits name this edition, not the series: someone holding
         # the bass booklet should see what they are holding.
         name = self.instruments[self.only]["name"] + " " if self.only else ""
         self.w(r"\begin{backsheet}{Fancy %sChords and Their Voicings}" % name)
-        for name, tuning, note in rows:
-            self.w(r"\tuningrow{%s}{%s}{%s}"
-                   % (tex_escape(name), tex_escape(tuning), tex_escape(note)))
+        for name, tuning, note, pen in rows:
+            self.w(r"\tuningrow{%s}{%s}{%s}{%s}"
+                   % (tex_escape(name), tex_escape(tuning),
+                      tex_escape(note), pen))
         notes = self.reading_notes()
         if notes:
             self.w(r"\readingnotes{%s}" % r"\\".join(notes))

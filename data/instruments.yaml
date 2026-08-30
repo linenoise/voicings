@@ -18,14 +18,14 @@ mandolin:
   max_diagonal: 7    # more, when it is one finger per string
   kind: frets
   name: Mandolin
-  also_covers: [Fiddle, "Tenor banjo"]
+  also_covers: ["Fiddle / violin", "Tenor banjo"]
   tuning: [G3, D4, A4, E5]
   courses: 2
   frets: 12
   # Fiddle is fretless but tuned identically; the numbers read as
   # semitones above the open string.
   note: >-
-    Tuned in fifths. Fiddle and tenor banjo share it, so the mandolin
+    Tuned in fifths. Fiddle / violin and tenor banjo share it, so these
     pages serve all three.
 
 guitar:
@@ -71,8 +71,8 @@ ukulele:
   courses: 1
   frets: 12
   note: >-
-    Soprano, concert and tenor. Re-entrant: the 4th sounds above the 3rd,
-    so "lowest first" means leftmost. Low-G is the same.
+    Soprano, concert, tenor and low-G. Re-entrant, so "lowest first"
+    means leftmost, not lowest-pitched.
   reentrant: true
 
 banjo:
@@ -96,3 +96,24 @@ piano:
   frets: 0
   note: >-
     Note names, low to high, as played.
+cello:
+  # Fretless, so these numbers are semitones above the open string rather
+  # than frets. A cellist reads them as positions; the arithmetic is the
+  # same either way. The hand is narrower here in relation to the string
+  # length than on any other instrument in the book, so the reach is set
+  # tight.
+  max_span: 3
+  max_diagonal: 5
+  kind: frets
+  name: Cello
+  also_covers:
+  - Viola
+  tuning:
+  - C2
+  - G2
+  - D3
+  - A3
+  courses: 1
+  frets: 12
+  note: Tuned in fifths, a fifth below the mandolin. Viola is the same four
+    notes an octave up, so these pages serve both.
