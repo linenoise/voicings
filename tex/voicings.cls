@@ -576,11 +576,18 @@
 % One column per string, so the same table serves a four-course mandolin
 % and a six-string guitar. The caller passes the count and the column
 % padding, because six columns will not take the padding five will.
+% Full width and full height. These are lookup tables read at arm's
+% length off a music stand, and there is no reason for one to sit small in
+% the top corner of a page that has nothing else on it. tabular* with a
+% stretching intercolumn skip spreads the strings across the measure; the
+% row stretch is what fills the rest. #2 is kept for callers but the
+% padding now comes out of the fill.
 \newenvironment{rootmap}[2]{%
-  \setlength{\tabcolsep}{#2}
-  \renewcommand{\arraystretch}{1.5}
-  \begin{tabular}{@{}l|*{#1}{c}@{}}
-}{\end{tabular}}
+  \setlength{\tabcolsep}{0pt}
+  \renewcommand{\arraystretch}{\rootmap@stretch}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|*{#1}{c}@{}}
+}{\end{tabular*}}
+\newcommand{\rootmap@stretch}{1.6}
 
 \newcommand{\rootmaphead}[1]{{\bfseries} & #1 \\[1pt] \hline}
 \newcommand{\rootmaprow}[2]{{\bfseries\color{keyred}#1} & #2 \\}
@@ -606,10 +613,11 @@
 % chords. Seven degrees across, twelve keys down, so the padding goes to
 % almost nothing and the cells set a size down.
 \newenvironment{numberchart}{%
-  \setlength{\tabcolsep}{2pt}
-  \renewcommand{\arraystretch}{1.32}
-  \begin{tabular}{@{}l|*{7}{c}@{}}
-}{\end{tabular}}
+  \setlength{\tabcolsep}{0pt}
+  \renewcommand{\arraystretch}{\numberchart@stretch}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|*{7}{c}@{}}
+}{\end{tabular*}}
+\newcommand{\numberchart@stretch}{1.5}
 \newcommand{\numberhead}[1]{{} & #1 \\[1pt] \hline}
 \newcommand{\numberrow}[2]{{\bfseries\color{keyred}\small#1} & #2 \\}
 \newcommand{\numbercell}[1]{{\small\color{\voicingcolor}\bfseries#1}}

@@ -351,7 +351,8 @@ class Book(object):
         self.w(r"\tocline{Tunings \& Credits}{back sheet}")
         self.w(r"\end{tocdirectory}")
         total = sum(self.voicing_count(i) for i in
-                    ("mandolin", "guitar", "ukulele", "piano", "banjo"))
+                    ("mandolin", "guitar", "ukulele", "piano", "banjo",
+                     "cello"))
         self.w(r"\begin{toctotal}")
         self.w(r"\textbf{%s chord voicings} in all." % "{,}".join(
             [str(total)[:-3], str(total)[-3:]] if total >= 1000 else [str(total)]))
@@ -388,7 +389,7 @@ class Book(object):
         if inst == "bass":
             return "roots \\& patterns"
         if inst == "cello":
-            return "roots, patterns \\& chords"
+            return "roots, patterns \\& %d voicings" % self.voicing_count(inst)
         return "%d chord voicings" % self.voicing_count(inst)
 
     # -- circle of fifths ------------------------------------------------
