@@ -245,8 +245,11 @@
 
 % #1 names the instrument for a single-instrument edition, or is empty for
 % the whole book. #2 is the line (or lines) of instrument names beneath the
-% rule. Both editions share one cover so they cannot drift apart.
-\newcommand{\coverpage}[2]{%
+% rule. #3 is centered in the space between the rule and the QR code, and
+% carries the tuning on a single-instrument cover; it is empty for the
+% whole book, where no one tuning belongs on the front. Both editions
+% share one cover so they cannot drift apart.
+\newcommand{\coverpage}[3]{%
   \thispagestyle{empty}%
   \begin{center}
     \vspace*{6mm}
@@ -260,6 +263,8 @@
     \vspace{6mm}
 
     #2%
+    \vfill
+    #3%
     \vfill
     % Vector, generated at compile time by the qrcode package -- no image
     % file to keep in step with the URL beneath it, and it stays sharp at
@@ -276,6 +281,12 @@
 % The instrument name above "Chords", for a single-instrument edition.
 \newcommand{\coversubject}[2]{%
   {\fontsize{22}{24}\selectfont\bfseries\color{#2}#1\par}\vspace{0.5mm}}
+
+% The tuning on a single-instrument cover. Monospaced and in the
+% instrument's own pen, the way tunings are set on the back sheet, so the
+% cover states the same fact in the same voice the rest of the book uses.
+\newcommand{\covertuning}[2]{%
+  {\fontsize{15}{18}\selectfont\ttfamily\bfseries\color{#2}#1\par}}
 
 % -------------------------------------------------------- table of contents
 \newenvironment{tocdirectory}{%

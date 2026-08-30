@@ -283,7 +283,16 @@ class Book(object):
                 lines.append(r"{\large\bfseries %s\par}"
                              % r"\, $\cdot$\, ".join(names))
             listing = r"\vspace{2.5mm}".join(lines)
-        self.w(r"\coverpage{%s}{%s}" % (subject, listing))
+        if self.only:
+            # The divider page that used to carry the tuning is gone from
+            # the solo editions, so the cover carries it instead.
+            meta = self.instruments[self.only]
+            tuning = r"\covertuning{%s}{%s}" % (
+                tex_escape(self.tuning_label(self.only)), INK[self.only]
+            ) if meta.get("kind", "frets") == "frets" else ""
+        else:
+            tuning = ""
+        self.w(r"\coverpage{%s}{%s}{%s}" % (subject, listing, tuning))
 
     def one_instrument(self, inst):
         """A single-instrument edition: that section and nothing else."""
@@ -443,11 +452,17 @@ class Book(object):
         doc = self.voicings[instrument]
         meta = self.instruments[instrument]
         self.w(r"\usevoicingcolor{%s}" % INK[instrument])
-        self.w(r"\sectiondivider{%s Chords}{%s}" % (
-            tex_escape(meta["name"]), tex_escape(meta["tuning_label"])
-            if "tuning_label" in meta else self.tuning_label(instrument)))
+        # A solo edition is already about one instrument: its cover says
+        # so and carries the tuning, so a divider page announcing the
+        # section says nothing the reader does not know, and the root map
+        # duplicates what the movable shapes page sends them to.
+        if not self.only:
+            self.w(r"\sectiondivider{%s Chords}{%s}" % (
+                tex_escape(meta["name"]), tex_escape(meta["tuning_label"])
+                if "tuning_label" in meta else self.tuning_label(instrument)))
         self.circle_of_fifths(instrument)
-        self.root_positions(instrument)
+        if not self.only:
+            self.root_positions(instrument)
         self.movable_shapes(instrument)
         by_key = {k["key"]: k for k in doc["keys"]}
         for key in CHROMATIC:
@@ -612,8 +627,11 @@ class Book(object):
         self.w(r"\begin{rootmapnote}")
         self.w(r"Shape is the fingering above its lowest fret. Slide it "
                r"one fret, the chord rises a semitone.\\")
-        self.w(r"Bottom is the degree on the lowest string. The page "
-               r"before gives the fret.")
+        if self.only:
+            self.w(r"Bottom is the degree on the lowest string.")
+        else:
+            self.w(r"Bottom is the degree on the lowest string. The page "
+                   r"before gives the fret.")
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
 
@@ -667,7 +685,8 @@ class Book(object):
 
     def piano_section(self):
         self.w(r"\usevoicingcolor{%s}" % INK["piano"])
-        self.w(r"\sectiondivider{Piano Chords}{notes, low to high}")
+        if not self.only:
+            self.w(r"\sectiondivider{Piano Chords}{notes, low to high}")
         self.circle_of_fifths("piano")
         doc = self.voicings["piano"]
         by_key = {k["key"]: k for k in doc["keys"]}
@@ -742,10 +761,12 @@ class Book(object):
         that is the thing you need before you play a note in it.
         """
         self.w(r"\usevoicingcolor{%s}" % INK["banjo"])
-        self.w(r"\sectiondivider{Banjo Chords}{%s}"
-               % tex_escape(self.tuning_label("banjo")))
+        if not self.only:
+            self.w(r"\sectiondivider{Banjo Chords}{%s}"
+                   % tex_escape(self.tuning_label("banjo")))
         self.circle_of_fifths("banjo")
-        self.root_positions("banjo")
+        if not self.only:
+            self.root_positions("banjo")
         self.movable_shapes("banjo")
         doc = self.voicings["banjo"]
         by_key = {k["key"]: k for k in doc["keys"]}
@@ -794,8 +815,9 @@ class Book(object):
 
     def bass_section(self):
         self.w(r"\usevoicingcolor{%s}" % INK["bass"])
-        self.w(r"\sectiondivider{Bass}{%s}"
-               % tex_escape(self.tuning_label("bass")))
+        if not self.only:
+            self.w(r"\sectiondivider{Bass}{%s}"
+                   % tex_escape(self.tuning_label("bass")))
         self.circle_of_fifths("bass")
         self.w(r"\begin{bookpage}{Root Positions}")
         self.w(r"\pagesubtitle{Bass}")
