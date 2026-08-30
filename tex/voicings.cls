@@ -164,8 +164,15 @@
   \hspace{1.6mm}{\color{rule}\rule[-0.15ex]{0.4pt}{1.1ex}}\hspace{1.6mm}}
 
 % ------------------------------------------------------------- page frames
-\newcommand{\pagerule}{\par\vspace{1.5pt}%
-  {\color{rule}\hrule height 0.4pt}\par\vspace{3pt}}
+% The optional argument lifts the rule without changing the space it
+% occupies: whatever comes off the top is given back underneath. A banjo
+% page needs it, because the drone caption that follows the rule sits
+% closer under it than a row of fret digits would, which left the rule
+% looking low even though the glue above and below was unchanged.
+\newif\ifpage@drone \page@dronefalse
+\newcommand{\dronepage}{\global\page@dronetrue}
+\newcommand{\pagerule}[1][0pt]{\par\vspace{\dimexpr1.5pt-#1\relax}%
+  {\color{rule}\hrule height 0.4pt}\par\vspace{\dimexpr3pt+#1\relax}}
 
 \newcommand{\pagetitle}[1]{%
   {\large\bfseries\color{ink}#1\par}}
@@ -318,7 +325,7 @@
 \newenvironment{chordpage}[4]{%
   \clearpage
   \pageheader{#1}{#2}{\ifthenelse{\equal{#3}{cont}}{continued}{}}%
-  \pagerule
+  \ifpage@drone\pagerule[1.8pt]\global\page@dronefalse\else\pagerule\fi
   #4%
   \raggedright
   \begin{multicols}{2}%

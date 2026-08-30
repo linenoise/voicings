@@ -551,6 +551,10 @@ class Book(object):
                     drone = r"\dronenoteboth{%s}" % major
                 else:
                     drone = r"\dronenote{%s}{%s}" % (major, minor)
+                if drone:
+                    # Tells the page frame to lift its rule: what follows
+                    # is a caption, not a row of fret digits.
+                    self.w(r"\dronepage")
                 self.w(r"\begin{chordpage}{Banjo}{%s}{%s}{%s}"
                        % (self.key_heading(key), "cont" if n else "", drone))
                 self.emit_chords(chunk)
