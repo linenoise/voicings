@@ -15,7 +15,7 @@ keys:
     - '1011'
   - chord: C5
     frets:
-    - '5015'
+    - x58x
     derived: true
   - chord: C+
     frets:
@@ -143,7 +143,7 @@ keys:
     - '2122'
   - chord: Db5
     frets:
-    - 662x
+    - x69x
     derived: true
   - chord: Db+
     frets:
@@ -271,7 +271,7 @@ keys:
     - '0233'
   - chord: D5
     frets:
-    - '0230'
+    - 023x
     derived: true
   - chord: D+
     frets:
@@ -399,7 +399,7 @@ keys:
     - '4344'
   - chord: Eb5
     frets:
-    - '1341'
+    - 134x
     derived: true
   - chord: Eb+
     frets:
@@ -527,7 +527,7 @@ keys:
     - '2002'
   - chord: E5
     frets:
-    - '2402'
+    - 245x
     derived: true
   - chord: E+
     frets:
@@ -655,7 +655,7 @@ keys:
     - '3113'
   - chord: F5
     frets:
-    - '3513'
+    - 356x
     derived: true
   - chord: F+
     frets:
@@ -783,7 +783,7 @@ keys:
     - '4224'
   - chord: Gb5
     frets:
-    - '4624'
+    - 467x
     derived: true
   - chord: Gb+
     frets:
@@ -911,7 +911,7 @@ keys:
     - '0335'
   - chord: G5
     frets:
-    - 00xx
+    - x03x
     derived: true
   - chord: G+
     frets:
@@ -1039,7 +1039,7 @@ keys:
     - '1101'
   - chord: Ab5
     frets:
-    - '1141'
+    - x14x
     derived: true
   - chord: Ab+
     frets:
@@ -1167,7 +1167,7 @@ keys:
     - '2212'
   - chord: A5
     frets:
-    - '2252'
+    - x25x
     derived: true
   - chord: A+
     frets:
@@ -1295,7 +1295,7 @@ keys:
     - '3323'
   - chord: Bb5
     frets:
-    - '3363'
+    - x36x
     derived: true
   - chord: Bb+
     frets:
@@ -1423,7 +1423,7 @@ keys:
     - '4434'
   - chord: B5
     frets:
-    - '4474'
+    - x47x
     derived: true
   - chord: B+
     frets:

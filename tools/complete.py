@@ -26,6 +26,7 @@ import sys
 import yaml
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import playability
 import theory  # noqa: E402
 import generate as gen  # noqa: E402
 import provenance  # noqa: E402
@@ -49,6 +50,46 @@ def required(reentrant=False, extra=()):
     return ([(q, None) for q in theory.VOCABULARY]
             + [(q, None) for q in extra]
             + list(theory.SLASH_FORMS))
+
+
+def rooted_variant(meta, symbol, shape):
+    """The same chord again with its root underneath, where that differs.
+
+    The ranked search treats the root in the bass as a preference, which
+    is right: it is what keeps Gb7#5 out of the eleventh fret. But the
+    shape it settles on is sometimes not the one anyone plays. Guitar C9
+    came out 0-1-0-0-1-0, every tone present, when the shape a guitarist
+    means by C9 is x-3-0-3-1-0.
+
+    Rather than choose between them, print both. The open one is easier
+    and the rooted one is the movable form, and which you want depends on
+    what you are playing.
+    """
+    if "root_variants" not in meta or not meta["root_variants"]:
+        return None
+    tuning = meta["tuning"]
+    root, quality, bass_pc = theory.parse_chord(symbol)
+    if bass_pc is not None:
+        return None
+    frets = theory.parse_frets(shape, len(tuning))
+    lowest = next(((theory.parse_note(t) + f) % 12
+                   for t, f in zip(tuning, frets) if f is not None), None)
+    if lowest == root:
+        return None
+    alt = gen.generate(tuning, symbol, max_span=meta.get("max_span", 4),
+                       max_diagonal=meta.get("max_diagonal"),
+                       require_bass_lowest=True)
+    if not alt or alt == shape:
+        return None
+    # Hold the variant to the plain span, without the wider allowance a
+    # diagonal shape gets. That allowance is meant for a shape with one
+    # finger per string climbing across the neck; any two-note shape is
+    # trivially monotonic and collects it by accident, which offered
+    # 8-0-0-0-3-0 for C6/9, a five-fret reach for two fingers.
+    if playability.span(theory.parse_frets(alt, len(tuning))) > \
+            meta.get("max_span", 4):
+        return None
+    return alt
 
 
 def symbol_for(key, quality, bass_interval):
@@ -149,8 +190,12 @@ def main():
                 if shape is None:
                     failed.append((name, key, sym))
                     continue
+                shapes = [shape]
+                alt = rooted_variant(meta, sym, shape)
+                if alt is not None:
+                    shapes.append(alt)
                 block["chords"].append({
-                    "chord": sym, "frets": [shape], "derived": True,
+                    "chord": sym, "frets": shapes, "derived": True,
                 })
                 added.append((name, key, sym, shape))
 

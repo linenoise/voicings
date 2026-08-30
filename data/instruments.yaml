@@ -32,6 +32,10 @@ guitar:
   # Six strings, so it can carry the chords the four course
   # instruments cannot spell without dropping half of them.
   extra_vocabulary: ["11", "13", "m13", "maj13", "7#11"]
+  # Print a second, rooted voicing wherever the first one is not
+  # in root position: on guitar that second shape is usually the
+  # movable one people are taught.
+  root_variants: true
   # Long scale: four frets in one hand position, no more.
   max_span: 3        # frets covered without shifting
   max_diagonal: 5    # more, when it is one finger per string

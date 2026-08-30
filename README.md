@@ -145,7 +145,7 @@ works out what a fingering actually sounds on that tuning, and compares.
 - **Warning:** every note belongs, but a defining tone is missing. A
   mandolin chop chord drops the fifth on purpose. Allowed.
 
-**2,183 voicings, 0 errors, 167 warnings.**
+**2,274 voicings, 0 errors, 167 warnings.**
 
 Two of those warnings reach the page as superscripts, because a player
 needs to know:
@@ -198,6 +198,21 @@ and the core worship voicings use between them. `make complete` gives every
 instrument all of it in all twelve keys. Transcribed voicings are left
 exactly as written. Missing ones are generated. Slash voicings on the
 ukulele are inversions, because it's re-entrant and has no bass.
+
+**Power chords** are built, not searched for. The ranked search wants as
+many strings ringing as a chord can fill and a 5 chord is deliberately the
+opposite: three strings, the rest damped, rooted on one of the two lowest.
+Asking the search for C5 gave `x3x013`, which sounds the right two notes
+and is not what anyone plays. `generate.power_chord` returns `x355xx`.
+
+**Rooted variants.** Where the first voicing is not in root position,
+guitar prints a second one that is. The search treats the root in the bass
+as a preference, which is right and keeps `Gb7#5` out of the eleventh
+fret, but the shape it settles on is sometimes not the one anyone plays:
+C9 came out `010010` when the shape a guitarist means by C9 is `x30310`.
+Both are printed. The open one is easier, the rooted one is movable, and
+which you want depends on what you are playing. Turned on per instrument
+with `root_variants` in `instruments.yaml`.
 
 Guitar carries five more: `11`, `13`, `m13`, `maj13`, `7#11`, listed in
 `instruments.yaml` as `extra_vocabulary`. Six strings can spell a six-note

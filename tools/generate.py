@@ -28,6 +28,53 @@ MAX_FRET = 12
 EXTENDED_ROOTED = {"11", "13", "m13", "maj13", "7#11"}
 
 
+def power_chord(tuning, root_pc, max_span, max_diagonal):
+    """The shape a player means by a 5 chord: root, fifth, octave.
+
+    Not something the ranked search will ever find. It prefers shapes with
+    as many strings ringing as the chord can fill, and a power chord is
+    deliberately the opposite -- three strings and the rest damped, rooted
+    low on the neck. Asking the search for C5 gave x-3-x-0-1-3, which
+    sounds the right two notes and is not what anyone plays.
+
+    Rooted on one of the two lowest strings, because that register is what
+    makes it a power chord rather than a thin high fifth.
+    """
+    opens = [theory.parse_note(t) for t in tuning]
+    fifth = (root_pc + 7) % 12
+    best = None
+    for i in range(min(2, len(tuning) - 1)):
+        fret = (root_pc - opens[i]) % 12
+        shape = [None] * len(tuning)
+        shape[i] = fret
+        f5 = (fifth - opens[i + 1]) % 12
+        while f5 < fret:
+            f5 += 12
+        shape[i + 1] = f5
+        if i + 2 < len(tuning):
+            f8 = (root_pc - opens[i + 2]) % 12
+            while f8 < fret:
+                f8 += 12
+            trial = list(shape)
+            trial[i + 2] = f8
+            # The octave has to be within reach of the root, measured
+            # directly. is_playable takes its span from the fretted notes
+            # alone, so an open root hid a tenth-fret octave and mandolin
+            # G5 came out 0-0-10-x.
+            if (f8 - fret <= max_span
+                    and playability.is_playable(trial, max_span, 4,
+                                                max_diagonal)):
+                shape = trial
+        if not playability.is_playable(shape, max_span, 4, max_diagonal):
+            continue
+        if best is None or fret < best[0]:
+            best = (fret, shape)
+    if best is None:
+        return None
+    return "".join("x" if f is None else ("[%d]" % f if f > 9 else str(f))
+                   for f in best[1])
+
+
 def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
              max_span=4, max_diagonal=None, require_bass_lowest=None):
     """Best playable voicing of `symbol` on `tuning`, or None.
@@ -40,6 +87,10 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
     for the eleventh fret to avoid a first inversion.
     """
     root, quality, bass_pc = theory.parse_chord(symbol)
+    if quality == "5" and bass_pc is None:
+        shape = power_chord(tuning, root, max_span, max_diagonal)
+        if shape is not None:
+            return shape
     if require_root_bass is None:
         require_root_bass = bass_pc is not None
     if require_bass_lowest is None:

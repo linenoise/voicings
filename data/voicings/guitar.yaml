@@ -15,7 +15,7 @@ keys:
     - x35543
   - chord: C5
     frets:
-    - 33x01x
+    - x355xx
     derived: true
   - chord: C+
     frets:
@@ -23,6 +23,7 @@ keys:
   - chord: C°
     frets:
     - 231x12
+    - x31x12
     derived: true
   - chord: Csus2
     frets:
@@ -55,10 +56,12 @@ keys:
   - chord: Cm7b5
     frets:
     - '211312'
+    - x31312
     derived: true
   - chord: C7sus4
     frets:
     - '113311'
+    - x33311
     derived: true
   - chord: C7b5
     frets:
@@ -72,30 +75,37 @@ keys:
   - chord: Cmaj9
     frets:
     - '020010'
+    - x30410
     derived: true
   - chord: Cm9
     frets:
     - '330046'
+    - x30046
     derived: true
   - chord: Cadd9
     frets:
     - '030010'
+    - x30010
     derived: true
   - chord: Cmadd9
     frets:
     - x6001x
+    - x31033
     derived: true
   - chord: C7b9
     frets:
     - '042310'
+    - x32320
     derived: true
   - chord: C7#9
     frets:
     - '011310'
+    - x31310
     derived: true
   - chord: Cm11
     frets:
     - '111311'
+    - x31311
     derived: true
   - chord: C11
     frets:
@@ -150,7 +160,7 @@ keys:
     - x46654
   - chord: Db5
     frets:
-    - 44x12x
+    - x466xx
     derived: true
   - chord: Db+
     frets:
@@ -158,6 +168,7 @@ keys:
   - chord: Db°
     frets:
     - '042020'
+    - x42020
     derived: true
   - chord: Dbsus2
     frets:
@@ -174,6 +185,7 @@ keys:
   - chord: Db6/9
     frets:
     - '111121'
+    - x41321
     derived: true
   - chord: Db7
     frets:
@@ -190,10 +202,12 @@ keys:
   - chord: Dbm7b5
     frets:
     - '042000'
+    - x42000
     derived: true
   - chord: Db7sus4
     frets:
     - '444102'
+    - x44102
     derived: true
   - chord: Db7b5
     frets:
@@ -207,30 +221,37 @@ keys:
   - chord: Dbmaj9
     frets:
     - '141111'
+    - x41111
     derived: true
   - chord: Dbm9
     frets:
     - '041100'
+    - x41100
     derived: true
   - chord: Dbadd9
     frets:
     - '141121'
+    - x41121
     derived: true
   - chord: Dbmadd9
     frets:
     - '041120'
+    - x41120
     derived: true
   - chord: Db7b9
     frets:
     - '440101'
+    - x40101
     derived: true
   - chord: Db7#9
     frets:
     - '043100'
+    - x43100
     derived: true
   - chord: Dbm11
     frets:
     - '044100'
+    - x44100
     derived: true
   - chord: Db11
     frets:
@@ -287,7 +308,7 @@ keys:
     - xx0231
   - chord: D5
     frets:
-    - '500235'
+    - x577xx
     derived: true
   - chord: D+
     frets:
@@ -311,6 +332,7 @@ keys:
   - chord: D6/9
     frets:
     - '000200'
+    - x50200
     derived: true
   - chord: D7
     frets:
@@ -327,10 +349,12 @@ keys:
   - chord: Dm7b5
     frets:
     - '430111'
+    - xx0111
     derived: true
   - chord: D7sus4
     frets:
     - '300013'
+    - xx0013
     derived: true
   - chord: D7b5
     frets:
@@ -344,6 +368,7 @@ keys:
   - chord: Dmaj9
     frets:
     - '000222'
+    - x52222
     derived: true
   - chord: Dm9
     frets:
@@ -352,22 +377,27 @@ keys:
   - chord: Dadd9
     frets:
     - '000232'
+    - x50252
     derived: true
   - chord: Dmadd9
     frets:
     - '000231'
+    - x53230
     derived: true
   - chord: D7b9
     frets:
     - '200542'
+    - x50542
     derived: true
   - chord: D7#9
     frets:
     - '200211'
+    - x535x2
     derived: true
   - chord: Dm11
     frets:
     - '000011'
+    - xx0011
     derived: true
   - chord: D11
     frets:
@@ -426,7 +456,7 @@ keys:
     - x68876
   - chord: Eb5
     frets:
-    - x1134x
+    - x688xx
     derived: true
   - chord: Eb+
     frets:
@@ -434,6 +464,7 @@ keys:
   - chord: Eb°
     frets:
     - '504242'
+    - xx1242
     derived: true
   - chord: Ebsus2
     frets:
@@ -450,6 +481,7 @@ keys:
   - chord: Eb6/9
     frets:
     - '111311'
+    - xx1311
     derived: true
   - chord: Eb7
     frets:
@@ -466,10 +498,12 @@ keys:
   - chord: Ebm7b5
     frets:
     - x01222
+    - xx1222
     derived: true
   - chord: Eb7sus4
     frets:
     - '411124'
+    - xx1124
     derived: true
   - chord: Eb7b5
     frets:
@@ -491,6 +525,7 @@ keys:
   - chord: Ebadd9
     frets:
     - '111043'
+    - xx1041
     derived: true
   - chord: Ebmadd9
     frets:
@@ -499,14 +534,17 @@ keys:
   - chord: Eb7b9
     frets:
     - '011020'
+    - xx1020
     derived: true
   - chord: Eb7#9
     frets:
     - '311022'
+    - xx1022
     derived: true
   - chord: Ebm11
     frets:
     - '111122'
+    - xx1122
     derived: true
   - chord: Eb11
     frets:
@@ -563,7 +601,7 @@ keys:
     - '022000'
   - chord: E5
     frets:
-    - '022400'
+    - 022xxx
     derived: true
   - chord: E+
     frets:
@@ -620,18 +658,22 @@ keys:
   - chord: Emaj9
     frets:
     - '221100'
+    - '021102'
     derived: true
   - chord: Em9
     frets:
     - '220000'
+    - '020002'
     derived: true
   - chord: Eadd9
     frets:
     - '222100'
+    - '024100'
     derived: true
   - chord: Emadd9
     frets:
     - '222000'
+    - '024000'
     derived: true
   - chord: E7b9
     frets:
@@ -703,7 +745,7 @@ keys:
     - '133111'
   - chord: F5
     frets:
-    - 133x11
+    - 133xxx
     derived: true
   - chord: F+
     frets:
@@ -760,26 +802,32 @@ keys:
   - chord: Fmaj9
     frets:
     - '002011'
+    - '102010'
     derived: true
   - chord: Fm9
     frets:
     - '331111'
+    - '131113'
     derived: true
   - chord: Fadd9
     frets:
     - '303011'
+    - '103011'
     derived: true
   - chord: Fmadd9
     frets:
     - '333111'
+    - '133113'
     derived: true
   - chord: F7b9
     frets:
     - '201211'
+    - '131212'
     derived: true
   - chord: F7#9
     frets:
     - '401111'
+    - '101144'
     derived: true
   - chord: Fm11
     frets:
@@ -840,7 +888,7 @@ keys:
     - '244222'
   - chord: Gb5
     frets:
-    - 244x22
+    - 244xxx
     derived: true
   - chord: Gb+
     frets:
@@ -880,6 +928,7 @@ keys:
   - chord: Gbm7b5
     frets:
     - '004210'
+    - '202210'
     derived: true
   - chord: Gb7sus4
     frets:
@@ -897,30 +946,37 @@ keys:
   - chord: Gbmaj9
     frets:
     - '113122'
+    - '213121'
     derived: true
   - chord: Gbm9
     frets:
     - '004120'
+    - '202120'
     derived: true
   - chord: Gbadd9
     frets:
     - '414122'
+    - 21412x
     derived: true
   - chord: Gbmadd9
     frets:
     - '444222'
+    - '244224'
     derived: true
   - chord: Gb7b9
     frets:
     - '014020'
+    - '212020'
     derived: true
   - chord: Gb7#9
     frets:
     - '012222'
+    - '202320'
     derived: true
   - chord: Gbm11
     frets:
     - '004100'
+    - '222200'
     derived: true
   - chord: Gb11
     frets:
@@ -977,7 +1033,7 @@ keys:
     - '355333'
   - chord: G5
     frets:
-    - x50033
+    - 355xxx
     derived: true
   - chord: G+
     frets:
@@ -1001,6 +1057,7 @@ keys:
   - chord: G6/9
     frets:
     - '000000'
+    - '300200'
     derived: true
   - chord: G7
     frets:
@@ -1019,6 +1076,7 @@ keys:
   - chord: Gm7b5
     frets:
     - '113023'
+    - '343066'
     derived: true
   - chord: G7sus4
     frets:
@@ -1041,22 +1099,27 @@ keys:
   - chord: Gm9
     frets:
     - '100333'
+    - '300331'
     derived: true
   - chord: Gadd9
     frets:
     - x0000x
+    - '300203'
     derived: true
   - chord: Gmadd9
     frets:
     - '500333'
+    - '300036'
     derived: true
   - chord: G7b9
     frets:
     - '120004'
+    - '320101'
     derived: true
   - chord: G7#9
     frets:
     - '110003'
+    - '310001'
     derived: true
   - chord: Gm11
     frets:
@@ -1123,7 +1186,7 @@ keys:
     - '466444'
   - chord: Ab5
     frets:
-    - xx1144
+    - 466xxx
     derived: true
   - chord: Ab+
     frets:
@@ -1147,6 +1210,7 @@ keys:
   - chord: Ab6/9
     frets:
     - '111111'
+    - '411111'
     derived: true
   - chord: Ab7
     frets:
@@ -1163,6 +1227,7 @@ keys:
   - chord: Abm7b5
     frets:
     - '220104'
+    - '420102'
     derived: true
   - chord: Ab7sus4
     frets:
@@ -1200,6 +1265,7 @@ keys:
   - chord: Ab7#9
     frets:
     - '221114'
+    - '421112'
     derived: true
   - chord: Abm11
     frets:
@@ -1260,7 +1326,7 @@ keys:
     - '002210'
   - chord: A5
     frets:
-    - '002250'
+    - x022xx
     derived: true
   - chord: A+
     frets:
@@ -1284,6 +1350,7 @@ keys:
   - chord: A6/9
     frets:
     - '002222'
+    - '502222'
     derived: true
   - chord: A7
     frets:
@@ -1300,10 +1367,12 @@ keys:
   - chord: Am7b5
     frets:
     - '301013'
+    - x01013
     derived: true
   - chord: A7sus4
     frets:
     - 0000xx
+    - x000x0
     derived: true
   - chord: A7b5
     frets:
@@ -1321,18 +1390,22 @@ keys:
   - chord: Am9
     frets:
     - '022213'
+    - '532000'
     derived: true
   - chord: Aadd9
     frets:
     - '022220'
+    - '522220'
     derived: true
   - chord: Amadd9
     frets:
     - '022210'
+    - '502500'
     derived: true
   - chord: A7b9
     frets:
     - '012223'
+    - '502323'
     derived: true
   - chord: A7#9
     frets:
@@ -1399,7 +1472,7 @@ keys:
     - '113321'
   - chord: Bb5
     frets:
-    - 1133xx
+    - x133xx
     derived: true
   - chord: Bb+
     frets:
@@ -1407,6 +1480,7 @@ keys:
   - chord: Bb°
     frets:
     - '012320'
+    - x12320
     derived: true
   - chord: Bbsus2
     frets:
@@ -1423,6 +1497,7 @@ keys:
   - chord: Bb6/9
     frets:
     - '110033'
+    - x10033
     derived: true
   - chord: Bb7
     frets:
@@ -1439,10 +1514,12 @@ keys:
   - chord: Bbm7b5
     frets:
     - '012120'
+    - x12120
     derived: true
   - chord: Bb7sus4
     frets:
     - '111141'
+    - x11141
     derived: true
   - chord: Bb7b5
     frets:
@@ -1460,26 +1537,32 @@ keys:
   - chord: Bbm9
     frets:
     - '443311'
+    - '686668'
     derived: true
   - chord: Bbadd9
     frets:
     - '133331'
+    - '633336'
     derived: true
   - chord: Bbmadd9
     frets:
     - '133321'
+    - 63366x
     derived: true
   - chord: Bb7b9
     frets:
     - '110304'
+    - x10101
     derived: true
   - chord: Bb7#9
     frets:
     - '440331'
+    - x10121
     derived: true
   - chord: Bbm11
     frets:
     - '111121'
+    - x11121
     derived: true
   - chord: Bb11
     frets:
@@ -1536,7 +1619,7 @@ keys:
     - x24432
   - chord: B5
     frets:
-    - 22440x
+    - x244xx
     derived: true
   - chord: B+
     frets:
@@ -1544,6 +1627,7 @@ keys:
   - chord: B°
     frets:
     - '120401'
+    - x20401
     derived: true
   - chord: Bsus2
     frets:
@@ -1560,6 +1644,7 @@ keys:
   - chord: B6/9
     frets:
     - '221104'
+    - x21102
     derived: true
   - chord: B7
     frets:
@@ -1576,10 +1661,12 @@ keys:
   - chord: Bm7b5
     frets:
     - '100201'
+    - x20201
     derived: true
   - chord: B7sus4
     frets:
     - '002200'
+    - x22200
     derived: true
   - chord: B7b5
     frets:
@@ -1593,6 +1680,7 @@ keys:
   - chord: Bmaj9
     frets:
     - x11422
+    - '744446'
     derived: true
   - chord: Bm9
     frets:
@@ -1601,6 +1689,7 @@ keys:
   - chord: Badd9
     frets:
     - '244442'
+    - '744447'
     derived: true
   - chord: Bmadd9
     frets:
@@ -1609,10 +1698,12 @@ keys:
   - chord: B7b9
     frets:
     - '201412'
+    - x21212
     derived: true
   - chord: B7#9
     frets:
     - '200442'
+    - x20445
     derived: true
   - chord: Bm11
     frets:
