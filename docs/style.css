@@ -10,7 +10,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 17.6px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 19.36px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* Header, nav and main share one measure, so the wordmark, the
    instrument links and the content all start on the same left edge. */
@@ -77,10 +77,10 @@ footer {
   max-width: 54rem; padding: 1rem; color: var(--faint); font-size: 0.9rem;
 }
 footer a { color: var(--faint); }
-.pen.mandolin { color: #00873C; }
-.pen.guitar { color: #0060BB; }
-.pen.ukulele { color: #9600D5; }
-.pen.piano { color: #AA0019; }
-.pen.banjo { color: #C05500; }
-.pen.bass { color: #9A8800; }
-.pen.cello { color: #63421F; }
+.pen.mandolin, .inst-mandolin .fret { color: #00873C; }
+.pen.guitar, .inst-guitar .fret { color: #0060BB; }
+.pen.ukulele, .inst-ukulele .fret { color: #9600D5; }
+.pen.piano, .inst-piano .fret { color: #AA0019; }
+.pen.banjo, .inst-banjo .fret { color: #C05500; }
+.pen.bass, .inst-bass .fret { color: #9A8800; }
+.pen.cello, .inst-cello .fret { color: #63421F; }
