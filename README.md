@@ -15,13 +15,11 @@ A pocket chord book you can print, cut up, and sew. Mandolin, guitar, ukulele, p
 
 These PDFs are shareable backups of a handwritten notebook that's very important to me. 
 
-The contents of the above documents are based on an actual handwritten notebook with thousands of chord voicings that I've kept in my instrument cases for years. Photos of the pages of my original notebook are included under the `notebook/` folder of this repository. That notebook covers the instruments I play regularly (mandolin, guitar, bass, banjo, and ukulele). I added piano and cello / viola later once I had the software generators running.
+The contents of the above documents are based on an actual handwritten notebook with thousands of chord voicings that I've kept in my instrument cases for years. Photos of the pages of my original notebook are included under the `notebook/` folder of this repository. That notebook covers the instruments I play regularly (mandolin, guitar, bass, banjo, and ukulele). I added piano and cello / viola later once I had the software generators running. Per-instrument editions each carry that instrument's circle of fifths, its reference pages, its chords, and the credits.
 
-**Read** is a PDF of each page enlarged to full-page for reading on a screen or reader.
+The **Read** links above are to PDF of the books with each page enlarged to a full sheet for reading on a screen or reader.
 
-**Print** is the same book imposed 4-up on US Letter, four 3.5in x 5.5in pages to a sheet, for printing and sewing. Those files carry `(print)` in the name.
-
-Per-instrument editions carry that instrument's circle of fifths, its reference pages, its chords, and the credits.
+The **Print** links are the same typeset notebooks arranged four 3.5 x 5.5 inch pages per sheet on US Letter. These are copies for printing, cutting, and sewing that end up the same size as my original notebook. Those PDF files carry `(print)` in the name.
 
 This QR code is the same as the QR code on the front of the printed books. It brings you to this book repository, <http://github.com/linenoise/voicings>. This allows you to **share this book with friends**:
 
