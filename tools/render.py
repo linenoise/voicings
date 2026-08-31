@@ -281,6 +281,9 @@ class Book(object):
 
     # -- front -----------------------------------------------------------
 
+    # The order everything lists instruments in: the cover, the tunings on
+    # the back sheet, the contents. One list, so the three cannot drift
+    # out of step with each other the way they had.
     ALL_INSTRUMENTS = ["mandolin", "guitar", "ukulele",
                        "piano", "banjo", "bass", "cello"]
 
@@ -302,9 +305,9 @@ class Book(object):
             # Each in its own pen, the way the notebook is written.
             # Seven names will not sit three and four on a 75mm cover
             # without crowding, so the seventh takes a line of its own.
-            rows = [["mandolin", "guitar", "ukulele"],
-                    ["piano", "banjo", "bass"],
-                    ["cello"]]
+            names_in_order = self.ALL_INSTRUMENTS
+            rows = [names_in_order[i:i + 3]
+                    for i in range(0, len(names_in_order), 3)]
             lines = []
             for row in rows:
                 names = [r"\textcolor{%s}{%s}"
@@ -1089,8 +1092,7 @@ class Book(object):
         if self.only:
             order = [self.only]
         else:
-            order = ["mandolin", "guitar", "bass", "ukulele",
-                     "banjo", "piano", "cello"]
+            order = self.ALL_INSTRUMENTS
         rows = []
         for name in order:
             meta = self.instruments[name]
