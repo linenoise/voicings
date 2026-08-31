@@ -91,6 +91,9 @@ banjo:
     drone, spiked rather than fretted.
 
 piano:
+  # Not a tuning, but it is what belongs in that column: the keys a
+  # pianist reads these voicings onto.
+  tuning_label: "A B C D E F G"
   kind: notes
   name: Piano
   frets: 0

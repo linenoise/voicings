@@ -585,12 +585,16 @@
 \newenvironment{rootmap}[2]{%
   \setlength{\tabcolsep}{0pt}
   \renewcommand{\arraystretch}{\rootmap@stretch}
-  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|*{#1}{c}@{}}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|*{#1}{c}c@{}}
 }{\end{tabular*}}
 \newcommand{\rootmap@stretch}{1.6}
 
-\newcommand{\rootmaphead}[1]{{\bfseries} & #1 \\[1pt] \hline}
-\newcommand{\rootmaprow}[2]{{\bfseries\color{keyred}#1} & #2 \\}
+% The trailing & feeds an empty final column. It has no width of its
+% own, so the stretched gutter in front of it becomes a right margin
+% the same size as the gaps between the columns, instead of the last
+% column sitting flush against the measure.
+\newcommand{\rootmaphead}[1]{{\bfseries} & #1 & \\[1pt] \hline}
+\newcommand{\rootmaprow}[2]{{\bfseries\color{keyred}#1} & #2 & \\}
 
 % Movable shapes: the relative fingering, which string carries the root,
 % and one worked example. Four narrow columns rather than the root map's
@@ -615,11 +619,11 @@
 \newenvironment{numberchart}{%
   \setlength{\tabcolsep}{0pt}
   \renewcommand{\arraystretch}{\numberchart@stretch}
-  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|*{7}{c}@{}}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l|*{7}{c}c@{}}
 }{\end{tabular*}}
 \newcommand{\numberchart@stretch}{1.5}
-\newcommand{\numberhead}[1]{{} & #1 \\[1pt] \hline}
-\newcommand{\numberrow}[2]{{\bfseries\color{keyred}\small#1} & #2 \\}
+\newcommand{\numberhead}[1]{{} & #1 & \\[1pt] \hline}
+\newcommand{\numberrow}[2]{{\bfseries\color{keyred}\small#1} & #2 & \\}
 \newcommand{\numbercell}[1]{{\small\color{\voicingcolor}\bfseries#1}}
 
 \newenvironment{rootmapnote}{\par\vfill\footnotesize\color{faint}}%
@@ -816,6 +820,11 @@
 % tuning on the back of the whole book came out in the bass's yellow.
 %
 % Set tight: seven instruments and the credits have to share one page.
+% The name sits in a fixed box so every tuning starts at the same place
+% down the list: the G of G D A E lands above the E of E A D G B E rather
+% than wherever the instrument's name happened to end.
+\newlength{\tuning@name}\setlength{\tuning@name}{21mm}
 \newcommand{\tuningrow}[4]{%
-  \item[]{\small\bfseries#1}\quad{\ttfamily\color{#4}\bfseries\small#2}%
+  \item[]\makebox[\tuning@name][l]{\small\bfseries#1}%
+  {\ttfamily\color{#4}\bfseries\small#2}%
   \par\vspace{0.15mm}{\scriptsize\color{faint}\linespread{0.86}\selectfont#3\par}}

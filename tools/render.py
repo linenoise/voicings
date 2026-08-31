@@ -783,7 +783,8 @@ class Book(object):
     def piano_section(self):
         self.w(r"\usevoicingcolor{%s}" % INK["piano"])
         if not self.only:
-            self.w(r"\sectiondivider{Piano Chords}{notes, low to high}")
+            self.w(r"\sectiondivider{Piano Chords}{%s}"
+                   % tex_escape(self.tuning_label("piano")))
         self.circle_of_fifths("piano")
         doc = self.voicings["piano"]
         by_key = {k["key"]: k for k in doc["keys"]}
@@ -1093,8 +1094,11 @@ class Book(object):
         rows = []
         for name in order:
             meta = self.instruments[name]
+            # Piano has no tuning but does have a label: the seven note
+            # names its voicings are written in.
             label = (self.tuning_label(name)
-                     if meta.get("kind", "frets") == "frets" else "")
+                     if meta.get("kind", "frets") == "frets"
+                     or "tuning_label" in meta else "")
             rows.append((meta["name"], label, meta.get("note", ""),
                          INK[name]))
         # The credits name this edition, not the series: someone holding
