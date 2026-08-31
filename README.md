@@ -43,12 +43,6 @@ The marks are on the binding edge, which alternates sides, so on a sheet printed
 
 Both editions carry the same five marks. The print edition is an imposition of the screen pages rather than a separate typesetting, so whatever is on a screen page is on the printed one. To sew a three-hole pamphlet stitch instead, use holes 1, 3 and 5 and ignore the other two.
 
-Consecutive pages land on the two faces of each rectangle, so the stack collates with no folding. `make print SCHEME=saddle` gives folded signatures instead.
-
-The cut lines are a third of a point of gray, drawn by `tools/impose.py` rather than by `pdfpages`, whose own frame option is a black hairline with no way to soften it. They match the book's own hairline gray, which is dark enough to follow with scissors under ordinary light and still light enough that a remnant after an imperfect cut does not read as a border. `CROP_MARKS=1` adds the pdfpages frame on top, for anyone trimming with a guillotine who wants the harder edge. Paper sizes and their cut positions live in `impose.PAPERS`; adding a third is a few numbers.
-
-On Letter the pages run right to the top and bottom edges of the paper. That's fine: the book's own margins are 6mm and 5mm, and a typical laser printer reserves about 4.2mm. A Brother HL-2270DW does. Nothing gets clipped as long as the driver isn't scaling. A4 has 8.8mm of its own at the head and tail, so the question doesn't arise there.
-
 ## How to recompile the PDF yourself
 
 ```bash
