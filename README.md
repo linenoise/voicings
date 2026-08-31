@@ -13,9 +13,13 @@ A pocket chord book you can print, cut up, and sew. Mandolin, guitar, ukulele, p
 | Bass | [Fancy Bass Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Bass Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 8 | 1 | Roots and patterns |
 | Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Roots, patterns and chords; also viola |
 
+The contents of these PDFs are based on an actual handwritten notebook with thousands of chord voicings that I've kept in my instrument cases for years. Photos of the pages of that original notebook are included under the `notebook/` folder of this repository.
+
 **Read** is a PDF of each page enlarged to full-page for reading on a screen or reader.
 
-**Print** is the same book imposed 4-up on US Letter, four 3.5in x 5.5in pages to a sheet, for printing and sewing. Those files carry `(print)` in the name. Per-instrument editions carry that instrument's circle of fifths, its reference pages, its chords, and the credits.
+**Print** is the same book imposed 4-up on US Letter, four 3.5in x 5.5in pages to a sheet, for printing and sewing. Those files carry `(print)` in the name.
+
+Per-instrument editions carry that instrument's circle of fifths, its reference pages, its chords, and the credits.
 
 This QR code is the same as the QR code on the front of the printed books. It brings you to this book repository, <http://github.com/linenoise/voicings>. This allows you to **share this book with friends**:
 
