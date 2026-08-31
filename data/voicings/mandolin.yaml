@@ -1149,7 +1149,6 @@ keys:
   - chord: A5
     frets:
     - x775
-    - '2775'
   - chord: A+
     frets:
     - '2345'
