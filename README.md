@@ -13,7 +13,9 @@ A pocket chord book you can print, cut up, and sew. Mandolin, guitar, ukulele, p
 | Bass | [Fancy Bass Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Bass Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 8 | 1 | Roots and patterns |
 | Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Roots, patterns and chords; also viola |
 
-This project started by me wanting to make a backup of a very important notebook to me. The contents of the above PDFs are based on an actual handwritten notebook with thousands of chord voicings that I've kept in my instrument cases for years, for the instruments I play regularly (mandolin, guitar, bass, banjo, and ukulele). I added piano and cello-viola later once I had the software generators running. Photos of the pages of my original notebook are included under the `notebook/` folder of this repository.
+The above PDFs are shareable backups of a handwritten notebook that's very important to me. 
+
+The contents of the above documents are based on an actual handwritten notebook with thousands of chord voicings that I've kept in my instrument cases for years. Photos of the pages of my original notebook are included under the `notebook/` folder of this repository. That notebook covers the instruments I play regularly (mandolin, guitar, bass, banjo, and ukulele). I added piano and cello / viola later once I had the software generators running.
 
 **Read** is a PDF of each page enlarged to full-page for reading on a screen or reader.
 
