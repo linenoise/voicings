@@ -2,16 +2,16 @@
 
 A pocket chord book you can print, cut up, and sew. Mandolin, guitar, ukulele, piano, banjo, bass, and cello. Every chord in all twelve keys.
 
-| Edition | Read | Print | Pages | Sheets | |
+| Edition | Read | Print on US Letter | Print on A4 | Pages | Sheets |
 |---|---|---|---|---|---|
-| **Everything** | [Fancy Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 119 | 15 | All seven instruments |
-| Mandolin | [Fancy Mandolin Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Mandolin Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also fiddle / violin, tenor banjo |
-| Guitar | [Fancy Guitar Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Guitar Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | Also baritone ukulele |
-| Ukulele | [Fancy Ukulele Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Ukulele Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 |  |
-| Piano | [Fancy Piano Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Piano Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 27 | 4 |  |
-| Banjo | [Fancy Banjo Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Banjo Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 16 | 2 | With drone spikes |
-| Bass | [Fancy Bass Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Bass Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 8 | 1 | Roots and patterns |
-| Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print%29.pdf) | 20 | 3 | Roots, patterns and chords; also viola |
+| **Everything** | [Fancy Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 119 | 15 |
+| Mandolin | [Fancy Mandolin Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Mandolin Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Mandolin Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Mandolin%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 16 | 2 |
+| Guitar | [Fancy Guitar Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Guitar Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Guitar Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Guitar%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 16 | 2 |
+| Ukulele | [Fancy Ukulele Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Ukulele Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Ukulele Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Ukulele%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 16 | 2 |
+| Piano | [Fancy Piano Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Piano Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Piano Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Piano%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 27 | 4 |
+| Banjo | [Fancy Banjo Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Banjo Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Banjo Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 16 | 2 |
+| Bass | [Fancy Bass Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Bass Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Bass Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 8 | 1 |
+| Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Cello Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 20 | 3 |
 
 These PDFs are printable, shareable copies of a handwritten notebook that's very important to me. 
 
@@ -19,7 +19,18 @@ The contents of the above documents are based on an actual handwritten notebook 
 
 The **Read** links above are for reading on a screen. In these, each notebook page takes up a full sheet. 
 
-The **Print** links are the for printing and binding into small pocket notebooks. They are typeset and arranged as four 3.5 x 5.5 inch pages per sheet, to be printed on US Letter paper. These are copies for printing, cutting, and sewing that end up the same size as my original notebook. Those PDF files carry `(print)` in the name.
+The **Print** links are for printing and binding into small pocket
+notebooks: four 3.5 x 5.5 inch pages per sheet, to be cut and sewn into
+something the size of the original. Pick the column that matches your
+paper. The two are the same book from the same typesetting, imposed twice;
+only the sheet around the pages and the cut lines differ. Those files
+carry `(print-letter)` or `(print-A4)` in the name.
+
+A4 needs one more cut than Letter does. Two 5.5in pages come to exactly
+11in, so on Letter the top and bottom edges of the sheet are already the
+edges of the book and there is one horizontal cut, down the middle. A4 is
+297mm, which leaves 8.8mm of waste at the head and the tail, so it gets
+three horizontal cuts. Both are drawn on the sheet.
 
 This QR code is the same as the QR code on the front of the printed books. It brings you to this book repository, <http://github.com/linenoise/voicings>. This allows you to **share this book with friends**:
 
@@ -27,8 +38,12 @@ This QR code is the same as the QR code on the front of the printed books. It br
 
 ## How to print, cut, and sew or staple a copy
 
-1. Print the 4-up PDF on US Letter, **double-sided, flipped on the long edge**, at 100%. Don't let the printer "fit to page".
-2. Cut along the gray lines. Every sheet carries them: three down and one across, marking the four 3.5in x 5.5in rectangles. That is 3/4in of waste trimmed from each side, one cut down the middle and one across. Two pages tall is exactly 11in, so there is no waste top or bottom and no line to cut there.
+1. Print the 4-up PDF for your paper, **double-sided, flipped on the long
+   edge**, at 100%. Don't let the printer "fit to page".
+2. Cut along the gray lines, which mark the four 3.5in x 5.5in
+   rectangles. On Letter that is three cuts down and one across: 3/4in of
+   waste off each side, then one down the middle and one across. On A4 it
+   is three each way, because the sheet is 18mm taller than two pages.
 3. Stack the rectangles in the order they came off the sheet: top-left. top-right, bottom-left, bottom-right.
 4. Punch the five holes. Every page carries five small gray circles down its binding edge, so there is nothing to measure: square up the stack, punch through the marks, sew.
 5. Sew a five-hole pamphlet stitch. The inner margin is 8.5mm, which leaves room for the thread. Alternatively, staple the binding on the side with hole punch marks.
@@ -47,9 +62,9 @@ Both editions carry the same five marks. The print edition is an imposition of t
 
 Consecutive pages land on the two faces of each rectangle, so the stack collates with no folding. `make print SCHEME=saddle` gives folded signatures instead.
 
-The cut lines are a third of a point of mid gray, drawn by `tools/impose.py` rather than by `pdfpages`, whose own frame option is a black hairline with no way to soften it. Gray is enough to follow with scissors and faint enough that whatever survives the cut does not read as a border. `CROP_MARKS=1` adds the pdfpages frame on top, for anyone trimming with a guillotine who wants the harder edge.
+The cut lines are a third of a point of gray, drawn by `tools/impose.py` rather than by `pdfpages`, whose own frame option is a black hairline with no way to soften it. They match the book's own hairline gray, which is dark enough to follow with scissors under ordinary light and still light enough that a remnant after an imperfect cut does not read as a border. `CROP_MARKS=1` adds the pdfpages frame on top, for anyone trimming with a guillotine who wants the harder edge. Paper sizes and their cut positions live in `impose.PAPERS`; adding a third is a few numbers.
 
-The pages run right to the top and bottom edges of the paper. That's fine: the book's own margins are 6mm and 5mm, and a typical laser printer reserves about 4.2mm. A Brother HL-2270DW does. Nothing gets clipped as long as the driver isn't scaling.
+On Letter the pages run right to the top and bottom edges of the paper. That's fine: the book's own margins are 6mm and 5mm, and a typical laser printer reserves about 4.2mm. A Brother HL-2270DW does. Nothing gets clipped as long as the driver isn't scaling. A4 has 8.8mm of its own at the head and tail, so the question doesn't arise there.
 
 ## How to recompile the PDF yourself
 

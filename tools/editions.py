@@ -27,6 +27,10 @@ sys.path.insert(0, HERE)
 import pagecount  # noqa: E402
 import impose as impose_mod  # noqa: E402
 
+# Which papers to impose for, and the suffix each gets in its
+# filename.
+PAPERS = [("letter", "print-letter"), ("a4", "print-A4")]
+
 INSTRUMENTS = ["mandolin", "guitar", "ukulele", "piano", "banjo", "bass",
                "cello"]
 TITLES = {
@@ -93,26 +97,39 @@ def build_one(build, slug, only, title):
     problems = impose_mod.verify_flat(pages)
     if problems:
         raise SystemExit("imposition error in %s: %s" % (slug, problems[0]))
-    with open(os.path.join(build, "impose-%s.tex" % slug), "w") as fh:
-        fh.write(impose_mod.TEMPLATE % dict(
-            description=impose_mod.DESCRIPTIONS["flat"],
-            n_pages=pages, n_sheets=len(order) // impose_mod.PER_SHEET,
-            pages=",".join("{}" if p is None else str(p) for p in order),
-            source=screen + ".pdf", frame="false"))
-    printed = "print-%s" % slug
-    # Twice, like the screen pass: the cut lines are positioned against
-    # the page node, and tikz only knows where that is on the second run.
-    for _ in range(2):
-        run([LATEX] + OPTS + ["-jobname", printed, "impose-%s.tex" % slug],
-            build)
-    print_pdf = os.path.join(build, printed + ".pdf")
+    # The same four pages imposed twice, once per paper. Everything about
+    # the book is identical: only the sheet around it and where the cuts
+    # fall change, so the two come off one screen PDF rather than two
+    # typesettings that could drift apart.
+    printed = {}
+    for paper, suffix in PAPERS:
+        job = "print-%s-%s" % (paper, slug)
+        tex = "impose-%s-%s.tex" % (paper, slug)
+        spec = impose_mod.PAPERS[paper]
+        with open(os.path.join(build, tex), "w") as fh:
+            fh.write(impose_mod.TEMPLATE % dict(
+                description=impose_mod.DESCRIPTIONS["flat"],
+                n_pages=pages, n_sheets=len(order) // impose_mod.PER_SHEET,
+                pages=",".join("{}" if p is None else str(p) for p in order),
+                source=screen + ".pdf", frame="false",
+                paper_geometry=spec["geometry"], paper_label=spec["label"],
+                cut_marks=impose_mod.cut_marks(paper)))
+        # Twice, like the screen pass: the cut lines are positioned
+        # against the page node, and tikz only knows where that is on the
+        # second run.
+        for _ in range(2):
+            run([LATEX] + OPTS + ["-jobname", job, tex], build)
+        printed[suffix] = os.path.join(build, job + ".pdf")
 
     # Rename to what a reader would want to see in a download folder.
     screen_named = os.path.join(build, "%s.pdf" % title)
-    print_named = os.path.join(build, "%s (print).pdf" % title)
     os.replace(screen_pdf, screen_named)
-    os.replace(print_pdf, print_named)
-    return screen_named, print_named, pages
+    named = {}
+    for suffix, path in printed.items():
+        target = os.path.join(build, "%s (%s).pdf" % (title, suffix))
+        os.replace(path, target)
+        named[suffix] = target
+    return screen_named, named, pages
 
 
 def main():
@@ -127,8 +144,10 @@ def main():
     for only in [None] + INSTRUMENTS:
         slug = only or "all"
         title = TITLES[only]
-        screen_pdf, print_pdf, pages = build_one(build, slug, only, title)
-        sheets = pagecount.count(print_pdf) // 2
+        screen_pdf, printed, pages = build_one(build, slug, only, title)
+        # Sheet count off the Letter imposition. Both papers take the same
+        # four pages to a side, so the number is the same either way.
+        sheets = pagecount.count(printed["print-letter"]) // 2
         rows.append((only, title, pages, sheets))
         print("%-9s %3d pages, %2d sheets   %s" % (slug, pages, sheets, title))
 
