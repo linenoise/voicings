@@ -71,8 +71,9 @@ spikes:
 piano:
 	@$(PYTHON) tools/piano.py
 
-## Build the static site for fancychords.com into pages/. Needs the PDFs,
-## which it copies into pages/downloads/.
+## Build the static site for fancychords.com into docs/. Needs the PDFs,
+## which it copies into docs/downloads/. GitHub Pages serves a branch
+## from the repository root or from docs/, and this is the latter.
 site: editions
 	@$(PYTHON) tools/site.py
 

@@ -69,14 +69,14 @@ sudo apt install texlive-xetex texlive-latex-extra   # Debian
 
 ## The website
 
-`make site` builds a static site into `pages/`: HTML, CSS and images, no
+`make site` builds a static site into `docs/`: HTML, CSS and images, no
 JavaScript. It is the same content as the book, generated from the same
 `render.Book`, so a chord that changes in `data/` changes in both places or
-in neither. The PDFs are copied into `pages/downloads/` rather than linked
+in neither. The PDFs are copied into `docs/downloads/` rather than linked
 off GitHub, because a download that leaves the domain is a download that
 breaks when the repository moves.
 
-To look at it before pushing: `python3 -m http.server --directory pages`.
+To look at it before pushing: `python3 -m http.server --directory docs`.
 Opening the files directly will not do, because the stylesheet and the
 images are referenced relatively.
 
@@ -85,11 +85,11 @@ sew a copy. Each instrument gets a page of everything the book has for it,
 in one scroll, with anchor links to each section. The circle of fifths is
 redrawn as SVG rather than shipped as an image.
 
-**Hosting.** `.github/workflows/pages.yml` publishes `pages/` to GitHub Pages
-on every push to `main`. The workflow is needed because branch-based
-publishing only serves from the repository root or from `/docs`, and this
-builds to `/pages`: uploading the folder as a Pages artifact works from any
-path.
+**Hosting.** GitHub Pages serves a branch from either the repository root
+or from `docs/`, which is why the site builds into the latter and needs no
+workflow to publish it. In the repository's Pages settings, set the source
+to "Deploy from a branch", the branch to `main`, and the folder to `/docs`.
+Every push then republishes.
 
 **DNS**, at Gandi, for the apex domain:
 
@@ -105,7 +105,7 @@ path.
 | AAAA | @ | 2606:50c0:8003::153 |
 | CNAME | www | linenoise.github.io. |
 
-`pages/CNAME` holds the domain, which is what tells GitHub Pages to answer
+`docs/CNAME` holds the domain, which is what tells GitHub Pages to answer
 for it. Turn on "Enforce HTTPS" in the repository's Pages settings once the
 certificate has been issued.
 

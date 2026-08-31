@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the static site for fancychords.com into `pages/`.
+"""Build the static site for fancychords.com into `docs/`.
 
 Static HTML, CSS and images. No JavaScript: the whole thing is a lookup
 table and a set of downloads, and neither needs a runtime.
@@ -575,7 +575,7 @@ footer a { color: var(--faint); }
 
 
 def main():
-    out = os.path.join(ROOT, "pages")
+    out = os.path.join(ROOT, "docs")
     downloads = os.path.join(out, "downloads")
     os.makedirs(downloads, exist_ok=True)
     book = render.Book(os.path.join(ROOT, "data"))
@@ -633,7 +633,7 @@ def main():
         site.instrument_page(inst)
 
     pages = len([f for f in os.listdir(out) if f.endswith(".html")])
-    print("wrote %d pages and %d downloads to pages/" % (pages, copied))
+    print("wrote %d pages and %d downloads to docs/" % (pages, copied))
 
 
 if __name__ == "__main__":
