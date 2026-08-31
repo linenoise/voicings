@@ -129,8 +129,8 @@ class Site(object):
             "<main>",
             body,
             "</main>",
-            '<footer><p>Copyright &copy; 2025 '
-            '<a href="%s">Danne Stayskal</a>. This site and the software '
+            '<footer><p>Copyright &copy; 2026 '
+            '<a href="%s">Danne Stayskal</a>.<br>This site and the software '
             "that builds it is open source. Its source code is available at "
             '<a href="%s">%s</a>.</p></footer>'
             % (AUTHOR_URL, SOURCE_URL, esc(SOURCE_URL)),
@@ -160,8 +160,10 @@ class Site(object):
         return '<ul class="downloads">%s</ul>' % "".join(cells)
 
     def section_nav(self, sections):
-        links = ['<a href="#%s">%s</a>' % (s, esc(TITLES[s])) for s in sections]
-        return '<nav class="sections">%s</nav>' % "\n".join(links)
+        items = ['<li><a href="#%s">%s</a></li>' % (s, esc(TITLES[s]))
+                 for s in sections]
+        return ('<section class="contents"><h2>Contents</h2>'
+                "<ul>%s</ul></section>" % "\n".join(items))
 
     def circle_svg(self, inst):
         """The circle of fifths, redrawn as SVG.
@@ -368,15 +370,15 @@ class Site(object):
                             meta["tuning"], entry["chord"], f,
                             meta.get("reentrant", False))) \
                         if meta.get("kind", "frets") == "frets" else ""
-                    cells.append('<span class="v">%s%s</span>'
-                                 % (esc(f), marks))
+                    cells.append('<span class="v pen %s">%s%s</span>'
+                                 % (inst, esc(f), marks))
                 if meta.get("kind") == "keyboard":
                     shapes = list(entry["frets"])
                     spread = self.book.piano_open(entry["chord"], key)
                     if spread and spread not in shapes:
                         shapes.append(spread)
-                    cells = ['<span class="v">%s</span>' % notes_html(f)
-                             for f in shapes]
+                    cells = ['<span class="v pen %s">%s</span>'
+                             % (inst, notes_html(f)) for f in shapes]
                 rows.append('<tr><th>%s</th><td class="fret">%s</td></tr>'
                             % (sym(entry["chord"]),
                                '<span class="alt"></span>'.join(cells)))
@@ -508,7 +510,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 17.6px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* Header, nav and main share one measure, so the wordmark, the
    instrument links and the content all start on the same left edge. */
@@ -526,12 +528,9 @@ nav a {
 }
 nav a:hover { text-decoration: underline; }
 nav a.on { text-decoration: underline; text-underline-offset: 4px; }
-nav.sections {
-  border: 0; padding: 0; margin: 1rem 0 2rem;
-}
-nav.sections a {
-  font-weight: 400; color: var(--faint); padding-right: 1rem;
-}
+.contents ul { margin: 0.5rem 0 2rem; padding-left: 1.2rem; }
+.contents li { margin: 0.2rem 0; }
+.contents a { color: var(--ink); text-decoration: underline; }
 main { padding: 1.5rem 1rem 3rem; }
 h1 { font-size: 2rem; margin: 1rem 0 0.25rem; }
 h2 { font-size: 1.3rem; margin: 2.5rem 0 0.75rem; }
@@ -559,6 +558,12 @@ tr.group th { padding-top: 0.8rem; color: %(keyred)s; }
 .sep { color: var(--rule); }
 .alt::after { content: " "; }
 .v + .alt + .v { padding-left: 0.6rem; }
+/* A rule under the key, so each block reads as its own table rather than
+   running into the one above it in a multi-column flow. */
+.key h3 {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.2rem; margin-bottom: 0.4rem;
+}
 .keys {
   display: grid; gap: 0 2.5rem;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
