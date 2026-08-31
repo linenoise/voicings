@@ -17,7 +17,7 @@ A pocket chord book you can print, cut up, and sew. Mandolin, guitar, ukulele, p
 
 **Print** is the same book imposed 4-up on US Letter, four 3.5in x 5.5in pages to a sheet, for printing and sewing. Those files carry `(print)` in the name. Per-instrument editions carry that instrument's circle of fifths, its reference pages, its chords, and the credits.
 
-This QR code is the same as the QR code on the front of the printed books. It brings you to this book repository, <http://github.com/linenoise/voicings>. This allows you to share this book with friends:
+This QR code is the same as the QR code on the front of the printed books. It brings you to this book repository, <http://github.com/linenoise/voicings>. This allows you to **share this book with friends**:
 
 <img src="assets/qr.png" alt="QR code linking to https://github.com/linenoise/voicings" width="360">
 
