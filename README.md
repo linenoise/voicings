@@ -67,6 +67,53 @@ sudo apt install texlive-xetex texlive-latex-extra   # Debian
 | `make lint` / `make pagecheck` | Catch undefined macros; catch page overflow |
 | `make clean` / `make distclean` | Remove TeX debris; remove all of `build/` |
 
+## The website
+
+`make site` builds a static site into `pages/`: HTML, CSS and images, no
+JavaScript. It is the same content as the book, generated from the same
+`render.Book`, so a chord that changes in `data/` changes in both places or
+in neither. The PDFs are copied into `pages/downloads/` rather than linked
+off GitHub, because a download that leaves the domain is a download that
+breaks when the repository moves.
+
+To look at it before pushing: `python3 -m http.server --directory pages`.
+Opening the files directly will not do, because the stylesheet and the
+images are referenced relatively.
+
+The front page carries the download table, the QR code, and how to print and
+sew a copy. Each instrument gets a page of everything the book has for it,
+in one scroll, with anchor links to each section. The circle of fifths is
+redrawn as SVG rather than shipped as an image.
+
+**Hosting.** `.github/workflows/pages.yml` publishes `pages/` to GitHub Pages
+on every push to `main`. The workflow is needed because branch-based
+publishing only serves from the repository root or from `/docs`, and this
+builds to `/pages`: uploading the folder as a Pages artifact works from any
+path.
+
+**DNS**, at Gandi, for the apex domain:
+
+| Type | Name | Value |
+|---|---|---|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| AAAA | @ | 2606:50c0:8000::153 |
+| AAAA | @ | 2606:50c0:8001::153 |
+| AAAA | @ | 2606:50c0:8002::153 |
+| AAAA | @ | 2606:50c0:8003::153 |
+| CNAME | www | linenoise.github.io. |
+
+`pages/CNAME` holds the domain, which is what tells GitHub Pages to answer
+for it. Turn on "Enforce HTTPS" in the repository's Pages settings once the
+certificate has been issued.
+
+The QR code on the cover and the back sheet points at fancychords.com.
+`\sourceurl` in the class file still points at GitHub, so the credits name
+both: one for a reader with a phone, one for someone who wants to correct a
+chord.
+
 ## How the data is checked
 
 Every voicing is checked against the chord it claims to be. `tools/theory.py` knows what notes are in each chord. `tools/validate.py` works out what a fingering actually sounds on that tuning, and compares.

@@ -254,7 +254,12 @@
 }{\par}
 
 % ------------------------------------------------------------------- cover
-\newcommand{\bookurl}{https://github.com/linenoise/voicings}
+% Where the book lives now. The QR code and the cover carry this.
+\newcommand{\bookurl}{https://fancychords.com}
+% Where it is built. Kept apart from \bookurl because they stopped
+% being the same place: one is for a reader with a phone, the other
+% for someone who wants to correct a chord.
+\newcommand{\sourceurl}{http://github.com/linenoise/voicings}
 
 % #1 names the instrument for a single-instrument edition, or is empty for
 % the whole book. #2 is the line (or lines) of instrument names beneath the
@@ -811,8 +816,11 @@
     \href{mailto:danne@stayskal.com}{danne@stayskal.com}\\
     http://danne.stayskal.com/\par}
    \vspace{0.9mm}
-   {\color{faint}Source, corrections and a printable copy:\par}
+   {\color{faint}Downloads and a printable copy:\par}
    \bookurl\par
+   \vspace{0.9mm}
+   {\color{faint}Source and corrections:\par}
+   \sourceurl\par
    \vspace{0.9mm}
    {\color{faint}\scriptsize MIT licensed. Print it, cut it, sew it,
     give it away.\par}}

@@ -37,7 +37,7 @@ ifeq ($(CROP_MARKS),1)
   IMPOSEOPTS := --crop-marks
 endif
 
-.PHONY: all screen print validate lint repair resolve revert spikes \
+.PHONY: site all screen print validate lint repair resolve revert spikes \
         piano qr complete editions pagecheck clean check-latex help
 
 all: validate editions
@@ -70,6 +70,11 @@ spikes:
 ## Regenerate the piano pages from data/piano-shapes.yaml.
 piano:
 	@$(PYTHON) tools/piano.py
+
+## Build the static site for fancychords.com into pages/. Needs the PDFs,
+## which it copies into pages/downloads/.
+site: editions
+	@$(PYTHON) tools/site.py
 
 ## Build all fourteen PDFs: the whole book and each instrument, screen and
 ## print. This is what `make` does, and what lands in editions/.

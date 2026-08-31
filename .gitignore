@@ -6,6 +6,13 @@
 build/*
 !build/*.tex
 !build/*.pdf
+# qr.tex and qr.pdf are intermediates for assets/qr.png, not editions.
+build/qr.tex
+build/qr.pdf
+
+# Local preview config for the site (python3 -m http.server), not part of
+# the build.
+.claude/
 
 *.aux
 *.log
