@@ -1,6 +1,6 @@
 # Fancy Chords and Their Voicings
 
-A pocket chord book you can print, cut up, and sew. Mandolin, guitar, ukulele, piano, banjo, bass, and cello. Every chord in all twelve keys.
+These are printable, shareable copies of my handwritten chord voicing notebook. You can download, print, cut, and sew or staple these chord voicing books for yourself. They cover most chords in all twelve keys for mandolin, guitar, ukulele, piano, banjo, bass, and cello.
 
 | Edition | Read | Print on US Letter | Print on A4 | Pages | Sheets |
 |---|---|---|---|---|---|
@@ -13,24 +13,11 @@ A pocket chord book you can print, cut up, and sew. Mandolin, guitar, ukulele, p
 | Bass | [Fancy Bass Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Bass Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Bass Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Bass%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 8 | 1 |
 | Cello | [Fancy Cello Chords and Their Voicings.pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings.pdf) | [Fancy Cello Chords and Their Voicings (print-letter).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print-letter%29.pdf) | [Fancy Cello Chords and Their Voicings (print-A4).pdf](https://github.com/linenoise/voicings/blob/main/build/Fancy%20Cello%20Chords%20and%20Their%20Voicings%20%28print-A4%29.pdf) | 20 | 3 |
 
-These PDFs are printable, shareable copies of a handwritten notebook that's very important to me. 
-
-The contents of the above documents are based on an actual handwritten notebook with thousands of chord voicings that I've kept in my instrument cases for years. Photos of the pages of my original notebook are included under the `notebook/` folder of this repository. That notebook covers the instruments I play regularly (mandolin, guitar, bass, banjo, and ukulele). I added piano and cello / viola later once I had the software generators running. Per-instrument editions each carry that instrument's circle of fifths, its reference pages, its chords, and the credits.
+The contents of the above documents are based on an actual handwritten notebook with thousands of chord voicings that I've kept in my instrument cases for years. Photos of the pages of my original notebook are included under the `notebook/` folder of this repository. That handwritten notebook covers the instruments I play regularly (mandolin, guitar, bass, banjo, and ukulele). I added piano and cello / viola later once I had the software generators running that are desribed below. Per-instrument editions each carry that instrument's circle of fifths, its reference pages, its chords, and the credits.
 
 The **Read** links above are for reading on a screen. In these, each notebook page takes up a full sheet. 
 
-The **Print** links are for printing and binding into small pocket
-notebooks: four 3.5 x 5.5 inch pages per sheet, to be cut and sewn into
-something the size of the original. Pick the column that matches your
-paper. The two are the same book from the same typesetting, imposed twice;
-only the sheet around the pages and the cut lines differ. Those files
-carry `(print-letter)` or `(print-A4)` in the name.
-
-A4 needs one more cut than Letter does. Two 5.5in pages come to exactly
-11in, so on Letter the top and bottom edges of the sheet are already the
-edges of the book and there is one horizontal cut, down the middle. A4 is
-297mm, which leaves 8.8mm of waste at the head and the tail, so it gets
-three horizontal cuts. Both are drawn on the sheet.
+The **Print** links are for printing and binding into small pocket notebooks: four 3.5 x 5.5 inch pages per sheet, to be cut and sewn into something the size of the original. Pick the column that matches your paper. The two are the same book from the same typesetting, imposed twice; only the sheet around the pages and the cut lines differ. Those files carry `(print-letter)` or `(print-A4)` in the name.
 
 This QR code is the same as the QR code on the front of the printed books. It brings you to this book repository, <http://github.com/linenoise/voicings>. This allows you to **share this book with friends**:
 
@@ -38,12 +25,8 @@ This QR code is the same as the QR code on the front of the printed books. It br
 
 ## How to print, cut, and sew or staple a copy
 
-1. Print the 4-up PDF for your paper, **double-sided, flipped on the long
-   edge**, at 100%. Don't let the printer "fit to page".
-2. Cut along the gray lines, which mark the four 3.5in x 5.5in
-   rectangles. On Letter that is three cuts down and one across: 3/4in of
-   waste off each side, then one down the middle and one across. On A4 it
-   is three each way, because the sheet is 18mm taller than two pages.
+1. Print the 4-up PDF for your paper, **double-sided, flipped on the long edge**, at 100%. Don't let the printer "fit to page".
+2. Cut along the gray lines, which mark the four 3.5in x 5.5in rectangles.
 3. Stack the rectangles in the order they came off the sheet: top-left. top-right, bottom-left, bottom-right.
 4. Punch the five holes. Every page carries five small gray circles down its binding edge, so there is nothing to measure: square up the stack, punch through the marks, sew.
 5. Sew a five-hole pamphlet stitch. The inner margin is 8.5mm, which leaves room for the thread. Alternatively, staple the binding on the side with hole punch marks.
