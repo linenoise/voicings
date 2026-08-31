@@ -1,6 +1,3 @@
-# Mandolin voicings.
-# Entries marked `derived` were generated to complete
-# the vocabulary; the rest came from the notebook.
 instrument: mandolin
 source: notebook pages 1-24
 keys:
@@ -1152,6 +1149,7 @@ keys:
   - chord: A5
     frets:
     - x775
+    - '2775'
   - chord: A+
     frets:
     - '2345'
@@ -1226,6 +1224,7 @@ keys:
     - '3545'
   - chord: A7#9
     frets:
+    - '5545'
     - '6233'
   - chord: Am11
     frets:
@@ -1249,6 +1248,7 @@ keys:
   - chord: A/E
     frets:
     - x245
+    - '9779'
   - chord: Am/E
     frets:
     - x235
