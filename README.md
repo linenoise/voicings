@@ -19,6 +19,10 @@ A pocket chord book you can print, cut up, and sew. Mandolin, guitar, ukulele, p
 
 <img src="assets/qr.png" alt="QR code linking to https://github.com/linenoise/voicings" width="360">
 
+This QR code is the same as the QR code on the front of the book. It brings you to this book repository:
+
+http://github.com/linenoise/voicings
+
 ## How to print, cut, and sew or staple a copy
 
 1. Print the 4-up PDF on US Letter, **double-sided, flipped on the long edge**, at 100%. Don't let the printer "fit to page".
