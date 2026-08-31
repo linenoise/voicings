@@ -12,12 +12,16 @@ body {
   color: var(--ink);
   font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+/* Header, nav and main share one measure, so the wordmark, the
+   instrument links and the content all start on the same left edge. */
+header, nav, main { max-width: 54rem; margin: 0 auto; }
 header { padding: 1.5rem 1rem 0.5rem; }
 .wordmark {
   font-size: 1.5rem; font-weight: 700; color: var(--ink); text-decoration: none;
 }
 .wordmark span { font-weight: 400; color: var(--faint); }
 nav { padding: 0 1rem; border-bottom: 1px solid var(--rule); }
+nav.sections { max-width: none; }
 nav a {
   display: inline-block; padding: 0.5rem 0.75rem 0.6rem 0;
   font-weight: 700; text-decoration: none; color: var(--ink);
@@ -30,7 +34,7 @@ nav.sections {
 nav.sections a {
   font-weight: 400; color: var(--faint); padding-right: 1rem;
 }
-main { max-width: 54rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+main { padding: 1.5rem 1rem 3rem; }
 h1 { font-size: 2rem; margin: 1rem 0 0.25rem; }
 h2 { font-size: 1.3rem; margin: 2.5rem 0 0.75rem; }
 h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
@@ -66,8 +70,8 @@ table.editions td, table.editions th { padding-right: 1.2rem; }
 table.editions .num { font-variant-numeric: tabular-nums; }
 .qr img { image-rendering: pixelated; }
 footer {
-  border-top: 1px solid var(--rule); margin-top: 3rem;
-  padding: 1rem; color: var(--faint); font-size: 0.9rem;
+  border-top: 1px solid var(--rule); margin: 3rem auto 0;
+  max-width: 54rem; padding: 1rem; color: var(--faint); font-size: 0.9rem;
 }
 footer a { color: var(--faint); }
 .pen.mandolin { color: #00873C; }

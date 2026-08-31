@@ -106,8 +106,16 @@ Every push then republishes.
 | CNAME | www | linenoise.github.io. |
 
 `docs/CNAME` holds the domain, which is what tells GitHub Pages to answer
-for it. Turn on "Enforce HTTPS" in the repository's Pages settings once the
-certificate has been issued.
+for it.
+
+**HTTPS.** GitHub issues the certificate itself, but only after its own DNS
+check passes, and that check wants the `www` record in the documented form:
+a CNAME to `linenoise.github.io.`, not to the apex. Pointing `www` at the
+apex serves fine over HTTP and still fails the check, which leaves the
+certificate unissued and "Enforce HTTPS" greyed out. Add the AAAA records
+too. Then remove the custom domain in the Pages settings, save, re-enter it
+and save again: that is what retriggers issuance. It takes a few minutes,
+after which "Enforce HTTPS" becomes available and should be turned on.
 
 The QR code on the cover and the back sheet points at fancychords.com.
 `\sourceurl` in the class file still points at GitHub, so the credits name
