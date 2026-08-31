@@ -17,7 +17,7 @@ These PDFs are printable, shareable copies of a handwritten notebook that's very
 
 The contents of the above documents are based on an actual handwritten notebook with thousands of chord voicings that I've kept in my instrument cases for years. Photos of the pages of my original notebook are included under the `notebook/` folder of this repository. That notebook covers the instruments I play regularly (mandolin, guitar, bass, banjo, and ukulele). I added piano and cello / viola later once I had the software generators running. Per-instrument editions each carry that instrument's circle of fifths, its reference pages, its chords, and the credits.
 
-The **Read** links above are for reading on a screen. In thes, each notebook page takes up a full sheet. 
+The **Read** links above are for reading on a screen. In these, each notebook page takes up a full sheet. 
 
 The **Print** links are the for printing and binding into small pocket notebooks. They are typeset and arranged as four 3.5 x 5.5 inch pages per sheet, to be printed on US Letter paper. These are copies for printing, cutting, and sewing that end up the same size as my original notebook. Those PDF files carry `(print)` in the name.
 
