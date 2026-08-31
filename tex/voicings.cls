@@ -83,8 +83,12 @@
 \definecolor{fretpurple}{HTML}{9600D5}  % ukulele, purple pen
 \definecolor{fretorange}{HTML}{C05500}  % banjo, orange pen
 \definecolor{fretyellow}{HTML}{9A8800}  % bass, darkest legible yellow
-\definecolor{rule}{HTML}{B8B8B8}
-\definecolor{faint}{HTML}{6E6E6E}
+% Both grays run at twice the contrast they used to. The old faint sat
+% at 4.97:1 and the old rule at 1.93:1, which reads on a screen and
+% washes out on a laser printer: this book is meant to be printed at
+% home and carried, so the page it makes there is the one that counts.
+\definecolor{rule}{HTML}{7E7E7E}   % 3.95:1, was 1.93:1
+\definecolor{faint}{HTML}{404040}  % 10.10:1, was 4.97:1
 \definecolor{paper}{HTML}{FFFFFF}
 \ifvoicings@screen
   \definecolor{paper}{HTML}{FDFCF8}
