@@ -17,10 +17,12 @@
 % one and the top and bottom edges are the paper's own.
 %
 % Drawn here rather than with pdfpages' own frame option, which is a
-% black hairline with no way to soften it. Mid grey at a third of a
-% point is visible enough to follow with scissors and faint enough that
-% whatever survives the cut does not read as a border.
-\definecolor{cutline}{HTML}{9A9A9A}
+% black hairline with no way to soften it. Matched to the book's hairline
+% grey: a third of a point at 3.95:1, which a laser prints faithfully and
+% which is still light enough that a remnant of it after an imperfect cut
+% does not read as a border. The first attempt at 9A9A9A looked right on
+% screen and needed good light to follow on paper.
+\definecolor{cutline}{HTML}{7E7E7E}
 \newcommand{\cutlines}{%
   \begin{tikzpicture}[remember picture, overlay]
     \foreach \cutx in {0.75, 4.25, 7.75} {%
