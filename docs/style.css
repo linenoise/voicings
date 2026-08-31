@@ -6,11 +6,16 @@
   --paper: #FDFCF8;
 }
 * { box-sizing: border-box; }
+/* The size lives on the root, not on body. Everything else here is in rem,
+   and rem resolves against html: setting it on body scaled the paragraphs
+   and left every heading, caption and table header at the browser default.
+   19.36px is 16 up a tenth, twice. */
+html { font-size: 19.36px; }
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 19.36px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 1rem/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* Header, nav and main share one measure, so the wordmark, the
    instrument links and the content all start on the same left edge. */
@@ -37,8 +42,10 @@ h2 { font-size: 1.3rem; margin: 2.5rem 0 0.75rem; }
 h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
 .tuning { font-family: ui-monospace, Menlo, Consolas, monospace;
           font-weight: 700; letter-spacing: 0.12em; margin: 0 0 0.5rem; }
-.lede { color: var(--faint); max-width: 40rem; }
-.note { color: var(--faint); font-size: 0.9rem; max-width: 34rem; }
+/* No narrower measure for prose: the content area is already the
+   measure, and capping these again broke lines well short of it. */
+.lede { color: var(--faint); }
+.note { color: var(--faint); font-size: 0.9rem; }
 .use { color: var(--faint); font-weight: 400; font-size: 0.9rem; }
 ul.downloads { list-style: none; padding: 0; margin: 0.5rem 0; }
 ul.downloads li { display: inline-block; margin: 0 1rem 0.5rem 0; }
@@ -50,25 +57,30 @@ table.grid thead th {
   border-bottom: 1px solid var(--rule); font-size: 0.85rem;
 }
 table.grid tbody th { font-weight: 700; white-space: nowrap; }
-tr.gap td { height: 0.7rem; }
+tr.gap td { height: 1.5rem; }
 tr.group th { padding-top: 0.8rem; color: #AA0019; }
 .fret { font-family: ui-monospace, Menlo, Consolas, monospace;
         font-weight: 700; letter-spacing: 0.05em; }
 .fret sup { font-size: 0.65em; font-weight: 700; color: var(--faint); }
 .sep { color: var(--rule); }
-.alt::after { content: " "; }
-.v + .alt + .v { padding-left: 0.6rem; }
+/* Each voicing is its own box with the gap on its right, so one that
+   wraps starts at the left edge of the cell rather than carrying an
+   indent from the separator in front of it. */
+.alt { display: none; }
+.v { display: inline-block; margin-right: 0.7rem; }
 /* A rule under the key, so each block reads as its own table rather than
    running into the one above it in a multi-column flow. */
 .key h3 {
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule); font-size: 1rem;
   padding-bottom: 0.2rem; margin-bottom: 0.4rem;
 }
 .keys {
   display: grid; gap: 0 2.5rem;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 }
-svg.circle { width: 100%; max-width: 26rem; height: auto; display: block; }
+/* Full measure. The drawing is a viewBox, so the type inside scales
+   with it and needs no separate size. */
+svg.circle { width: 100%; height: auto; display: block; }
 table.editions td, table.editions th { padding-right: 1.2rem; }
 table.editions .num { font-variant-numeric: tabular-nums; }
 .qr img { image-rendering: pixelated; }
