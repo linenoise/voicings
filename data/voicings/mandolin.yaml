@@ -928,7 +928,7 @@ keys:
     frets:
     - '0225'
     - '2223'
-    - '7577'
+    - '0777'
   - chord: G7
     frets:
     - '0021'
@@ -968,12 +968,10 @@ keys:
   - chord: Gmaj9
     frets:
     - '2423'
-    - '0022'
     - '0425'
   - chord: Gm9
     frets:
     - '0315'
-    - '3313'
     - '2313'
   - chord: Gadd9
     frets:
