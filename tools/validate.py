@@ -50,7 +50,8 @@ class Finding(object):
 
 
 def check_voicing(instrument, tuning, key, symbol, frets_text, kind="frets",
-                  reentrant=False, max_span=None, max_diagonal=None):
+                  reentrant=False, max_span=None, max_diagonal=None,
+                  diagonal_step=2):
     """Yield Findings for one written voicing.
 
     A voicing is either fret numbers against a tuning, or -- for a keyboard
@@ -155,7 +156,8 @@ def check_voicing(instrument, tuning, key, symbol, frets_text, kind="frets",
 
     # Can a hand make this shape? Four fingers, and only so much reach.
     if frets is not None and max_span is not None:
-        why = playability.unplayable_reason(frets, max_span, 4, max_diagonal)
+        why = playability.unplayable_reason(frets, max_span, 4,
+                                            max_diagonal, diagonal_step)
         if why:
             yield Finding(WARNING, instrument, key, symbol, frets_text,
                           "hard to finger: %s" % why)
@@ -201,7 +203,9 @@ def main():
                     for f in check_voicing(name, tuning, keyblock["key"],
                                            entry["chord"], frets_text, kind,
                                            reentrant, meta.get("max_span"),
-                                           meta.get("max_diagonal")):
+                                           meta.get("max_diagonal"),
+                                           meta.get("max_diagonal_step",
+                                                    2)):
                         findings.append(f)
                         counts[f.severity] += 1
 

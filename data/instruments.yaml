@@ -16,6 +16,9 @@ mandolin:
   # Short scale, four courses -- diagonals reach a long way.
   max_span: 4        # frets covered without shifting
   max_diagonal: 7    # more, when it is one finger per string
+  # Frets are half a guitar's width, so a diagonal can climb three of them
+  # per course and still lie under the hand. Danne plays Emaj9 1-4-6-0.
+  max_diagonal_step: 3
   kind: frets
   name: Mandolin
   also_covers: ["Fiddle / violin", "Tenor banjo"]

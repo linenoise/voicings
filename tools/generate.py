@@ -28,7 +28,7 @@ MAX_FRET = 12
 EXTENDED_ROOTED = {"11", "13", "m13", "maj13", "7#11"}
 
 
-def power_chord(tuning, root_pc, max_span, max_diagonal):
+def power_chord(tuning, root_pc, max_span, max_diagonal, diagonal_step=2):
     """The shape a player means by a 5 chord: root, fifth, octave.
 
     Not something the ranked search will ever find. It prefers shapes with
@@ -63,9 +63,11 @@ def power_chord(tuning, root_pc, max_span, max_diagonal):
             # G5 came out 0-0-10-x.
             if (f8 - fret <= max_span
                     and playability.is_playable(trial, max_span, 4,
-                                                max_diagonal)):
+                                                max_diagonal,
+                                                diagonal_step)):
                 shape = trial
-        if not playability.is_playable(shape, max_span, 4, max_diagonal):
+        if not playability.is_playable(shape, max_span, 4, max_diagonal,
+                                       diagonal_step):
             continue
         if best is None or fret < best[0]:
             best = (fret, shape)
@@ -76,7 +78,8 @@ def power_chord(tuning, root_pc, max_span, max_diagonal):
 
 
 def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
-             max_span=4, max_diagonal=None, require_bass_lowest=None):
+             max_span=4, max_diagonal=None, require_bass_lowest=None,
+             diagonal_step=2):
     """Best playable voicing of `symbol` on `tuning`, or None.
 
     An explicitly named bass -- the E of C/E -- is a hard requirement: get
@@ -88,7 +91,8 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
     """
     root, quality, bass_pc = theory.parse_chord(symbol)
     if quality == "5" and bass_pc is None:
-        shape = power_chord(tuning, root, max_span, max_diagonal)
+        shape = power_chord(tuning, root, max_span, max_diagonal,
+                            diagonal_step)
         if shape is not None:
             return shape
     if require_root_bass is None:
@@ -131,7 +135,8 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
         if len(sounding) < max(2, len(tuning) - 2):
             continue
         shape = list(combo)
-        if not playability.is_playable(shape, max_span, 4, max_diagonal):
+        if not playability.is_playable(shape, max_span, 4, max_diagonal,
+                                       diagonal_step):
             continue
         fretted = [f for _, f in sounding if f]
         pcs = {(open_pcs[i] + f) % 12 for i, f in sounding}
@@ -199,10 +204,10 @@ def generate(tuning, symbol, max_fret=MAX_FRET, require_root_bass=None,
             # a mandolin's lowest string is G, so C/E has no E to sit on.
             # Take an inversion that contains the note instead of nothing.
             return generate(tuning, symbol, max_fret, require_root_bass,
-                            max_span, max_diagonal, require_bass_lowest=False)
+                            max_span, max_diagonal, False, diagonal_step)
         if require_root_bass:
             return generate(tuning, symbol, max_fret, False,
-                            max_span, max_diagonal, False)
+                            max_span, max_diagonal, False, diagonal_step)
         return None
 
     out = []
@@ -220,7 +225,8 @@ def for_instrument(meta, symbol, max_fret=MAX_FRET):
     """Generate using an instrument's own reach limits."""
     return generate(meta["tuning"], symbol, max_fret,
                     max_span=meta.get("max_span", 4),
-                    max_diagonal=meta.get("max_diagonal"))
+                    max_diagonal=meta.get("max_diagonal"),
+                    diagonal_step=meta.get("max_diagonal_step", 2))
 
 
 if __name__ == "__main__":

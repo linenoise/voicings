@@ -166,8 +166,8 @@ keys:
     - '6686'
   - chord: Dbm6
     frets:
-    - '6676'
     - '3244'
+    - '6676'
   - chord: Db6/9
     frets:
     - '3141'
@@ -410,8 +410,8 @@ keys:
     - '2102'
   - chord: Ebsus2
     frets:
+    - '8886'
     - '3366'
-    - 88x6
   - chord: Ebsus4
     frets:
     - '8864'
@@ -446,6 +446,7 @@ keys:
     frets:
     - '2142'
     - '6465'
+    - '8445'
   - chord: Eb7sus4
     frets:
     - '8646'
@@ -466,6 +467,7 @@ keys:
     - '0151'
   - chord: Ebm9
     frets:
+    - '6362'
     - '3441'
   - chord: Ebadd9
     frets:
@@ -480,7 +482,7 @@ keys:
   - chord: Eb7#9
     frets:
     - '6562'
-    - '6466'
+    - '8599'
   - chord: Ebm11
     frets:
     - '1441'
@@ -533,6 +535,7 @@ keys:
     frets:
     - '4477'
     - '9997'
+    - x222
   - chord: Esus4
     frets:
     - '4200'
@@ -583,6 +586,7 @@ keys:
     - '1022'
   - chord: Emaj9
     frets:
+    - '1460'
     - '1122'
   - chord: Em9
     frets:
@@ -590,14 +594,13 @@ keys:
   - chord: Eadd9
     frets:
     - '1420'
-    - '1222'
   - chord: Emadd9
     frets:
     - '0222'
     - '9597'
   - chord: E7b9
     frets:
-    - x251
+    - '1251'
   - chord: E7#9
     frets:
     - '7673'

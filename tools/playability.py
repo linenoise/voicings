@@ -75,7 +75,7 @@ def span(frets):
     return (max(fretted) - min(fretted)) if fretted else 0
 
 
-def is_diagonal(frets):
+def is_diagonal(frets, step=2):
     """One finger per string, frets climbing as the strings do.
 
     The hand angles across the neck for these, so they reach much further
@@ -98,21 +98,23 @@ def is_diagonal(frets):
 
     # How steeply it climbs matters as much as how far. A diminished
     # seventh on a mandolin is 1-3-5-7: two frets per string, and the hand
-    # lies across it naturally. Three frets per string covers the same
-    # ground and is a different proposition entirely.
+    # lies across it naturally. How much steeper than that a hand will take
+    # depends on the instrument -- `step` is frets per string, and mandolin
+    # frets are narrow enough for three.
     for (i, a), (j, b) in zip(fretted, fretted[1:]):
-        if abs(b - a) > 2 * (j - i):
+        if abs(b - a) > step * (j - i):
             return False
     return True
 
 
-def unplayable_reason(frets, max_span, max_fingers=4, max_diagonal=None):
+def unplayable_reason(frets, max_span, max_fingers=4, max_diagonal=None,
+                      diagonal_step=2):
     """Why a hand can't make this shape, or None if it can."""
     n = fingers_needed(frets)
     if n > max_fingers:
         return "needs %d fingers" % n
     limit = max_span
-    if max_diagonal is not None and is_diagonal(frets):
+    if max_diagonal is not None and is_diagonal(frets, diagonal_step):
         limit = max_diagonal
     s = span(frets)
     if s > limit:
@@ -120,5 +122,7 @@ def unplayable_reason(frets, max_span, max_fingers=4, max_diagonal=None):
     return None
 
 
-def is_playable(frets, max_span, max_fingers=4, max_diagonal=None):
-    return unplayable_reason(frets, max_span, max_fingers, max_diagonal) is None
+def is_playable(frets, max_span, max_fingers=4, max_diagonal=None,
+                diagonal_step=2):
+    return unplayable_reason(frets, max_span, max_fingers, max_diagonal,
+                             diagonal_step) is None
