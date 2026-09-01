@@ -53,7 +53,14 @@ TITLES = {
     "patterns": "Patterns",
     "spikes": "Drone Spikes",
     "chords": "Chords",
+    "printing": "How to print, cut, and sew a copy",
 }
+
+
+# Said above the download buttons on every page that carries them:
+# the PDFs are a book to make, not a web page to scroll.
+BOOKLETS = ('<p class="booklets">This content is designed to be printed '
+            "into booklets.</p>")
 
 
 def colors():
@@ -460,10 +467,9 @@ class Site(object):
             body.append('<p class="tuning pen %s">%s</p>' % (inst, esc(tuning)))
         if meta.get("note"):
             body.append("<p class=\"lede\">%s</p>" % esc(meta["note"]))
+        body.append(BOOKLETS)
         body.append(self.downloads(inst))
-        body.append('<p class="booklets">This content is designed to be '
-                    "printed into booklets.</p>")
-        body.append(self.section_nav(sections))
+        body.append(self.section_nav(sections + ["printing"]))
 
         for s in sections:
             body.append('<section id="%s"><h2>%s</h2>' % (s, esc(TITLES[s])))
@@ -496,6 +502,7 @@ class Site(object):
             elif s == "chords":
                 body.append(self.chords_for(inst))
             body.append("</section>")
+        body.append(self.printing_section())
         return self.page(inst, "Fancy %s Chords" % name,
                          "\n".join(body), inst)
 
@@ -506,14 +513,13 @@ class Site(object):
         body = []
         body.append(
             '<p class="lede">A pocket notebook of chord voicings for seven '
-            "instruments, in all twelve keys. Print it, cut it, sew it, give "
-            "it away. Every voicing is checked against the chord it claims to "
-            "be.</p>")
-        body.append("<h2>Download</h2>")
+            "instruments, in all twelve keys. <strong>Print it, cut it, sew "
+            "it, give it away.</strong> Every voicing is checked against the "
+            "chord it claims to be.</p>")
+        body.append(BOOKLETS)
         body.append(self.downloads())
-        body.append('<p class="booklets">This content is designed to be '
-                    "printed into booklets.<br>Individual instrument "
-                    "booklets are also available:</p>")
+        body.append('<p class="booklets">Individual instrument booklets are '
+                    "also available:</p>")
         body.append(self.picks())
         body.append(self.printing_section())
         return self.page("index", "Fancy Chords and Their Voicings",
@@ -614,9 +620,11 @@ h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
    the choice can be made without opening the file. */
 .getit { margin: 0.5rem 0 2.5rem; }
 .getit .edition { font-weight: 700; font-size: 1.1rem; margin: 0 0 0.7rem; }
+/* Three equal columns, so each button is a third of the measure and the
+   row lines up with the instrument cards below it. */
 ul.buttons {
   list-style: none; padding: 0; margin: 0;
-  display: flex; flex-wrap: wrap; gap: 0.7rem;
+  display: grid; gap: 0.7rem; grid-template-columns: repeat(3, 1fr);
 }
 ul.buttons li { margin: 0; }
 a.btn {
@@ -632,9 +640,9 @@ a.btn .meta { display: block; font-size: 0.85rem; opacity: 0.8; }
 a.btn:hover, a.btn:focus {
   background: var(--ink); border-color: var(--ink); color: var(--paper);
 }
-/* On a phone the buttons go full width: a thumb is a blunt instrument,
-   and there is nothing to line them up with at that measure anyway. */
-@media (max-width: 30rem) {
+/* Below the width where three columns still hold a label on one line,
+   the buttons stack and go full width: a thumb is a blunt instrument. */
+@media (max-width: 46rem) {
   ul.buttons { display: block; }
   ul.buttons li { margin-bottom: 0.7rem; }
   a.btn { min-width: 0; }
