@@ -505,6 +505,7 @@ keys:
     - '4422'
   - chord: Esus4
     frets:
+    - '2452'
     - '2402'
   - chord: E6
     frets:
