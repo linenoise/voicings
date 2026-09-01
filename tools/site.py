@@ -544,6 +544,10 @@ top-right, bottom-left, bottom-right.</li>
 </ol>
 <p><img src="pamphlet-stitch.svg" alt="Five-hole pamphlet stitch: the spine
 outside, the spine inside, and the order of the six passes"></p>
+<p>Examples of some printed and stapled booklets:</p>
+<p><img src="booklets.jpg" width="2038" height="1437" alt="Three stapled
+booklets on a desk: Fancy Mandolin Chords, Fancy Guitar Chords and Fancy
+Banjo Chords, each with its tuning and a QR code on the cover"></p>
 </section>
 """
 
@@ -646,6 +650,9 @@ a.btn:hover, a.btn:focus {
   a.btn { min-width: 0; }
 }
 p.booklets { margin: 0 0 0.9rem; }
+/* The stitch diagram is 900px wide and had nothing holding it back, so it
+   ran off the side of a phone. Both figures share the one width now. */
+#printing img { display: block; width: 100%%; max-width: 900px; height: auto; }
 ul.picks {
   list-style: none; padding: 0; margin: 0 0 2.5rem;
   display: grid; gap: 0.7rem;
@@ -722,9 +729,10 @@ def main():
             shutil.copy2(os.path.join(build, f), os.path.join(downloads, f))
             copied += 1
 
-    stitch = os.path.join(ROOT, "images", "pamphlet-stitch.svg")
-    if os.path.exists(stitch):
-        shutil.copy2(stitch, os.path.join(out, "pamphlet-stitch.svg"))
+    for name in ("pamphlet-stitch.svg", "booklets.jpg"):
+        src = os.path.join(ROOT, "images", name)
+        if os.path.exists(src):
+            shutil.copy2(src, os.path.join(out, name))
 
     with open(os.path.join(out, "style.css"), "w") as fh:
         fh.write(site.stylesheet())
