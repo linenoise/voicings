@@ -167,7 +167,7 @@ keys:
   - chord: Dbm6
     frets:
     - '6676'
-    - '3240'
+    - '3244'
   - chord: Db6/9
     frets:
     - '3141'
@@ -209,12 +209,15 @@ keys:
     - '4141'
   - chord: Dbmaj9
     frets:
+    - '5141'
     - '5144'
   - chord: Dbm9
     frets:
+    - '6960'
     - '9969'
   - chord: Dbadd9
     frets:
+    - '6364'
     - '1141'
   - chord: Dbmadd9
     frets:
