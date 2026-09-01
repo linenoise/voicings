@@ -1351,6 +1351,7 @@ keys:
     derived: true
   - chord: B7
     frets:
+    - '4320'
     - '2322'
   - chord: Bmaj7
     frets:
