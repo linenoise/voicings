@@ -15,7 +15,7 @@ keys:
     - '5133'
   - chord: C5
     frets:
-    - '0533'
+    - x533
   - chord: C+
     frets:
     - '1234'
@@ -28,13 +28,14 @@ keys:
     frets:
     - '5033'
     - '5553'
+    - '0033'
   - chord: Csus4
     frets:
     - '0333'
   - chord: C6
     frets:
+    - '5500'
     - '2233'
-    - '5770'
   - chord: Cm6
     frets:
     - '2133'
@@ -46,7 +47,8 @@ keys:
   - chord: C7
     frets:
     - '5576'
-    - '0230'
+    - '0210'
+    - '3213'
   - chord: Cmaj7
     frets:
     - '5520'
@@ -81,10 +83,11 @@ keys:
     - '7878'
   - chord: Cmaj9
     frets:
-    - '7978'
     - '5950'
+    - '7978'
   - chord: Cm9
     frets:
+    - '5066'
     - '8858'
   - chord: Cadd9
     frets:
@@ -100,7 +103,8 @@ keys:
     - '6878'
   - chord: C7#9
     frets:
-    - '5860'
+    - '3130'
+    - '8878'
   - chord: Cm11
     frets:
     - '0111'
