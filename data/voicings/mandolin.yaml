@@ -837,13 +837,10 @@ keys:
     frets:
     - '1202'
     - '1400'
-  - chord: Gb2
-    frets:
-    - '3444'
-    - '1412'
   - chord: Gbadd9
     frets:
     - '3444'
+    - '1412'
   - chord: Gbmadd9
     frets:
     - '2444'
