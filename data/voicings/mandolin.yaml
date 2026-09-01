@@ -656,7 +656,7 @@ keys:
     - '6789'
   - chord: F°
     frets:
-    - '4321'
+    - '4324'
     - '1321'
   - chord: Fsus2
     frets:
@@ -718,11 +718,11 @@ keys:
   - chord: Fmaj9
     frets:
     - '0201'
-    - '5333'
+    - '0300'
   - chord: Fm9
     frets:
-    - '1333'
-    - '5333'
+    - '0364'
+    - '8584'
   - chord: Fadd9
     frets:
     - '0301'
@@ -732,8 +732,8 @@ keys:
     - '1333'
   - chord: F7b9
     frets:
-    - '2101'
-    - '5365'
+    - '2362'
+    - '8485'
   - chord: F7#9
     frets:
     - '1101'
