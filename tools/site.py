@@ -99,6 +99,27 @@ class Site(object):
     def __init__(self, book, out):
         self.book = book
         self.out = out
+        self._counts = {}
+
+    def edition_counts(self, title):
+        """Pages and sheets for one edition, read off the built PDFs.
+
+        Off the files rather than a list kept by hand, so a button cannot
+        promise a length the download does not have.
+        """
+        if title not in self._counts:
+            import pagecount
+            here = os.path.join(self.out, "downloads")
+
+            def n(suffix):
+                f = os.path.join(here, "%s%s.pdf" % (title, suffix))
+                return pagecount.count(f) if os.path.exists(f) else None
+
+            pages, letter, a4 = n(""), n(" (print-letter)"), n(" (print-A4)")
+            self._counts[title] = (pages,
+                                   letter // 2 if letter else None,
+                                   a4 // 2 if a4 else None)
+        return self._counts[title]
 
     # -- shell -----------------------------------------------------------
 
@@ -145,19 +166,64 @@ class Site(object):
     # -- pieces ----------------------------------------------------------
 
     def downloads(self, inst=None):
-        """The three files for one edition, or the whole table."""
+        """The three editions of one book, as buttons.
+
+        These are the point of the site. Someone who lands here wants the
+        file in their hand -- nobody wants to stare at a phone during
+        rehearsal -- so each edition is a target big enough to hit with a
+        thumb, named for what you would do with it and labelled with what
+        it costs: pages to read, sheets of paper to print.
+        """
         title = ("Fancy %s Chords and Their Voicings"
                  % self.book.instruments[inst]["name"]) if inst else \
                 "Fancy Chords and Their Voicings"
+        pages, letter, a4 = self.edition_counts(title)
+
+        def meta(n, unit):
+            return "%s %s &middot; PDF" % (n, unit) if n else "PDF"
+
         rows = [
-            ("Read on a screen", "%s.pdf" % title),
-            ("Print on US Letter", "%s (print-letter).pdf" % title),
-            ("Print on A4", "%s (print-A4).pdf" % title),
+            ("", "Read on a screen", meta(pages, "pages")),
+            (" (print-letter)", "Print on US Letter", meta(letter, "sheets")),
+            (" (print-A4)", "Print on A4", meta(a4, "sheets")),
         ]
-        cells = ['<li><a href="downloads/%s">%s</a></li>'
-                 % (esc(f.replace(" ", "%20")), esc(label))
-                 for label, f in rows]
-        return '<ul class="downloads">%s</ul>' % "".join(cells)
+        out = ['<div class="getit">',
+               '<p class="edition">%s</p>' % esc(title),
+               '<ul class="buttons">']
+        for suffix, label, sub in rows:
+            f = "%s%s.pdf" % (title, suffix)
+            out.append('<li><a class="btn" href="downloads/%s">'
+                       '<span class="what">%s</span>'
+                       '<span class="meta">%s</span></a></li>'
+                       % (esc(f.replace(" ", "%20")), esc(label), sub))
+        out.append("</ul></div>")
+        return "\n".join(out)
+
+    def picks(self):
+        """The seven instrument editions, as their own colored targets.
+
+        Clicking an instrument under a heading that says Download means
+        wanting that instrument's book, so these go to the instrument
+        page, where its own buttons are the first thing on it.
+        """
+        items = []
+        for inst in ORDER:
+            meta = self.book.instruments[inst]
+            title = "Fancy %s Chords and Their Voicings" % meta["name"]
+            pages = self.edition_counts(title)[0]
+            tuning = (self.book.tuning_label(inst)
+                      if "tuning" in meta or "tuning_label" in meta else "")
+            bits = []
+            if tuning:
+                bits.append('<span class="fret">%s</span>' % esc(tuning))
+            if pages:
+                bits.append("%s pages" % pages)
+            items.append('<li><a class="pick pen %s" href="%s.html">'
+                         '<span class="who">%s</span>'
+                         '<span class="meta">%s</span></a></li>'
+                         % (inst, inst, esc(meta["name"]),
+                            " &middot; ".join(bits)))
+        return '<ul class="picks">%s</ul>' % "\n".join(items)
 
     def section_nav(self, sections):
         items = ['<li><a href="#%s">%s</a></li>' % (s, esc(TITLES[s]))
@@ -401,7 +467,6 @@ class Site(object):
             body.append('<p class="tuning pen %s">%s</p>' % (inst, esc(tuning)))
         if meta.get("note"):
             body.append("<p class=\"lede\">%s</p>" % esc(meta["note"]))
-        body.append("<h2>Download</h2>")
         body.append(self.downloads(inst))
         body.append(self.section_nav(sections))
 
@@ -439,7 +504,7 @@ class Site(object):
         return self.page(inst, "Fancy %s Chords" % name,
                          "\n".join(body), inst)
 
-    def index_page(self, rows):
+    def index_page(self):
         # No <h1> here: the wordmark in the header already says it, and
         # printing the title twice on the one page that carries it is the
         # kind of thing that reads as a template showing through.
@@ -450,26 +515,10 @@ class Site(object):
             "it away. Every voicing is checked against the chord it claims to "
             "be.</p>")
         body.append("<h2>Download</h2>")
-        head = ("<tr><th>Edition</th><th>Read</th><th>Print, US Letter</th>"
-                "<th>Print, A4</th><th>Pages</th><th>Sheets</th>"
-                "<th>Voicings</th></tr>")
-        trs = []
-        for label, title, pages, sheets, count in rows:
-            def cell(suffix, text):
-                f = "%s%s.pdf" % (title, suffix)
-                return '<td><a href="downloads/%s">%s</a></td>' % (
-                    esc(f.replace(" ", "%20")), esc(text))
-            trs.append("<tr><th>%s</th>%s%s%s"
-                       '<td class="num">%s</td><td class="num">%s</td>'
-                       '<td class="num">%s</td></tr>'
-                       % (esc(label), cell("", "PDF"),
-                          cell(" (print-letter)", "PDF"),
-                          cell(" (print-A4)", "PDF"),
-                          pages, sheets, count))
-        body.append('<table class="grid editions"><thead>%s</thead>'
-                    "<tbody>%s</tbody></table>" % (head, "".join(trs)))
-        body.append('<p class="qr"><img src="qr.png" alt="QR code for '
-                    '%s" width="200" height="200"></p>' % esc(SITE_URL))
+        body.append(self.downloads())
+        body.append("<h3 class=\"orjust\">Or just the instrument in your "
+                    "hands</h3>")
+        body.append(self.picks())
         body.append(self.printing_section())
         return self.page("index", "Fancy Chords and Their Voicings",
                          "\n".join(body), None)
@@ -506,7 +555,13 @@ punch.</p>
         # lot. The monospace face has always meant "a position" here, and
         # the printed book colors all of it the same way.
         pens = "\n".join(
-            ".pen.%s, .inst-%s .fret { color: %s; }" % (inst, inst, PENS[inst])
+            ".pen.%s, .inst-%s .fret { color: %s; }\n"
+            ".inst-%s a.btn { color: %s; border-color: %s; }\n"
+            ".inst-%s a.btn:hover, .inst-%s a.btn:focus "
+            "{ background: %s; border-color: %s; color: var(--paper); }"
+            % (inst, inst, PENS[inst],
+               inst, PENS[inst], PENS[inst],
+               inst, inst, PENS[inst], PENS[inst])
             for inst in ORDER)
         css = """/* Generated by tools/site.py. */
 :root {
@@ -557,8 +612,51 @@ h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
 .lede { color: var(--faint); }
 .note { color: var(--faint); font-size: 0.9rem; }
 .use { color: var(--faint); font-weight: 400; font-size: 0.9rem; }
-ul.downloads { list-style: none; padding: 0; margin: 0.5rem 0; }
-ul.downloads li { display: inline-block; margin: 0 1rem 0.5rem 0; }
+/* The downloads are what the site is for. A plain list of links read as
+   something to get past; a button reads as something to press. Each one
+   carries the cost of taking it -- pages to read, sheets to print -- so
+   the choice can be made without opening the file. */
+.getit { margin: 0.5rem 0 2.5rem; }
+.getit .edition { font-weight: 700; font-size: 1.1rem; margin: 0 0 0.7rem; }
+ul.buttons {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-wrap: wrap; gap: 0.7rem;
+}
+ul.buttons li { margin: 0; }
+a.btn {
+  display: block; min-width: 12rem; padding: 0.7rem 1rem;
+  border: 2px solid var(--ink); border-radius: 6px;
+  color: var(--ink); text-decoration: none;
+}
+a.btn .what { display: block; font-weight: 700; }
+/* An arrow, so a button that leads to a file cannot be mistaken for one
+   that leads to another page. */
+a.btn .what::after { content: " \\2193"; }
+a.btn .meta { display: block; font-size: 0.85rem; opacity: 0.8; }
+a.btn:hover, a.btn:focus {
+  background: var(--ink); border-color: var(--ink); color: var(--paper);
+}
+/* On a phone the buttons go full width: a thumb is a blunt instrument,
+   and there is nothing to line them up with at that measure anyway. */
+@media (max-width: 30rem) {
+  ul.buttons { display: block; }
+  ul.buttons li { margin-bottom: 0.7rem; }
+  a.btn { min-width: 0; }
+}
+h3.orjust { font-size: 1.05rem; color: var(--faint); margin-bottom: 0.6rem; }
+ul.picks {
+  list-style: none; padding: 0; margin: 0 0 2.5rem;
+  display: grid; gap: 0.7rem;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+}
+ul.picks li { margin: 0; }
+a.pick {
+  display: block; padding: 0.6rem 0.9rem; text-decoration: none;
+  border: 1px solid var(--rule); border-radius: 6px;
+}
+a.pick .who { display: block; font-weight: 700; font-size: 1.15rem; }
+a.pick .meta { display: block; font-size: 0.85rem; color: var(--faint); }
+a.pick:hover, a.pick:focus { border-color: currentColor; }
 table.grid { border-collapse: collapse; margin: 0.5rem 0 1rem; }
 table.grid th, table.grid td {
   padding: 0.2rem 0.7rem 0.2rem 0; text-align: left; vertical-align: baseline;
@@ -591,9 +689,6 @@ tr.group th { padding-top: 0.8rem; color: %(keyred)s; }
 /* Full measure. The drawing is a viewBox, so the type inside scales
    with it and needs no separate size. */
 svg.circle { width: 100%%; height: auto; display: block; }
-table.editions td, table.editions th { padding-right: 1.2rem; }
-table.editions .num { font-variant-numeric: tabular-nums; }
-.qr img { image-rendering: pixelated; }
 footer {
   border-top: 1px solid var(--rule); margin: 3rem auto 0;
   max-width: 54rem; padding: 1rem; color: var(--faint); font-size: 0.9rem;
@@ -625,10 +720,6 @@ def main():
             shutil.copy2(os.path.join(build, f), os.path.join(downloads, f))
             copied += 1
 
-    for name in ("qr.png",):
-        src = os.path.join(ROOT, "assets", name)
-        if os.path.exists(src):
-            shutil.copy2(src, os.path.join(out, name))
     stitch = os.path.join(ROOT, "images", "pamphlet-stitch.svg")
     if os.path.exists(stitch):
         shutil.copy2(stitch, os.path.join(out, "pamphlet-stitch.svg"))
@@ -636,30 +727,7 @@ def main():
     with open(os.path.join(out, "style.css"), "w") as fh:
         fh.write(site.stylesheet())
 
-    # Page and sheet counts come off the built PDFs rather than a list
-    # kept by hand, so the table cannot claim a length the file does not
-    # have.
-    import pagecount
-
-    def counts(title):
-        screen = os.path.join(downloads, "%s.pdf" % title)
-        printed = os.path.join(downloads, "%s (print-letter).pdf" % title)
-        if not (os.path.exists(screen) and os.path.exists(printed)):
-            return "", ""
-        return pagecount.count(screen), pagecount.count(printed) // 2
-
-    total = sum(book.voicing_count(i) for i in ORDER)
-    rows = []
-    for label, title, inst in (
-            [("Everything", "Fancy Chords and Their Voicings", None)]
-            + [(book.instruments[i]["name"],
-                "Fancy %s Chords and Their Voicings" % book.instruments[i]["name"],
-                i) for i in ORDER]):
-        pages, sheets = counts(title)
-        n = total if inst is None else book.voicing_count(inst)
-        rows.append((label, title, pages, sheets,
-                     "{:,}".format(n) if n else "none"))
-    site.index_page(rows)
+    site.index_page()
     for inst in ORDER:
         site.instrument_page(inst)
 

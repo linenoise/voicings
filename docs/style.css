@@ -47,8 +47,51 @@ h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
 .lede { color: var(--faint); }
 .note { color: var(--faint); font-size: 0.9rem; }
 .use { color: var(--faint); font-weight: 400; font-size: 0.9rem; }
-ul.downloads { list-style: none; padding: 0; margin: 0.5rem 0; }
-ul.downloads li { display: inline-block; margin: 0 1rem 0.5rem 0; }
+/* The downloads are what the site is for. A plain list of links read as
+   something to get past; a button reads as something to press. Each one
+   carries the cost of taking it -- pages to read, sheets to print -- so
+   the choice can be made without opening the file. */
+.getit { margin: 0.5rem 0 2.5rem; }
+.getit .edition { font-weight: 700; font-size: 1.1rem; margin: 0 0 0.7rem; }
+ul.buttons {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-wrap: wrap; gap: 0.7rem;
+}
+ul.buttons li { margin: 0; }
+a.btn {
+  display: block; min-width: 12rem; padding: 0.7rem 1rem;
+  border: 2px solid var(--ink); border-radius: 6px;
+  color: var(--ink); text-decoration: none;
+}
+a.btn .what { display: block; font-weight: 700; }
+/* An arrow, so a button that leads to a file cannot be mistaken for one
+   that leads to another page. */
+a.btn .what::after { content: " \2193"; }
+a.btn .meta { display: block; font-size: 0.85rem; opacity: 0.8; }
+a.btn:hover, a.btn:focus {
+  background: var(--ink); border-color: var(--ink); color: var(--paper);
+}
+/* On a phone the buttons go full width: a thumb is a blunt instrument,
+   and there is nothing to line them up with at that measure anyway. */
+@media (max-width: 30rem) {
+  ul.buttons { display: block; }
+  ul.buttons li { margin-bottom: 0.7rem; }
+  a.btn { min-width: 0; }
+}
+h3.orjust { font-size: 1.05rem; color: var(--faint); margin-bottom: 0.6rem; }
+ul.picks {
+  list-style: none; padding: 0; margin: 0 0 2.5rem;
+  display: grid; gap: 0.7rem;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+}
+ul.picks li { margin: 0; }
+a.pick {
+  display: block; padding: 0.6rem 0.9rem; text-decoration: none;
+  border: 1px solid var(--rule); border-radius: 6px;
+}
+a.pick .who { display: block; font-weight: 700; font-size: 1.15rem; }
+a.pick .meta { display: block; font-size: 0.85rem; color: var(--faint); }
+a.pick:hover, a.pick:focus { border-color: currentColor; }
 table.grid { border-collapse: collapse; margin: 0.5rem 0 1rem; }
 table.grid th, table.grid td {
   padding: 0.2rem 0.7rem 0.2rem 0; text-align: left; vertical-align: baseline;
@@ -81,18 +124,29 @@ tr.group th { padding-top: 0.8rem; color: #AA0019; }
 /* Full measure. The drawing is a viewBox, so the type inside scales
    with it and needs no separate size. */
 svg.circle { width: 100%; height: auto; display: block; }
-table.editions td, table.editions th { padding-right: 1.2rem; }
-table.editions .num { font-variant-numeric: tabular-nums; }
-.qr img { image-rendering: pixelated; }
 footer {
   border-top: 1px solid var(--rule); margin: 3rem auto 0;
   max-width: 54rem; padding: 1rem; color: var(--faint); font-size: 0.9rem;
 }
 footer a { color: var(--faint); }
 .pen.mandolin, .inst-mandolin .fret { color: #00873C; }
+.inst-mandolin a.btn { color: #00873C; border-color: #00873C; }
+.inst-mandolin a.btn:hover, .inst-mandolin a.btn:focus { background: #00873C; border-color: #00873C; color: var(--paper); }
 .pen.guitar, .inst-guitar .fret { color: #0060BB; }
+.inst-guitar a.btn { color: #0060BB; border-color: #0060BB; }
+.inst-guitar a.btn:hover, .inst-guitar a.btn:focus { background: #0060BB; border-color: #0060BB; color: var(--paper); }
 .pen.ukulele, .inst-ukulele .fret { color: #9600D5; }
+.inst-ukulele a.btn { color: #9600D5; border-color: #9600D5; }
+.inst-ukulele a.btn:hover, .inst-ukulele a.btn:focus { background: #9600D5; border-color: #9600D5; color: var(--paper); }
 .pen.piano, .inst-piano .fret { color: #AA0019; }
+.inst-piano a.btn { color: #AA0019; border-color: #AA0019; }
+.inst-piano a.btn:hover, .inst-piano a.btn:focus { background: #AA0019; border-color: #AA0019; color: var(--paper); }
 .pen.banjo, .inst-banjo .fret { color: #C05500; }
+.inst-banjo a.btn { color: #C05500; border-color: #C05500; }
+.inst-banjo a.btn:hover, .inst-banjo a.btn:focus { background: #C05500; border-color: #C05500; color: var(--paper); }
 .pen.bass, .inst-bass .fret { color: #9A8800; }
+.inst-bass a.btn { color: #9A8800; border-color: #9A8800; }
+.inst-bass a.btn:hover, .inst-bass a.btn:focus { background: #9A8800; border-color: #9A8800; color: var(--paper); }
 .pen.cello, .inst-cello .fret { color: #63421F; }
+.inst-cello a.btn { color: #63421F; border-color: #63421F; }
+.inst-cello a.btn:hover, .inst-cello a.btn:focus { background: #63421F; border-color: #63421F; color: var(--paper); }

@@ -19,9 +19,9 @@ The **Read** links above are for reading on a screen. In these, each notebook pa
 
 The **Print** links are for printing and binding into small pocket notebooks: four 3.5 x 5.5 inch pages per sheet, to be cut and sewn into something the size of the original. Pick the column that matches your paper. The two are the same book from the same typesetting, imposed twice; only the sheet around the pages and the cut lines differ. Those files carry `(print-letter)` or `(print-A4)` in the name.
 
-This QR code is the same as the QR code on the front of the printed books. It brings you to this book repository, <http://github.com/linenoise/voicings>. This allows you to **share this book with friends**:
+This QR code is the same as the QR code on the front of the printed books. It brings you to <https://fancychords.com>, where every edition can be downloaded. This allows you to **share this book with friends**:
 
-<img src="assets/qr.png" alt="QR code linking to https://github.com/linenoise/voicings" width="360">
+<img src="assets/qr.png" alt="QR code linking to https://fancychords.com" width="360">
 
 ## How to print, cut, and sew or staple a copy
 

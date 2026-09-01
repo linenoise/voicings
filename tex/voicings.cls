@@ -814,7 +814,7 @@
    {\color{faint}%
     Danne Stayskal\\
     \href{mailto:danne@stayskal.com}{danne@stayskal.com}\\
-    http://danne.stayskal.com/\par}
+    http://danne.stayskal.com\par}
    \vspace{0.9mm}
    {\color{faint}Downloads and a printable copy:\par}
    \bookurl\par
