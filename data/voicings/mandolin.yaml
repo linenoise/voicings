@@ -1037,6 +1037,7 @@ keys:
     - '5678'
   - chord: Ab°
     frets:
+    - '1024'
     - '4024'
   - chord: Absus2
     frets:
@@ -1104,7 +1105,7 @@ keys:
     - '3134'
   - chord: Abmadd9
     frets:
-    - '1114'
+    - '4114'
   - chord: Ab7b9
     frets:
     - '2434'
