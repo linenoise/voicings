@@ -1269,13 +1269,15 @@ keys:
     - '3346'
   - chord: Bb5
     frets:
-    - 33xx
+    - 331x
   - chord: Bb+
     frets:
     - '3456'
+    - '3012'
   - chord: Bb°
     frets:
     - '3246'
+    - '6876'
   - chord: Bbsus2
     frets:
     - '3336'
@@ -1300,15 +1302,17 @@ keys:
   - chord: Bbmaj7
     frets:
     - '3001'
+    - '2011'
   - chord: Bbm7
     frets:
-    - '1311'
+    - '3344'
   - chord: Bb°7
     frets:
     - '3243'
     - '3579'
   - chord: Bbm7b5
     frets:
+    - '3244'
     - '6676'
   - chord: Bb7sus4
     frets:
@@ -1335,19 +1339,22 @@ keys:
   - chord: Bbadd9
     frets:
     - '3031'
+    - '7888'
   - chord: Bbmadd9
     frets:
     - '6336'
+    - '6888'
   - chord: Bb7b9
     frets:
-    - '4656'
     - '3024'
+    - '4656'
   - chord: Bb7#9
     frets:
-    - '6656'
     - '3044'
+    - '6656'
   - chord: Bbm11
     frets:
+    - '3144'
     - '1141'
     derived: true
   - chord: Bbm/Db
