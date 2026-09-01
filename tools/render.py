@@ -104,6 +104,14 @@ CHORDS_PER_PAGE = 34
 # two ways leaves both pages half empty. A column holds more rows than
 # the shared figure assumed, so guitar gets its own.
 PER_PAGE = {"guitar": 40}      # fret grids, one line each
+# What a chord page holds, counted in voicing lines rather than chords --
+# see paginate(). Measured on guitar key G, the fullest in the book: 51
+# lines sets clean, 52 is 1.8pt overfull, 53 spills onto a page of its
+# own. Mandolin key F sets 54 clean, its four-position grids being
+# narrower. The default covers every other instrument, whose fullest key
+# is 33 lines.
+ROWS_PER_PAGE = {"guitar": 51, "mandolin": 54}
+DEFAULT_ROWS_PER_PAGE = 54
 PIANO_PER_PAGE = 17
 WORSHIP_PER_PAGE = 8      # name, notes, and a line of description
 
@@ -142,19 +150,39 @@ def notes_tex(text):
     return r"\notes{%s}" % r"\notesep ".join(parts)
 
 
-def paginate(items, capacity):
+def paginate(items, capacity, weight=None):
     """Split into as few pages as fit, then even them out.
 
     Filling each page to capacity and letting the remainder spill leaves a
     key with twenty-eight chords on one page and one lonely chord on the
     next. Splitting the same key fifteen and fourteen reads better and
     costs nothing.
+
+    `weight` is what an item costs on the page, defaulting to one each.
+    Chords are not all one line: a guitar chord with two voicings wraps to
+    two, which is how key G came to overflow its page while still counting
+    39 chords of a possible 40. Measuring lines instead of chords is the
+    difference between a page that splits and a page that spills.
     """
     if not items:
         return [[]]
-    n_pages = max(1, -(-len(items) // capacity))
-    per = -(-len(items) // n_pages)
-    return [items[i:i + per] for i in range(0, len(items), per)]
+    if weight is None:
+        def weight(_):
+            return 1
+    total = sum(weight(i) for i in items)
+    n_pages = max(1, -(-total // capacity))
+    target = -(-total // n_pages)
+    pages, page, load = [], [], 0
+    for item in items:
+        w = weight(item)
+        if page and load + w > target:
+            pages.append(page)
+            page, load = [], 0
+        page.append(item)
+        load += w
+    if page:
+        pages.append(page)
+    return pages
 
 
 class Book(object):
@@ -513,8 +541,9 @@ class Book(object):
             if not block:
                 continue
             ordered = self.ordered_chords(block["chords"])
-            capacity = PER_PAGE.get(instrument, CHORDS_PER_PAGE)
-            for n, chunk in enumerate(paginate(ordered, capacity)):
+            capacity = ROWS_PER_PAGE.get(instrument, DEFAULT_ROWS_PER_PAGE)
+            for n, chunk in enumerate(paginate(ordered, capacity,
+                                               lambda e: len(e["frets"]))):
                 self.chord_page(instrument, key, chunk,
                                 continued=(n > 0))
 

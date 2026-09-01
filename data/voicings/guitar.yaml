@@ -740,9 +740,11 @@ keys:
   - chord: F
     frets:
     - '133211'
+    - xx3211
   - chord: Fm
     frets:
     - '133111'
+    - xx3111
   - chord: F5
     frets:
     - 133xxx
@@ -750,6 +752,7 @@ keys:
   - chord: F+
     frets:
     - xx3221
+    - 1x3221
   - chord: F°
     frets:
     - '123104'
@@ -760,12 +763,15 @@ keys:
   - chord: Fsus4
     frets:
     - '133311'
+    - xx3311
   - chord: F6
     frets:
     - 1x3231
+    - xx3231
   - chord: Fm6
     frets:
     - xx3131
+    - 1x3131
   - chord: F6/9
     frets:
     - '100033'
@@ -883,9 +889,11 @@ keys:
   - chord: Gb
     frets:
     - '244322'
+    - xx4322
   - chord: Gbm
     frets:
     - '244222'
+    - xx4222
   - chord: Gb5
     frets:
     - 244xxx
@@ -1048,6 +1056,7 @@ keys:
   - chord: Gsus4
     frets:
     - '330013'
+    - '355533'
   - chord: G6
     frets:
     - '320000'
@@ -1066,7 +1075,7 @@ keys:
   - chord: Gmaj7
     frets:
     - '320002'
-    - '354433'
+    - 3x4433
   - chord: Gm7
     frets:
     - '353333'
@@ -1090,7 +1099,7 @@ keys:
     - 3x344x
   - chord: G9
     frets:
-    - '300201'
+    - '320201'
     - '353435'
   - chord: Gmaj9
     frets:
