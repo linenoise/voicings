@@ -78,7 +78,7 @@ a.btn:hover, a.btn:focus {
   ul.buttons li { margin-bottom: 0.7rem; }
   a.btn { min-width: 0; }
 }
-h3.orjust { font-size: 1.05rem; color: var(--faint); margin-bottom: 0.6rem; }
+p.booklets { margin: 0 0 0.9rem; }
 ul.picks {
   list-style: none; padding: 0; margin: 0 0 2.5rem;
   display: grid; gap: 0.7rem;

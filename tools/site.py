@@ -183,12 +183,12 @@ class Site(object):
             return "%s %s &middot; PDF" % (n, unit) if n else "PDF"
 
         rows = [
-            ("", "Read on a screen", meta(pages, "pages")),
-            (" (print-letter)", "Print on US Letter", meta(letter, "sheets")),
-            (" (print-A4)", "Print on A4", meta(a4, "sheets")),
+            ("", "To Read on a screen", meta(pages, "pages")),
+            (" (print-letter)", "To Print on US Letter", meta(letter, "sheets")),
+            (" (print-A4)", "To Print on A4", meta(a4, "sheets")),
         ]
         out = ['<div class="getit">',
-               '<p class="edition">%s</p>' % esc(title),
+               '<p class="edition">Download <cite>%s</cite></p>' % esc(title),
                '<ul class="buttons">']
         for suffix, label, sub in rows:
             f = "%s%s.pdf" % (title, suffix)
@@ -211,18 +211,11 @@ class Site(object):
             meta = self.book.instruments[inst]
             title = "Fancy %s Chords and Their Voicings" % meta["name"]
             pages = self.edition_counts(title)[0]
-            tuning = (self.book.tuning_label(inst)
-                      if "tuning" in meta or "tuning_label" in meta else "")
-            bits = []
-            if tuning:
-                bits.append('<span class="fret">%s</span>' % esc(tuning))
-            if pages:
-                bits.append("%s pages" % pages)
             items.append('<li><a class="pick pen %s" href="%s.html">'
                          '<span class="who">%s</span>'
                          '<span class="meta">%s</span></a></li>'
                          % (inst, inst, esc(meta["name"]),
-                            " &middot; ".join(bits)))
+                            "%s pages" % pages if pages else ""))
         return '<ul class="picks">%s</ul>' % "\n".join(items)
 
     def section_nav(self, sections):
@@ -468,6 +461,8 @@ class Site(object):
         if meta.get("note"):
             body.append("<p class=\"lede\">%s</p>" % esc(meta["note"]))
         body.append(self.downloads(inst))
+        body.append('<p class="booklets">This content is designed to be '
+                    "printed into booklets.</p>")
         body.append(self.section_nav(sections))
 
         for s in sections:
@@ -516,8 +511,9 @@ class Site(object):
             "be.</p>")
         body.append("<h2>Download</h2>")
         body.append(self.downloads())
-        body.append("<h3 class=\"orjust\">Or just the instrument in your "
-                    "hands</h3>")
+        body.append('<p class="booklets">This content is designed to be '
+                    "printed into booklets.<br>Individual instrument "
+                    "booklets are also available:</p>")
         body.append(self.picks())
         body.append(self.printing_section())
         return self.page("index", "Fancy Chords and Their Voicings",
@@ -643,7 +639,7 @@ a.btn:hover, a.btn:focus {
   ul.buttons li { margin-bottom: 0.7rem; }
   a.btn { min-width: 0; }
 }
-h3.orjust { font-size: 1.05rem; color: var(--faint); margin-bottom: 0.6rem; }
+p.booklets { margin: 0 0 0.9rem; }
 ul.picks {
   list-style: none; padding: 0; margin: 0 0 2.5rem;
   display: grid; gap: 0.7rem;
