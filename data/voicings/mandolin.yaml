@@ -1396,10 +1396,11 @@ keys:
     - '4452'
   - chord: B5
     frets:
-    - '4422'
+    - 442x
   - chord: B+
     frets:
     - '0123'
+    - '4567'
   - chord: B°
     frets:
     - '4357'
@@ -1429,6 +1430,7 @@ keys:
   - chord: Bmaj7
     frets:
     - '4466'
+    - '3467'
   - chord: Bm7
     frets:
     - '4002'
@@ -1443,8 +1445,8 @@ keys:
     - '7787'
   - chord: B7sus4
     frets:
-    - '4475'
     - '4202'
+    - '4475'
   - chord: B7b5
     frets:
     - '4101'
