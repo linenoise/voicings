@@ -60,7 +60,8 @@ TITLES = {
 # Said under the title of every download block: the PDFs are a book to
 # make, and reading one on a screen is the fallback, not the point.
 BOOKLETS = ('<p class="booklets">This booklet is designed to be printed, '
-            "or you can also download a copy to read on your device:</p>")
+            "so nobody has to stare at their phone during rehearsal.<br>"
+            "Or you can also download a copy to read on your device:</p>")
 
 
 def colors():
