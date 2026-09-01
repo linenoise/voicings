@@ -51,7 +51,7 @@ h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
    something to get past; a button reads as something to press. Each one
    carries the cost of taking it -- pages to read, sheets to print -- so
    the choice can be made without opening the file. */
-.getit { margin: 0.5rem 0 2.5rem; }
+.getit { margin: 0.5rem 0 1.2rem; }
 .getit .edition { font-weight: 700; font-size: 1.1rem; margin: 0 0 0.7rem; }
 /* Three equal columns, so each button is a third of the measure and the
    row lines up with the instrument cards below it. */

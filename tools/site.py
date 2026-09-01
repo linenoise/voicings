@@ -59,9 +59,8 @@ TITLES = {
 
 # Said under the title of every download block: the PDFs are a book to
 # make, and reading one on a screen is the fallback, not the point.
-BOOKLETS = ('<p class="booklets">This content is designed to be printed '
-            "into booklets, or you can also download a copy to read on "
-            "your device:</p>")
+BOOKLETS = ('<p class="booklets">This booklet is designed to be printed, '
+            "or you can also download a copy to read on your device:</p>")
 
 
 def colors():
@@ -190,7 +189,10 @@ class Site(object):
         pages, letter, a4 = self.edition_counts(title)
 
         def meta(n, unit):
-            return "%s %s &middot; PDF" % (n, unit) if n else "PDF"
+            # The bass edition is one sheet, and said so as "1 sheets".
+            if not n:
+                return "PDF"
+            return "%s %s &middot; PDF" % (n, unit if n != 1 else unit[:-1])
 
         rows = [
             ("", "To Read on a screen", meta(pages, "pages")),
@@ -516,8 +518,8 @@ class Site(object):
         body = []
         body.append(
             '<p class="lede">A downloadable, printable pocket notebook of '
-            "chord voicings for seven instruments. <strong>Print it, cut it, "
-            "sew it, give it away.</strong></p>")
+            "chord voicings for seven instruments.<br><strong>Print it, cut "
+            "it, sew it, give it away.</strong></p>")
         body.append(self.downloads())
         body.append('<p class="booklets">Individual instrument booklets are '
                     "also available:</p>")
@@ -614,7 +616,7 @@ h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
    something to get past; a button reads as something to press. Each one
    carries the cost of taking it -- pages to read, sheets to print -- so
    the choice can be made without opening the file. */
-.getit { margin: 0.5rem 0 2.5rem; }
+.getit { margin: 0.5rem 0 1.2rem; }
 .getit .edition { font-weight: 700; font-size: 1.1rem; margin: 0 0 0.7rem; }
 /* Three equal columns, so each button is a third of the measure and the
    row lines up with the instrument cards below it. */
