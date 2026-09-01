@@ -333,9 +333,11 @@ keys:
     - '5450'
   - chord: Dmaj9
     frets:
-    - '[11]079'
+    - '7440'
+    - '2040'
   - chord: Dm9
     frets:
+    - '7330'
     - '2231'
   - chord: Dadd9
     frets:
@@ -362,7 +364,7 @@ keys:
     derived: true
   - chord: D/F#
     frets:
-    - '2002'
+    - x455
   - chord: D7/F#
     frets:
     - x458
