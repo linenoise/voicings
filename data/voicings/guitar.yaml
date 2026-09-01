@@ -165,6 +165,7 @@ keys:
   - chord: Db+
     frets:
     - x43221
+    - x4322x
   - chord: Db°
     frets:
     - '042020'
@@ -199,6 +200,7 @@ keys:
   - chord: Db°7
     frets:
     - x45353
+    - x4535x
   - chord: Dbm7b5
     frets:
     - '042000'
@@ -212,6 +214,7 @@ keys:
   - chord: Db7b5
     frets:
     - '143001'
+    - x4546x
   - chord: Db7#5
     frets:
     - '523225'
@@ -303,6 +306,7 @@ keys:
   - chord: D
     frets:
     - xx0232
+    - x57775
   - chord: Dm
     frets:
     - xx0231
@@ -451,9 +455,11 @@ keys:
   - chord: Eb
     frets:
     - x68886
+    - xx1343
   - chord: Ebm
     frets:
     - x68876
+    - xx1342
   - chord: Eb5
     frets:
     - x688xx
@@ -478,6 +484,7 @@ keys:
   - chord: Ebm6
     frets:
     - x64546
+    - xx1312
   - chord: Eb6/9
     frets:
     - '111311'
@@ -486,12 +493,15 @@ keys:
   - chord: Eb7
     frets:
     - x68686
+    - xx1323
   - chord: Ebmaj7
     frets:
     - x68786
+    - xx1333
   - chord: Ebm7
     frets:
     - x68676
+    - xx1322
   - chord: Eb°7
     frets:
     - x67575
@@ -606,6 +616,7 @@ keys:
   - chord: E+
     frets:
     - '032110'
+    - x7655x
   - chord: E°
     frets:
     - '012050'
@@ -613,6 +624,7 @@ keys:
   - chord: Esus2
     frets:
     - '024400'
+    - x79977
   - chord: Esus4
     frets:
     - '022200'
@@ -632,12 +644,14 @@ keys:
   - chord: Emaj7
     frets:
     - '021100'
+    - x79897
   - chord: Em7
     frets:
     - '020000'
   - chord: E°7
     frets:
     - '012020'
+    - xx2323
   - chord: Em7b5
     frets:
     - '010030'
