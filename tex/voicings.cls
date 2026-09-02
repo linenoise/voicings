@@ -418,6 +418,46 @@
   \end{tikzpicture}%
   \endgroup}
 
+% The same digits the book prints, set under the strings they belong to.
+% This is the whole claim the figure makes -- that the row of numbers and
+% the picture are one thing -- so the numbers have to sit where the
+% strings are, not in a caption underneath.
+% Set with \frets and no size of its own, so a digit under a string is
+% the same digit, at the same size, as the one across the equals sign.
+% That is the whole point of the figure: setting these smaller made the
+% two halves read as a picture and a caption rather than one equation.
+% The string spacing widens to suit, or six of them would collide.
+\newcommand{\cb@labels}[1]{%
+  \foreach \pos [count=\si from 0] in {#1} {%
+    \node[color=\voicingcolor] at (\si,4.75) {\frets{\pos}};
+  }}
+
+% How big the whole figure is drawn -- box, digits and all, so the two
+% sides stay the same size as each other whatever the page can spare.
+% The back sheet has room for full size; the contents page is fitting
+% one in beside nine lines of directory. Same pattern as \usecofsize.
+\newcommand{\cb@scale}{1}
+\newcommand{\usechordboxscale}[1]{\renewcommand{\cb@scale}{#1}}
+
+% A chord box with those digits under it.
+\newcommand{\chordboxnums}[3]{%
+  \begingroup
+  \begin{tikzpicture}[x=4.6mm,y=-4mm,line width=0.3pt]
+    \foreach \s in {0,...,\numexpr#1-1\relax}
+      \draw[color=rule] (\s,0) -- (\s,4);
+    \foreach \f in {1,...,4}
+      \draw[color=rule] (0,\f) -- (\numexpr#1-1\relax,\f);
+    \ifnum#2=0\relax
+      \draw[line width=1.1pt,color=ink] (0,0) -- (\numexpr#1-1\relax,0);
+    \else
+      \draw[color=rule] (0,0) -- (\numexpr#1-1\relax,0);
+      \node[anchor=east,color=faint,font=\fontsize{5}{5}\selectfont]
+        at (-0.35,0.5) {#2};
+    \fi
+    \cb@dots{#3}\cb@labels{#3}%
+  \end{tikzpicture}%
+  \endgroup}
+
 % One dot, or an x above the nut, per string.
 \newcommand{\cb@dots}[1]{%
   \foreach \pos [count=\si from 0] in {#1} {%
@@ -930,16 +970,29 @@
 % the digits that mean it. A booklet with no contents page has nowhere
 % else to show a reader what a row of numbers is a picture of.
 % #1 the chord's name, #2 the box, #3 the digits.
+% Free-standing: the back sheet sets it inside a list and the contents
+% page does not, so the \item belongs to the caller.
 \newcommand{\readingfigure}[3]{%
-  \item[]\vspace{1.8mm}
-  \centerline{%
+  \par\vspace{1.8mm}
+  \centerline{\scalebox{\cb@scale}{%
     \begin{tabular}{@{}c@{\hskip 4mm}c@{\hskip 4mm}c@{}}
-      #2 & \raisebox{4.2mm}{\color{faint}$=$}
-         & \raisebox{4.2mm}{\frets{#3}}\\
-    \end{tabular}}%
+      #2 & \raisebox{7mm}{\color{faint}$=$}
+         & \raisebox{7mm}{\frets{#3}}\\
+    \end{tabular}}}%
   \vspace{1.2mm}
   {\footnotesize\color{faint}\centering
    The same #1 chord, drawn and written.\par}}
+
+% Without the caption, for a page whose surrounding text already says
+% what the figure is showing.
+\newcommand{\readingfigurebare}[2]{%
+  \par\vspace{1.4mm}
+  \centerline{\scalebox{\cb@scale}{%
+    \begin{tabular}{@{}c@{\hskip 4mm}c@{\hskip 4mm}c@{}}
+      #1 & \raisebox{7mm}{\color{faint}$=$}
+         & \raisebox{7mm}{\frets{#2}}\\
+    \end{tabular}}}%
+  \vspace{1mm}}
 
 \newenvironment{backsheet}[1]{%
   \renewcommand{\backsheet@title}{#1}%

@@ -814,11 +814,18 @@ class Book(object):
         self.w(r"\textbf{%s chord voicings} in all." % "{,}".join(
             [str(total)[:-3], str(total)[-3:]] if total >= 1000 else [str(total)]))
         self.w(r"\end{toctotal}")
+        # The whole book in one picture: a guitar C, because it is the
+        # chord most readers already know by sight and the only common
+        # one that uses all three marks -- a muted string, an open one
+        # and three stopped.
+        self.w(r"\usechordboxscale{0.62}")
+        self.w(r"\readingfigurebare{\chordboxnums{6}{0}{x,3,2,0,1,0}}"
+               r"{x32010}")
+        self.w(r"\usechordboxscale{1}")
         self.w(r"\begin{tocnote}")
         # One sentence per line: four short rules read as four rules when
         # they are stacked, and as a paragraph when they are not.
-        self.w(r"Twelve keys for every chord on each instrument.\\")
-        self.w(r"Fret numbers read from the lowest string.\\")
+        self.w(r"Twelve keys for every chord, on each instrument.\\")
         self.w(r"\frets{x} means don't play that string.\\")
         self.w(r"\vmarkink{r} means rootless: for rhythm, "
                r"not for soloing.\\")
@@ -1716,7 +1723,7 @@ class Book(object):
         name, frets = example
         strings = len(self.instruments[self.only]["tuning"])
         dots = ",".join(frets)
-        return r"\readingfigure{%s}{\chordbox{%d}{0}{%s}}{%s}" % (
+        return r"\item[]\readingfigure{%s}{\chordboxnums{%d}{0}{%s}}{%s}" % (
             tex_escape(name), strings, dots, tex_escape(frets))
 
     def reading_notes(self):
