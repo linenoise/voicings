@@ -19,6 +19,7 @@ import pagecount  # noqa: E402
 
 # Every environment and command that opens with a \clearpage.
 STARTERS = [r"\begin{bookpage}", r"\begin{chordpage}", r"\begin{pianopage}",
+            r"\begin{theorypage}",
             r"\begin{circlepage}", r"\begin{backsheet}", r"\sectiondivider"]
 
 

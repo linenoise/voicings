@@ -123,3 +123,12 @@ cello:
   frets: 12
   note: Tuned in fifths, a fifth below the mandolin. Viola is the same four
     notes an octave up, so these pages serve both.
+
+# Not an instrument. "Theory" is a pseudo-instrument so the chapter that
+# explains the chords can be built, imposed and downloaded by the same
+# machinery as the ones that voice them. It has no tuning and no voicings
+# file, so validate and generate never see it.
+theory:
+  kind: theory
+  name: Theory
+  note: How the chords in this book are built, named and used.

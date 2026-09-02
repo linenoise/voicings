@@ -21,7 +21,7 @@ Twelve keys for every chord on each instrument.\\
 Fret numbers read from the lowest string.\\
 \frets{x} means don't play that string.\\
 \vmarkink{r} means rootless: for rhythm, not for soloing.\\
-\vmarkink{i} means the chord given is an inversion.\\
+\vmarkink{i} means the voicing given is an inversion.\\
 Tunings are on the back sheet.
 \end{tocnote}
 \end{bookpage}
@@ -651,7 +651,7 @@ Bottom is the degree on the lowest string. The page before gives the fret.
   \chordrow{A7\#9}{\frets{332220}}
   \chordrow{Am11}{\frets{000010}}
   \chordgap
-  \chordrowfirst{A11}{\frets{x00000}}
+  \chordrowfirst{A11}{\frets{500000}}
   \chordrow{A13}{\frets{504020}}
   \chordrow{Am13}{\frets{504010}}
   \chordrow{Amaj13}{\frets{x04120}}
@@ -3496,10 +3496,8 @@ The rest belongs to whoever is playing chords.
 \theoryterm{\frets{2013}}{One digit per string, lowest string first. The number is the fret.}
 \theoryterm{\frets{x}}{Don't play that string.}
 \theoryterm{\frets{0}}{Play it open.}
-\theoryterm{\vmarkink{r}}{Rootless: the chord's own root is not in this shape. For rhythm, not for soloing.}
-\theoryterm{\vmarkink{i}}{An inversion. The root is in there, but it is not the lowest note.}
-\theoryterm{\textbf{/E}}{A named bass. \textbf{C/E} is a C chord with an E underneath it.}
 \end{widetermlist}
+\theorypara{Three more marks sit beside the voicings: a slash, a small \textbf{r} and a small \textbf{i}. Each is about which notes a shape leaves out and which one it puts underneath, so they wait for the inversions and rootless pages, where there are chords to leave notes out of.}
 \theorypara{Each instrument is printed in its own colour, so you can find the page by the ink. This chapter is in black: it belongs to all of them.}
 \end{theorypage}
 \begin{theorypage}{The Same Chord, Two Ways}
@@ -3704,11 +3702,13 @@ Read across: in the key on the left, the four is the note under the 4. A minor k
 \end{theorypage}
 \begin{theorypage}{Inversions}
 \theorypara{A chord is its notes, in any order. Put a note other than the root at the bottom and you have an inversion: the same chord, sitting differently.}
-\begin{theorycols}
+\begin{widetermlist}
 \theoryterm{root}{\frets{C E G}}
 \theoryterm{first}{\frets{E G C}}
 \theoryterm{second}{\frets{G C E}}
-\end{theorycols}
+\theoryterm{\textbf{C/E}}{the chord, a slash, and the note that goes underneath it}
+\theoryterm{\vmarkink{i}}{this book's mark for a voicing whose lowest note is not the root}
+\end{widetermlist}
 \begin{center}
 \chainbox{C}\chainarrow \chainbox{C/E}\chainarrow \chainbox{C/G}
 \end{center}
@@ -3723,6 +3723,7 @@ Read across: in the key on the left, the four is the note under the 4. A minor k
 \theoryterm{then}{\frets{R} – if a bass is playing it}
 \theoryterm{never}{\frets{3} or \frets{b3}, which decide major or minor}
 \theoryterm{never}{\frets{b7} or \frets{7}, which decide which seventh}
+\theoryterm{\vmarkink{r}}{this book's mark for a voicing with no root in it}
 \end{widetermlist}
 \begin{center}
 \chromastrip{R,3,5,b7}
@@ -3734,6 +3735,30 @@ Read across: in the key on the left, the four is the note under the 4. A minor k
 \theorycaption{The same chord with the root and fifth gone. It is still a seventh: those two notes were the ones naming it.}
 \theorypara{A voicing with no root is marked \vmarkink{r}. In a band it is often the better chord: the bass has the root covered, and the notes you have left are the ones carrying the harmony. On your own it sounds like a different chord, because it is one.}
 \theorypara{This is why \textbf{Cmaj9} and \textbf{Em7} can be the same four notes. Context, and whoever is playing underneath, decides which one you have played.}
+\end{theorypage}
+\begin{theorypage}{Open and Closed Voicings}
+\theorypara{Two ways to arrange the same notes. A \textbf{closed} voicing packs them into a single octave, stacked as tightly as they go. An \textbf{open} voicing lifts one of the inner notes an octave and lets the chord breathe across a wider span.}
+\begin{center}
+\chromastrip{C,E,G}
+\end{center}
+\theorycaption{Closed. Three notes inside one octave.}
+\begin{center}
+\chromastrip{C,G,C,E}
+\end{center}
+\theorycaption{Open. The same chord, spread past the octave, with the third on top.}
+\theorypara{Closed voicings turn to mud low down, where the overtones of notes a third apart collide. Open ones give each note room, and they make the move to the next chord easier, because a note that is already spread has somewhere to go.}
+\theorypara{\textbf{On a fretted instrument you get what the tuning gives you.} A mandolin or a cello is tuned in fifths, so its shapes come out open whether you meant them or not. A guitar's barre chords are close voicings with an octave doubled on top. There is not much choice in it.}
+\end{theorypage}
+\begin{theorypage}{Two Voicings for Every Chord}
+\theorypara{\textbf{On a piano there is nothing but choice}, so the piano pages print two voicings for every chord. The first is closed, the notes in order from the root. The second is the spread voicing: root and fifth low for the left hand, then the colour above it with the third on top, which is where the ear goes looking for it.}
+\begin{widetermlist}
+\theoryterm{C}{\frets{C E G} closed, \frets{C G C E} open}
+\theoryterm{Cmaj7}{\frets{C E G B} closed, \frets{C G B E} open}
+\theoryterm{C9}{\frets{C E G Bb D} closed, \frets{C G Bb D E} open}
+\end{widetermlist}
+\theorypara{Split them at the hands. The left takes the root and the fifth, the right takes what is left. That is why the spread voicings are written root-and-fifth first: the break in the list is where your hands part.}
+\theorypara{If a bass player has the root, drop it and play the right hand alone. You are back at a rootless voicing, and the \vmarkink{r} on those pages is telling you the same thing this one is.}
+\begin{rootmapnote}The spread voicings are the ones the notebook was written from, and the ones a pianist actually reaches for.\end{rootmapnote}
 \end{theorypage}
 \begin{theorypage}{Progressions}
 \theorypara{Written in numbers, so they work in any key.}

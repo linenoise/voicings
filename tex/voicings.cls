@@ -341,6 +341,136 @@
   \vfill\null
   \clearpage}
 
+% ----------------------------------------------------------- theory pages
+% The only pages here that argue rather than list. Body text is set a
+% little smaller than a chord row and ragged right: these are read in a
+% chair, not glanced at on a stand, and a justified 75mm measure at this
+% size opens rivers.
+\newenvironment{theorypage}[1]{%
+  \clearpage\pagetitle{#1}\raggedright\footnotesize
+}{\par}
+
+\newcommand{\theorypara}[1]{\par\vskip1.1mm #1\par}
+
+% What a drawing is showing. Centred under it, in the faint gray the
+% footnotes use, so it reads as a label rather than another sentence.
+\newcommand{\theorycaption}[1]{%
+  \par\vspace{-0.6mm}
+  {\centering\scriptsize\color{faint}#1\par}\vskip0.6mm}
+
+% A term and what it means, hung the way \degreerow hangs a chord name,
+% so the terms line up down the left edge and the eye can find one
+% without reading the sentences.
+\newlength{\theory@term}\setlength{\theory@term}{16mm}
+\newcommand{\theoryterm}[2]{%
+  \par\vskip1.3mm\nointerlineskip
+  \vtop{\hsize=\linewidth
+    \hangindent=\theory@term\hangafter=1
+    \makebox[\theory@term][l]{\bfseries #1}#2\par}}
+
+% The same, one column and a wider gutter, for lists whose terms are
+% words rather than symbols. "thirteenth" does not fit beside a chord
+% degree in a 16mm box.
+\newenvironment{widetermlist}{%
+  \setlength{\theory@term}{22mm}%
+}{\setlength{\theory@term}{16mm}}
+
+% A chord quality: what it is called, the degrees it stacks, and what it
+% is for. The degrees are set in the voicing face because they are the
+% same alphabet the chord pages use.
+\newcommand{\qualityrow}[3]{%
+  \par\vskip1.4mm\nointerlineskip
+  \vtop{\hsize=\linewidth
+    \hangindent=\theory@term\hangafter=1
+    \makebox[\theory@term][l]{\bfseries #1}#2\par
+    \vspace{0.2mm}{\scriptsize\color{faint}#3\par}}}
+
+% Two columns, for the pages that are a list of short definitions.
+\newenvironment{theorycols}{%
+  \begin{multicols}{2}\raggedright
+}{\end{multicols}}
+
+% ------------------------------------------------- theory diagrams
+% Drawn with TikZ, which the class already loads for the circle of
+% fifths. Every one of these is small enough to sit inside a 75mm
+% column with the prose that explains it.
+
+% A chord box: the thing every other chord book prints, drawn once here
+% so the reader can see that it and a row of digits say the same thing.
+% #1 number of strings, #2 fret of the top line (0 = nut),
+% #3 comma list of fret numbers low string first, x for muted.
+\newcommand{\chordbox}[3]{%
+  \begingroup
+  \def\cb@strings{#1}\def\cb@base{#2}%
+  \begin{tikzpicture}[x=3.4mm,y=-3.6mm,line width=0.3pt]
+    \foreach \s in {0,...,\numexpr#1-1\relax}
+      \draw[color=rule] (\s,0) -- (\s,4);
+    \foreach \f in {1,...,4}
+      \draw[color=rule] (0,\f) -- (\numexpr#1-1\relax,\f);
+    \ifnum#2=0\relax
+      \draw[line width=1.1pt,color=ink] (0,0) -- (\numexpr#1-1\relax,0);
+    \else
+      \draw[color=rule] (0,0) -- (\numexpr#1-1\relax,0);
+      \node[anchor=east,color=faint,font=\fontsize{5}{5}\selectfont]
+        at (-0.35,0.5) {#2};
+    \fi
+    \cb@dots{#3}%
+  \end{tikzpicture}%
+  \endgroup}
+
+% One dot, or an x above the nut, per string.
+\newcommand{\cb@dots}[1]{%
+  \foreach \pos [count=\si from 0] in {#1} {%
+    \ifthenelse{\equal{\pos}{x}}{%
+      \node[color=faint,font=\fontsize{5}{5}\selectfont]
+        at (\si,-0.45) {$\times$};
+    }{\ifthenelse{\equal{\pos}{0}}{%
+      \node[draw,color=ink,circle,inner sep=0.35mm,line width=0.3pt]
+        at (\si,-0.45) {};
+    }{%
+      \fill[color=ink] (\si,\pos-0.5) circle (0.85mm);
+    }}%
+  }}
+
+% The twelve semitones as a strip, with some of them named. #1 is a
+% comma list of twelve labels; an empty one leaves the box blank.
+\newcommand{\chromastrip}[1]{%
+  \begin{tikzpicture}[x=5.2mm,y=-4.4mm,line width=0.3pt]
+    \foreach \lab [count=\i from 0] in {#1} {%
+      \draw[color=rule] (\i,0) rectangle (\i+1,1);
+      \node[font=\fontsize{5.6}{6}\selectfont\ttfamily\bfseries,
+            color=\voicingcolor] at (\i+0.5,0.5) {\lab};
+    }
+  \end{tikzpicture}}
+
+% A stack of thirds, drawn as the notes it stacks. #1 comma list of
+% degree labels, bottom first.
+\newcommand{\thirdstack}[1]{%
+  \begin{tikzpicture}[x=4.6mm,y=-4.0mm,line width=0.3pt]
+    \foreach \lab [count=\i from 0] in {#1} {%
+      \node[font=\fontsize{6}{6.4}\selectfont\ttfamily\bfseries,
+            color=\voicingcolor] at (0,-\i) {\lab};
+      \ifnum\i>0
+        \draw[color=rule,->,>=stealth,line width=0.25pt]
+          (0.9,-\i+0.75) -- (0.9,-\i+0.25);
+        \node[anchor=west,font=\fontsize{5}{5.4}\selectfont,color=faint]
+          at (1.15,-\i+0.5) {a third};
+      \fi
+    }
+  \end{tikzpicture}}
+
+% A row of boxed labels with an arrow between each -- progressions,
+% substitutions, inversions. Built by the caller rather than looped over
+% here, because only the caller knows which box is the last one and so
+% which arrow not to draw.
+\newcommand{\chainbox}[1]{%
+  \tikz[baseline=-0.9mm]{
+    \node[draw,color=rule,rounded corners=0.4mm,
+          inner xsep=1.1mm,inner ysep=0.7mm,line width=0.3pt,
+          font=\fontsize{6}{6.4}\selectfont\ttfamily\bfseries]
+      {\textcolor{\voicingcolor}{#1}};}}
+\newcommand{\chainarrow}{\,{\color{faint}\tiny$\to$}\,}
+
 % ------------------------------------------------------------ chord pages
 % Two columns of the same shape as the notebook: the chord name on the
 % left, its voicings running right. Rows are ruled faintly so the eye can

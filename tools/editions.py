@@ -31,8 +31,10 @@ import impose as impose_mod  # noqa: E402
 # filename.
 PAPERS = [("letter", "print-letter"), ("a4", "print-A4")]
 
+# "theory" is not an instrument. It is the chapter that explains the
+# chords, built as its own booklet so it can live in a case beside them.
 INSTRUMENTS = ["mandolin", "guitar", "ukulele", "piano", "banjo", "bass",
-               "cello"]
+               "cello", "theory"]
 TITLES = {
     "mandolin": "Fancy Mandolin Chords and Their Voicings",
     "guitar":   "Fancy Guitar Chords and Their Voicings",
@@ -41,12 +43,14 @@ TITLES = {
     "banjo":    "Fancy Banjo Chords and Their Voicings",
     "bass":     "Fancy Bass Chords and Their Voicings",
     "cello":    "Fancy Cello Chords and Their Voicings",
+    "theory":   "Fancy Theory of Chords and Their Voicings",
     None:       "Fancy Chords and Their Voicings",
 }
 
 # Anything that begins with a \clearpage. Kept in step with
 # tools/pagecheck.py, which applies the same test to the default build.
 PAGE_STARTS = [r"\begin{bookpage}", r"\begin{chordpage}",
+               r"\begin{theorypage}",
                r"\begin{pianopage}", r"\begin{circlepage}",
                r"\begin{backsheet}", r"\sectiondivider"]
 

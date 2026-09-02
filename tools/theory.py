@@ -68,6 +68,15 @@ QUALITIES = {
     "m13":     (0, 2, 3, 7, 9, 10),
     "maj13":   (0, 2, 4, 7, 9, 11),
     "7#11":    (0, 4, 6, 7, 10),
+    # Named in the theory booklet and nowhere else. They live here so its
+    # tables can take degrees from the same source as every other chord
+    # rather than keeping a second copy by hand; they stay out of
+    # VOCABULARY, so nothing generates or voices them.
+    "7sus2":   (0, 2, 7, 10),
+    "9sus4":   (0, 2, 5, 7, 10),
+    "9sus2":   (0, 2, 7, 10),
+    "9b5":     (0, 2, 4, 6, 10),
+    "9#5":     (0, 2, 4, 8, 10),
 }
 
 # The degree that gives each quality its identity. If a voicing omits this,

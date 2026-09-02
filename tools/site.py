@@ -27,8 +27,10 @@ SITE_URL = "https://fancychords.com"
 SOURCE_URL = "http://github.com/linenoise/voicings"
 AUTHOR_URL = "https://danne.stayskal.com"
 
-# Every instrument, in the order everything else lists them.
-ORDER = render.Book.ALL_INSTRUMENTS
+# Every instrument, in the order everything else lists them, and then
+# the theory chapter -- not an instrument, but a booklet like the
+# rest, so it gets a page and a nav link of its own.
+ORDER = render.Book.ALL_INSTRUMENTS + ["theory"]
 
 # Which sections a page carries, in the order they appear. Mirrors what
 # the book gives each instrument.
@@ -41,8 +43,11 @@ SECTIONS = {
     # pages after: a cellist does reach for a grip when the part asks.
     "cello": ["circle", "movable", "numbers", "roots", "under", "patterns",
               "chords"],
+    # The theory booklet, in the order the booklet sets them.
+    "theory": [slug for slug, _t, _b in render.THEORY_PAGES],
 }
-KIND = {"piano": "piano", "banjo": "banjo", "bass": "notes", "cello": "cello"}
+KIND = {"piano": "piano", "banjo": "banjo", "bass": "notes",
+        "cello": "cello", "theory": "theory"}
 
 TITLES = {
     "circle": "Circle of Fifths",
@@ -55,6 +60,8 @@ TITLES = {
     "chords": "Chords",
     "printing": "How to print, cut, and sew a copy",
 }
+# The theory chapter names its own pages.
+TITLES.update({slug: title for slug, title, _b in render.THEORY_PAGES})
 
 
 # Said under the title of every download block: the PDFs are a book to
@@ -81,6 +88,21 @@ INK = "#" + RAW.get("ink", "1A1A1A")
 FAINT = "#" + RAW.get("faint", "404040")
 RULE = "#" + RAW.get("rule", "7E7E7E")
 PAPER = "#" + RAW.get("paper", "FDFCF8")
+
+
+def edition_title(book, inst):
+    """The filename and title of one edition.
+
+    Theory needs the preposition -- "Fancy Theory of Chords and Their
+    Voicings" -- and the download links have to name the built file
+    exactly, so this is the one place the string is formed.
+    """
+    if inst is None:
+        return "Fancy Chords and Their Voicings"
+    name = book.instruments[inst]["name"]
+    if inst == "theory":
+        name += " of"
+    return "Fancy %s Chords and Their Voicings" % name
 
 
 def esc(text):
@@ -184,9 +206,7 @@ class Site(object):
         thumb, named for what you would do with it and labelled with what
         it costs: pages to read, sheets of paper to print.
         """
-        title = ("Fancy %s Chords and Their Voicings"
-                 % self.book.instruments[inst]["name"]) if inst else \
-                "Fancy Chords and Their Voicings"
+        title = edition_title(self.book, inst)
         pages, letter, a4 = self.edition_counts(title)
 
         def meta(n, unit):
@@ -223,8 +243,7 @@ class Site(object):
         items = []
         for inst in ORDER:
             meta = self.book.instruments[inst]
-            title = "Fancy %s Chords and Their Voicings" % meta["name"]
-            pages = self.edition_counts(title)[0]
+            pages = self.edition_counts(edition_title(self.book, inst))[0]
             items.append('<li><a class="pick pen %s" href="%s.html">'
                          '<span class="who">%s</span>'
                          '<span class="meta">%s</span></a></li>'
@@ -462,6 +481,170 @@ class Site(object):
 
     # -- pages -----------------------------------------------------------
 
+    def theory_html(self, text):
+        """The markup THEORY_PAGES is written in, as HTML.
+
+        The same three rules as render.theory_tex, so a paragraph reads
+        the same on the page as it does in the booklet.
+        """
+        out = esc(text).replace("--", "&ndash;")
+        out = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", out)
+        out = re.sub(r"`(.+?)`", r'<span class="fret">\1</span>', out)
+        out = re.sub(r"\^([ri])", r'<sup class="mark">\1</sup>', out)
+        return out
+
+    def theory_block(self, kind, payload):
+        if kind == "para":
+            return "<p>%s</p>" % self.theory_html(payload)
+        if kind == "note":
+            return '<p class="note">%s</p>' % self.theory_html(payload)
+        if kind in ("terms", "wideterms"):
+            rows = payload
+        elif kind == "intervals":
+            rows = [("`%s`" % self.book.DEGREE_NAMES[i],
+                     render.INTERVAL_NAMES[i]) for i in range(12)]
+        elif kind == "scale":
+            rows = [("`%s`" % d, g) for d, g in render.SCALE_STEPS]
+        elif kind == "qualities":
+            items = []
+            for label, quality, use in payload:
+                degrees = " ".join(
+                    self.book.degree_name(i, quality)
+                    for i in theory.QUALITIES[quality])
+                items.append(
+                    '<div class="quality"><p class="q"><b>%s</b>'
+                    '<span class="fret">%s</span></p>'
+                    '<p class="use">%s</p></div>'
+                    % (self.theory_html(label), esc(degrees),
+                       self.theory_html(use)))
+            return '<div class="qualities">%s</div>' % "\n".join(items)
+        elif kind == "figure":
+            return self.theory_figure(payload)
+        else:
+            raise ValueError("unknown theory block %r" % kind)
+        cells = ['<div class="term"><dt>%s</dt><dd>%s</dd></div>'
+                 % (self.theory_html(t), self.theory_html(g))
+                 for t, g in rows]
+        return '<dl class="terms">%s</dl>' % "\n".join(cells)
+
+    # -- theory drawings -------------------------------------------------
+
+    def theory_figure(self, payload):
+        """The booklet's diagrams, redrawn as SVG. Same shapes, same
+        captions -- see render.Book.theory_figure."""
+        art, caption = payload[0], payload[-1]
+        if art == "chordboxes":
+            art_html = ('<div class="boxes">%s</div>' % "".join(
+                '<figure>%s<figcaption>%s</figcaption></figure>'
+                % (self.chord_box_svg(strings, base, dots),
+                   self.theory_html(label))
+                for label, strings, base, dots in payload[1]))
+        elif art == "chroma":
+            art_html = self.chroma_svg(payload[1])
+        elif art == "stack":
+            art_html = self.stack_svg(payload[1])
+        elif art == "chain":
+            art_html = ('<p class="chain">%s</p>'
+                        % '<span class="arrow">&rarr;</span>'.join(
+                            '<span class="fret">%s</span>' % esc(x)
+                            for x in payload[1]))
+        else:
+            raise ValueError("unknown figure %r" % art)
+        return ('<figure class="fig">%s<figcaption>%s</figcaption></figure>'
+                % (art_html, self.theory_html(caption)))
+
+    def chord_box_svg(self, strings, base, dots):
+        """A chord box: strings down, frets across, a dot per finger."""
+        dx, dy, pad = 22, 24, 16
+        w = (strings - 1) * dx + pad * 2
+        h = 4 * dy + pad * 2 + 14
+        top = pad + 14
+        p = ['<svg class="box" viewBox="0 0 %d %d" '
+             'xmlns="http://www.w3.org/2000/svg" role="img" '
+             'aria-label="chord diagram">' % (w, h)]
+        for i in range(strings):
+            x = pad + i * dx
+            p.append('<line x1="%d" y1="%d" x2="%d" y2="%d" '
+                     'class="grid"/>' % (x, top, x, top + 4 * dy))
+        for f in range(5):
+            y = top + f * dy
+            cls = "nut" if (f == 0 and base == 0) else "grid"
+            p.append('<line x1="%d" y1="%d" x2="%d" y2="%d" class="%s"/>'
+                     % (pad, y, pad + (strings - 1) * dx, y, cls))
+        for i, pos in enumerate(dots.split(",")):
+            x = pad + i * dx
+            if pos == "x":
+                p.append('<text x="%d" y="%d" class="mute">&#215;</text>'
+                         % (x, top - 5))
+            elif pos == "0":
+                p.append('<circle cx="%d" cy="%d" r="4" class="open"/>'
+                         % (x, top - 9))
+            else:
+                p.append('<circle cx="%d" cy="%d" r="7" class="dot"/>'
+                         % (x, top + (int(pos) - 0.5) * dy))
+        p.append("</svg>")
+        return "".join(p)
+
+    def chroma_svg(self, labels):
+        """Twelve semitones as a strip of boxes."""
+        w, h = 34, 26
+        p = ['<svg class="chroma" viewBox="0 0 %d %d" '
+             'xmlns="http://www.w3.org/2000/svg" role="img" '
+             'aria-label="semitone strip">' % (len(labels) * w + 2, h + 2)]
+        for i, lab in enumerate(labels):
+            x = 1 + i * w
+            p.append('<rect x="%d" y="1" width="%d" height="%d" '
+                     'class="cell"/>' % (x, w, h))
+            if lab:
+                p.append('<text x="%d" y="%d" class="lab">%s</text>'
+                         % (x + w / 2, h / 2 + 5, esc(lab)))
+        p.append("</svg>")
+        return "".join(p)
+
+    def stack_svg(self, labels):
+        """A stack of thirds, bottom note first in the data."""
+        row, w = 26, 150
+        n = len(labels)
+        p = ['<svg class="stack" viewBox="0 0 %d %d" '
+             'xmlns="http://www.w3.org/2000/svg" role="img" '
+             'aria-label="stack of thirds">' % (w, n * row + 6)]
+        for i, lab in enumerate(labels):
+            y = 4 + i * row
+            p.append('<text x="26" y="%d" class="lab">%s</text>'
+                     % (y + 17, esc(lab)))
+            if i < n - 1:
+                p.append('<line x1="52" y1="%d" x2="52" y2="%d" '
+                         'class="arrow"/>' % (y + 20, y + row + 4))
+                p.append('<text x="60" y="%d" class="cap">a third</text>'
+                         % (y + row))
+        p.append("</svg>")
+        return "".join(p)
+
+    def theory_page(self, inst="theory"):
+        """The theory chapter, from the same blocks the booklet sets."""
+        meta = self.book.instruments[inst]
+        body = ['<h1 class="pen %s">%s</h1>' % (inst, esc(meta["name"])),
+                '<p class="lede">%s</p>' % esc(meta["note"]),
+                BOOKLETS_INTRO if False else ""]
+        body = [b for b in body if b]
+        body.append(self.downloads(inst))
+        body.append(self.section_nav(
+            [s for s, _t, _b in render.THEORY_PAGES] + ["printing"]))
+        for slug, title, blocks in render.THEORY_PAGES:
+            body.append('<section id="%s"><h2>%s</h2>' % (slug, esc(title)))
+            if slug == "circle":
+                body.append(self.circle_svg("theory"))
+            elif slug == "numbers":
+                body.append(self.numbers_table())
+            for kind, payload in blocks:
+                if kind in ("circle", "numbers"):
+                    continue
+                body.append(self.theory_block(kind, payload))
+            body.append("</section>")
+        body.append(self.printing_section())
+        return self.page(inst, "Fancy Theory of Chords",
+                         "\n".join(body), inst)
+
     def instrument_page(self, inst):
         meta = self.book.instruments[inst]
         name = meta["name"]
@@ -651,6 +834,47 @@ a.btn:hover, a.btn:focus {
   a.btn { min-width: 0; }
 }
 p.booklets { margin: 0 0 0.9rem; }
+/* --- the theory chapter ------------------------------------------- */
+dl.terms { margin: 0.8rem 0 1.2rem; }
+dl.terms .term { display: flex; gap: 0.8rem; margin: 0 0 0.45rem; }
+dl.terms dt { flex: 0 0 7.5rem; font-weight: 700; margin: 0; }
+dl.terms dd { margin: 0; }
+.qualities { margin: 0.6rem 0 1rem; }
+.quality { margin: 0 0 0.9rem; }
+.quality .q { margin: 0; display: flex; gap: 0.8rem; align-items: baseline; }
+.quality .q b { flex: 0 0 5rem; }
+.quality .use { margin: 0.1rem 0 0 5.8rem; color: var(--faint);
+                font-size: 0.9rem; }
+sup.mark { font-weight: 700; font-size: 0.7em; color: var(--faint); }
+figure.fig { margin: 1rem 0 1.2rem; }
+figure.fig figcaption { color: var(--faint); font-size: 0.85rem;
+                        margin-top: 0.35rem; }
+.boxes { display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-end; }
+.boxes figure { margin: 0; }
+.boxes figcaption { color: var(--faint); font-size: 0.85rem;
+                    margin-top: 0.25rem; text-align: center; }
+svg.box { height: 7rem; width: auto; display: block; }
+svg.box .grid { stroke: var(--rule); stroke-width: 1; }
+svg.box .nut { stroke: var(--ink); stroke-width: 3.5; }
+svg.box .dot { fill: var(--ink); }
+svg.box .open { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+svg.box .mute { fill: var(--faint); font-size: 15px; text-anchor: middle; }
+svg.chroma { max-width: 100%%; height: auto; display: block; }
+svg.chroma .cell { fill: none; stroke: var(--rule); stroke-width: 1; }
+svg.chroma .lab { text-anchor: middle; font-weight: 700; font-size: 13px;
+                  font-family: ui-monospace, Menlo, Consolas, monospace;
+                  fill: var(--ink); }
+svg.stack { height: 9rem; width: auto; display: block; }
+svg.stack .lab { font-weight: 700; font-size: 15px; fill: var(--ink);
+                 font-family: ui-monospace, Menlo, Consolas, monospace;
+                 text-anchor: middle; }
+svg.stack .arrow { stroke: var(--rule); stroke-width: 1; }
+svg.stack .cap { font-size: 11px; fill: var(--faint); }
+p.chain { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+          margin: 0.6rem 0 0; }
+p.chain .fret { border: 1px solid var(--rule); border-radius: 3px;
+                padding: 0.15rem 0.5rem; }
+p.chain .arrow { color: var(--faint); }
 /* The stitch diagram is 900px wide and had nothing holding it back, so it
    ran off the side of a phone. Both figures share the one width now. */
 #printing img { display: block; width: 100%%; max-width: 900px; height: auto; }
@@ -740,7 +964,10 @@ def main():
 
     site.index_page()
     for inst in ORDER:
-        site.instrument_page(inst)
+        if inst == "theory":
+            site.theory_page()
+        else:
+            site.instrument_page(inst)
 
     pages = len([f for f in os.listdir(out) if f.endswith(".html")])
     print("wrote %d pages and %d downloads to docs/" % (pages, copied))

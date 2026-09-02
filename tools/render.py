@@ -29,6 +29,420 @@ SHARP_KEYS = {"G", "D", "A", "E", "B"}
 # How chords group on a key page, in the order a player meets them. Slash
 # voicings come last: they are what you reach for to move a bass line, not
 # what you reach for to play the chord.
+# --------------------------------------------------------------- theory
+# The theory chapter's content, once, in a markup small enough to set
+# both ways. The booklet and the website both read this: prose that
+# disagreed with itself across two files would be worse than no prose.
+#
+#   `x`     a fret number, degree or chord symbol -- the voicing face
+#   **x**   bold
+#   ^r ^i   the superscript marks the voicings carry
+#
+# A block is (kind, payload):
+#   para        one paragraph
+#   terms       [(term, gloss)] -- a hanging list
+#   qualities   [(label, quality, what it is for)]; degrees come from
+#               theory.QUALITIES, so a chord cannot be explained one way
+#               and voiced another
+#   note        the small print at the foot of a page
+#   circle      the circle of fifths, drawn with no fingerings
+#   numbers     the number chart
+INTERVAL_NAMES = {
+    0: "root", 1: "flat ninth", 2: "ninth, or second",
+    3: "minor third", 4: "major third", 5: "fourth, or eleventh",
+    6: "flat fifth, or sharp eleventh", 7: "fifth",
+    8: "sharp fifth, or flat thirteenth", 9: "sixth, or thirteenth",
+    10: "minor seventh", 11: "major seventh",
+}
+
+SCALE_STEPS = [("1", "then a tone"), ("2", "then a tone"),
+               ("3", "then a semitone"), ("4", "then a tone"),
+               ("5", "then a tone"), ("6", "then a tone"),
+               ("7", "then a semitone, and you are home")]
+
+THEORY_PAGES = [
+    ("reading", "How to Read a Chord", [
+        ("para", "A chord symbol is a root and a quality. **Am7** is an A, "
+         "and everything after the A says which notes to stack on it. The "
+         "root moves; the quality does not."),
+        ("wideterms", [
+            ("`2013`", "One digit per string, lowest string first. The "
+             "number is the fret."),
+            ("`x`", "Don't play that string."),
+            ("`0`", "Play it open."),
+        ]),
+        ("para", "Three more marks sit beside the voicings: a slash, a "
+         "small **r** and a small **i**. Each is about which notes a "
+         "shape leaves out and which one it puts underneath, so they wait "
+         "for the inversions and rootless pages, where there are chords "
+         "to leave notes out of."),
+        ("para", "Each instrument is printed in its own colour, so you "
+         "can find the page by the ink. This chapter is in black: it "
+         "belongs to all of them."),
+    ]),
+    ("boxes", "The Same Chord, Two Ways", [
+        ("para", "Most chord books draw a box: a grid of strings and "
+         "frets with a dot where a finger goes. This one prints the frets "
+         "as digits. They say the same thing."),
+        ("figure", ("chordboxes", [
+            ("`2013`", 4, 0, "2,0,1,3"),
+            ("`x32010`", 6, 0, "x,3,2,0,1,0"),
+        ], "Mandolin `2013` and guitar `x32010`. One digit per string, "
+           "lowest string first, and a dot where the digit says.")),
+        ("para", "Read either the same way. The leftmost digit is the "
+         "lowest string, `0` is open, `x` is a string you don't play, and "
+         "any other number is the fret to stop it at."),
+        ("para", "A box has to be redrawn when the chord moves up the "
+         "neck. A digit carries its fret with it, which is why this book "
+         "fits in a pocket."),
+    ]),
+    ("chromatic", "The Chromatic Scale", [
+        ("para", "Twelve notes, each one fret or one key apart, and then "
+         "the whole thing repeats an octave higher. That is every note "
+         "there is."),
+        ("figure", ("chroma", ["A", "A#", "B", "C", "C#", "D", "D#", "E",
+                               "F", "F#", "G", "G#"],
+                    "Sharps going up.")),
+        ("figure", ("chroma", ["A", "Bb", "B", "C", "Db", "D", "Eb", "E",
+                               "F", "Gb", "G", "Ab"],
+                    "The same twelve, spelled with flats.")),
+        ("para", "Five of the twelve have two names. **A#** and **Bb** are "
+         "one fret, one key, one sound -- which name is right depends on "
+         "the key you are in, and this book heads those pages with both."),
+        ("para", "On a fretted instrument one fret is one semitone, so the "
+         "chromatic scale is just walking up the neck. That is the whole "
+         "reason a shape with no open strings can be slid: move every note "
+         "the same number of semitones and the chord keeps its shape and "
+         "changes its name."),
+    ]),
+    ("intervals", "Notes and Intervals", [
+        ("para", "Twelve notes, each a semitone apart, and then it starts "
+         "again. An interval is how many semitones lie between two of "
+         "them. Every chord in this book is written as intervals from its "
+         "root, and that is what makes a shape movable: slide it up a fret "
+         "and every interval in it is unchanged."),
+        ("intervals", None),
+        ("figure", ("chroma", ["R", "b9", "9", "b3", "3", "4", "b5", "5",
+                               "#5", "6", "b7", "7"],
+                    "Twelve semitones up from any root. Every chord in "
+                    "the book is a handful of these.")),
+        ("note", "Accidentals are written before the number, the way a "
+         "chord symbol writes them: `b3`, not 3`b`."),
+    ]),
+    ("scale", "The Major Scale", [
+        ("para", "Seven of the twelve notes, in a fixed pattern of tones "
+         "and semitones. Everything else on these pages is counted against "
+         "it."),
+        ("scale", None),
+        ("figure", ("chroma", ["1", "", "2", "", "3", "4", "", "5", "",
+                               "6", "", "7"],
+                    "The major scale inside the chromatic one. The gaps "
+                    "are the notes it leaves out.")),
+        ("para", "**The relative minor.** Start the same seven notes from "
+         "the sixth and you have the natural minor of that key. A minor "
+         "and C major are the same notes; which one you are in is decided "
+         "by where the music rests."),
+        ("para", "**Why some keys are flat.** A scale uses each letter "
+         "once. In F that forces B flat rather than A sharp, because the "
+         "scale already has an A. The note is one note; the spelling "
+         "depends on the key it is in, which is why the same key heads one "
+         "page **Bb** and another **A#**."),
+    ]),
+    ("circle", "The Circle of Fifths", [
+        ("circle", None),
+        ("para", "Each step clockwise adds a sharp or drops a flat, and "
+         "moves the root up a fifth. Neighbours share six of their seven "
+         "notes, which is why a song can wander one step either way "
+         "without anything sounding wrong, and why the `5` chord sits one "
+         "step clockwise of home and the `4` one step counter-clockwise."),
+    ]),
+    ("nashville", "Nashville Numbers", [
+        ("para", "Name the chords by their degree in the key instead of by "
+         "letter, and a chart transposes itself. `1 4 5` is the same three "
+         "chords in every key; the number chart says which letters they "
+         "are."),
+        ("terms", [("`1`", "major"), ("`2`", "minor"), ("`3`", "minor"),
+                   ("`4`", "major"), ("`5`", "major"), ("`6`", "minor"),
+                   ("`7`", "diminished")]),
+        ("figure", ("chain", ["1", "4", "5", "1"],
+                    "The commonest turn there is, in any key.")),
+        ("para", "Those are the chords the major scale builds on its own "
+         "degrees, using only notes from the key. A number on its own "
+         "means that chord; a quality after it means play that instead, "
+         "and `4m` in a major key is a borrowed chord rather than a "
+         "mistake."),
+        ("para", "In a minor key the same seven chords are counted from "
+         "the six. A minor song's home chord is the `6m` of its relative "
+         "major, or the `1m` if the chart is written in the minor."),
+    ]),
+    ("numbers", "The Number Chart", [
+        ("numbers", None),
+    ]),
+    ("building", "How Chords Are Built", [
+        ("para", "Take a scale degree and stack thirds on it: skip a note, "
+         "take a note. Three of them is a triad, four is a seventh chord, "
+         "five is a ninth, and so on up. The chord is named for the "
+         "highest third in the stack."),
+        ("wideterms", [
+            ("triad", "`R 3 5`"),
+            ("seventh", "`R 3 5 7`"),
+            ("ninth", "`R 3 5 7 9`"),
+            ("eleventh", "`R 3 5 7 9 11`"),
+            ("thirteenth", "`R 3 5 7 9 11 13`"),
+        ]),
+        ("figure", ("stack", ["R", "3", "5", "7", "9", "11", "13"],
+                    "Read from the bottom. Each step up is a third.")),
+        ("para", "A thirteenth chord has seven notes and you have four "
+         "fingers, so the stack is a claim about which notes belong, not "
+         "an instruction to sound all of them. What to leave out is on the "
+         "rootless page."),
+        ("para", "**Added against stacked.** An **add9** has no seventh: "
+         "the ninth is added to a triad rather than reached by stacking "
+         "past a seventh. That is the whole difference between **Cadd9** "
+         "and **C9**, and it is why the book prints both."),
+    ]),
+    ("triads", "Triads", [
+        ("qualities", [
+            ("major", "", "The default. Three notes, and the one every "
+             "other chord is measured against."),
+            ("m", "m", "Lower the third a semitone. Everything else "
+             "stays."),
+            ("5", "5", "Root and fifth, no third: neither major nor minor, "
+             "so it sits over either. Loud guitars live here."),
+            ("+", "+", "Raise the fifth. Restless -- it wants to rise to "
+             "the next chord's root."),
+            ("dim", "o", "Lower the third and the fifth. Tense and "
+             "unstable; usually passing through on the way somewhere."),
+            ("sus2", "sus2", "The third is replaced by the second, not "
+             "joined by it. Open and unresolved, and neither major nor "
+             "minor."),
+            ("sus4", "sus4", "The third replaced by the fourth. Leans hard "
+             "on whatever follows it."),
+        ]),
+    ]),
+    ("sixths", "Sixths", [
+        ("figure", ("stack", ['R', '3', '5', '6'],
+                    "A triad with a sixth on top, not a seventh.")),
+        ("qualities", [
+            ("6", "6", "A major triad with the sixth added. Warmer and "
+             "less final than a seventh: ends a song without closing it."),
+            ("m6", "m6", "Minor triad, major sixth. The sixth stays major "
+             "-- that is what keeps it from being a m7b5 rooted "
+             "elsewhere."),
+            ("6/9", "6/9", "Sixth and ninth, no seventh. All colour and no "
+             "pull, which makes it a good last chord."),
+        ]),
+    ]),
+    ("sevenths", "Sevenths", [
+        ("figure", ("stack", ['R', '3', '5', 'b7'],
+                    "The fourth third. Everything above this is colour.")),
+        ("qualities", [
+            ("7", "7", "Major triad, minor seventh. The blues chord, and "
+             "the one that pulls to the fourth."),
+            ("maj7", "maj7", "Major triad, major seventh. Still: it is not "
+             "pulling anywhere."),
+            ("m7", "m7", "Minor triad, minor seventh. The workhorse of the "
+             "two chord."),
+            ("dim7", "o7", "Minor thirds all the way up. Symmetrical, so "
+             "one shape names four chords, three frets apart."),
+            ("m7b5", "m7b5", "A diminished triad with a minor seventh. The "
+             "two chord of a minor key. Also called half-diminished."),
+            ("7sus4", "7sus4", "A seventh with the fourth in place of the "
+             "third. Suspends the pull without cancelling it."),
+            ("7sus2", "7sus2", "The same idea with the second. Not voiced "
+             "in this book."),
+            ("7b5", "7b5", "Flatten the fifth of a seventh. It shares "
+             "three notes with the 7b5 a tritone away, which is why the "
+             "two stand in for each other."),
+            ("7#5", "7#5", "Raise it instead. Reads as an altered "
+             "dominant, and sits well before a minor chord."),
+        ]),
+    ]),
+    ("ninths", "Ninths", [
+        ("figure", ("stack", ['R', '3', '5', 'b7', '9'],
+                    "The seventh has to be there for it to be a ninth.")),
+        ("qualities", [
+            ("9", "9", "A seventh with the ninth stacked on. The seventh "
+             "has to be there; without it you have an add9."),
+            ("maj9", "maj9", "Major seventh plus ninth. On four strings "
+             "the root is the first thing to go."),
+            ("m9", "m9", "Minor seventh plus ninth."),
+            ("add9", "add9", "The ninth added to a plain triad, no "
+             "seventh. Written **2** in some books and **add2** in "
+             "others."),
+            ("madd9", "madd9", "The same over a minor triad."),
+        ]),
+    ]),
+    ("altered", "Altered Ninths", [
+        ("figure", ("chain", ["2m", "5", "5b9", "1"],
+                    "An altered dominant does the same job as a plain "
+                    "one, with more tension to resolve.")),
+        ("qualities", [
+            ("7b9", "7b9", "Dominant with the ninth flattened. Four of its "
+             "five notes are a diminished seventh."),
+            ("7#9", "7#9", "Dominant with the ninth raised -- the same "
+             "pitch as a minor third, which is why it sounds like major "
+             "and minor at once."),
+            ("9b5", "9b5", "A ninth with the fifth flattened. Not voiced "
+             "in this book."),
+            ("9#5", "9#5", "A ninth with the fifth raised. Not voiced in "
+             "this book."),
+            ("9sus4", "9sus4", "A ninth suspending the fourth. Not voiced "
+             "in this book."),
+            ("m11", "m11", "Minor ninth with the eleventh on top. Six "
+             "notes, so something is always dropped."),
+        ]),
+    ]),
+    ("extended", "Elevenths and Thirteenths", [
+        ("qualities", [
+            ("11", "11", "The eleventh over a dominant. The third is "
+             "usually dropped: a natural eleventh sits a semitone above it "
+             "and the two fight."),
+            ("13", "13", "The thirteenth over a dominant. The same note as "
+             "the sixth, an octave up, over a chord that has a seventh."),
+            ("m13", "m13", "The same over a minor seventh."),
+            ("maj13", "maj13", "And over a major seventh."),
+            ("7#11", "7#11", "The raised eleventh, which does not fight "
+             "the third. The lydian dominant sound."),
+        ]),
+        ("note", "Only the guitar has strings enough to voice these, so "
+         "they appear on its pages and nowhere else."),
+    ]),
+    ("inversions", "Inversions", [
+        ("para", "A chord is its notes, in any order. Put a note other "
+         "than the root at the bottom and you have an inversion: the same "
+         "chord, sitting differently."),
+        ("wideterms", [("root", "`C E G`"), ("first", "`E G C`"),
+                       ("second", "`G C E`"),
+                       ("**C/E**", "the chord, a slash, and the note that "
+                        "goes underneath it"),
+                       ("^i", "this book's mark for a voicing whose lowest "
+                        "note is not the root")]),
+        ("figure", ("chain", ["C", "C/E", "C/G"],
+                    "One chord, three bass notes.")),
+        ("para", "Written **C/E** and **C/G** -- the chord, a slash, the "
+         "note underneath. Use them to give the bass a line to walk: "
+         "**C**, **C/B**, **Am** descends by step where three root "
+         "positions would jump."),
+        ("para", "On four courses the lowest string is often not the root "
+         "whether you meant it or not. Where that happens the voicing is "
+         "marked ^i. It is not a fault. It is a warning that the bass note "
+         "is doing something, and that if someone else is playing the root "
+         "you may be hearing a chord neither of you named."),
+    ]),
+    ("rootless", "Rootless Voicings", [
+        ("para", "Four strings, six notes. Something goes. The order to "
+         "drop them in:"),
+        ("wideterms", [
+            ("first", "`5` -- the fifth says nothing the root has not "
+             "already said"),
+            ("then", "`R` -- if a bass is playing it"),
+            ("never", "`3` or `b3`, which decide major or minor"),
+            ("never", "`b7` or `7`, which decide which seventh"),
+            ("^r", "this book's mark for a voicing with no root in it"),
+        ]),
+        ("figure", ("chroma", ["R", "3", "5", "b7"],
+                    "A seventh chord, whole.")),
+        ("figure", ("chroma", ["", "3", "", "b7"],
+                    "The same chord with the root and fifth gone. It is "
+                    "still a seventh: those two notes were the ones "
+                    "naming it.")),
+        ("para", "A voicing with no root is marked ^r. In a band it is "
+         "often the better chord: the bass has the root covered, and the "
+         "notes you have left are the ones carrying the harmony. On your "
+         "own it sounds like a different chord, because it is one."),
+        ("para", "This is why **Cmaj9** and **Em7** can be the same four "
+         "notes. Context, and whoever is playing underneath, decides which "
+         "one you have played."),
+    ]),
+    ("spacing", "Open and Closed Voicings", [
+        ("para", "Two ways to arrange the same notes. A **closed** voicing "
+         "packs them into a single octave, stacked as tightly as they "
+         "go. An **open** voicing lifts one of the inner notes an octave "
+         "and lets the chord breathe across a wider span."),
+        ("figure", ("chroma", ["C", "E", "G"],
+                    "Closed. Three notes inside one octave.")),
+        ("figure", ("chroma", ["C", "G", "C", "E"],
+                    "Open. The same chord, spread past the octave, with "
+                    "the third on top.")),
+        ("para", "Closed voicings turn to mud low down, where the "
+         "overtones of notes a third apart collide. Open ones give each "
+         "note room, and they make the move to the next chord easier, "
+         "because a note that is already spread has somewhere to go."),
+        ("para", "**On a fretted instrument you get what the tuning "
+         "gives you.** A mandolin or a cello is tuned in fifths, so its "
+         "shapes come out open whether you meant them or not. A guitar's "
+         "barre chords are close voicings with an octave doubled on top. "
+         "There is not much choice in it."),
+    ]),
+    ("pianovoicing", "Two Voicings for Every Chord", [
+        ("para", "**On a piano there is nothing but choice**, so the "
+         "piano pages print two voicings for every chord. The first is "
+         "closed, the notes in order from the root. The second is the "
+         "spread voicing: root and fifth low for the left hand, then the "
+         "colour above it with the third on top, which is where the ear "
+         "goes looking for it."),
+        ("wideterms", [
+            ("C", "`C E G` closed, `C G C E` open"),
+            ("Cmaj7", "`C E G B` closed, `C G B E` open"),
+            ("C9", "`C E G Bb D` closed, `C G Bb D E` open"),
+        ]),
+        ("para", "Split them at the hands. The left takes the root and "
+         "the fifth, the right takes what is left. That is why the "
+         "spread voicings are written root-and-fifth first: the break in "
+         "the list is where your hands part."),
+        ("para", "If a bass player has the root, drop it and play the "
+         "right hand alone. You are back at a rootless voicing, and the "
+         "^r on those pages is telling you the same thing this one is."),
+        ("note", "The spread voicings are the ones the notebook was "
+         "written from, and the ones a pianist actually reaches for."),
+    ]),
+    ("progressions", "Progressions", [
+        ("para", "Written in numbers, so they work in any key."),
+        ("wideterms", [
+            ("`1 4 5`", "Almost everything. Folk, blues, country, most "
+             "hymns."),
+            ("`1 5 6m 4`", "The four chords a great many pop songs are "
+             "made of."),
+            ("`2m 5 1`", "The turn jazz is built on. The 2m and the 5 "
+             "share three notes."),
+            ("`1 6m 4 5`", "Fifties doo-wop."),
+            ("`6m 4 1 5`", "The same four chords, starting from the "
+             "minor."),
+            ("`1 4 1 5`", "Twelve-bar blues in outline. Make all three "
+             "sevenths."),
+        ]),
+        ("figure", ("chain", ["1", "5", "6m", "4"],
+                    "Four chords, a great many songs.")),
+        ("para", "The pull of `5` to `1` is the engine. It comes from the "
+         "tritone inside the seventh chord: the third and the flat "
+         "seventh are six semitones apart, and both want to move a "
+         "semitone."),
+    ]),
+    ("substitutions", "Substitutions", [
+        ("para", "Chords that share notes can stand in for one another."),
+        ("wideterms", [
+            ("relative", "`1` and `6m` share two notes. So do `4` and "
+             "`2m`."),
+            ("tritone", "Any `7` chord can be replaced by the `7` a "
+             "tritone away. They share the third and the seventh, "
+             "swapped."),
+            ("sixths", "A `6` will stand in for a `maj7` at the end of a "
+             "phrase, and lands softer."),
+            ("sus", "A `sus4` before the chord it resolves to buys a "
+             "beat."),
+            ("dim7", "Four chords at once: every three frets is the same "
+             "shape and the same notes, so one grip covers four roots."),
+        ]),
+        ("figure", ("chain", ["2m", "b2 7", "1"],
+                    "The tritone substitution: put a `b2 7` where the "
+                    "`5` was and the bass walks down by semitone.")),
+        ("para", "None of this is a rule. It is a list of places where "
+         "two chords are close enough that an ear will follow you."),
+    ]),
+]
+
+
 CHORD_GROUPS = [
     ("triads",   ["", "m", "5", "+", "o", "sus2", "sus4"]),
     ("sixths",   ["6", "m6", "6/9"]),
@@ -91,6 +505,9 @@ INK = {
     "banjo":    "fretorange",
     "bass":     "fretyellow",
     "cello":    "fretbrown",
+    # Not an instrument. The theory booklet is set in plain ink because
+    # it belongs to all of them and none of them.
+    "theory":   "ink",
 }
 
 # Rows per page. These are tuned against the real compiled PDF -- see
@@ -304,6 +721,7 @@ class Book(object):
         self.banjo_section()
         self.bass_section()
         self.cello_section()
+        self.theory_section()
         self.back_matter()
         return "\n".join(self.out) + "\n"
 
@@ -323,6 +741,11 @@ class Book(object):
         self.w(r"\usevoicingcolor{ink}")
         if self.only:
             name = self.instruments[self.only]["name"]
+            # "Fancy / Theory of / Chords and Their Voicings". The other
+            # covers read as a compound noun -- Fancy Mandolin Chords --
+            # and this one needs the preposition to do the same work.
+            if self.only == "theory":
+                name += " of"
             subject = r"\coversubject{%s}{%s}" % (tex_escape(name),
                                                   INK[self.only])
             # The title already names the instrument; repeating it under
@@ -365,6 +788,8 @@ class Book(object):
             self.bass_section()
         elif inst == "cello":
             self.cello_section()
+        elif inst == "theory":
+            self.theory_section()
         else:
             self.chord_section(inst)
 
@@ -379,6 +804,7 @@ class Book(object):
                             ("bass", "Bass"),
                             ("cello", "Cello")]:
             self.w(r"\tocline{%s}{%s}" % (label, self.section_hint(inst)))
+        self.w(r"\tocline{Theory}{how the chords are built}")
         self.w(r"\tocline{Tunings \& Credits}{back sheet}")
         self.w(r"\end{tocdirectory}")
         total = sum(self.voicing_count(i) for i in
@@ -444,8 +870,14 @@ class Book(object):
             major = key
             flat = key not in SHARP_KEYS
             minor = theory.spell((theory.NOTE_TO_PC[key] + 9) % 12, flat) + "m"
-            mv = self.voicing_for(instrument, major) or ""
-            nv = self.voicing_for(instrument, minor) or ""
+            # The theory booklet's circle names keys and signatures and
+            # stops there: a fingering in a wedge would belong to an
+            # instrument, and this section belongs to none of them.
+            if instrument == "theory":
+                mv = nv = ""
+            else:
+                mv = self.voicing_for(instrument, major) or ""
+                nv = self.voicing_for(instrument, minor) or ""
             # Which way is "outward" for this wedge: up in the top half of
             # the circle, down in the bottom. Decides the stacking order.
             angle = (90 - 30 * i) % 360
@@ -465,6 +897,11 @@ class Book(object):
             self.w(r"\circlefootnote{String and fret for each root: "
                    r"\frets{G3} is the third position on the G string.\\ "
                    r"Lowest that falls under the hand.}")
+        elif instrument == "theory":
+            self.w(r"\circlefootnote{Outer ring: major.\\ "
+                   r"Inner ring: its relative minor -- the same seven "
+                   r"notes, counted from the sixth.\\ "
+                   r"Centre: the key signature.}")
         elif instrument == "bass":
             self.w(r"\circlefootnote{String and fret for each root: "
                    r"\frets{A3} is the third fret of the A string.\\ "
@@ -763,6 +1200,116 @@ class Book(object):
                r"from its six.")
         self.w(r"\end{rootmapnote}")
         self.w(r"\end{bookpage}")
+
+    # ------------------------------------------------------------ theory
+    # THEORY_PAGES, above, holds the words. These turn them into pages.
+
+    def theory_tex(self, text):
+        """The little markup THEORY_PAGES is written in, as LaTeX."""
+        out = tex_escape(text)
+        out = out.replace("--", "\u2013")
+        out = re.sub(r"\*\*(.+?)\*\*", r"\\textbf{\1}", out)
+        out = re.sub(r"`(.+?)`", r"\\frets{\1}", out)
+        out = re.sub(r"\^([ri])", r"\\vmarkink{\1}", out)
+        return out
+
+    def theory_degrees(self, quality):
+        """A quality's degrees, from the same table that voices it."""
+        return " ".join(r"\frets{%s}" % tex_escape(
+            self.degree_name(i, quality)) for i in theory.QUALITIES[quality])
+
+    def theory_section(self):
+        """The chapter that explains the rest of the book.
+
+        Everything else here answers "where do I put my fingers". This
+        answers "why is that the chord", and it is the one section that
+        belongs to no instrument -- so it is set in plain ink, and its
+        circle of fifths carries no fingerings.
+        """
+        self.w(r"\usevoicingcolor{ink}")
+        if not self.only:
+            self.w(r"\sectiondivider{Theory}{how the chords are built}")
+        for slug, title, blocks in THEORY_PAGES:
+            if slug == "circle":
+                self.circle_of_fifths("theory")
+                continue
+            if slug == "numbers":
+                self.number_chart("theory")
+                continue
+            self.w(r"\begin{theorypage}{%s}" % tex_escape(title))
+            for kind, payload in blocks:
+                self.theory_block(kind, payload)
+            self.w(r"\end{theorypage}")
+
+    def theory_block(self, kind, payload):
+        if kind == "para":
+            self.w(r"\theorypara{%s}" % self.theory_tex(payload))
+        elif kind == "note":
+            self.w(r"\begin{rootmapnote}%s\end{rootmapnote}"
+                   % self.theory_tex(payload))
+        elif kind == "wideterms":
+            self.w(r"\begin{widetermlist}")
+            for term, gloss in payload:
+                self.w(r"\theoryterm{%s}{%s}"
+                       % (self.theory_tex(term), self.theory_tex(gloss)))
+            self.w(r"\end{widetermlist}")
+        elif kind == "terms":
+            self.w(r"\begin{theorycols}")
+            for term, gloss in payload:
+                self.w(r"\theoryterm{%s}{%s}"
+                       % (self.theory_tex(term), self.theory_tex(gloss)))
+            self.w(r"\end{theorycols}")
+        elif kind == "intervals":
+            self.w(r"\begin{theorycols}")
+            for i in range(12):
+                self.w(r"\theoryterm{\frets{%s}}{%s}"
+                       % (tex_escape(self.DEGREE_NAMES[i]),
+                          tex_escape(INTERVAL_NAMES[i])))
+            self.w(r"\end{theorycols}")
+        elif kind == "scale":
+            self.w(r"\begin{theorycols}")
+            for deg, gap in SCALE_STEPS:
+                self.w(r"\theoryterm{\frets{%s}}{%s}"
+                       % (deg, tex_escape(gap)))
+            self.w(r"\end{theorycols}")
+        elif kind == "qualities":
+            for label, quality, use in payload:
+                self.w(r"\qualityrow{%s}{%s}{%s}"
+                       % (self.theory_tex(label),
+                          self.theory_degrees(quality),
+                          self.theory_tex(use)))
+        elif kind == "figure":
+            self.theory_figure(payload)
+        else:
+            raise ValueError("unknown theory block %r" % kind)
+
+    def theory_figure(self, payload):
+        """A drawing and its caption. One per topic, where one helps."""
+        art = payload[0]
+        caption = payload[-1]
+        self.w(r"\begin{center}")
+        if art == "chordboxes":
+            cells = []
+            for label, strings, base, dots in payload[1]:
+                cells.append(r"\begin{tabular}{@{}c@{}}%s\\[0.6mm]"
+                             r"{\footnotesize %s}\end{tabular}"
+                             % (r"\chordbox{%d}{%d}{%s}"
+                                % (strings, base, dots),
+                                self.theory_tex(label)))
+            self.w(r"\qquad".join(cells))
+        elif art == "chroma":
+            self.w(r"\chromastrip{%s}"
+                   % ",".join(tex_escape(x) for x in payload[1]))
+        elif art == "stack":
+            self.w(r"\thirdstack{%s}"
+                   % ",".join(tex_escape(x) for x in payload[1]))
+        elif art == "chain":
+            self.w(r"\chainarrow ".join(
+                r"\chainbox{%s}" % tex_escape(x) for x in payload[1]))
+        else:
+            raise ValueError("unknown figure %r" % art)
+        self.w(r"\end{center}")
+        self.w(r"\theorycaption{%s}" % self.theory_tex(caption))
 
     def voicing_marks(self, instrument, symbol, frets_text):
         """Superscript caveats: r for rootless, i for inversion.
@@ -1177,7 +1724,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--data", default="data")
     ap.add_argument("--out", default="build/body.tex")
-    ap.add_argument("--only", choices=Book.ALL_INSTRUMENTS,
+    ap.add_argument("--only", choices=Book.ALL_INSTRUMENTS + ["theory"],
                     help="render one instrument's edition instead of the "
                          "whole book")
     args = ap.parse_args()

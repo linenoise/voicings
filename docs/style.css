@@ -81,6 +81,47 @@ a.btn:hover, a.btn:focus {
   a.btn { min-width: 0; }
 }
 p.booklets { margin: 0 0 0.9rem; }
+/* --- the theory chapter ------------------------------------------- */
+dl.terms { margin: 0.8rem 0 1.2rem; }
+dl.terms .term { display: flex; gap: 0.8rem; margin: 0 0 0.45rem; }
+dl.terms dt { flex: 0 0 7.5rem; font-weight: 700; margin: 0; }
+dl.terms dd { margin: 0; }
+.qualities { margin: 0.6rem 0 1rem; }
+.quality { margin: 0 0 0.9rem; }
+.quality .q { margin: 0; display: flex; gap: 0.8rem; align-items: baseline; }
+.quality .q b { flex: 0 0 5rem; }
+.quality .use { margin: 0.1rem 0 0 5.8rem; color: var(--faint);
+                font-size: 0.9rem; }
+sup.mark { font-weight: 700; font-size: 0.7em; color: var(--faint); }
+figure.fig { margin: 1rem 0 1.2rem; }
+figure.fig figcaption { color: var(--faint); font-size: 0.85rem;
+                        margin-top: 0.35rem; }
+.boxes { display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-end; }
+.boxes figure { margin: 0; }
+.boxes figcaption { color: var(--faint); font-size: 0.85rem;
+                    margin-top: 0.25rem; text-align: center; }
+svg.box { height: 7rem; width: auto; display: block; }
+svg.box .grid { stroke: var(--rule); stroke-width: 1; }
+svg.box .nut { stroke: var(--ink); stroke-width: 3.5; }
+svg.box .dot { fill: var(--ink); }
+svg.box .open { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+svg.box .mute { fill: var(--faint); font-size: 15px; text-anchor: middle; }
+svg.chroma { max-width: 100%; height: auto; display: block; }
+svg.chroma .cell { fill: none; stroke: var(--rule); stroke-width: 1; }
+svg.chroma .lab { text-anchor: middle; font-weight: 700; font-size: 13px;
+                  font-family: ui-monospace, Menlo, Consolas, monospace;
+                  fill: var(--ink); }
+svg.stack { height: 9rem; width: auto; display: block; }
+svg.stack .lab { font-weight: 700; font-size: 15px; fill: var(--ink);
+                 font-family: ui-monospace, Menlo, Consolas, monospace;
+                 text-anchor: middle; }
+svg.stack .arrow { stroke: var(--rule); stroke-width: 1; }
+svg.stack .cap { font-size: 11px; fill: var(--faint); }
+p.chain { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+          margin: 0.6rem 0 0; }
+p.chain .fret { border: 1px solid var(--rule); border-radius: 3px;
+                padding: 0.15rem 0.5rem; }
+p.chain .arrow { color: var(--faint); }
 /* The stitch diagram is 900px wide and had nothing holding it back, so it
    ran off the side of a phone. Both figures share the one width now. */
 #printing img { display: block; width: 100%; max-width: 900px; height: auto; }
@@ -155,3 +196,6 @@ footer a { color: var(--faint); }
 .pen.cello, .inst-cello .fret { color: #63421F; }
 .inst-cello a.btn { color: #63421F; border-color: #63421F; }
 .inst-cello a.btn:hover, .inst-cello a.btn:focus { background: #63421F; border-color: #63421F; color: var(--paper); }
+.pen.theory, .inst-theory .fret { color: #1A1A1A; }
+.inst-theory a.btn { color: #1A1A1A; border-color: #1A1A1A; }
+.inst-theory a.btn:hover, .inst-theory a.btn:focus { background: #1A1A1A; border-color: #1A1A1A; color: var(--paper); }
