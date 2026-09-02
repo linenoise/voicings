@@ -819,6 +819,7 @@ class Book(object):
         # one that uses all three marks -- a muted string, an open one
         # and three stopped.
         self.w(r"\usechordboxscale{0.62}")
+        self.w(r"\vfill")
         self.w(r"\readingfigurebare{\chordboxnums{6}{0}{x,3,2,0,1,0}}"
                r"{x32010}")
         self.w(r"\usechordboxscale{1}")

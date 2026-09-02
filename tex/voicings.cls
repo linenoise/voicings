@@ -972,27 +972,43 @@
 % #1 the chord's name, #2 the box, #3 the digits.
 % Free-standing: the back sheet sets it inside a list and the contents
 % page does not, so the \item belongs to the caller.
+% Set as one \vbox with no glue of its own. A box placed between two
+% \vfill centres exactly; the loose \vspace this used to carry leaked
+% 1.8mm above and 1.2mm below and pushed the figure visibly off centre.
 \newcommand{\readingfigure}[3]{%
-  \par\vspace{1.8mm}
-  \centerline{\scalebox{\cb@scale}{%
-    \begin{tabular}{@{}c@{\hskip 4mm}c@{\hskip 4mm}c@{}}
-      #2 & \raisebox{7mm}{\color{faint}$=$}
-         & \raisebox{7mm}{\frets{#3}}\\
-    \end{tabular}}}%
-  \vspace{1.2mm}
-  {\footnotesize\color{faint}\centering
-   The same #1 chord, drawn and written.\par}}
+  \par\nointerlineskip
+  \vbox{\parskip=0pt
+    \centerline{\scalebox{\cb@scale}{%
+      \begin{tabular}{@{}c@{\hskip 4mm}c@{\hskip 4mm}c@{}}
+        #2 & \raisebox{7mm}{\color{faint}$=$}
+           & \raisebox{7mm}{\frets{#3}}\\
+      \end{tabular}}}%
+    \vspace{1.4mm}
+    {\footnotesize\color{faint}\centering
+     The same #1 chord, drawn and written.\par}%
+    % Centring the box is not the same as centring what you can see. The
+    % drawing's bounding box reaches above its topmost ink, so the figure
+    % sits low in a box that is itself centred; this pads the bottom to
+    % put the same amount of white above and below what is printed.
+    % Measured on the printed page rather than reasoned about, and 2.7mm
+    % is where all five instruments land within a millimetre. The last
+    % fraction is one glyph: a muted string is marked with a taller sign
+    % than an open one, so a guitar's topmost ink sits a little higher
+    % than a mandolin's and no single value centres both exactly.
+    \vspace{2.7mm}}%
+  \par}
 
 % Without the caption, for a page whose surrounding text already says
 % what the figure is showing.
 \newcommand{\readingfigurebare}[2]{%
-  \par\vspace{1.4mm}
-  \centerline{\scalebox{\cb@scale}{%
-    \begin{tabular}{@{}c@{\hskip 4mm}c@{\hskip 4mm}c@{}}
-      #1 & \raisebox{7mm}{\color{faint}$=$}
-         & \raisebox{7mm}{\frets{#2}}\\
-    \end{tabular}}}%
-  \vspace{1mm}}
+  \par\nointerlineskip
+  \vbox{\parskip=0pt
+    \centerline{\scalebox{\cb@scale}{%
+      \begin{tabular}{@{}c@{\hskip 4mm}c@{\hskip 4mm}c@{}}
+        #1 & \raisebox{7mm}{\color{faint}$=$}
+           & \raisebox{7mm}{\frets{#2}}\\
+      \end{tabular}}}}%
+  \par}
 
 % The chord figure, held until the end-code can place it. It belongs
 % between the reading notes and the credits with equal air above and

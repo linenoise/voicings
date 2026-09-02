@@ -270,6 +270,7 @@ keys:
     - '2455'
   - chord: Dm
     frets:
+    - '2001'
     - '2355'
   - chord: D5
     frets:
