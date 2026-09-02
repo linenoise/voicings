@@ -396,7 +396,7 @@ class Book(object):
         self.w(r"\frets{x} means don't play that string.\\")
         self.w(r"\vmarkink{r} means rootless: for rhythm, "
                r"not for soloing.\\")
-        self.w(r"\vmarkink{i} means the chord given is an inversion.\\")
+        self.w(r"\vmarkink{i} means the voicing given is an inversion.\\")
         self.w(r"Tunings are on the back sheet.")
         self.w(r"\end{tocnote}")
         self.w(r"\end{bookpage}")
@@ -1168,7 +1168,7 @@ class Book(object):
             lines.append(r"\vmarkink{r} means rootless: for rhythm, "
                          r"not for soloing.")
         if r"\vmark{i}" in body:
-            lines.append(r"\vmarkink{i} means the chord given is an "
+            lines.append(r"\vmarkink{i} means the voicing given is an "
                          r"inversion.")
         return lines
 
