@@ -926,6 +926,21 @@
   \item[]\vspace{1.4mm}{\color{rule}\hrule height 0.4pt}\vspace{1.6mm}
   {\footnotesize\color{faint}#1\par}}
 
+% The same thing the reading notes say, drawn once: a chord box beside
+% the digits that mean it. A booklet with no contents page has nowhere
+% else to show a reader what a row of numbers is a picture of.
+% #1 the chord's name, #2 the box, #3 the digits.
+\newcommand{\readingfigure}[3]{%
+  \item[]\vspace{1.8mm}
+  \centerline{%
+    \begin{tabular}{@{}c@{\hskip 4mm}c@{\hskip 4mm}c@{}}
+      #2 & \raisebox{4.2mm}{\color{faint}$=$}
+         & \raisebox{4.2mm}{\frets{#3}}\\
+    \end{tabular}}%
+  \vspace{1.2mm}
+  {\footnotesize\color{faint}\centering
+   The same #1 chord, drawn and written.\par}}
+
 \newenvironment{backsheet}[1]{%
   \renewcommand{\backsheet@title}{#1}%
   \clearpage\thispagestyle{empty}%

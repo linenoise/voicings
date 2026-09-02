@@ -1690,7 +1690,34 @@ class Book(object):
         notes = self.reading_notes()
         if notes:
             self.w(r"\readingnotes{%s}" % r"\\".join(notes))
+        figure = self.reading_figure()
+        if figure:
+            self.w(figure)
         self.w(r"\end{backsheet}")
+
+    # One chord per instrument, drawn on the back sheet so a reader can
+    # see what a row of digits is a picture of. Chosen for being ordinary,
+    # inside the first four frets, and for using the marks the notes
+    # beside it explain: an open string, a stopped one, and on the guitar
+    # a muted one.
+    READING_EXAMPLE = {
+        "mandolin": ("C", "0230"),
+        "guitar":   ("C", "x32010"),
+        "ukulele":  ("F", "2010"),
+        "banjo":    ("C", "2012"),
+        "cello":    ("C", "0023"),
+    }
+
+    def reading_figure(self):
+        """The chord box for this edition's example, or nothing."""
+        example = self.READING_EXAMPLE.get(self.only)
+        if not example or r"\chordrow" not in "\n".join(self.out):
+            return None
+        name, frets = example
+        strings = len(self.instruments[self.only]["tuning"])
+        dots = ",".join(frets)
+        return r"\readingfigure{%s}{\chordbox{%d}{0}{%s}}{%s}" % (
+            tex_escape(name), strings, dots, tex_escape(frets))
 
     def reading_notes(self):
         """How to read a fingering, for a booklet with no contents page.
