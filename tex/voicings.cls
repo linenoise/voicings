@@ -994,6 +994,12 @@
     \end{tabular}}}%
   \vspace{1mm}}
 
+% The chord figure, held until the end-code can place it. It belongs
+% between the reading notes and the credits with equal air above and
+% below, and only the environment knows where those two edges are.
+\newcommand{\backsheet@figure}{}
+\newcommand{\backsheetfigure}[1]{\renewcommand{\backsheet@figure}{#1}}
+
 \newenvironment{backsheet}[1]{%
   \renewcommand{\backsheet@title}{#1}%
   \clearpage\thispagestyle{empty}%
@@ -1003,6 +1009,8 @@
     \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}%
 }{%
   \end{list}
+  \vfill
+  \backsheet@figure
   \vfill
   {\color{rule}\hrule height 0.4pt}
   \vspace{1.2mm}

@@ -1686,6 +1686,12 @@ class Book(object):
                      or "tuning_label" in meta else "")
             rows.append((meta["name"], label, meta.get("note", ""),
                          INK[name]))
+        # Set before the environment opens: its end-code is what places
+        # the figure, and the list inside it is a group that would take
+        # the definition away again.
+        figure = self.reading_figure()
+        if figure:
+            self.w(figure)
         # The credits name this edition, not the series: someone holding
         # the bass booklet should see what they are holding.
         name = self.instruments[self.only]["name"] + " " if self.only else ""
@@ -1697,9 +1703,6 @@ class Book(object):
         notes = self.reading_notes()
         if notes:
             self.w(r"\readingnotes{%s}" % r"\\".join(notes))
-        figure = self.reading_figure()
-        if figure:
-            self.w(figure)
         self.w(r"\end{backsheet}")
 
     # One chord per instrument, drawn on the back sheet so a reader can
@@ -1723,7 +1726,7 @@ class Book(object):
         name, frets = example
         strings = len(self.instruments[self.only]["tuning"])
         dots = ",".join(frets)
-        return r"\item[]\readingfigure{%s}{\chordboxnums{%d}{0}{%s}}{%s}" % (
+        return r"\backsheetfigure{\readingfigure{%s}{\chordboxnums{%d}{0}{%s}}{%s}}" % (
             tex_escape(name), strings, dots, tex_escape(frets))
 
     def reading_notes(self):
