@@ -217,6 +217,18 @@ shapes:
     - 14
     - 16
     note: Dominant, spacious
+  7sus2:
+    close:
+    - 0
+    - 2
+    - 7
+    - 10
+    open:
+    - 0
+    - 7
+    - 10
+    - 14
+    note: Dominant without the bite
   7sus4:
     close:
     - 0

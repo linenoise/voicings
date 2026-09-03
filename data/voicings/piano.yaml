@@ -78,6 +78,10 @@ keys:
     frets:
     - C-E-G-Bb-D
     note: Dominant, spacious
+  - chord: C7sus2
+    frets:
+    - C-D-G-Bb
+    note: Dominant without the bite
   - chord: C7sus4
     frets:
     - C-F-G-Bb
@@ -216,6 +220,10 @@ keys:
     frets:
     - Db-F-Ab-B-Eb
     note: Dominant, spacious
+  - chord: Db7sus2
+    frets:
+    - Db-Eb-Ab-B
+    note: Dominant without the bite
   - chord: Db7sus4
     frets:
     - Db-Gb-Ab-B
@@ -354,6 +362,10 @@ keys:
     frets:
     - D-F#-A-C-E
     note: Dominant, spacious
+  - chord: D7sus2
+    frets:
+    - D-E-A-C
+    note: Dominant without the bite
   - chord: D7sus4
     frets:
     - D-G-A-C
@@ -492,6 +504,10 @@ keys:
     frets:
     - Eb-G-Bb-Db-F
     note: Dominant, spacious
+  - chord: Eb7sus2
+    frets:
+    - Eb-F-Bb-Db
+    note: Dominant without the bite
   - chord: Eb7sus4
     frets:
     - Eb-Ab-Bb-Db
@@ -630,6 +646,10 @@ keys:
     frets:
     - E-G#-B-D-F#
     note: Dominant, spacious
+  - chord: E7sus2
+    frets:
+    - E-F#-B-D
+    note: Dominant without the bite
   - chord: E7sus4
     frets:
     - E-A-B-D
@@ -768,6 +788,10 @@ keys:
     frets:
     - F-A-C-Eb-G
     note: Dominant, spacious
+  - chord: F7sus2
+    frets:
+    - F-G-C-Eb
+    note: Dominant without the bite
   - chord: F7sus4
     frets:
     - F-Bb-C-Eb
@@ -906,6 +930,10 @@ keys:
     frets:
     - Gb-Bb-Db-E-Ab
     note: Dominant, spacious
+  - chord: Gb7sus2
+    frets:
+    - Gb-Ab-Db-E
+    note: Dominant without the bite
   - chord: Gb7sus4
     frets:
     - Gb-B-Db-E
@@ -1044,6 +1072,10 @@ keys:
     frets:
     - G-B-D-F-A
     note: Dominant, spacious
+  - chord: G7sus2
+    frets:
+    - G-A-D-F
+    note: Dominant without the bite
   - chord: G7sus4
     frets:
     - G-C-D-F
@@ -1096,7 +1128,7 @@ keys:
     frets:
     - B-D-G-A
     note: Suspended bass color
-  - chord: Gm/Bb
+  - chord: Gm/A#
     frets:
     - A#-D-G
     note: Minor, third in the bass
@@ -1182,6 +1214,10 @@ keys:
     frets:
     - Ab-C-Eb-Gb-Bb
     note: Dominant, spacious
+  - chord: Ab7sus2
+    frets:
+    - Ab-Bb-Eb-Gb
+    note: Dominant without the bite
   - chord: Ab7sus4
     frets:
     - Ab-Db-Eb-Gb
@@ -1320,6 +1356,10 @@ keys:
     frets:
     - A-C#-E-G-B
     note: Dominant, spacious
+  - chord: A7sus2
+    frets:
+    - A-B-E-G
+    note: Dominant without the bite
   - chord: A7sus4
     frets:
     - A-D-E-G
@@ -1458,6 +1498,10 @@ keys:
     frets:
     - Bb-D-F-Ab-C
     note: Dominant, spacious
+  - chord: Bb7sus2
+    frets:
+    - Bb-C-F-Ab
+    note: Dominant without the bite
   - chord: Bb7sus4
     frets:
     - Bb-Eb-F-Ab
@@ -1596,6 +1640,10 @@ keys:
     frets:
     - B-D#-F#-A-C#
     note: Dominant, spacious
+  - chord: B7sus2
+    frets:
+    - B-C#-F#-A
+    note: Dominant without the bite
   - chord: B7sus4
     frets:
     - B-E-F#-A
