@@ -101,10 +101,9 @@ THEORY_PAGES = [
              "under it."),
             ("~C°~", "Diminished, or ~Cdim~."),
             ("~C+~", "Augmented, or ~Caug~."),
-            ("~[flat]~", "Flat. A semitone down."),
-            ("~[sharp]~", "Sharp. A semitone up."),
-            ("~[natural]~", "Natural. Cancels one the key signature asked "
-             "for."),
+            ("~[flat]~", "Flat, also ~b~. A semitone down."),
+            ("~[sharp]~", "Sharp, also ~#~. A semitone up."),
+            ("~[natural]~", "Natural. Neither sharp nor flat."),
             ("+b3+", "A degree: three semitones up. The flat goes first, "
              "as a chord symbol writes it."),
             ("~Bb~", "A note. The flat goes after: here it is part of "
