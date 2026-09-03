@@ -491,7 +491,7 @@ class Site(object):
         out = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", out)
         out = re.sub(r"@(\w+):(.+?)@",
                      r'<span class="fret pen \1">\2</span>', out)
-        out = re.sub(r"~(.+?)~", r'<span class="note">\1</span>', out)
+        out = re.sub(r"~(.+?)~", r'<span class="notename">\1</span>', out)
         out = re.sub(r"\+(.+?)\+", r'<span class="interval">\1</span>', out)
         out = re.sub(r"`(.+?)`", r'<span class="fret">\1</span>', out)
         out = re.sub(r"\^([ri])", r'<sup class="mark">\1</sup>', out)
@@ -527,8 +527,8 @@ class Site(object):
             for name, close, spread in payload:
                 rows.append(
                     '<tr><th rowspan="2">%s</th>'
-                    '<td><span class="note">%s</span></td><td>closed</td></tr>'
-                    '<tr><td><span class="note">%s</span></td>'
+                    '<td><span class="notename">%s</span></td><td>closed</td></tr>'
+                    '<tr><td><span class="notename">%s</span></td>'
                     '<td>open</td></tr>' % (esc(name), esc(close), esc(spread)))
             return ('<table class="pairs">%s</table>' % "".join(rows))
         elif kind == "figure":
@@ -555,7 +555,7 @@ class Site(object):
                    esc(frets))
                 for inst, frets, strings, base, dots in payload[1]))
         elif art == "chroma":
-            pen = ("note" if all(render.NOTE_TOKEN.match(x)
+            pen = ("notename" if all(render.NOTE_TOKEN.match(x)
                                  for x in payload[1] if x) else "interval")
             art_html = self.chroma_svg(payload[1], pen)
         elif art == "stack":
@@ -568,7 +568,7 @@ class Site(object):
         elif art == "chain":
             art_html = ('<p class="chain">%s</p>'
                         % '<span class="arrow">&rarr;</span>'.join(
-                            '<span class="note">%s</span>' % esc(x)
+                            '<span class="notename">%s</span>' % esc(x)
                             for x in payload[1]))
         else:
             raise ValueError("unknown figure %r" % art)
@@ -879,15 +879,15 @@ dl.terms dd { margin: 0; }
 sup.mark { font-weight: 700; font-size: 0.7em; color: var(--faint); }
 /* A note or chord name, in the red the key titles are set in. Degrees,
    fret numbers and Nashville numbers stay in the body ink. */
-.note { font-family: ui-monospace, Menlo, Consolas, monospace;
-        font-weight: 700; letter-spacing: 0.05em; color: %(keyred)s; }
+.notename { font-family: ui-monospace, Menlo, Consolas, monospace;
+            font-weight: 700; letter-spacing: 0.05em; color: %(keyred)s; }
 /* A degree or interval -- a distance rather than a note you can name --
    in the bass pen, as the booklet sets it. */
 .interval { font-family: ui-monospace, Menlo, Consolas, monospace;
             font-weight: 700; letter-spacing: 0.05em; color: %(bass)s; }
-svg.chroma .lab.note { fill: %(keyred)s; }
+svg.chroma .lab.notename { fill: %(keyred)s; }
 svg.chroma .lab.interval { fill: %(bass)s; }
-p.chain .interval, p.chain .note { border: 1px solid var(--rule);
+p.chain .interval, p.chain .notename { border: 1px solid var(--rule);
                                    border-radius: 3px;
                                    padding: 0.15rem 0.5rem; }
 /* The box itself stays in ink, as \chordbox draws it in the booklet.
@@ -909,13 +909,14 @@ figure.fig figcaption { color: var(--faint); font-size: 0.85rem;
 .boxes figure { margin: 0; }
 .boxes figcaption { color: var(--faint); font-size: 0.85rem;
                     margin-top: 0.25rem; text-align: center; }
-svg.box { height: 7rem; width: auto; display: block; }
+svg.box { height: 6.5em; width: auto; display: block; }
 svg.box .grid { stroke: var(--rule); stroke-width: 1; }
 svg.box .nut { stroke: var(--ink); stroke-width: 3.5; }
 svg.box .dot { fill: var(--ink); }
 svg.box .open { fill: none; stroke: var(--ink); stroke-width: 1.5; }
 svg.box .mute { fill: var(--faint); text-anchor: middle; }
-svg.chroma { max-width: 100%%; height: auto; display: block; }
+svg.chroma { height: 2.1em; width: auto; max-width: 100%%;
+             display: block; }
 svg.chroma .cell { fill: none; stroke: var(--rule); stroke-width: 1; }
 svg.chroma .lab { text-anchor: middle; font-weight: 700;
                   font-family: ui-monospace, Menlo, Consolas, monospace;
