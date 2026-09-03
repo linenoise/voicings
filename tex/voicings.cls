@@ -378,6 +378,12 @@
 % figure -- so the page keeps a single rhythm and nothing has to know
 % what follows it. Written after each block rather than before, because
 % only then does the last thing on a page get it too.
+% One line of air, written before every block and nowhere else. Once
+% per boundary, so it cannot double; and because it comes before rather
+% than after, the first block on a page gets its line under the title
+% and a figure gets one whatever it follows. \addvspace would have been
+% the tidier tool but it does nothing after the boxes \theoryterm and
+% multicols leave behind, which is most of these pages.
 \newcommand{\theorygap}{\par\vskip\baselineskip}
 \newcommand{\theorypara}[1]{\par #1\par}
 

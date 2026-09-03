@@ -89,7 +89,7 @@ THEORY_PAGES = [
         ("para", "Everything printed beside a chord, and what it means."),
         ("wideterms", [
             ("`2013`", "A voicing. One digit per string, lowest string "
-             "first, in the instrument's own color."),
+             "first, in the instrument's color."),
             ("`x`", "Don't play that string."),
             ("`0`", "Play it open, no finger down."),
             ("^r", "Rootless: this shape has no root in it."),
@@ -99,14 +99,13 @@ THEORY_PAGES = [
              "under it."),
             ("~C°~", "Diminished. Written ~Cdim~ in some books."),
             ("~C+~", "Augmented, or ~Caug~."),
-            ("+b3+", "A degree: three semitones above the root. The flat "
-             "goes before the number, as a chord symbol writes it."),
-            ("~Bb~", "A note. The flat goes after, because here it is "
-             "part of the note's name."),
+            ("+b3+", "A degree: three semitones up. The flat goes "
+             "before the number, as a chord symbol writes it."),
+            ("~Bb~", "A note. The flat goes after: here it is part of "
+             "the name."),
         ]),
-        ("note", "Note and chord names are printed in red, degrees and "
-         "intervals in yellow, and fingerings in the color of the "
-         "instrument that plays them."),
+        ("note", "Names of notes and chords are red, degrees and "
+         "intervals yellow, fingerings the color of their instrument."),
     ]),
     ("chromatic", "The Chromatic Scale", [
         ("para", "Twelve notes, each one fret or one key apart, and then "
@@ -310,9 +309,9 @@ THEORY_PAGES = [
         ]),
     ]),
     ("altered", "Altered Ninths", [
-        ("figure", ("chain", ["2m", "5", "5b9", "1"],
-                    "An altered dominant does the same job as a plain "
-                    "one, with more tension to resolve.")),
+        ("figure", ("stack", ["R", "3", "5", "b7", "b9"],
+                    "The alteration is the last note. Everything under "
+                    "it is an ordinary seventh chord.")),
         ("qualities", [
             ("7b9", "7b9", "Dominant with the ninth flattened. Four of its "
              "five notes are a diminished seventh."),
@@ -386,12 +385,11 @@ THEORY_PAGES = [
                     "The same chord, root and fifth gone. Still a "
                     "seventh: those two name it.")),
         ("para", "A voicing with no root is marked ^r. In a band it is "
-         "often the better chord: the bass has the root covered, and the "
-         "notes you have left are the ones carrying the harmony. On your "
-         "own it sounds like a different chord, because it is one."),
-        ("note", "This is why ~Cmaj9~ and ~Em7~ can be the same four "
-         "notes. Whoever is playing underneath decides which one you "
-         "played."),
+         "often the better chord: the bass has the root, and what you "
+         "have left carries the harmony. Alone it sounds like a "
+         "different chord, because it is one."),
+        ("note", "It is why ~Cmaj9~ and ~Em7~ can be four identical "
+         "notes."),
     ]),
     ("spacing", "Open and Closed Voicings", [
         ("para", "Two ways to arrange the same notes. A **closed** voicing "
@@ -1291,8 +1289,11 @@ class Book(object):
                 continue
             self.w(r"\begin{theorypage}{%s}" % tex_escape(title))
             for kind, payload in blocks:
-                self.theory_block(kind, payload)
+                # Before each block, once per boundary: every element
+                # gets a line above it, including a drawing that opens
+                # the page, and none of them can double up.
                 self.w(r"\theorygap")
+                self.theory_block(kind, payload)
             self.w(r"\end{theorypage}")
 
     def theory_block(self, kind, payload):

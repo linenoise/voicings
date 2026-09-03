@@ -893,6 +893,9 @@ p.chain .interval, p.chain .note { border: 1px solid var(--rule);
 /* The box itself stays in ink, as \chordbox draws it in the booklet.
    Only the digits underneath take the instrument's pen. */
 .theory p { margin: 1.5em 0; }
+/* A line of air above and below, whatever the figure sits between --
+   the booklet gives them the same, using \addvspace so two gaps meeting
+   stay one line. */
 figure.fig { margin: 1.5em 0; }
 /* Closed above open, roots in one column: the point is what moved. */
 table.pairs { border-collapse: collapse; margin: 0 0 1.5em; }
