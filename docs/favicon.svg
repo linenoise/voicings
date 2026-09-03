@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>Fancy Chords and Their Voicings</title>
+  <desc>Mandolin C major, the 0230 of the book's own C page, in the
+  mandolin's green. The open strings carry no rings: at sixteen pixels
+  they close up into blobs and take the two fretted notes down with
+  them, and an unmuted string drawn plain already reads as open.</desc>
+  <rect x="0" y="0" width="32" height="32" rx="6" fill="#FDFCF8"/>
+  <g stroke="#C4C4C4" stroke-width="1">
+    <line x1="5" y1="9" x2="5" y2="28"/>
+    <line x1="12.33" y1="9" x2="12.33" y2="28"/>
+    <line x1="19.67" y1="9" x2="19.67" y2="28"/>
+    <line x1="27" y1="9" x2="27" y2="28"/>
+    <line x1="5" y1="15.3" x2="27" y2="15.3"/>
+    <line x1="5" y1="21.6" x2="27" y2="21.6"/>
+    <line x1="5" y1="28" x2="27" y2="28"/>
+  </g>
+  <line x1="4" y1="9" x2="28" y2="9" stroke="#1A1A1A" stroke-width="3.4"/>
+  <circle cx="12.33" cy="18.4" r="3.6" fill="#00873C"/>
+  <circle cx="19.67" cy="24.8" r="3.6" fill="#00873C"/>
+</svg>

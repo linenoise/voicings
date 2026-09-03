@@ -173,6 +173,9 @@ class Site(object):
             '<meta charset="utf-8">',
             '<meta name="viewport" content="width=device-width,initial-scale=1">',
             "<title>%s</title>" % esc(title),
+            '<link rel="icon" href="favicon.svg" type="image/svg+xml">',
+            '<link rel="icon" href="favicon.png" sizes="32x32">',
+            '<link rel="apple-touch-icon" href="apple-touch-icon.png">',
             '<link rel="stylesheet" href="style.css">',
             "</head>",
             "<body%s>" % (' class="inst-%s"' % active if active else ""),
@@ -1009,7 +1012,8 @@ def main():
             shutil.copy2(os.path.join(build, f), os.path.join(downloads, f))
             copied += 1
 
-    for name in ("pamphlet-stitch.svg", "booklets.jpg"):
+    for name in ("pamphlet-stitch.svg", "booklets.jpg", "favicon.svg",
+                 "favicon.png", "apple-touch-icon.png"):
         src = os.path.join(ROOT, "images", name)
         if os.path.exists(src):
             shutil.copy2(src, os.path.join(out, name))
