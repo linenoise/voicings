@@ -267,13 +267,20 @@
 % carries the tuning on a single-instrument cover; it is empty for the
 % whole book, where no one tuning belongs on the front. Both editions
 % share one cover so they cannot drift apart.
+% A word set small in front of Chords on the cover. The theory booklet
+% is Fancy Theory *of* Chords, and the preposition belongs to the noun
+% it governs rather than trailing the line above it.
+\newcommand{\cover@lead}{}
+\newcommand{\coverlead}[1]{%
+  \renewcommand{\cover@lead}{{\fontsize{15}{17}\selectfont #1}\,}}
+
 \newcommand{\coverpage}[3]{%
   \thispagestyle{empty}%
   \begin{center}
     \vspace*{6mm}
     {\fontsize{15}{17}\selectfont\bfseries Fancy\par}
     #1%
-    {\fontsize{30}{32}\selectfont\bfseries Chords\par}
+    {\fontsize{30}{32}\selectfont\bfseries\cover@lead Chords\par}
     \vspace{1mm}
     {\fontsize{13}{15}\selectfont and Their Voicings\par}
     \vspace{5mm}
@@ -350,9 +357,11 @@
   \clearpage\pagetitle{#1}\raggedright\footnotesize
 }{\par}
 
-\newcommand{\theorypara}[1]{\par\vskip1.1mm #1\par}
+% A blank line between paragraphs, not a nudge. These pages are read
+% rather than scanned, and 1.1mm did not separate them.
+\newcommand{\theorypara}[1]{\par\vskip\baselineskip #1\par}
 
-% What a drawing is showing. Centred under it, in the faint gray the
+% What a drawing is showing. Centered under it, in the faint gray the
 % footnotes use, so it reads as a label rather than another sentence.
 \newcommand{\theorycaption}[1]{%
   \par\vspace{-0.6mm}
@@ -483,21 +492,20 @@
     }
   \end{tikzpicture}}
 
-% A stack of thirds, drawn as the notes it stacks. #1 comma list of
-% degree labels, bottom first.
+% A stack of thirds. Drawn left to right, the way the chord chains are,
+% because a column of seven degrees in a 75mm measure left the page
+% mostly white and read as a list rather than as one chord.
+% #1 comma list of degree labels, root first.
 \newcommand{\thirdstack}[1]{%
-  \begin{tikzpicture}[x=4.6mm,y=-4.0mm,line width=0.3pt]
-    \foreach \lab [count=\i from 0] in {#1} {%
-      \node[font=\fontsize{6}{6.4}\selectfont\ttfamily\bfseries,
-            color=\voicingcolor] at (0,-\i) {\lab};
-      \ifnum\i>0
-        \draw[color=rule,->,>=stealth,line width=0.25pt]
-          (0.9,-\i+0.75) -- (0.9,-\i+0.25);
-        \node[anchor=west,font=\fontsize{5}{5.4}\selectfont,color=faint]
-          at (1.15,-\i+0.5) {a third};
-      \fi
-    }
-  \end{tikzpicture}}
+  \begingroup
+  \def\ts@sep{}%
+  \foreach \lab in {#1} {%
+    \ts@sep\chainbox{\lab}%
+    \gdef\ts@sep{\thirdarrow}%
+  }%
+  \endgroup}
+\newcommand{\thirdarrow}{%
+  \,\raisebox{0.35ex}{\scriptsize\color{faint}$\to$}\,}
 
 % A row of boxed labels with an arrow between each -- progressions,
 % substitutions, inversions. Built by the caller rather than looped over
@@ -638,7 +646,7 @@
 % room a label has is 2*pi*r/12: the inner ring has to sit far enough out
 % that four digits at body size still fit across it. Pushing the middle
 % circle out from 24mm to 26mm and shrinking the hub buys the minor ring
-% the millimetre it was short.
+% the millimeter it was short.
 \newlength{\cof@outer}\setlength{\cof@outer}{36mm}
 \newlength{\cof@mid}\setlength{\cof@mid}{26mm}
 \newlength{\cof@inner}\setlength{\cof@inner}{12mm}
@@ -973,8 +981,8 @@
 % Free-standing: the back sheet sets it inside a list and the contents
 % page does not, so the \item belongs to the caller.
 % Set as one \vbox with no glue of its own. A box placed between two
-% \vfill centres exactly; the loose \vspace this used to carry leaked
-% 1.8mm above and 1.2mm below and pushed the figure visibly off centre.
+% \vfill centers exactly; the loose \vspace this used to carry leaked
+% 1.8mm above and 1.2mm below and pushed the figure visibly off center.
 \newcommand{\readingfigure}[3]{%
   \par\nointerlineskip
   \vbox{\parskip=0pt
@@ -986,15 +994,15 @@
     \vspace{1.4mm}
     {\footnotesize\color{faint}\centering
      The same #1 chord, drawn and written.\par}%
-    % Centring the box is not the same as centring what you can see. The
+    % Centering the box is not the same as centering what you can see. The
     % drawing's bounding box reaches above its topmost ink, so the figure
-    % sits low in a box that is itself centred; this pads the bottom to
+    % sits low in a box that is itself centered; this pads the bottom to
     % put the same amount of white above and below what is printed.
     % Measured on the printed page rather than reasoned about, and 2.7mm
-    % is where all five instruments land within a millimetre. The last
+    % is where all five instruments land within a millimeter. The last
     % fraction is one glyph: a muted string is marked with a taller sign
     % than an open one, so a guitar's topmost ink sits a little higher
-    % than a mandolin's and no single value centres both exactly.
+    % than a mandolin's and no single value centers both exactly.
     \vspace{2.7mm}}%
   \par}
 

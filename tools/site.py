@@ -203,7 +203,7 @@ class Site(object):
         These are the point of the site. Someone who lands here wants the
         file in their hand -- nobody wants to stare at a phone during
         rehearsal -- so each edition is a target big enough to hit with a
-        thumb, named for what you would do with it and labelled with what
+        thumb, named for what you would do with it and labeled with what
         it costs: pages to read, sheets of paper to print.
         """
         title = edition_title(self.book, inst)
@@ -542,7 +542,12 @@ class Site(object):
         elif art == "chroma":
             art_html = self.chroma_svg(payload[1])
         elif art == "stack":
-            art_html = self.stack_svg(payload[1])
+            # Left to right, as the booklet sets it. A column of seven
+            # degrees read as a list rather than as one chord.
+            art_html = ('<p class="chain">%s</p>'
+                        % '<span class="arrow">&rarr;</span>'.join(
+                            '<span class="fret">%s</span>' % esc(x)
+                            for x in payload[1]))
         elif art == "chain":
             art_html = ('<p class="chain">%s</p>'
                         % '<span class="arrow">&rarr;</span>'.join(
@@ -553,70 +558,73 @@ class Site(object):
         return ('<figure class="fig">%s<figcaption>%s</figcaption></figure>'
                 % (art_html, self.theory_html(caption)))
 
+    # The book's drawings are laid out in millimetres by voicings.cls;
+    # these repeat those numbers at 8 units to the millimetre, so a
+    # figure on the page and the same figure on screen are the same
+    # shape. Change one and change the other.
+    MM = 8.0
+    CB_STRING = 4.6 * MM     # tikzpicture x= in \chordboxnums
+    CB_FRET = 4.0 * MM       # tikzpicture y=
+    CB_DOT = 0.85 * MM       # \cb@dots circle radius
+    CB_MARK = -0.45          # marker row, in fret units
+    CB_OPEN = 0.5 * MM       # open-string ring, outer radius
+    CB_MUTE = 5.0 / 2.845 * MM   # the x is set at 5pt
+    CHROMA_W = 5.2 * MM      # \chromastrip x=
+    CHROMA_H = 4.4 * MM      # \chromastrip y=
+    CHROMA_PT = 5.6 / 2.845 * MM  # its labels are 5.6pt
+
     def chord_box_svg(self, strings, base, dots):
         """A chord box: strings down, frets across, a dot per finger."""
-        dx, dy, pad = 22, 24, 16
+        dx, dy = self.CB_STRING, self.CB_FRET
+        pad = dx / 2
+        top = pad + abs(self.CB_MARK) * dy + self.CB_MUTE / 2
         w = (strings - 1) * dx + pad * 2
-        h = 4 * dy + pad * 2 + 14
-        top = pad + 14
-        p = ['<svg class="box" viewBox="0 0 %d %d" '
+        h = top + 4 * dy + pad
+        p = ['<svg class="box" viewBox="0 0 %.1f %.1f" '
              'xmlns="http://www.w3.org/2000/svg" role="img" '
              'aria-label="chord diagram">' % (w, h)]
         for i in range(strings):
             x = pad + i * dx
-            p.append('<line x1="%d" y1="%d" x2="%d" y2="%d" '
+            p.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" '
                      'class="grid"/>' % (x, top, x, top + 4 * dy))
         for f in range(5):
             y = top + f * dy
             cls = "nut" if (f == 0 and base == 0) else "grid"
-            p.append('<line x1="%d" y1="%d" x2="%d" y2="%d" class="%s"/>'
+            p.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" '
+                     'class="%s"/>'
                      % (pad, y, pad + (strings - 1) * dx, y, cls))
+        marky = top + self.CB_MARK * dy
         for i, pos in enumerate(dots.split(",")):
             x = pad + i * dx
             if pos == "x":
-                p.append('<text x="%d" y="%d" class="mute">&#215;</text>'
-                         % (x, top - 5))
+                p.append('<text x="%.1f" y="%.1f" class="mute" '
+                         'font-size="%.1f">&#215;</text>'
+                         % (x, marky + self.CB_MUTE * 0.36, self.CB_MUTE))
             elif pos == "0":
-                p.append('<circle cx="%d" cy="%d" r="4" class="open"/>'
-                         % (x, top - 9))
+                p.append('<circle cx="%.1f" cy="%.1f" r="%.1f" '
+                         'class="open"/>' % (x, marky, self.CB_OPEN))
             else:
-                p.append('<circle cx="%d" cy="%d" r="7" class="dot"/>'
-                         % (x, top + (int(pos) - 0.5) * dy))
+                p.append('<circle cx="%.1f" cy="%.1f" r="%.1f" class="dot"/>'
+                         % (x, top + (int(pos) - 0.5) * dy, self.CB_DOT))
         p.append("</svg>")
         return "".join(p)
 
     def chroma_svg(self, labels):
         """Twelve semitones as a strip of boxes."""
-        w, h = 34, 26
-        p = ['<svg class="chroma" viewBox="0 0 %d %d" '
+        w, h = self.CHROMA_W, self.CHROMA_H
+        p = ['<svg class="chroma" viewBox="0 0 %.1f %.1f" '
              'xmlns="http://www.w3.org/2000/svg" role="img" '
-             'aria-label="semitone strip">' % (len(labels) * w + 2, h + 2)]
+             'aria-label="semitone strip">'
+             % (len(labels) * w + 2, h + 2)]
         for i, lab in enumerate(labels):
             x = 1 + i * w
-            p.append('<rect x="%d" y="1" width="%d" height="%d" '
+            p.append('<rect x="%.1f" y="1" width="%.1f" height="%.1f" '
                      'class="cell"/>' % (x, w, h))
             if lab:
-                p.append('<text x="%d" y="%d" class="lab">%s</text>'
-                         % (x + w / 2, h / 2 + 5, esc(lab)))
-        p.append("</svg>")
-        return "".join(p)
-
-    def stack_svg(self, labels):
-        """A stack of thirds, bottom note first in the data."""
-        row, w = 26, 150
-        n = len(labels)
-        p = ['<svg class="stack" viewBox="0 0 %d %d" '
-             'xmlns="http://www.w3.org/2000/svg" role="img" '
-             'aria-label="stack of thirds">' % (w, n * row + 6)]
-        for i, lab in enumerate(labels):
-            y = 4 + i * row
-            p.append('<text x="26" y="%d" class="lab">%s</text>'
-                     % (y + 17, esc(lab)))
-            if i < n - 1:
-                p.append('<line x1="52" y1="%d" x2="52" y2="%d" '
-                         'class="arrow"/>' % (y + 20, y + row + 4))
-                p.append('<text x="60" y="%d" class="cap">a third</text>'
-                         % (y + row))
+                p.append('<text x="%.1f" y="%.1f" class="lab" '
+                         'font-size="%.1f">%s</text>'
+                         % (x + w / 2, h / 2 + self.CHROMA_PT * 0.36,
+                            self.CHROMA_PT, esc(lab)))
         p.append("</svg>")
         return "".join(p)
 
@@ -846,7 +854,8 @@ dl.terms dd { margin: 0; }
 .quality .use { margin: 0.1rem 0 0 5.8rem; color: var(--faint);
                 font-size: 0.9rem; }
 sup.mark { font-weight: 700; font-size: 0.7em; color: var(--faint); }
-figure.fig { margin: 1rem 0 1.2rem; }
+.theory p { margin: 1.5em 0; }
+figure.fig { margin: 1.5em 0; }
 figure.fig figcaption { color: var(--faint); font-size: 0.85rem;
                         margin-top: 0.35rem; }
 .boxes { display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-end; }
@@ -858,18 +867,12 @@ svg.box .grid { stroke: var(--rule); stroke-width: 1; }
 svg.box .nut { stroke: var(--ink); stroke-width: 3.5; }
 svg.box .dot { fill: var(--ink); }
 svg.box .open { fill: none; stroke: var(--ink); stroke-width: 1.5; }
-svg.box .mute { fill: var(--faint); font-size: 15px; text-anchor: middle; }
+svg.box .mute { fill: var(--faint); text-anchor: middle; }
 svg.chroma { max-width: 100%%; height: auto; display: block; }
 svg.chroma .cell { fill: none; stroke: var(--rule); stroke-width: 1; }
-svg.chroma .lab { text-anchor: middle; font-weight: 700; font-size: 13px;
+svg.chroma .lab { text-anchor: middle; font-weight: 700;
                   font-family: ui-monospace, Menlo, Consolas, monospace;
                   fill: var(--ink); }
-svg.stack { height: 9rem; width: auto; display: block; }
-svg.stack .lab { font-weight: 700; font-size: 15px; fill: var(--ink);
-                 font-family: ui-monospace, Menlo, Consolas, monospace;
-                 text-anchor: middle; }
-svg.stack .arrow { stroke: var(--rule); stroke-width: 1; }
-svg.stack .cap { font-size: 11px; fill: var(--faint); }
 p.chain { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
           margin: 0.6rem 0 0; }
 p.chain .fret { border: 1px solid var(--rule); border-radius: 3px;

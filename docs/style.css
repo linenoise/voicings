@@ -93,7 +93,8 @@ dl.terms dd { margin: 0; }
 .quality .use { margin: 0.1rem 0 0 5.8rem; color: var(--faint);
                 font-size: 0.9rem; }
 sup.mark { font-weight: 700; font-size: 0.7em; color: var(--faint); }
-figure.fig { margin: 1rem 0 1.2rem; }
+.theory p { margin: 1.5em 0; }
+figure.fig { margin: 1.5em 0; }
 figure.fig figcaption { color: var(--faint); font-size: 0.85rem;
                         margin-top: 0.35rem; }
 .boxes { display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-end; }
@@ -105,18 +106,12 @@ svg.box .grid { stroke: var(--rule); stroke-width: 1; }
 svg.box .nut { stroke: var(--ink); stroke-width: 3.5; }
 svg.box .dot { fill: var(--ink); }
 svg.box .open { fill: none; stroke: var(--ink); stroke-width: 1.5; }
-svg.box .mute { fill: var(--faint); font-size: 15px; text-anchor: middle; }
+svg.box .mute { fill: var(--faint); text-anchor: middle; }
 svg.chroma { max-width: 100%; height: auto; display: block; }
 svg.chroma .cell { fill: none; stroke: var(--rule); stroke-width: 1; }
-svg.chroma .lab { text-anchor: middle; font-weight: 700; font-size: 13px;
+svg.chroma .lab { text-anchor: middle; font-weight: 700;
                   font-family: ui-monospace, Menlo, Consolas, monospace;
                   fill: var(--ink); }
-svg.stack { height: 9rem; width: auto; display: block; }
-svg.stack .lab { font-weight: 700; font-size: 15px; fill: var(--ink);
-                 font-family: ui-monospace, Menlo, Consolas, monospace;
-                 text-anchor: middle; }
-svg.stack .arrow { stroke: var(--rule); stroke-width: 1; }
-svg.stack .cap { font-size: 11px; fill: var(--faint); }
 p.chain { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
           margin: 0.6rem 0 0; }
 p.chain .fret { border: 1px solid var(--rule); border-radius: 3px;

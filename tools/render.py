@@ -62,25 +62,6 @@ SCALE_STEPS = [("1", "then a tone"), ("2", "then a tone"),
 
 THEORY_PAGES = [
     ("reading", "How to Read a Chord", [
-        ("para", "A chord symbol is a root and a quality. **Am7** is an A, "
-         "and everything after the A says which notes to stack on it. The "
-         "root moves; the quality does not."),
-        ("wideterms", [
-            ("`2013`", "One digit per string, lowest string first. The "
-             "number is the fret."),
-            ("`x`", "Don't play that string."),
-            ("`0`", "Play it open."),
-        ]),
-        ("para", "Three more marks sit beside the voicings: a slash, a "
-         "small **r** and a small **i**. Each is about which notes a "
-         "shape leaves out and which one it puts underneath, so they wait "
-         "for the inversions and rootless pages, where there are chords "
-         "to leave notes out of."),
-        ("para", "Each instrument is printed in its own colour, so you "
-         "can find the page by the ink. This chapter is in black: it "
-         "belongs to all of them."),
-    ]),
-    ("boxes", "The Same Chord, Two Ways", [
         ("para", "Most chord books draw a box: a grid of strings and "
          "frets with a dot where a finger goes. This one prints the frets "
          "as digits. They say the same thing."),
@@ -95,6 +76,9 @@ THEORY_PAGES = [
         ("para", "A box has to be redrawn when the chord moves up the "
          "neck. A digit carries its fret with it, which is why this book "
          "fits in a pocket."),
+        ("para", "Each instrument is printed in its own color, so you "
+         "can find the page by the ink. This chapter is in black: it "
+         "belongs to all of them."),
     ]),
     ("chromatic", "The Chromatic Scale", [
         ("para", "Twelve notes, each one fret or one key apart, and then "
@@ -151,7 +135,7 @@ THEORY_PAGES = [
     ("circle", "The Circle of Fifths", [
         ("circle", None),
         ("para", "Each step clockwise adds a sharp or drops a flat, and "
-         "moves the root up a fifth. Neighbours share six of their seven "
+         "moves the root up a fifth. Neighbors share six of their seven "
          "notes, which is why a song can wander one step either way "
          "without anything sounding wrong, and why the `5` chord sits one "
          "step clockwise of home and the `4` one step counter-clockwise."),
@@ -165,7 +149,7 @@ THEORY_PAGES = [
                    ("`4`", "major"), ("`5`", "major"), ("`6`", "minor"),
                    ("`7`", "diminished")]),
         ("figure", ("chain", ["1", "4", "5", "1"],
-                    "The commonest turn there is, in any key.")),
+                    "The most common turn there is, in any key.")),
         ("para", "Those are the chords the major scale builds on its own "
          "degrees, using only notes from the key. A number on its own "
          "means that chord; a quality after it means play that instead, "
@@ -191,7 +175,7 @@ THEORY_PAGES = [
             ("thirteenth", "`R 3 5 7 9 11 13`"),
         ]),
         ("figure", ("stack", ["R", "3", "5", "7", "9", "11", "13"],
-                    "Read from the bottom. Each step up is a third.")),
+                    "Every step is a third. Take three and you have a triad; keep going and you name the chord for the last one.")),
         ("para", "A thirteenth chord has seven notes and you have four "
          "fingers, so the stack is a claim about which notes belong, not "
          "an instruction to sound all of them. What to leave out is on the "
@@ -222,20 +206,20 @@ THEORY_PAGES = [
     ]),
     ("sixths", "Sixths", [
         ("figure", ("stack", ['R', '3', '5', '6'],
-                    "A triad with a sixth on top, not a seventh.")),
+                    "A triad with a sixth added, not a seventh.")),
         ("qualities", [
             ("6", "6", "A major triad with the sixth added. Warmer and "
              "less final than a seventh: ends a song without closing it."),
             ("m6", "m6", "Minor triad, major sixth. The sixth stays major "
              "-- that is what keeps it from being a m7b5 rooted "
              "elsewhere."),
-            ("6/9", "6/9", "Sixth and ninth, no seventh. All colour and no "
+            ("6/9", "6/9", "Sixth and ninth, no seventh. All color and no "
              "pull, which makes it a good last chord."),
         ]),
     ]),
     ("sevenths", "Sevenths", [
         ("figure", ("stack", ['R', '3', '5', 'b7'],
-                    "The fourth third. Everything above this is colour.")),
+                    "The fourth third. Everything past it is color.")),
         ("qualities", [
             ("7", "7", "Major triad, minor seventh. The blues chord, and "
              "the one that pulls to the fourth."),
@@ -248,7 +232,7 @@ THEORY_PAGES = [
             ("m7b5", "m7b5", "A diminished triad with a minor seventh. The "
              "two chord of a minor key. Also called half-diminished."),
             ("7sus4", "7sus4", "A seventh with the fourth in place of the "
-             "third. Suspends the pull without cancelling it."),
+             "third. Suspends the pull without canceling it."),
             ("7sus2", "7sus2", "The same idea with the second. Not voiced "
              "in this book."),
             ("7b5", "7b5", "Flatten the fifth of a seventh. It shares "
@@ -344,16 +328,15 @@ THEORY_PAGES = [
         ("figure", ("chroma", ["R", "3", "5", "b7"],
                     "A seventh chord, whole.")),
         ("figure", ("chroma", ["", "3", "", "b7"],
-                    "The same chord with the root and fifth gone. It is "
-                    "still a seventh: those two notes were the ones "
-                    "naming it.")),
+                    "The same chord, root and fifth gone. Still a "
+                    "seventh: those two name it.")),
         ("para", "A voicing with no root is marked ^r. In a band it is "
          "often the better chord: the bass has the root covered, and the "
          "notes you have left are the ones carrying the harmony. On your "
          "own it sounds like a different chord, because it is one."),
-        ("para", "This is why **Cmaj9** and **Em7** can be the same four "
-         "notes. Context, and whoever is playing underneath, decides which "
-         "one you have played."),
+        ("note", "This is why **Cmaj9** and **Em7** can be the same four "
+         "notes. Whoever is playing underneath decides which one you "
+         "played."),
     ]),
     ("spacing", "Open and Closed Voicings", [
         ("para", "Two ways to arrange the same notes. A **closed** voicing "
@@ -380,7 +363,7 @@ THEORY_PAGES = [
          "piano pages print two voicings for every chord. The first is "
          "closed, the notes in order from the root. The second is the "
          "spread voicing: root and fifth low for the left hand, then the "
-         "colour above it with the third on top, which is where the ear "
+         "color above it with the third on top, which is where the ear "
          "goes looking for it."),
         ("wideterms", [
             ("C", "`C E G` closed, `C G C E` open"),
@@ -656,7 +639,7 @@ class Book(object):
         wherever the answer lands on the B string the four-string position
         follows in parentheses: C is B1, or A3 if you have four strings.
         The two are stacked rather than run together, because a wedge is
-        only about eleven millimetres across.
+        only about eleven millimeters across.
         """
         root, _, _ = theory.parse_chord(symbol)
         name = theory.spell(root)
@@ -741,11 +724,12 @@ class Book(object):
         self.w(r"\usevoicingcolor{ink}")
         if self.only:
             name = self.instruments[self.only]["name"]
-            # "Fancy / Theory of / Chords and Their Voicings". The other
-            # covers read as a compound noun -- Fancy Mandolin Chords --
-            # and this one needs the preposition to do the same work.
+            # The other covers read as a compound noun: Fancy Mandolin
+            # Chords. This one needs a preposition, and it belongs to the
+            # word it governs -- "Fancy / Theory / of Chords" -- not
+            # trailing the line above it.
             if self.only == "theory":
-                name += " of"
+                self.w(r"\coverlead{of}")
             subject = r"\coversubject{%s}{%s}" % (tex_escape(name),
                                                   INK[self.only])
             # The title already names the instrument; repeating it under
@@ -873,7 +857,10 @@ class Book(object):
         self.w(r"\usecofsize{%s}" % {
             "guitar": "6.4", "piano": "6.4", "bass": "7"}.get(instrument, "9"))
         self.w(r"\begin{circlepage}{%s}" % tex_escape(title))
-        self.w(r"\begin{circleoffifths}{%s}" % tex_escape(title))
+        # The hub names whose circle this is. In the theory booklet it is
+        # nobody's, and a word there was just a word in a hole.
+        hub = "" if instrument == "theory" else tex_escape(title)
+        self.w(r"\begin{circleoffifths}{%s}" % hub)
         for i, key in enumerate(CIRCLE):
             major = key
             flat = key not in SHARP_KEYS
@@ -909,7 +896,7 @@ class Book(object):
             self.w(r"\circlefootnote{Outer ring: major.\\ "
                    r"Inner ring: its relative minor -- the same seven "
                    r"notes, counted from the sixth.\\ "
-                   r"Centre: the key signature.}")
+                   r"Center: the key signature.}")
         elif instrument == "bass":
             self.w(r"\circlefootnote{String and fret for each root: "
                    r"\frets{A3} is the third fret of the A string.\\ "
@@ -1696,6 +1683,10 @@ class Book(object):
         # The credits name this edition, not the series: someone holding
         # the bass booklet should see what they are holding.
         name = self.instruments[self.only]["name"] + " " if self.only else ""
+        # "Fancy Theory of Chords", as the cover has it. The preposition
+        # is why this is not just the instrument name and a space.
+        if self.only == "theory":
+            name += "of "
         self.w(r"\begin{backsheet}{Fancy %sChords and Their Voicings}" % name)
         for name, tuning, note, pen in rows:
             self.w(r"\tuningrow{%s}{%s}{%s}{%s}"
@@ -1747,7 +1738,10 @@ class Book(object):
         # telling that reader to read left to right explains nothing.
         if r"\chordrow" in body:
             lines.append(r"Fret numbers read from the lowest string.")
-        if r"\frets{x" in body:
+        # The theory chapter quotes a fingering in its opening figure and
+        # explains it there. Everywhere else the mark turns up it is on a
+        # chord grid, which is what this line is for.
+        if r"\frets{x" in body and r"\chordrow" in body:
             lines.append(r"\frets{x} means don't play that string.")
         if r"\vmark{r}" in body:
             lines.append(r"\vmarkink{r} means rootless: for rhythm, "

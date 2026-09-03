@@ -2,7 +2,7 @@
 %
 % Cut into quarters, stack in order, sew along the spine edge.
 %
-% 23 book pages -> 3 sheets of US Letter, printed
+% 22 book pages -> 3 sheets of US Letter, printed
 % double-sided, flipped on the LONG edge.
 \documentclass{article}
 \usepackage[letterpaper,margin=0pt]{geometry}
@@ -13,7 +13,7 @@
 
 % Drawn here rather than with pdfpages' own frame option, which is a
 % black hairline with no way to soften it. Matched to the book's hairline
-% grey: a third of a point at 3.95:1, which a laser prints faithfully and
+% gray: a third of a point at 3.95:1, which a laser prints faithfully and
 % which is still light enough that a remnant of it after an imperfect cut
 % does not read as a border. The first attempt at 9A9A9A looked right on
 % screen and needed good light to follow on paper.
@@ -29,7 +29,7 @@
 
 \begin{document}
 \includepdf[
-  pages={1,3,5,7,4,2,8,6,9,11,13,15,12,10,16,14,17,19,21,23,20,18,{},22},
+  pages={1,3,5,7,4,2,8,6,9,11,13,15,12,10,16,14,17,19,21,{},20,18,{},22},
   nup=2x2,
   noautoscale=true,
   delta=0pt 0pt,

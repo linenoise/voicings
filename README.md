@@ -113,7 +113,7 @@ for it.
 check passes, and that check wants the `www` record in the documented form:
 a CNAME to `linenoise.github.io.`, not to the apex. Pointing `www` at the
 apex serves fine over HTTP and still fails the check, which leaves the
-certificate unissued and "Enforce HTTPS" greyed out. Add the AAAA records
+certificate unissued and "Enforce HTTPS" grayed out. Add the AAAA records
 too. Then remove the custom domain in the Pages settings, save, re-enter it
 and save again: that is what retriggers issuance. It takes a few minutes,
 after which "Enforce HTTPS" becomes available and should be turned on.
