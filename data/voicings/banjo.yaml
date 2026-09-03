@@ -24,6 +24,7 @@ keys:
   - chord: C°
     frets:
     - '1514'
+    - '4544'
     derived: true
   - chord: Csus2
     frets:
@@ -36,6 +37,7 @@ keys:
   - chord: C6
     frets:
     - '2215'
+    - '[10]987'
     derived: true
   - chord: Cm6
     frets:
@@ -48,13 +50,16 @@ keys:
   - chord: C7
     frets:
     - '2312'
+    - '[10]988'
   - chord: Cmaj7
     frets:
     - '5502'
+    - '[10]989'
     derived: true
   - chord: Cm7
     frets:
     - '1311'
+    - '[10]888'
     derived: true
   - chord: C°7
     frets:
@@ -138,9 +143,11 @@ keys:
   - chord: Db
     frets:
     - '3123'
+    - '[11][10]9[11]'
   - chord: Dbm
     frets:
     - '2122'
+    - '[11]99[11]'
   - chord: Db5
     frets:
     - x69x
@@ -152,6 +159,7 @@ keys:
   - chord: Db°
     frets:
     - '5022'
+    - '2022'
     derived: true
   - chord: Dbsus2
     frets:
@@ -164,6 +172,7 @@ keys:
   - chord: Db6
     frets:
     - '3326'
+    - '[11][10]98'
     derived: true
   - chord: Dbm6
     frets:
@@ -176,13 +185,16 @@ keys:
   - chord: Db7
     frets:
     - '3423'
+    - '[11][10]99'
   - chord: Dbmaj7
     frets:
     - '3523'
+    - '[11][10]9[10]'
     derived: true
   - chord: Dbm7
     frets:
     - '2422'
+    - '[11]999'
     derived: true
   - chord: Db°7
     frets:
@@ -276,6 +288,7 @@ keys:
   - chord: D+
     frets:
     - '0334'
+    - '4334'
     derived: true
   - chord: D°
     frets:
@@ -408,6 +421,7 @@ keys:
   - chord: Eb°
     frets:
     - '1244'
+    - '4244'
     derived: true
   - chord: Ebsus2
     frets:
@@ -420,6 +434,7 @@ keys:
   - chord: Eb6
     frets:
     - '5011'
+    - '[10]888'
     derived: true
   - chord: Ebm6
     frets:
@@ -435,6 +450,7 @@ keys:
   - chord: Ebmaj7
     frets:
     - '1030'
+    - '888[12]'
     derived: true
   - chord: Ebm7
     frets:
@@ -536,6 +552,7 @@ keys:
   - chord: E°
     frets:
     - '2355'
+    - '8988'
     derived: true
   - chord: Esus2
     frets:
@@ -548,6 +565,7 @@ keys:
   - chord: E6
     frets:
     - '6602'
+    - '2426'
     derived: true
   - chord: Em6
     frets:
@@ -563,6 +581,7 @@ keys:
   - chord: Emaj7
     frets:
     - '1102'
+    - '2101'
     derived: true
   - chord: Em7
     frets:
@@ -691,6 +710,7 @@ keys:
   - chord: Fmaj7
     frets:
     - '2213'
+    - '3212'
     derived: true
   - chord: Fm7
     frets:
@@ -788,6 +808,7 @@ keys:
   - chord: Gb+
     frets:
     - '4330'
+    - '4334'
     derived: true
   - chord: Gb°
     frets:
@@ -804,6 +825,7 @@ keys:
   - chord: Gb6
     frets:
     - '1344'
+    - '4321'
     derived: true
   - chord: Gbm6
     frets:
@@ -819,6 +841,7 @@ keys:
   - chord: Gbmaj7
     frets:
     - '3324'
+    - '4323'
     derived: true
   - chord: Gbm7
     frets:
@@ -916,6 +939,7 @@ keys:
   - chord: G+
     frets:
     - '5001'
+    - '1001'
     derived: true
   - chord: G°
     frets:
@@ -932,6 +956,7 @@ keys:
   - chord: G6
     frets:
     - '0002'
+    - '5432'
     derived: true
   - chord: Gm6
     frets:
@@ -947,6 +972,7 @@ keys:
   - chord: Gmaj7
     frets:
     - '0004'
+    - '5434'
     derived: true
   - chord: Gm7
     frets:
@@ -1048,6 +1074,7 @@ keys:
   - chord: Ab°
     frets:
     - '0100'
+    - '6436'
     derived: true
   - chord: Absus2
     frets:
@@ -1060,6 +1087,7 @@ keys:
   - chord: Ab6
     frets:
     - '1113'
+    - '6543'
     derived: true
   - chord: Abm6
     frets:
@@ -1072,13 +1100,16 @@ keys:
   - chord: Ab7
     frets:
     - '1114'
+    - '6544'
   - chord: Abmaj7
     frets:
     - '1115'
+    - '6545'
     derived: true
   - chord: Abm7
     frets:
     - '1104'
+    - '6444'
     derived: true
   - chord: Ab°7
     frets:
@@ -1188,6 +1219,7 @@ keys:
   - chord: A6
     frets:
     - '2224'
+    - '7654'
     derived: true
   - chord: Am6
     frets:
@@ -1200,13 +1232,16 @@ keys:
   - chord: A7
     frets:
     - '2225'
+    - '7655'
   - chord: Amaj7
     frets:
     - '2226'
+    - '7656'
     derived: true
   - chord: Am7
     frets:
     - '2215'
+    - '7555'
     derived: true
   - chord: A°7
     frets:
@@ -1290,9 +1325,11 @@ keys:
   - chord: Bb
     frets:
     - '3333'
+    - '8768'
   - chord: Bbm
     frets:
     - '3323'
+    - '8668'
   - chord: Bb5
     frets:
     - x36x
@@ -1300,6 +1337,7 @@ keys:
   - chord: Bb+
     frets:
     - '0334'
+    - '4334'
     derived: true
   - chord: Bb°
     frets:
@@ -1316,6 +1354,7 @@ keys:
   - chord: Bb6
     frets:
     - '0335'
+    - '8765'
     derived: true
   - chord: Bbm6
     frets:
@@ -1328,13 +1367,16 @@ keys:
   - chord: Bb7
     frets:
     - '3336'
+    - '8766'
   - chord: Bbmaj7
     frets:
     - '0337'
+    - '8767'
     derived: true
   - chord: Bbm7
     frets:
     - '3326'
+    - '8666'
     derived: true
   - chord: Bb°7
     frets:
@@ -1428,10 +1470,12 @@ keys:
   - chord: B+
     frets:
     - '1001'
+    - '5445'
     derived: true
   - chord: B°
     frets:
     - '0403'
+    - '3433'
     derived: true
   - chord: Bsus2
     frets:
@@ -1444,6 +1488,7 @@ keys:
   - chord: B6
     frets:
     - '1104'
+    - '9876'
     derived: true
   - chord: Bm6
     frets:
@@ -1459,10 +1504,12 @@ keys:
   - chord: Bmaj7
     frets:
     - '1301'
+    - '9878'
     derived: true
   - chord: Bm7
     frets:
     - '0200'
+    - '9777'
     derived: true
   - chord: B°7
     frets:
