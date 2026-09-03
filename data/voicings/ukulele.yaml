@@ -132,6 +132,7 @@ keys:
   - chord: Dbm
     frets:
     - '1104'
+    - '6444'
   - chord: Db5
     frets:
     - x144
@@ -1381,6 +1382,7 @@ keys:
     derived: true
   - chord: B9
     frets:
+    - '4354'
     - '6352'
   - chord: Bmaj9
     frets:
