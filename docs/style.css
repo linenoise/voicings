@@ -97,6 +97,15 @@ sup.mark { font-weight: 700; font-size: 0.7em; color: var(--faint); }
    fret numbers and Nashville numbers stay in the body ink. */
 .note { font-family: ui-monospace, Menlo, Consolas, monospace;
         font-weight: 700; letter-spacing: 0.05em; color: #AA0019; }
+/* A degree or interval -- a distance rather than a note you can name --
+   in the bass pen, as the booklet sets it. */
+.interval { font-family: ui-monospace, Menlo, Consolas, monospace;
+            font-weight: 700; letter-spacing: 0.05em; color: #9A8800; }
+svg.chroma .lab.note { fill: #AA0019; }
+svg.chroma .lab.interval { fill: #9A8800; }
+p.chain .interval, p.chain .note { border: 1px solid var(--rule);
+                                   border-radius: 3px;
+                                   padding: 0.15rem 0.5rem; }
 /* The box itself stays in ink, as \chordbox draws it in the booklet.
    Only the digits underneath take the instrument's pen. */
 .theory p { margin: 1.5em 0; }

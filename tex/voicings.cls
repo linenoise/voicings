@@ -365,6 +365,11 @@
 % a note name is a thing you can put a finger on.
 \newcommand{\notename}[1]{{\ttfamily\bfseries\color{keyred}#1}}
 
+% An interval or a degree -- a distance from a root rather than a note
+% you can name -- in the bass pen. Note and chord names are red, fret
+% marks are ink, and this is the third thing the chapter talks about.
+\newcommand{\intervalname}[1]{{\ttfamily\bfseries\color{fretyellow}#1}}
+
 % A voicing quoted in the theory chapter, in the pen of the instrument
 % it belongs to. #1 is the color, #2 the digits.
 \newcommand{\instfrets}[2]{{\ttfamily\bfseries\color{#1}#2}}

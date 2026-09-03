@@ -3508,16 +3508,35 @@ The rest belongs to whoever is playing chords.
 \theorypara{Each instrument is printed in its own color, so you can find the page by the ink. This chapter is in black: it belongs to all of them.}
 \theorygap
 \end{theorypage}
+\begin{theorypage}{The Marks in This Book}
+\theorypara{Everything printed beside a chord, and what it means.}
+\theorygap
+\begin{widetermlist}
+\theoryterm{\frets{2013}}{A voicing. One digit per string, lowest string first, in the instrument's own color.}
+\theoryterm{\frets{x}}{Don't play that string.}
+\theoryterm{\frets{0}}{Play it open, no finger down.}
+\theoryterm{\vmarkink{r}}{Rootless: this shape has no root in it.}
+\theoryterm{\vmarkink{i}}{An inversion: the root is in there, but something else is underneath.}
+\theoryterm{\notename{C/E}}{A slash chord. The chord, then the note that goes under it.}
+\theoryterm{\notename{C\degsign{}}}{Diminished. Written \notename{Cdim} in some books.}
+\theoryterm{\notename{C+}}{Augmented, or \notename{Caug}.}
+\theoryterm{\intervalname{b3}}{A degree: three semitones above the root. The flat goes before the number, as a chord symbol writes it.}
+\theoryterm{\notename{Bb}}{A note. The flat goes after, because here it is part of the note's name.}
+\end{widetermlist}
+\theorygap
+\begin{rootmapnote}Note and chord names are printed in red, degrees and intervals in yellow, and fingerings in the color of the instrument that plays them.\end{rootmapnote}
+\theorygap
+\end{theorypage}
 \begin{theorypage}{The Chromatic Scale}
 \theorypara{Twelve notes, each one fret or one key apart, and then the whole thing repeats an octave higher. That is every note there is.}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chromastrip{A,A\#,B,C,C\#,D,D\#,E,F,F\#,G,G\#}
+{\usevoicingcolor{keyred}\chromastrip{A,A\#,B,C,C\#,D,D\#,E,F,F\#,G,G\#}}
 }
 \theorycaption{Sharps going up.}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chromastrip{A,Bb,B,C,Db,D,Eb,E,F,Gb,G,Ab}
+{\usevoicingcolor{keyred}\chromastrip{A,Bb,B,C,Db,D,Eb,E,F,Gb,G,Ab}}
 }
 \theorycaption{The same twelve, spelled with flats.}
 \theorygap
@@ -3530,49 +3549,49 @@ The rest belongs to whoever is playing chords.
 \theorypara{Twelve notes, each a semitone apart, and then it starts again. An interval is how many semitones lie between two of them. Every chord in this book is written as intervals from its root, and that is what makes a shape movable: slide it up a fret and every interval in it is unchanged.}
 \theorygap
 \begin{theorycols}
-\theoryterm{\frets{R}}{root}
-\theoryterm{\frets{b9}}{flat ninth}
-\theoryterm{\frets{9}}{ninth, or second}
-\theoryterm{\frets{b3}}{minor third}
-\theoryterm{\frets{3}}{major third}
-\theoryterm{\frets{4}}{fourth, or eleventh}
-\theoryterm{\frets{b5}}{flat fifth, or sharp eleventh}
-\theoryterm{\frets{5}}{fifth}
-\theoryterm{\frets{\#5}}{sharp fifth, or flat thirteenth}
-\theoryterm{\frets{6}}{sixth, or thirteenth}
-\theoryterm{\frets{b7}}{minor seventh}
-\theoryterm{\frets{7}}{major seventh}
+\theoryterm{\intervalname{R}}{root}
+\theoryterm{\intervalname{b9}}{flat ninth}
+\theoryterm{\intervalname{9}}{ninth, or second}
+\theoryterm{\intervalname{b3}}{minor third}
+\theoryterm{\intervalname{3}}{major third}
+\theoryterm{\intervalname{4}}{fourth, or eleventh}
+\theoryterm{\intervalname{b5}}{flat fifth, or sharp eleventh}
+\theoryterm{\intervalname{5}}{fifth}
+\theoryterm{\intervalname{\#5}}{sharp fifth, or flat thirteenth}
+\theoryterm{\intervalname{6}}{sixth, or thirteenth}
+\theoryterm{\intervalname{b7}}{minor seventh}
+\theoryterm{\intervalname{7}}{major seventh}
 \end{theorycols}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chromastrip{R,b9,9,b3,3,4,b5,5,\#5,6,b7,7}
+{\usevoicingcolor{fretyellow}\chromastrip{R,b9,9,b3,3,4,b5,5,\#5,6,b7,7}}
 }
 \theorycaption{Twelve semitones up from any root. Every chord in the book is a handful of these.}
 \theorygap
-\begin{rootmapnote}Accidentals are written before the number, the way a chord symbol writes them: \frets{b3}, not 3\frets{b}.\end{rootmapnote}
+\begin{rootmapnote}Accidentals are written before the number, the way a chord symbol writes them: \intervalname{b3}, not 3\intervalname{b}.\end{rootmapnote}
 \theorygap
 \end{theorypage}
 \begin{theorypage}{The Major Scale}
 \theorypara{Seven of the twelve notes, in a fixed pattern of tones and semitones. Everything else on these pages is counted against it.}
 \theorygap
 \begin{theorycols}
-\theoryterm{\frets{1}}{then a tone}
-\theoryterm{\frets{2}}{then a tone}
-\theoryterm{\frets{3}}{then a semitone}
-\theoryterm{\frets{4}}{then a tone}
-\theoryterm{\frets{5}}{then a tone}
-\theoryterm{\frets{6}}{then a tone}
-\theoryterm{\frets{7}}{then a semitone, and you are home}
+\theoryterm{\intervalname{1}}{then a tone}
+\theoryterm{\intervalname{2}}{then a tone}
+\theoryterm{\intervalname{3}}{then a semitone}
+\theoryterm{\intervalname{4}}{then a tone}
+\theoryterm{\intervalname{5}}{then a tone}
+\theoryterm{\intervalname{6}}{then a tone}
+\theoryterm{\intervalname{7}}{then a semitone, and you are home}
 \end{theorycols}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chromastrip{1,,2,,3,4,,5,,6,,7}
+{\usevoicingcolor{fretyellow}\chromastrip{1,,2,,3,4,,5,,6,,7}}
 }
 \theorycaption{The major scale inside the chromatic one. The gaps are the notes it leaves out.}
 \theorygap
 \theorypara{\textbf{The relative minor.} Start the same seven notes from the sixth and you have the natural minor of that key. A minor and C major are the same notes; which one you are in is decided by where the music rests.}
 \theorygap
-\theorypara{\textbf{Why some keys are flat.} A scale uses each letter once. In F that forces B flat rather than A sharp, because the scale already has an A. The note is one note; the spelling depends on the key it is in, which is why the same key heads one page \notename{Bb} and another \notename{A\#}.}
+\theorypara{\textbf{Why some keys are flat.} A scale uses each letter once. In F that forces \notename{Bb} rather than \notename{A\#}, because the scale already has an A. The note is one note; the spelling depends on the key it is in, which is why the same key heads one page \notename{Bb} and another \notename{A\#}.}
 \theorygap
 \end{theorypage}
 \usevoicingcolor{ink}
@@ -3594,27 +3613,48 @@ The rest belongs to whoever is playing chords.
 \end{circleoffifths}
 \circlefootnote{Outer ring: major.\\ Inner ring: its relative minor -- the same seven notes, counted from the sixth.\\ Center: the key signature.}
 \end{circlepage}
+\begin{theorypage}{Why Instruments Are Tuned This Way}
+\theorypara{The circle is a chain of fifths. So is almost every tuning in this book, and so is the order the sharps and flats are written in a key signature. They are the same chain, read at different speeds.}
+\theorygap
+\par\nointerlineskip\vspace{0.4mm}\centerline{%
+{\usevoicingcolor{keyred}\chromastrip{F,C,G,D,A,E,B}}
+}
+\theorycaption{The order sharps appear in a key signature, each a fifth above the last. Flats take the same seven backwards.}
+\theorygap
+\theorypara{Read the flat order and you have read a bass: \notename{E A D G}. Four of the seven, in order, because a fourth up is a fifth down.}
+\theorygap
+\begin{widetermlist}
+\theoryterm{mandolin}{\notename{G D A E}, fifths}
+\theoryterm{cello}{\notename{C G D A}, fifths}
+\theoryterm{bass}{\notename{E A D G}, fourths}
+\theoryterm{guitar}{\notename{E A D G B E}, fourths with one third}
+\theoryterm{ukulele}{\notename{G C E A}, fourth, third, fourth}
+\end{widetermlist}
+\theorygap
+\theorypara{Fifths reach far: a mandolin crosses two octaves on four courses, and its chords ask for stretches. Fourths keep the notes close, so a guitar barres six strings with one finger. Two answers to the same chain.}
+\theorygap
+\end{theorypage}
 \begin{theorypage}{Nashville Numbers}
-\theorypara{Name the chords by their degree in the key instead of by letter, and a chart transposes itself. \frets{1 4 5} is the same three chords in every key; the number chart says which letters they are.}
+\theorypara{Name the chords by their degree in the key instead of by letter, and a chart transposes itself. \notename{1 4 5} is the same three chords in every key; the number chart says which letters they are.}
 \theorygap
 \begin{theorycols}
-\theoryterm{\frets{1}}{major}
-\theoryterm{\frets{2}}{minor}
-\theoryterm{\frets{3}}{minor}
-\theoryterm{\frets{4}}{major}
-\theoryterm{\frets{5}}{major}
-\theoryterm{\frets{6}}{minor}
-\theoryterm{\frets{7}}{diminished}
+\theoryterm{\notename{1}}{major}
+\theoryterm{\notename{2}}{minor}
+\theoryterm{\notename{3}}{minor}
+\theoryterm{\notename{4}}{major}
+\theoryterm{\notename{5}}{major}
+\theoryterm{\notename{6}}{minor}
+\theoryterm{\notename{7}}{diminished}
 \end{theorycols}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chainbox{1}\chainarrow \chainbox{4}\chainarrow \chainbox{5}\chainarrow \chainbox{1}
+{\usevoicingcolor{keyred}\chainbox{1}\chainarrow \chainbox{4}\chainarrow \chainbox{5}\chainarrow \chainbox{1}}
 }
 \theorycaption{The most common turn there is, in any key.}
 \theorygap
-\theorypara{Those are the chords the major scale builds on its own degrees, using only notes from the key. A number on its own means that chord; a quality after it means play that instead, and \frets{4m} in a major key is a borrowed chord rather than a mistake.}
+\theorypara{Those are the chords the major scale builds on its own degrees, using only notes from the key. A number on its own means that chord; a quality after it means play that instead, and \notename{4m} in a major key is a borrowed chord rather than a mistake.}
 \theorygap
-\theorypara{In a minor key the same seven chords are counted from the six. A minor song's home chord is the \frets{6m} of its relative major, or the \frets{1m} if the chart is written in the minor.}
+\theorypara{In a minor key the same seven chords are counted from the six. A minor song's home chord is the \notename{6m} of its relative major, or the \notename{1m} if the chart is written in the minor.}
 \theorygap
 \end{theorypage}
 \begin{bookpage}{Numbers}
@@ -3642,15 +3682,15 @@ Read across: in the key on the left, the four is the note under the 4. A minor k
 \theorypara{Take a scale degree and stack thirds on it: skip a note, take a note. Three of them is a triad, four is a seventh chord, five is a ninth, and so on up. The chord is named for the highest third.}
 \theorygap
 \begin{widetermlist}
-\theoryterm{triad}{\frets{R 3 5}}
-\theoryterm{seventh}{\frets{R 3 5 7}}
-\theoryterm{ninth}{\frets{R 3 5 7 9}}
-\theoryterm{eleventh}{\frets{R 3 5 7 9 11}}
-\theoryterm{thirteenth}{\frets{R 3 5 7 9 11 13}}
+\theoryterm{triad}{\intervalname{R 3 5}}
+\theoryterm{seventh}{\intervalname{R 3 5 7}}
+\theoryterm{ninth}{\intervalname{R 3 5 7 9}}
+\theoryterm{eleventh}{\intervalname{R 3 5 7 9 11}}
+\theoryterm{thirteenth}{\intervalname{R 3 5 7 9 11 13}}
 \end{widetermlist}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\thirdstack{R,3,5,7,9,11,13}
+{\usevoicingcolor{fretyellow}\thirdstack{R,3,5,7,9,11,13}}
 }
 \theorycaption{Every step is a third. Take three and you have a triad; keep going and you name the chord for the last one.}
 \theorygap
@@ -3660,81 +3700,81 @@ Read across: in the key on the left, the four is the note under the 4. A minor k
 \theorygap
 \end{theorypage}
 \begin{theorypage}{Triads}
-\qualityrow{major}{\frets{R} \frets{3} \frets{5}}{The default. Three notes, and the one every other chord is measured against.}
-\qualityrow{m}{\frets{R} \frets{b3} \frets{5}}{Lower the third a semitone. Everything else stays.}
-\qualityrow{5}{\frets{R} \frets{5}}{Root and fifth, no third: neither major nor minor, so it sits over either. Loud guitars live here.}
-\qualityrow{+}{\frets{R} \frets{3} \frets{\#5}}{Raise the fifth. Restless – it wants to rise to the next chord's root.}
-\qualityrow{dim}{\frets{R} \frets{b3} \frets{b5}}{Lower the third and the fifth. Tense and unstable; usually passing through on the way somewhere.}
-\qualityrow{sus2}{\frets{R} \frets{2} \frets{5}}{The third is replaced by the second, not joined by it. Open and unresolved, and neither major nor minor.}
-\qualityrow{sus4}{\frets{R} \frets{4} \frets{5}}{The third replaced by the fourth. Leans hard on whatever follows it.}
+\qualityrow{major}{\intervalname{R} \intervalname{3} \intervalname{5}}{The default. Three notes, and the one every other chord is measured against.}
+\qualityrow{m}{\intervalname{R} \intervalname{b3} \intervalname{5}}{Lower the third a semitone. Everything else stays.}
+\qualityrow{5}{\intervalname{R} \intervalname{5}}{Root and fifth, no third: neither major nor minor, so it sits over either. Loud guitars live here.}
+\qualityrow{+}{\intervalname{R} \intervalname{3} \intervalname{\#5}}{Raise the fifth. Restless – it wants to rise to the next chord's root.}
+\qualityrow{dim}{\intervalname{R} \intervalname{b3} \intervalname{b5}}{Lower the third and the fifth. Tense and unstable; usually passing through on the way somewhere.}
+\qualityrow{sus2}{\intervalname{R} \intervalname{2} \intervalname{5}}{The third is replaced by the second, not joined by it. Open and unresolved, and neither major nor minor.}
+\qualityrow{sus4}{\intervalname{R} \intervalname{4} \intervalname{5}}{The third replaced by the fourth. Leans hard on whatever follows it.}
 \theorygap
 \end{theorypage}
 \begin{theorypage}{Sixths}
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\thirdstack{R,3,5,6}
+{\usevoicingcolor{fretyellow}\thirdstack{R,3,5,6}}
 }
 \theorycaption{A triad with a sixth added, not a seventh.}
 \theorygap
-\qualityrow{6}{\frets{R} \frets{3} \frets{5} \frets{6}}{A major triad with the sixth added. Warmer and less final than a seventh: ends a song without closing it.}
-\qualityrow{m6}{\frets{R} \frets{b3} \frets{5} \frets{6}}{Minor triad, major sixth. The sixth stays major – that is what keeps it from being a m7b5 rooted elsewhere.}
-\qualityrow{6/9}{\frets{R} \frets{9} \frets{3} \frets{5} \frets{6}}{Sixth and ninth, no seventh. All color and no pull, which makes it a good last chord.}
+\qualityrow{6}{\intervalname{R} \intervalname{3} \intervalname{5} \intervalname{6}}{A major triad with the sixth added. Warmer and less final than a seventh: ends a song without closing it.}
+\qualityrow{m6}{\intervalname{R} \intervalname{b3} \intervalname{5} \intervalname{6}}{Minor triad, major sixth. The sixth stays major – that is what keeps it from being a m7b5 rooted elsewhere.}
+\qualityrow{6/9}{\intervalname{R} \intervalname{9} \intervalname{3} \intervalname{5} \intervalname{6}}{Sixth and ninth, no seventh. All color and no pull, which makes it a good last chord.}
 \theorygap
 \end{theorypage}
 \begin{theorypage}{Sevenths}
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\thirdstack{R,3,5,b7}
+{\usevoicingcolor{fretyellow}\thirdstack{R,3,5,b7}}
 }
 \theorycaption{The fourth third. Everything past it is color.}
 \theorygap
-\qualityrow{7}{\frets{R} \frets{3} \frets{5} \frets{b7}}{Major triad, minor seventh. The blues chord, and the one that pulls to the fourth.}
-\qualityrow{maj7}{\frets{R} \frets{3} \frets{5} \frets{7}}{Major triad, major seventh. Still: it is not pulling anywhere.}
-\qualityrow{m7}{\frets{R} \frets{b3} \frets{5} \frets{b7}}{Minor triad, minor seventh. The workhorse of the two chord.}
-\qualityrow{dim7}{\frets{R} \frets{b3} \frets{b5} \frets{6}}{Minor thirds all the way up. Symmetrical, so one shape names four chords, three frets apart.}
-\qualityrow{m7b5}{\frets{R} \frets{b3} \frets{b5} \frets{b7}}{A diminished triad with a minor seventh. The two chord of a minor key. Also called half-diminished.}
-\qualityrow{7sus4}{\frets{R} \frets{4} \frets{5} \frets{b7}}{A seventh with the fourth in place of the third. Suspends the pull without canceling it.}
-\qualityrow{7sus2}{\frets{R} \frets{9} \frets{5} \frets{b7}}{The same idea with the second. Not voiced in this book.}
-\qualityrow{7b5}{\frets{R} \frets{3} \frets{b5} \frets{b7}}{Flatten the fifth of a seventh. It shares three notes with the 7b5 a tritone away, which is why the two stand in for each other.}
-\qualityrow{7\#5}{\frets{R} \frets{3} \frets{\#5} \frets{b7}}{Raise it instead. Reads as an altered dominant, and sits well before a minor chord.}
+\qualityrow{7}{\intervalname{R} \intervalname{3} \intervalname{5} \intervalname{b7}}{Major triad, minor seventh. The blues chord, and the one that pulls to the fourth.}
+\qualityrow{maj7}{\intervalname{R} \intervalname{3} \intervalname{5} \intervalname{7}}{Major triad, major seventh. Still: it is not pulling anywhere.}
+\qualityrow{m7}{\intervalname{R} \intervalname{b3} \intervalname{5} \intervalname{b7}}{Minor triad, minor seventh. The workhorse of the two chord.}
+\qualityrow{dim7}{\intervalname{R} \intervalname{b3} \intervalname{b5} \intervalname{6}}{Minor thirds all the way up. Symmetrical, so one shape names four chords, three frets apart.}
+\qualityrow{m7b5}{\intervalname{R} \intervalname{b3} \intervalname{b5} \intervalname{b7}}{A diminished triad with a minor seventh. The two chord of a minor key. Also called half-diminished.}
+\qualityrow{7sus4}{\intervalname{R} \intervalname{4} \intervalname{5} \intervalname{b7}}{A seventh with the fourth in place of the third. Suspends the pull without canceling it.}
+\qualityrow{7sus2}{\intervalname{R} \intervalname{9} \intervalname{5} \intervalname{b7}}{The same idea with the second. Not voiced in this book.}
+\qualityrow{7b5}{\intervalname{R} \intervalname{3} \intervalname{b5} \intervalname{b7}}{Flatten the fifth of a seventh. It shares three notes with the 7b5 a tritone away, which is why the two stand in for each other.}
+\qualityrow{7\#5}{\intervalname{R} \intervalname{3} \intervalname{\#5} \intervalname{b7}}{Raise it instead. Reads as an altered dominant, and sits well before a minor chord.}
 \theorygap
 \end{theorypage}
 \begin{theorypage}{Ninths}
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\thirdstack{R,3,5,b7,9}
+{\usevoicingcolor{fretyellow}\thirdstack{R,3,5,b7,9}}
 }
 \theorycaption{The seventh has to be there for it to be a ninth.}
 \theorygap
-\qualityrow{9}{\frets{R} \frets{9} \frets{3} \frets{5} \frets{b7}}{A seventh with the ninth stacked on. The seventh has to be there; without it you have an add9.}
-\qualityrow{maj9}{\frets{R} \frets{9} \frets{3} \frets{5} \frets{7}}{Major seventh plus ninth. On four strings the root is the first thing to go.}
-\qualityrow{m9}{\frets{R} \frets{9} \frets{b3} \frets{5} \frets{b7}}{Minor seventh plus ninth.}
-\qualityrow{add9}{\frets{R} \frets{9} \frets{3} \frets{5}}{The ninth added to a plain triad, no seventh. Written \notename{2} in some books and \notename{add2} in others.}
-\qualityrow{madd9}{\frets{R} \frets{9} \frets{b3} \frets{5}}{The same over a minor triad.}
+\qualityrow{9}{\intervalname{R} \intervalname{9} \intervalname{3} \intervalname{5} \intervalname{b7}}{A seventh with the ninth stacked on. The seventh has to be there; without it you have an add9.}
+\qualityrow{maj9}{\intervalname{R} \intervalname{9} \intervalname{3} \intervalname{5} \intervalname{7}}{Major seventh plus ninth. On four strings the root is the first thing to go.}
+\qualityrow{m9}{\intervalname{R} \intervalname{9} \intervalname{b3} \intervalname{5} \intervalname{b7}}{Minor seventh plus ninth.}
+\qualityrow{add9}{\intervalname{R} \intervalname{9} \intervalname{3} \intervalname{5}}{The ninth added to a plain triad, no seventh. Written \notename{2} in some books and \notename{add2} in others.}
+\qualityrow{madd9}{\intervalname{R} \intervalname{9} \intervalname{b3} \intervalname{5}}{The same over a minor triad.}
 \theorygap
 \end{theorypage}
 \begin{theorypage}{Altered Ninths}
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chainbox{2m}\chainarrow \chainbox{5}\chainarrow \chainbox{5b9}\chainarrow \chainbox{1}
+{\usevoicingcolor{keyred}\chainbox{2m}\chainarrow \chainbox{5}\chainarrow \chainbox{5b9}\chainarrow \chainbox{1}}
 }
 \theorycaption{An altered dominant does the same job as a plain one, with more tension to resolve.}
 \theorygap
-\qualityrow{7b9}{\frets{R} \frets{b9} \frets{3} \frets{5} \frets{b7}}{Dominant with the ninth flattened. Four of its five notes are a diminished seventh.}
-\qualityrow{7\#9}{\frets{R} \frets{b3} \frets{3} \frets{5} \frets{b7}}{Dominant with the ninth raised – the same pitch as a minor third, which is why it sounds like major and minor at once.}
-\qualityrow{9b5}{\frets{R} \frets{9} \frets{3} \frets{b5} \frets{b7}}{A ninth with the fifth flattened. Not voiced in this book.}
-\qualityrow{9\#5}{\frets{R} \frets{9} \frets{3} \frets{\#5} \frets{b7}}{A ninth with the fifth raised. Not voiced in this book.}
-\qualityrow{9sus4}{\frets{R} \frets{9} \frets{4} \frets{5} \frets{b7}}{A ninth suspending the fourth. Not voiced in this book.}
-\qualityrow{m11}{\frets{R} \frets{9} \frets{b3} \frets{4} \frets{5} \frets{b7}}{Minor ninth with the eleventh on top. Six notes, so something is always dropped.}
+\qualityrow{7b9}{\intervalname{R} \intervalname{b9} \intervalname{3} \intervalname{5} \intervalname{b7}}{Dominant with the ninth flattened. Four of its five notes are a diminished seventh.}
+\qualityrow{7\#9}{\intervalname{R} \intervalname{b3} \intervalname{3} \intervalname{5} \intervalname{b7}}{Dominant with the ninth raised – the same pitch as a minor third, which is why it sounds like major and minor at once.}
+\qualityrow{9b5}{\intervalname{R} \intervalname{9} \intervalname{3} \intervalname{b5} \intervalname{b7}}{A ninth with the fifth flattened. Not voiced in this book.}
+\qualityrow{9\#5}{\intervalname{R} \intervalname{9} \intervalname{3} \intervalname{\#5} \intervalname{b7}}{A ninth with the fifth raised. Not voiced in this book.}
+\qualityrow{9sus4}{\intervalname{R} \intervalname{9} \intervalname{4} \intervalname{5} \intervalname{b7}}{A ninth suspending the fourth. Not voiced in this book.}
+\qualityrow{m11}{\intervalname{R} \intervalname{9} \intervalname{b3} \intervalname{4} \intervalname{5} \intervalname{b7}}{Minor ninth with the eleventh on top. Six notes, so something is always dropped.}
 \theorygap
 \end{theorypage}
 \begin{theorypage}{Elevenths and Thirteenths}
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\thirdstack{R,3,5,b7,9,11,13}
+{\usevoicingcolor{fretyellow}\thirdstack{R,3,5,b7,9,11,13}}
 }
 \theorycaption{Seven notes and four fingers. The 5 goes first, then the R, then the 11 unless it is the one you came for.}
 \theorygap
-\qualityrow{11}{\frets{R} \frets{9} \frets{3} \frets{4} \frets{5} \frets{b7}}{The eleventh over a dominant. The third is usually dropped: a natural eleventh sits a semitone above it and the two fight.}
-\qualityrow{13}{\frets{R} \frets{9} \frets{3} \frets{5} \frets{6} \frets{b7}}{The thirteenth over a dominant. The same note as the sixth, an octave up, over a chord that has a seventh.}
-\qualityrow{m13}{\frets{R} \frets{9} \frets{b3} \frets{5} \frets{6} \frets{b7}}{The same over a minor seventh.}
-\qualityrow{maj13}{\frets{R} \frets{9} \frets{3} \frets{5} \frets{6} \frets{7}}{And over a major seventh.}
-\qualityrow{7\#11}{\frets{R} \frets{3} \frets{b5} \frets{5} \frets{b7}}{The raised eleventh, which does not fight the third. The lydian dominant sound.}
+\qualityrow{11}{\intervalname{R} \intervalname{9} \intervalname{3} \intervalname{4} \intervalname{5} \intervalname{b7}}{The eleventh over a dominant. The third is usually dropped: a natural eleventh sits a semitone above it and the two fight.}
+\qualityrow{13}{\intervalname{R} \intervalname{9} \intervalname{3} \intervalname{5} \intervalname{6} \intervalname{b7}}{The thirteenth over a dominant. The same note as the sixth, an octave up, over a chord that has a seventh.}
+\qualityrow{m13}{\intervalname{R} \intervalname{9} \intervalname{b3} \intervalname{5} \intervalname{6} \intervalname{b7}}{The same over a minor seventh.}
+\qualityrow{maj13}{\intervalname{R} \intervalname{9} \intervalname{3} \intervalname{5} \intervalname{6} \intervalname{7}}{And over a major seventh.}
+\qualityrow{7\#11}{\intervalname{R} \intervalname{3} \intervalname{b5} \intervalname{5} \intervalname{b7}}{The raised eleventh, which does not fight the third. The lydian dominant sound.}
 \theorygap
 \begin{rootmapnote}Only the guitar has strings enough to voice these, so they appear on its pages and nowhere else.\end{rootmapnote}
 \theorygap
@@ -3751,7 +3791,7 @@ Read across: in the key on the left, the four is the note under the 4. A minor k
 \end{widetermlist}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chainbox{C}\chainarrow \chainbox{C/E}\chainarrow \chainbox{C/G}
+{\usevoicingcolor{keyred}\chainbox{C}\chainarrow \chainbox{C/E}\chainarrow \chainbox{C/G}}
 }
 \theorycaption{One chord, three bass notes.}
 \theorygap
@@ -3764,20 +3804,20 @@ Read across: in the key on the left, the four is the note under the 4. A minor k
 \theorypara{Four strings, six notes. Something goes. The order to drop them in:}
 \theorygap
 \begin{widetermlist}
-\theoryterm{first}{\frets{5}, which says nothing the root has not}
-\theoryterm{then}{\frets{R}, if a bass is playing it}
-\theoryterm{never}{\frets{3} or \frets{b3}: they decide major or minor}
-\theoryterm{never}{\frets{b7} or \frets{7}: they decide which seventh}
+\theoryterm{first}{\intervalname{5}, which says nothing the root has not}
+\theoryterm{then}{\intervalname{R}, if a bass is playing it}
+\theoryterm{never}{\intervalname{3} or \intervalname{b3}: they decide major or minor}
+\theoryterm{never}{\intervalname{b7} or \intervalname{7}: they decide which seventh}
 \theoryterm{\vmarkink{r}}{this book's mark for a voicing with no root}
 \end{widetermlist}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chromastrip{R,3,5,b7}
+{\usevoicingcolor{fretyellow}\chromastrip{R,3,5,b7}}
 }
 \theorycaption{A seventh chord, whole.}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chromastrip{,3,,b7}
+{\usevoicingcolor{fretyellow}\chromastrip{,3,,b7}}
 }
 \theorycaption{The same chord, root and fifth gone. Still a seventh: those two name it.}
 \theorygap
@@ -3790,12 +3830,12 @@ Read across: in the key on the left, the four is the note under the 4. A minor k
 \theorypara{Two ways to arrange the same notes. A \textbf{closed} voicing packs them into a single octave, stacked as tightly as they go. An \textbf{open} voicing lifts one of the inner notes an octave and lets the chord breathe across a wider span.}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chromastrip{C,E,G}
+{\usevoicingcolor{keyred}\chromastrip{C,E,G}}
 }
 \theorycaption{Closed. Three notes inside one octave.}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chromastrip{C,G,C,E}
+{\usevoicingcolor{keyred}\chromastrip{C,G,C,E}}
 }
 \theorycaption{Open. The same chord, spread past the octave, with the third on top.}
 \theorygap
@@ -3823,37 +3863,37 @@ Read across: in the key on the left, the four is the note under the 4. A minor k
 \theorypara{Written in numbers, so they work in any key.}
 \theorygap
 \begin{widetermlist}
-\theoryterm{\frets{1 4 5}}{Almost everything. Folk, blues, country, most hymns.}
-\theoryterm{\frets{1 5 6m 4}}{The four chords a great many pop songs are made of.}
-\theoryterm{\frets{2m 5 1}}{The turn jazz is built on. The 2m and the 5 share three notes.}
-\theoryterm{\frets{1 6m 4 5}}{Fifties doo-wop.}
-\theoryterm{\frets{6m 4 1 5}}{The same four chords, starting from the minor.}
-\theoryterm{\frets{1 4 1 5}}{Twelve-bar blues in outline. Make all three sevenths.}
+\theoryterm{\notename{1 4 5}}{Almost everything. Folk, blues, country, most hymns.}
+\theoryterm{\notename{1 5 6m 4}}{The four chords a great many pop songs are made of.}
+\theoryterm{\notename{2m 5 1}}{The turn jazz is built on. The 2m and the 5 share three notes.}
+\theoryterm{\notename{1 6m 4 5}}{Fifties doo-wop.}
+\theoryterm{\notename{6m 4 1 5}}{The same four chords, starting from the minor.}
+\theoryterm{\notename{1 4 1 5}}{Twelve-bar blues in outline. Make all three sevenths.}
 \end{widetermlist}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chainbox{1}\chainarrow \chainbox{5}\chainarrow \chainbox{6m}\chainarrow \chainbox{4}
+{\usevoicingcolor{keyred}\chainbox{1}\chainarrow \chainbox{5}\chainarrow \chainbox{6m}\chainarrow \chainbox{4}}
 }
 \theorycaption{Four chords, a great many songs.}
 \theorygap
-\theorypara{The pull of \frets{5} to \frets{1} is the engine. It comes from the tritone inside the seventh chord: the third and the flat seventh are six semitones apart, and both want to move a semitone.}
+\theorypara{The pull of \notename{5} to \notename{1} is the engine. It comes from the tritone inside the seventh chord: the third and the flat seventh are six semitones apart, and both want to move a semitone.}
 \theorygap
 \end{theorypage}
 \begin{theorypage}{Substitutions}
 \theorypara{Chords that share notes can stand in for one another.}
 \theorygap
 \begin{widetermlist}
-\theoryterm{relative}{\frets{1} and \frets{6m} share two notes. So do \frets{4} and \frets{2m}.}
-\theoryterm{tritone}{Any \frets{7} chord can be replaced by the \frets{7} a tritone away. They share the third and the seventh, swapped.}
-\theoryterm{sixths}{A \frets{6} will stand in for a \frets{maj7} at the end of a phrase, and lands softer.}
-\theoryterm{sus}{A \frets{sus4} before the chord it resolves to buys a beat.}
+\theoryterm{relative}{\notename{1} and \notename{6m} share two notes. So do \notename{4} and \notename{2m}.}
+\theoryterm{tritone}{Any \notename{7} chord can be replaced by the \notename{7} a tritone away. They share the third and the seventh, swapped.}
+\theoryterm{sixths}{A \notename{6} will stand in for a \notename{maj7} at the end of a phrase, and lands softer.}
+\theoryterm{sus}{A \notename{sus4} before the chord it resolves to buys a beat.}
 \theoryterm{dim7}{Four chords at once: every three frets is the same shape and the same notes, so one grip covers four roots.}
 \end{widetermlist}
 \theorygap
 \par\nointerlineskip\vspace{0.4mm}\centerline{%
-\chainbox{2m}\chainarrow \chainbox{b2 7}\chainarrow \chainbox{1}
+{\usevoicingcolor{keyred}\chainbox{2m}\chainarrow \chainbox{b2 7}\chainarrow \chainbox{1}}
 }
-\theorycaption{The tritone substitution: put a \frets{b2 7} where the \frets{5} was and the bass walks down by semitone.}
+\theorycaption{The tritone substitution: put a \notename{b2 7} where the \notename{5} was and the bass walks down by semitone.}
 \theorygap
 \theorypara{None of this is a rule. It is a list of places where two chords are close enough that an ear will follow you.}
 \theorygap

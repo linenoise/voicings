@@ -55,6 +55,10 @@ INTERVAL_NAMES = {
     10: "minor seventh", 11: "major seventh",
 }
 
+# A token that names a note rather than a distance: a letter, and maybe
+# an accidental. Tells a chromatic strip from an interval strip.
+NOTE_TOKEN = re.compile(r"^[A-G](#|b)?$")
+
 SCALE_STEPS = [("1", "then a tone"), ("2", "then a tone"),
                ("3", "then a semitone"), ("4", "then a tone"),
                ("5", "then a tone"), ("6", "then a tone"),
@@ -80,6 +84,29 @@ THEORY_PAGES = [
         ("para", "Each instrument is printed in its own color, so you "
          "can find the page by the ink. This chapter is in black: it "
          "belongs to all of them."),
+    ]),
+    ("symbols", "The Marks in This Book", [
+        ("para", "Everything printed beside a chord, and what it means."),
+        ("wideterms", [
+            ("`2013`", "A voicing. One digit per string, lowest string "
+             "first, in the instrument's own color."),
+            ("`x`", "Don't play that string."),
+            ("`0`", "Play it open, no finger down."),
+            ("^r", "Rootless: this shape has no root in it."),
+            ("^i", "An inversion: the root is in there, but something "
+             "else is underneath."),
+            ("~C/E~", "A slash chord. The chord, then the note that goes "
+             "under it."),
+            ("~C°~", "Diminished. Written ~Cdim~ in some books."),
+            ("~C+~", "Augmented, or ~Caug~."),
+            ("+b3+", "A degree: three semitones above the root. The flat "
+             "goes before the number, as a chord symbol writes it."),
+            ("~Bb~", "A note. The flat goes after, because here it is "
+             "part of the note's name."),
+        ]),
+        ("note", "Note and chord names are printed in red, degrees and "
+         "intervals in yellow, and fingerings in the color of the "
+         "instrument that plays them."),
     ]),
     ("chromatic", "The Chromatic Scale", [
         ("para", "Twelve notes, each one fret or one key apart, and then "
@@ -112,7 +139,7 @@ THEORY_PAGES = [
                     "Twelve semitones up from any root. Every chord in "
                     "the book is a handful of these.")),
         ("note", "Accidentals are written before the number, the way a "
-         "chord symbol writes them: `b3`, not 3`b`."),
+         "chord symbol writes them: +b3+, not 3+b+."),
     ]),
     ("scale", "The Major Scale", [
         ("para", "Seven of the twelve notes, in a fixed pattern of tones "
@@ -128,7 +155,7 @@ THEORY_PAGES = [
          "and C major are the same notes; which one you are in is decided "
          "by where the music rests."),
         ("para", "**Why some keys are flat.** A scale uses each letter "
-         "once. In F that forces B flat rather than A sharp, because the "
+         "once. In F that forces ~Bb~ rather than ~A#~, because the "
          "scale already has an A. The note is one note; the spelling "
          "depends on the key it is in, which is why the same key heads one "
          "page ~Bb~ and another ~A#~."),
@@ -138,27 +165,51 @@ THEORY_PAGES = [
         ("para", "Each step clockwise adds a sharp or drops a flat, and "
          "moves the root up a fifth. Neighbors share six of their seven "
          "notes, which is why a song can wander one step either way "
-         "without anything sounding wrong, and why the `5` chord sits one "
-         "step clockwise of home and the `4` one step counter-clockwise."),
+         "without anything sounding wrong, and why the ~5~ chord sits one "
+         "step clockwise of home and the ~4~ one step counter-clockwise."),
+    ]),
+    ("tunings", "Why Instruments Are Tuned This Way", [
+        ("para", "The circle is a chain of fifths. So is almost every "
+         "tuning in this book, and so is the order the sharps and flats "
+         "are written in a key signature. They are the same chain, read "
+         "at different speeds."),
+        ("figure", ("chroma", ["F", "C", "G", "D", "A", "E", "B"],
+                    "The order sharps appear in a key signature, each a "
+                    "fifth above the last. Flats take the same seven "
+                    "backwards.")),
+        ("para", "Read the flat order and you have read a bass: "
+         "~E A D G~. Four of the seven, in order, because a fourth up "
+         "is a fifth down."),
+        ("wideterms", [
+            ("mandolin", "~G D A E~, fifths"),
+            ("cello", "~C G D A~, fifths"),
+            ("bass", "~E A D G~, fourths"),
+            ("guitar", "~E A D G B E~, fourths with one third"),
+            ("ukulele", "~G C E A~, fourth, third, fourth"),
+        ]),
+        ("para", "Fifths reach far: a mandolin crosses two octaves on "
+         "four courses, and its chords ask for stretches. Fourths keep "
+         "the notes close, so a guitar barres six strings with one "
+         "finger. Two answers to the same chain."),
     ]),
     ("nashville", "Nashville Numbers", [
         ("para", "Name the chords by their degree in the key instead of by "
-         "letter, and a chart transposes itself. `1 4 5` is the same three "
+         "letter, and a chart transposes itself. ~1 4 5~ is the same three "
          "chords in every key; the number chart says which letters they "
          "are."),
-        ("terms", [("`1`", "major"), ("`2`", "minor"), ("`3`", "minor"),
-                   ("`4`", "major"), ("`5`", "major"), ("`6`", "minor"),
-                   ("`7`", "diminished")]),
+        ("terms", [("~1~", "major"), ("~2~", "minor"), ("~3~", "minor"),
+                   ("~4~", "major"), ("~5~", "major"), ("~6~", "minor"),
+                   ("~7~", "diminished")]),
         ("figure", ("chain", ["1", "4", "5", "1"],
                     "The most common turn there is, in any key.")),
         ("para", "Those are the chords the major scale builds on its own "
          "degrees, using only notes from the key. A number on its own "
          "means that chord; a quality after it means play that instead, "
-         "and `4m` in a major key is a borrowed chord rather than a "
+         "and ~4m~ in a major key is a borrowed chord rather than a "
          "mistake."),
         ("para", "In a minor key the same seven chords are counted from "
-         "the six. A minor song's home chord is the `6m` of its relative "
-         "major, or the `1m` if the chart is written in the minor."),
+         "the six. A minor song's home chord is the ~6m~ of its relative "
+         "major, or the ~1m~ if the chart is written in the minor."),
     ]),
     ("numbers", "The Number Chart", [
         ("numbers", None),
@@ -169,11 +220,11 @@ THEORY_PAGES = [
          "five is a ninth, and so on up. The chord is named for the "
          "highest third."),
         ("wideterms", [
-            ("triad", "`R 3 5`"),
-            ("seventh", "`R 3 5 7`"),
-            ("ninth", "`R 3 5 7 9`"),
-            ("eleventh", "`R 3 5 7 9 11`"),
-            ("thirteenth", "`R 3 5 7 9 11 13`"),
+            ("triad", "+R 3 5+"),
+            ("seventh", "+R 3 5 7+"),
+            ("ninth", "+R 3 5 7 9+"),
+            ("eleventh", "+R 3 5 7 9 11+"),
+            ("thirteenth", "+R 3 5 7 9 11 13+"),
         ]),
         ("figure", ("stack", ["R", "3", "5", "7", "9", "11", "13"],
                     "Every step is a third. Take three and you have a triad; keep going and you name the chord for the last one.")),
@@ -323,10 +374,10 @@ THEORY_PAGES = [
         ("para", "Four strings, six notes. Something goes. The order to "
          "drop them in:"),
         ("wideterms", [
-            ("first", "`5`, which says nothing the root has not"),
-            ("then", "`R`, if a bass is playing it"),
-            ("never", "`3` or `b3`: they decide major or minor"),
-            ("never", "`b7` or `7`: they decide which seventh"),
+            ("first", "+5+, which says nothing the root has not"),
+            ("then", "+R+, if a bass is playing it"),
+            ("never", "+3+ or +b3+: they decide major or minor"),
+            ("never", "+b7+ or +7+: they decide which seventh"),
             ("^r", "this book's mark for a voicing with no root"),
         ]),
         ("figure", ("chroma", ["R", "3", "5", "b7"],
@@ -385,21 +436,21 @@ THEORY_PAGES = [
     ("progressions", "Progressions", [
         ("para", "Written in numbers, so they work in any key."),
         ("wideterms", [
-            ("`1 4 5`", "Almost everything. Folk, blues, country, most "
+            ("~1 4 5~", "Almost everything. Folk, blues, country, most "
              "hymns."),
-            ("`1 5 6m 4`", "The four chords a great many pop songs are "
+            ("~1 5 6m 4~", "The four chords a great many pop songs are "
              "made of."),
-            ("`2m 5 1`", "The turn jazz is built on. The 2m and the 5 "
+            ("~2m 5 1~", "The turn jazz is built on. The 2m and the 5 "
              "share three notes."),
-            ("`1 6m 4 5`", "Fifties doo-wop."),
-            ("`6m 4 1 5`", "The same four chords, starting from the "
+            ("~1 6m 4 5~", "Fifties doo-wop."),
+            ("~6m 4 1 5~", "The same four chords, starting from the "
              "minor."),
-            ("`1 4 1 5`", "Twelve-bar blues in outline. Make all three "
+            ("~1 4 1 5~", "Twelve-bar blues in outline. Make all three "
              "sevenths."),
         ]),
         ("figure", ("chain", ["1", "5", "6m", "4"],
                     "Four chords, a great many songs.")),
-        ("para", "The pull of `5` to `1` is the engine. It comes from the "
+        ("para", "The pull of ~5~ to ~1~ is the engine. It comes from the "
          "tritone inside the seventh chord: the third and the flat "
          "seventh are six semitones apart, and both want to move a "
          "semitone."),
@@ -407,21 +458,21 @@ THEORY_PAGES = [
     ("substitutions", "Substitutions", [
         ("para", "Chords that share notes can stand in for one another."),
         ("wideterms", [
-            ("relative", "`1` and `6m` share two notes. So do `4` and "
-             "`2m`."),
-            ("tritone", "Any `7` chord can be replaced by the `7` a "
+            ("relative", "~1~ and ~6m~ share two notes. So do ~4~ and "
+             "~2m~."),
+            ("tritone", "Any ~7~ chord can be replaced by the ~7~ a "
              "tritone away. They share the third and the seventh, "
              "swapped."),
-            ("sixths", "A `6` will stand in for a `maj7` at the end of a "
+            ("sixths", "A ~6~ will stand in for a ~maj7~ at the end of a "
              "phrase, and lands softer."),
-            ("sus", "A `sus4` before the chord it resolves to buys a "
+            ("sus", "A ~sus4~ before the chord it resolves to buys a "
              "beat."),
             ("dim7", "Four chords at once: every three frets is the same "
              "shape and the same notes, so one grip covers four roots."),
         ]),
         ("figure", ("chain", ["2m", "b2 7", "1"],
-                    "The tritone substitution: put a `b2 7` where the "
-                    "`5` was and the bass walks down by semitone.")),
+                    "The tritone substitution: put a ~b2 7~ where the "
+                    "~5~ was and the bass walks down by semitone.")),
         ("para", "None of this is a rule. It is a list of places where "
          "two chords are close enough that an ear will follow you."),
     ]),
@@ -1210,13 +1261,14 @@ class Book(object):
                      lambda m: r"\instfrets{%s}{%s}" % (INK[m.group(1)],
                                                         m.group(2)), out)
         out = re.sub(r"~(.+?)~", r"\\notename{\1}", out)
+        out = re.sub(r"\+(.+?)\+", r"\\intervalname{\1}", out)
         out = re.sub(r"`(.+?)`", r"\\frets{\1}", out)
         out = re.sub(r"\^([ri])", r"\\vmarkink{\1}", out)
         return out
 
     def theory_degrees(self, quality):
         """A quality's degrees, from the same table that voices it."""
-        return " ".join(r"\frets{%s}" % tex_escape(
+        return " ".join(r"\intervalname{%s}" % tex_escape(
             self.degree_name(i, quality)) for i in theory.QUALITIES[quality])
 
     def theory_section(self):
@@ -1264,14 +1316,14 @@ class Book(object):
         elif kind == "intervals":
             self.w(r"\begin{theorycols}")
             for i in range(12):
-                self.w(r"\theoryterm{\frets{%s}}{%s}"
+                self.w(r"\theoryterm{\intervalname{%s}}{%s}"
                        % (tex_escape(self.DEGREE_NAMES[i]),
                           tex_escape(INTERVAL_NAMES[i])))
             self.w(r"\end{theorycols}")
         elif kind == "scale":
             self.w(r"\begin{theorycols}")
             for deg, gap in SCALE_STEPS:
-                self.w(r"\theoryterm{\frets{%s}}{%s}"
+                self.w(r"\theoryterm{\intervalname{%s}}{%s}"
                        % (deg, tex_escape(gap)))
             self.w(r"\end{theorycols}")
         elif kind == "qualities":
@@ -1315,14 +1367,18 @@ class Book(object):
                        tex_escape(frets)))
             self.w(r"\qquad".join(cells))
         elif art == "chroma":
-            self.w(r"\chromastrip{%s}"
-                   % ",".join(tex_escape(x) for x in payload[1]))
+            # A strip of note names is red; a strip of degrees is the
+            # interval pen. Same drawing, and what is in it decides.
+            pen = ("keyred" if all(NOTE_TOKEN.match(x) for x in payload[1] if x)
+                   else "fretyellow")
+            self.w(r"{\usevoicingcolor{%s}\chromastrip{%s}}"
+                   % (pen, ",".join(tex_escape(x) for x in payload[1])))
         elif art == "stack":
-            self.w(r"\thirdstack{%s}"
+            self.w(r"{\usevoicingcolor{fretyellow}\thirdstack{%s}}"
                    % ",".join(tex_escape(x) for x in payload[1]))
         elif art == "chain":
-            self.w(r"\chainarrow ".join(
-                r"\chainbox{%s}" % tex_escape(x) for x in payload[1]))
+            self.w(r"{\usevoicingcolor{keyred}" + r"\chainarrow ".join(
+                r"\chainbox{%s}" % tex_escape(x) for x in payload[1]) + "}")
         else:
             raise ValueError("unknown figure %r" % art)
         self.w(r"}")

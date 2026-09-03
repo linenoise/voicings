@@ -492,6 +492,7 @@ class Site(object):
         out = re.sub(r"@(\w+):(.+?)@",
                      r'<span class="fret pen \1">\2</span>', out)
         out = re.sub(r"~(.+?)~", r'<span class="note">\1</span>', out)
+        out = re.sub(r"\+(.+?)\+", r'<span class="interval">\1</span>', out)
         out = re.sub(r"`(.+?)`", r'<span class="fret">\1</span>', out)
         out = re.sub(r"\^([ri])", r'<sup class="mark">\1</sup>', out)
         return out
@@ -504,10 +505,10 @@ class Site(object):
         if kind in ("terms", "wideterms"):
             rows = payload
         elif kind == "intervals":
-            rows = [("`%s`" % self.book.DEGREE_NAMES[i],
+            rows = [("+%s+" % self.book.DEGREE_NAMES[i],
                      render.INTERVAL_NAMES[i]) for i in range(12)]
         elif kind == "scale":
-            rows = [("`%s`" % d, g) for d, g in render.SCALE_STEPS]
+            rows = [("+%s+" % d, g) for d, g in render.SCALE_STEPS]
         elif kind == "qualities":
             items = []
             for label, quality, use in payload:
@@ -516,7 +517,7 @@ class Site(object):
                     for i in theory.QUALITIES[quality])
                 items.append(
                     '<div class="quality"><p class="q"><b>%s</b>'
-                    '<span class="fret">%s</span></p>'
+                    '<span class="interval">%s</span></p>'
                     '<p class="use">%s</p></div>'
                     % (self.theory_html(label), esc(degrees),
                        self.theory_html(use)))
@@ -554,18 +555,20 @@ class Site(object):
                    esc(frets))
                 for inst, frets, strings, base, dots in payload[1]))
         elif art == "chroma":
-            art_html = self.chroma_svg(payload[1])
+            pen = ("note" if all(render.NOTE_TOKEN.match(x)
+                                 for x in payload[1] if x) else "interval")
+            art_html = self.chroma_svg(payload[1], pen)
         elif art == "stack":
             # Left to right, as the booklet sets it. A column of seven
             # degrees read as a list rather than as one chord.
             art_html = ('<p class="chain">%s</p>'
                         % '<span class="arrow">&rarr;</span>'.join(
-                            '<span class="fret">%s</span>' % esc(x)
+                            '<span class="interval">%s</span>' % esc(x)
                             for x in payload[1]))
         elif art == "chain":
             art_html = ('<p class="chain">%s</p>'
                         % '<span class="arrow">&rarr;</span>'.join(
-                            '<span class="fret">%s</span>' % esc(x)
+                            '<span class="note">%s</span>' % esc(x)
                             for x in payload[1]))
         else:
             raise ValueError("unknown figure %r" % art)
@@ -623,7 +626,7 @@ class Site(object):
         p.append("</svg>")
         return "".join(p)
 
-    def chroma_svg(self, labels):
+    def chroma_svg(self, labels, pen="interval"):
         """Twelve semitones as a strip of boxes."""
         w, h = self.CHROMA_W, self.CHROMA_H
         p = ['<svg class="chroma" viewBox="0 0 %.1f %.1f" '
@@ -635,9 +638,9 @@ class Site(object):
             p.append('<rect x="%.1f" y="1" width="%.1f" height="%.1f" '
                      'class="cell"/>' % (x, w, h))
             if lab:
-                p.append('<text x="%.1f" y="%.1f" class="lab" '
+                p.append('<text x="%.1f" y="%.1f" class="lab %s" '
                          'font-size="%.1f">%s</text>'
-                         % (x + w / 2, h / 2 + self.CHROMA_PT * 0.36,
+                         % (x + w / 2, h / 2 + self.CHROMA_PT * 0.36, pen,
                             self.CHROMA_PT, esc(lab)))
         p.append("</svg>")
         return "".join(p)
@@ -878,6 +881,15 @@ sup.mark { font-weight: 700; font-size: 0.7em; color: var(--faint); }
    fret numbers and Nashville numbers stay in the body ink. */
 .note { font-family: ui-monospace, Menlo, Consolas, monospace;
         font-weight: 700; letter-spacing: 0.05em; color: %(keyred)s; }
+/* A degree or interval -- a distance rather than a note you can name --
+   in the bass pen, as the booklet sets it. */
+.interval { font-family: ui-monospace, Menlo, Consolas, monospace;
+            font-weight: 700; letter-spacing: 0.05em; color: %(bass)s; }
+svg.chroma .lab.note { fill: %(keyred)s; }
+svg.chroma .lab.interval { fill: %(bass)s; }
+p.chain .interval, p.chain .note { border: 1px solid var(--rule);
+                                   border-radius: 3px;
+                                   padding: 0.15rem 0.5rem; }
 /* The box itself stays in ink, as \chordbox draws it in the booklet.
    Only the digits underneath take the instrument's pen. */
 .theory p { margin: 1.5em 0; }
@@ -966,7 +978,8 @@ footer a { color: var(--faint); }
 %(pens)s
 """
         return css % dict(ink=INK, faint=FAINT, rule=RULE, paper=PAPER,
-                          keyred="#" + RAW["keyred"], pens=pens)
+                          keyred="#" + RAW["keyred"], bass=PENS["bass"],
+                          pens=pens)
 
 
 def main():
