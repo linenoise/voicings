@@ -12,6 +12,7 @@ keys:
     - '5578'
   - chord: Cm
     frets:
+    - '0133'
     - '5133'
   - chord: C5
     frets:
@@ -127,10 +128,6 @@ keys:
   - chord: C/G
     frets:
     - '0230'
-  - chord: Cm/G
-    frets:
-    - '0133'
-    derived: true
 - key: Db
   pages:
   - 9
@@ -161,6 +158,7 @@ keys:
     - '1144'
   - chord: Dbsus4
     frets:
+    - '1442'
     - '6444'
     - '6699'
   - chord: Db6
@@ -282,6 +280,7 @@ keys:
     - '7755'
   - chord: D+
     frets:
+    - '3012'
     - '3456'
   - chord: D°
     frets:
@@ -530,6 +529,7 @@ keys:
   chords:
   - chord: E
     frets:
+    - '1220'
     - '1224'
     - '9677'
   - chord: Em
@@ -546,6 +546,7 @@ keys:
   - chord: E°
     frets:
     - '0210'
+    - '0213'
   - chord: Esus2
     frets:
     - '4477'
@@ -1298,6 +1299,7 @@ keys:
     - '3356'
   - chord: Bbm
     frets:
+    - '3341'
     - '3346'
   - chord: Bb5
     frets:
@@ -1308,6 +1310,7 @@ keys:
     - '3012'
   - chord: Bb°
     frets:
+    - 324x
     - '3246'
     - '6876'
   - chord: Bbsus2
@@ -1460,10 +1463,12 @@ keys:
     - '6667'
   - chord: B7
     frets:
+    - '2122'
     - '4102'
     - '4465'
   - chord: Bmaj7
     frets:
+    - '4112'
     - '4466'
     - '3467'
   - chord: Bm7
