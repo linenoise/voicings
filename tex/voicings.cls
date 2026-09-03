@@ -359,13 +359,30 @@
 
 % A blank line between paragraphs, not a nudge. These pages are read
 % rather than scanned, and 1.1mm did not separate them.
-\newcommand{\theorypara}[1]{\par\vskip\baselineskip #1\par}
+% A note or a chord name in the theory chapter, in the red the key
+% titles and the piano pages are set in. Degrees, fret numbers and
+% Nashville numbers stay in the body ink: a degree is an abstraction,
+% a note name is a thing you can put a finger on.
+\newcommand{\notename}[1]{{\ttfamily\bfseries\color{keyred}#1}}
+
+% A voicing quoted in the theory chapter, in the pen of the instrument
+% it belongs to. #1 is the color, #2 the digits.
+\newcommand{\instfrets}[2]{{\ttfamily\bfseries\color{#1}#2}}
+
+% One blank line under every block on a theory page -- paragraph, list,
+% figure -- so the page keeps a single rhythm and nothing has to know
+% what follows it. Written after each block rather than before, because
+% only then does the last thing on a page get it too.
+\newcommand{\theorygap}{\par\vskip\baselineskip}
+\newcommand{\theorypara}[1]{\par #1\par}
 
 % What a drawing is showing. Centered under it, in the faint gray the
 % footnotes use, so it reads as a label rather than another sentence.
+% Set close under the drawing it names: a caption a full line away from
+% its figure would read as another paragraph. The block gap goes below.
 \newcommand{\theorycaption}[1]{%
   \par\vspace{-0.6mm}
-  {\centering\scriptsize\color{faint}#1\par}\vskip0.6mm}
+  {\centering\scriptsize\color{faint}#1\par}}
 
 % A term and what it means, hung the way \degreerow hangs a chord name,
 % so the terms line up down the left edge and the eye can find one

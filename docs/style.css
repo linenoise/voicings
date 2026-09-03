@@ -93,8 +93,20 @@ dl.terms dd { margin: 0; }
 .quality .use { margin: 0.1rem 0 0 5.8rem; color: var(--faint);
                 font-size: 0.9rem; }
 sup.mark { font-weight: 700; font-size: 0.7em; color: var(--faint); }
+/* A note or chord name, in the red the key titles are set in. Degrees,
+   fret numbers and Nashville numbers stay in the body ink. */
+.note { font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-weight: 700; letter-spacing: 0.05em; color: #AA0019; }
+/* The box itself stays in ink, as \chordbox draws it in the booklet.
+   Only the digits underneath take the instrument's pen. */
 .theory p { margin: 1.5em 0; }
 figure.fig { margin: 1.5em 0; }
+/* Closed above open, roots in one column: the point is what moved. */
+table.pairs { border-collapse: collapse; margin: 0 0 1.5em; }
+table.pairs th { text-align: left; font-weight: 700; padding-right: 1.2rem;
+                 vertical-align: top; }
+table.pairs td { padding: 0 1rem 0 0; }
+table.pairs td:last-child { color: var(--faint); font-size: 0.9rem; }
 figure.fig figcaption { color: var(--faint); font-size: 0.85rem;
                         margin-top: 0.35rem; }
 .boxes { display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-end; }
@@ -171,26 +183,34 @@ footer {
 }
 footer a { color: var(--faint); }
 .pen.mandolin, .inst-mandolin .fret { color: #00873C; }
+.fret.pen.mandolin, .boxes figure.pen.mandolin .fret { color: #00873C; }
 .inst-mandolin a.btn { color: #00873C; border-color: #00873C; }
 .inst-mandolin a.btn:hover, .inst-mandolin a.btn:focus { background: #00873C; border-color: #00873C; color: var(--paper); }
 .pen.guitar, .inst-guitar .fret { color: #0060BB; }
+.fret.pen.guitar, .boxes figure.pen.guitar .fret { color: #0060BB; }
 .inst-guitar a.btn { color: #0060BB; border-color: #0060BB; }
 .inst-guitar a.btn:hover, .inst-guitar a.btn:focus { background: #0060BB; border-color: #0060BB; color: var(--paper); }
 .pen.ukulele, .inst-ukulele .fret { color: #9600D5; }
+.fret.pen.ukulele, .boxes figure.pen.ukulele .fret { color: #9600D5; }
 .inst-ukulele a.btn { color: #9600D5; border-color: #9600D5; }
 .inst-ukulele a.btn:hover, .inst-ukulele a.btn:focus { background: #9600D5; border-color: #9600D5; color: var(--paper); }
 .pen.piano, .inst-piano .fret { color: #AA0019; }
+.fret.pen.piano, .boxes figure.pen.piano .fret { color: #AA0019; }
 .inst-piano a.btn { color: #AA0019; border-color: #AA0019; }
 .inst-piano a.btn:hover, .inst-piano a.btn:focus { background: #AA0019; border-color: #AA0019; color: var(--paper); }
 .pen.banjo, .inst-banjo .fret { color: #C05500; }
+.fret.pen.banjo, .boxes figure.pen.banjo .fret { color: #C05500; }
 .inst-banjo a.btn { color: #C05500; border-color: #C05500; }
 .inst-banjo a.btn:hover, .inst-banjo a.btn:focus { background: #C05500; border-color: #C05500; color: var(--paper); }
 .pen.bass, .inst-bass .fret { color: #9A8800; }
+.fret.pen.bass, .boxes figure.pen.bass .fret { color: #9A8800; }
 .inst-bass a.btn { color: #9A8800; border-color: #9A8800; }
 .inst-bass a.btn:hover, .inst-bass a.btn:focus { background: #9A8800; border-color: #9A8800; color: var(--paper); }
 .pen.cello, .inst-cello .fret { color: #63421F; }
+.fret.pen.cello, .boxes figure.pen.cello .fret { color: #63421F; }
 .inst-cello a.btn { color: #63421F; border-color: #63421F; }
 .inst-cello a.btn:hover, .inst-cello a.btn:focus { background: #63421F; border-color: #63421F; color: var(--paper); }
 .pen.theory, .inst-theory .fret { color: #1A1A1A; }
+.fret.pen.theory, .boxes figure.pen.theory .fret { color: #1A1A1A; }
 .inst-theory a.btn { color: #1A1A1A; border-color: #1A1A1A; }
 .inst-theory a.btn:hover, .inst-theory a.btn:focus { background: #1A1A1A; border-color: #1A1A1A; color: var(--paper); }

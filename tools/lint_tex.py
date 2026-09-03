@@ -21,6 +21,7 @@ PRIMITIVES = {
     "rightarrow", "flat", "sharp", "bigstar", "dag",
     "hskip", "kern", "hbox", "vbox", "hsize", "smash", "nobreak",
     "allowbreak", "rlap", "llap", "hfil", "raisebox", "textcolor",
+    "centerline", "nointerlineskip",
 }
 
 

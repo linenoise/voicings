@@ -66,10 +66,11 @@ THEORY_PAGES = [
          "frets with a dot where a finger goes. This one prints the frets "
          "as digits. They say the same thing."),
         ("figure", ("chordboxes", [
-            ("`2013`", 4, 0, "2,0,1,3"),
-            ("`x32010`", 6, 0, "x,3,2,0,1,0"),
-        ], "Mandolin `2013` and guitar `x32010`. One digit per string, "
-           "lowest string first, and a dot where the digit says.")),
+            ("mandolin", "2013", 4, 0, "2,0,1,3"),
+            ("guitar", "x32010", 6, 0, "x,3,2,0,1,0"),
+        ], "Mandolin @mandolin:2013@ and guitar @guitar:x32010@. One digit "
+           "per string, lowest string first, and a dot where the digit "
+           "says.")),
         ("para", "Read either the same way. The leftmost digit is the "
          "lowest string, `0` is open, `x` is a string you don't play, and "
          "any other number is the fret to stop it at."),
@@ -90,7 +91,7 @@ THEORY_PAGES = [
         ("figure", ("chroma", ["A", "Bb", "B", "C", "Db", "D", "Eb", "E",
                                "F", "Gb", "G", "Ab"],
                     "The same twelve, spelled with flats.")),
-        ("para", "Five of the twelve have two names. **A#** and **Bb** are "
+        ("para", "Five of the twelve have two names. ~A#~ and ~Bb~ are "
          "one fret, one key, one sound -- which name is right depends on "
          "the key you are in, and this book heads those pages with both."),
         ("para", "On a fretted instrument one fret is one semitone, so the "
@@ -130,7 +131,7 @@ THEORY_PAGES = [
          "once. In F that forces B flat rather than A sharp, because the "
          "scale already has an A. The note is one note; the spelling "
          "depends on the key it is in, which is why the same key heads one "
-         "page **Bb** and another **A#**."),
+         "page ~Bb~ and another ~A#~."),
     ]),
     ("circle", "The Circle of Fifths", [
         ("circle", None),
@@ -166,7 +167,7 @@ THEORY_PAGES = [
         ("para", "Take a scale degree and stack thirds on it: skip a note, "
          "take a note. Three of them is a triad, four is a seventh chord, "
          "five is a ninth, and so on up. The chord is named for the "
-         "highest third in the stack."),
+         "highest third."),
         ("wideterms", [
             ("triad", "`R 3 5`"),
             ("seventh", "`R 3 5 7`"),
@@ -180,10 +181,10 @@ THEORY_PAGES = [
          "fingers, so the stack is a claim about which notes belong, not "
          "an instruction to sound all of them. What to leave out is on the "
          "rootless page."),
-        ("para", "**Added against stacked.** An **add9** has no seventh: "
+        ("para", "**Added against stacked.** An ~add9~ has no seventh: "
          "the ninth is added to a triad rather than reached by stacking "
-         "past a seventh. That is the whole difference between **Cadd9** "
-         "and **C9**, and it is why the book prints both."),
+         "past a seventh. That is the whole difference between ~Cadd9~ "
+         "and ~C9~, and it is why the book prints both."),
     ]),
     ("triads", "Triads", [
         ("qualities", [
@@ -252,7 +253,7 @@ THEORY_PAGES = [
              "the root is the first thing to go."),
             ("m9", "m9", "Minor seventh plus ninth."),
             ("add9", "add9", "The ninth added to a plain triad, no "
-             "seventh. Written **2** in some books and **add2** in "
+             "seventh. Written ~2~ in some books and ~add2~ in "
              "others."),
             ("madd9", "madd9", "The same over a minor triad."),
         ]),
@@ -278,6 +279,10 @@ THEORY_PAGES = [
         ]),
     ]),
     ("extended", "Elevenths and Thirteenths", [
+        ("figure", ("stack", ["R", "3", "5", "b7", "9", "11", "13"],
+                    "Seven notes and four fingers. The 5 goes first, then "
+                    "the R, then the 11 unless it is the one you came "
+                    "for.")),
         ("qualities", [
             ("11", "11", "The eleventh over a dominant. The third is "
              "usually dropped: a natural eleventh sits a semitone above it "
@@ -296,17 +301,17 @@ THEORY_PAGES = [
         ("para", "A chord is its notes, in any order. Put a note other "
          "than the root at the bottom and you have an inversion: the same "
          "chord, sitting differently."),
-        ("wideterms", [("root", "`C E G`"), ("first", "`E G C`"),
-                       ("second", "`G C E`"),
-                       ("**C/E**", "the chord, a slash, and the note that "
+        ("wideterms", [("root", "~C E G~"), ("first", "~E G C~"),
+                       ("second", "~G C E~"),
+                       ("~C/E~", "the chord, a slash, and the note that "
                         "goes underneath it"),
                        ("^i", "this book's mark for a voicing whose lowest "
                         "note is not the root")]),
         ("figure", ("chain", ["C", "C/E", "C/G"],
                     "One chord, three bass notes.")),
-        ("para", "Written **C/E** and **C/G** -- the chord, a slash, the "
+        ("para", "Written ~C/E~ and ~C/G~ -- the chord, a slash, the "
          "note underneath. Use them to give the bass a line to walk: "
-         "**C**, **C/B**, **Am** descends by step where three root "
+         "~C~, ~C/B~, ~Am~ descends by step where three root "
          "positions would jump."),
         ("para", "On four courses the lowest string is often not the root "
          "whether you meant it or not. Where that happens the voicing is "
@@ -318,12 +323,11 @@ THEORY_PAGES = [
         ("para", "Four strings, six notes. Something goes. The order to "
          "drop them in:"),
         ("wideterms", [
-            ("first", "`5` -- the fifth says nothing the root has not "
-             "already said"),
-            ("then", "`R` -- if a bass is playing it"),
-            ("never", "`3` or `b3`, which decide major or minor"),
-            ("never", "`b7` or `7`, which decide which seventh"),
-            ("^r", "this book's mark for a voicing with no root in it"),
+            ("first", "`5`, which says nothing the root has not"),
+            ("then", "`R`, if a bass is playing it"),
+            ("never", "`3` or `b3`: they decide major or minor"),
+            ("never", "`b7` or `7`: they decide which seventh"),
+            ("^r", "this book's mark for a voicing with no root"),
         ]),
         ("figure", ("chroma", ["R", "3", "5", "b7"],
                     "A seventh chord, whole.")),
@@ -334,7 +338,7 @@ THEORY_PAGES = [
          "often the better chord: the bass has the root covered, and the "
          "notes you have left are the ones carrying the harmony. On your "
          "own it sounds like a different chord, because it is one."),
-        ("note", "This is why **Cmaj9** and **Em7** can be the same four "
+        ("note", "This is why ~Cmaj9~ and ~Em7~ can be the same four "
          "notes. Whoever is playing underneath decides which one you "
          "played."),
     ]),
@@ -365,18 +369,16 @@ THEORY_PAGES = [
          "spread voicing: root and fifth low for the left hand, then the "
          "color above it with the third on top, which is where the ear "
          "goes looking for it."),
-        ("wideterms", [
-            ("C", "`C E G` closed, `C G C E` open"),
-            ("Cmaj7", "`C E G B` closed, `C G B E` open"),
-            ("C9", "`C E G Bb D` closed, `C G Bb D E` open"),
+        ("voicingpairs", [
+            ("C", "C E G", "C G C E"),
+            ("Cmaj7", "C E G B", "C G B E"),
+            ("C9", "C E G Bb D", "C G Bb D E"),
         ]),
         ("para", "Split them at the hands. The left takes the root and "
          "the fifth, the right takes what is left. That is why the "
          "spread voicings are written root-and-fifth first: the break in "
          "the list is where your hands part."),
-        ("para", "If a bass player has the root, drop it and play the "
-         "right hand alone. You are back at a rootless voicing, and the "
-         "^r on those pages is telling you the same thing this one is."),
+
         ("note", "The spread voicings are the ones the notebook was "
          "written from, and the ones a pianist actually reaches for."),
     ]),
@@ -1204,6 +1206,10 @@ class Book(object):
         out = tex_escape(text)
         out = out.replace("--", "\u2013")
         out = re.sub(r"\*\*(.+?)\*\*", r"\\textbf{\1}", out)
+        out = re.sub(r"@(\w+):(.+?)@",
+                     lambda m: r"\instfrets{%s}{%s}" % (INK[m.group(1)],
+                                                        m.group(2)), out)
+        out = re.sub(r"~(.+?)~", r"\\notename{\1}", out)
         out = re.sub(r"`(.+?)`", r"\\frets{\1}", out)
         out = re.sub(r"\^([ri])", r"\\vmarkink{\1}", out)
         return out
@@ -1234,6 +1240,7 @@ class Book(object):
             self.w(r"\begin{theorypage}{%s}" % tex_escape(title))
             for kind, payload in blocks:
                 self.theory_block(kind, payload)
+                self.w(r"\theorygap")
             self.w(r"\end{theorypage}")
 
     def theory_block(self, kind, payload):
@@ -1273,6 +1280,17 @@ class Book(object):
                        % (self.theory_tex(label),
                           self.theory_degrees(quality),
                           self.theory_tex(use)))
+        elif kind == "voicingpairs":
+            # Closed above open, the roots in one column, so the eye can
+            # see what moved rather than reading two lists in a sentence.
+            rows = []
+            for name, close, spread in payload:
+                rows.append(r"\textbf{%s} & \notename{%s} & closed\\"
+                            % (tex_escape(name), tex_escape(close)))
+                rows.append(r" & \notename{%s} & open\\"
+                            % tex_escape(spread))
+            self.w(r"\begin{tabular}{@{}l@{\hskip 3mm}l@{\hskip 2.5mm}l@{}}"
+                   + "\n".join(rows) + r"\end{tabular}")
         elif kind == "figure":
             self.theory_figure(payload)
         else:
@@ -1282,15 +1300,19 @@ class Book(object):
         """A drawing and its caption. One per topic, where one helps."""
         art = payload[0]
         caption = payload[-1]
-        self.w(r"\begin{center}")
+        self.w(r"\par\nointerlineskip\vspace{0.4mm}\centerline{%")
         if art == "chordboxes":
             cells = []
-            for label, strings, base, dots in payload[1]:
-                cells.append(r"\begin{tabular}{@{}c@{}}%s\\[0.6mm]"
-                             r"{\footnotesize %s}\end{tabular}"
-                             % (r"\chordbox{%d}{%d}{%s}"
-                                % (strings, base, dots),
-                                self.theory_tex(label)))
+            for inst, frets, strings, base, dots in payload[1]:
+                # Box and digits both in that instrument's pen: two
+                # instruments side by side, and the ink says which is
+                # which before the label does.
+                cells.append(
+                    r"\begin{tabular}{@{}c@{}}"
+                    r"{\usevoicingcolor{%s}\chordbox{%d}{%d}{%s}}\\[0.6mm]"
+                    r"{\footnotesize\instfrets{%s}{%s}}\end{tabular}"
+                    % (INK[inst], strings, base, dots, INK[inst],
+                       tex_escape(frets)))
             self.w(r"\qquad".join(cells))
         elif art == "chroma":
             self.w(r"\chromastrip{%s}"
@@ -1303,7 +1325,7 @@ class Book(object):
                 r"\chainbox{%s}" % tex_escape(x) for x in payload[1]))
         else:
             raise ValueError("unknown figure %r" % art)
-        self.w(r"\end{center}")
+        self.w(r"}")
         self.w(r"\theorycaption{%s}" % self.theory_tex(caption))
 
     def voicing_marks(self, instrument, symbol, frets_text):

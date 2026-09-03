@@ -484,11 +484,14 @@ class Site(object):
     def theory_html(self, text):
         """The markup THEORY_PAGES is written in, as HTML.
 
-        The same three rules as render.theory_tex, so a paragraph reads
-        the same on the page as it does in the booklet.
+        The same rules as render.theory_tex, so a paragraph reads the
+        same on the page as it does in the booklet.
         """
         out = esc(text).replace("--", "&ndash;")
         out = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", out)
+        out = re.sub(r"@(\w+):(.+?)@",
+                     r'<span class="fret pen \1">\2</span>', out)
+        out = re.sub(r"~(.+?)~", r'<span class="note">\1</span>', out)
         out = re.sub(r"`(.+?)`", r'<span class="fret">\1</span>', out)
         out = re.sub(r"\^([ri])", r'<sup class="mark">\1</sup>', out)
         return out
@@ -518,6 +521,15 @@ class Site(object):
                     % (self.theory_html(label), esc(degrees),
                        self.theory_html(use)))
             return '<div class="qualities">%s</div>' % "\n".join(items)
+        elif kind == "voicingpairs":
+            rows = []
+            for name, close, spread in payload:
+                rows.append(
+                    '<tr><th rowspan="2">%s</th>'
+                    '<td><span class="note">%s</span></td><td>closed</td></tr>'
+                    '<tr><td><span class="note">%s</span></td>'
+                    '<td>open</td></tr>' % (esc(name), esc(close), esc(spread)))
+            return ('<table class="pairs">%s</table>' % "".join(rows))
         elif kind == "figure":
             return self.theory_figure(payload)
         else:
@@ -535,10 +547,12 @@ class Site(object):
         art, caption = payload[0], payload[-1]
         if art == "chordboxes":
             art_html = ('<div class="boxes">%s</div>' % "".join(
-                '<figure>%s<figcaption>%s</figcaption></figure>'
-                % (self.chord_box_svg(strings, base, dots),
-                   self.theory_html(label))
-                for label, strings, base, dots in payload[1]))
+                '<figure class="pen %s">%s'
+                '<figcaption><span class="fret">%s</span></figcaption>'
+                '</figure>'
+                % (inst, self.chord_box_svg(strings, base, dots),
+                   esc(frets))
+                for inst, frets, strings, base, dots in payload[1]))
         elif art == "chroma":
             art_html = self.chroma_svg(payload[1])
         elif art == "stack":
@@ -750,12 +764,18 @@ Banjo Chords, each with its tuning and a QR code on the cover"></p>
         # appears: chords, root positions, movable shapes, patterns, the
         # lot. The monospace face has always meant "a position" here, and
         # the printed book colors all of it the same way.
+        # `.fret.pen.X` is listed as well as `.pen.X`, and deliberately
+        # more specific than `.inst-Y .fret`: the theory pages quote one
+        # instrument's voicing inside another's page, and without this
+        # the page's own ink wins on source order alone.
         pens = "\n".join(
             ".pen.%s, .inst-%s .fret { color: %s; }\n"
+            ".fret.pen.%s, .boxes figure.pen.%s .fret { color: %s; }\n"
             ".inst-%s a.btn { color: %s; border-color: %s; }\n"
             ".inst-%s a.btn:hover, .inst-%s a.btn:focus "
             "{ background: %s; border-color: %s; color: var(--paper); }"
             % (inst, inst, PENS[inst],
+               inst, inst, PENS[inst],
                inst, PENS[inst], PENS[inst],
                inst, inst, PENS[inst], PENS[inst])
             for inst in ORDER)
@@ -854,8 +874,20 @@ dl.terms dd { margin: 0; }
 .quality .use { margin: 0.1rem 0 0 5.8rem; color: var(--faint);
                 font-size: 0.9rem; }
 sup.mark { font-weight: 700; font-size: 0.7em; color: var(--faint); }
+/* A note or chord name, in the red the key titles are set in. Degrees,
+   fret numbers and Nashville numbers stay in the body ink. */
+.note { font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-weight: 700; letter-spacing: 0.05em; color: %(keyred)s; }
+/* The box itself stays in ink, as \chordbox draws it in the booklet.
+   Only the digits underneath take the instrument's pen. */
 .theory p { margin: 1.5em 0; }
 figure.fig { margin: 1.5em 0; }
+/* Closed above open, roots in one column: the point is what moved. */
+table.pairs { border-collapse: collapse; margin: 0 0 1.5em; }
+table.pairs th { text-align: left; font-weight: 700; padding-right: 1.2rem;
+                 vertical-align: top; }
+table.pairs td { padding: 0 1rem 0 0; }
+table.pairs td:last-child { color: var(--faint); font-size: 0.9rem; }
 figure.fig figcaption { color: var(--faint); font-size: 0.85rem;
                         margin-top: 0.35rem; }
 .boxes { display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-end; }
