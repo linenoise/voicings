@@ -139,9 +139,11 @@ keys:
   - chord: Db
     frets:
     - '1344'
+    - '6344'
   - chord: Dbm
     frets:
     - '1244'
+    - '6674'
   - chord: Db5
     frets:
     - '6644'
@@ -152,6 +154,7 @@ keys:
   - chord: Db°
     frets:
     - '0240'
+    - '6579'
   - chord: Dbsus2
     frets:
     - '6664'
@@ -268,10 +271,12 @@ keys:
     frets:
     - '2002'
     - '2455'
+    - 'x002'
   - chord: Dm
     frets:
     - '2001'
     - '2355'
+    - 'x001'
   - chord: D5
     frets:
     - '7755'
@@ -303,6 +308,7 @@ keys:
   - chord: D7
     frets:
     - '2032'
+    - 'x032'
   - chord: Dmaj7
     frets:
     - '2042'
@@ -396,9 +402,11 @@ keys:
     frets:
     - '0113'
     - '3113'
+    - 'x113'
   - chord: Ebm
     frets:
     - '3466'
+    - 'x112'
   - chord: Eb5
     frets:
     - '8866'
@@ -421,6 +429,7 @@ keys:
     frets:
     - '3133'
     - '5566'
+    - '88[10]8'
   - chord: Ebm6
     frets:
     - '3132'
@@ -432,14 +441,17 @@ keys:
   - chord: Eb7
     frets:
     - '3143'
+    - 'x143'
   - chord: Ebmaj7
     frets:
     - '3153'
     - '8556'
+    - 'x153'
   - chord: Ebm7
     frets:
     - '3142'
     - '8899'
+    - 'x142'
   - chord: Eb°7
     frets:
     - '2468'
@@ -519,6 +531,7 @@ keys:
   - chord: E
     frets:
     - '1224'
+    - '9677'
   - chord: Em
     frets:
     - '0220'
@@ -529,6 +542,7 @@ keys:
     frets:
     - '1234'
     - '5678'
+    - 'x234'
   - chord: E°
     frets:
     - '0210'
@@ -543,6 +557,7 @@ keys:
   - chord: E6
     frets:
     - '4244'
+    - '99[11]9'
   - chord: Em6
     frets:
     - '6223'
@@ -556,13 +571,16 @@ keys:
     frets:
     - '1020'
     - '7677'
+    - 'x254'
   - chord: Emaj7
     frets:
     - '1120'
     - '4264'
+    - 'x264'
   - chord: Em7
     frets:
     - '0020'
+    - 'x253'
   - chord: E°7
     frets:
     - '0246'
@@ -775,9 +793,11 @@ keys:
   - chord: Gb
     frets:
     - '3446'
+    - 'x446'
   - chord: Gbm
     frets:
     - '2445'
+    - 'x445'
   - chord: Gb5
     frets:
     - '[11][11]99'
@@ -811,10 +831,12 @@ keys:
   - chord: Gb7
     frets:
     - '3242'
+    - 'x212'
   - chord: Gbmaj7
     frets:
     - '3342'
     - '3441'
+    - 'x411'
   - chord: Gbm7
     frets:
     - '2440'
@@ -912,6 +934,7 @@ keys:
   - chord: G°
     frets:
     - '3543'
+    - '0546'
   - chord: Gsus2
     frets:
     - '0003'
@@ -1308,10 +1331,12 @@ keys:
   - chord: Bb7
     frets:
     - '1011'
+    - '3354'
   - chord: Bbmaj7
     frets:
     - '3001'
     - '2011'
+    - '3355'
   - chord: Bbm7
     frets:
     - '3344'
@@ -1436,6 +1461,7 @@ keys:
   - chord: B7
     frets:
     - '4102'
+    - '4465'
   - chord: Bmaj7
     frets:
     - '4466'

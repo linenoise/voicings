@@ -560,11 +560,10 @@ CHORDS_PER_PAGE = 34
 # the shared figure assumed, so guitar gets its own.
 PER_PAGE = {"guitar": 40}      # fret grids, one line each
 # What a chord page holds, counted in voicing lines rather than chords --
-# see paginate(). Measured on guitar key G, the fullest in the book: 51
-# lines sets clean, 52 is 1.8pt overfull, 53 spills onto a page of its
-# own. Mandolin key F sets 54 clean, its four-position grids being
-# narrower. The default covers every other instrument, whose fullest key
-# is 33 lines.
+# see paginate(). Measured on the fullest key of each: guitar sets 51
+# lines clean, is 1.8pt overfull at 52 and spills at 53. Mandolin sets 57
+# clean and spills at 58, its four-position grids being narrower. The
+# default covers every other instrument, whose fullest key is 39 lines.
 ROWS_PER_PAGE = {"guitar": 51, "mandolin": 54}
 DEFAULT_ROWS_PER_PAGE = 54
 PIANO_PER_PAGE = 17
