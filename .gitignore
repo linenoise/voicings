@@ -21,3 +21,8 @@ build/qr.pdf
 .DS_Store
 __pycache__/
 *.pyc
+
+# Danne's archive of other people's chord charts, read to find voicings
+# this book lacks. Reading them is one thing; republishing them from a
+# public repository is another, so they stay out of it.
+import/
