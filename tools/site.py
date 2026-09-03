@@ -491,6 +491,9 @@ class Site(object):
         out = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", out)
         out = re.sub(r"@(\w+):(.+?)@",
                      r'<span class="fret pen \1">\2</span>', out)
+        out = (out.replace("[flat]", "\u266d")
+                  .replace("[sharp]", "\u266f")
+                  .replace("[natural]", "\u266e"))
         out = re.sub(r"~(.+?)~", r'<span class="notename">\1</span>', out)
         out = re.sub(r"\+(.+?)\+", r'<span class="interval">\1</span>', out)
         out = re.sub(r"`(.+?)`", r'<span class="fret">\1</span>', out)

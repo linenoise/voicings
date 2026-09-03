@@ -86,26 +86,31 @@ THEORY_PAGES = [
          "belongs to all of them."),
     ]),
     ("symbols", "The Marks in This Book", [
-        ("para", "Everything printed beside a chord, and what it means."),
+        ("para", "Everything printed beside a chord, and what it means. "
+         "Names of notes and chords are red, degrees and intervals "
+         "yellow, fingerings the color of their instrument."),
         ("wideterms", [
-            ("`2013`", "A voicing. One digit per string, lowest string "
-             "first, in the instrument's color."),
+            ("`2013`", "A voicing. One digit per string, lowest first, in "
+             "the instrument's color."),
             ("`x`", "Don't play that string."),
             ("`0`", "Play it open, no finger down."),
-            ("^r", "Rootless: this shape has no root in it."),
-            ("^i", "An inversion: the root is in there, but something "
-             "else is underneath."),
+            ("^r", "Rootless: voiced without its root."),
+            ("^i", "An inversion: something other than the root is "
+             "underneath."),
             ("~C/E~", "A slash chord. The chord, then the note that goes "
              "under it."),
-            ("~C°~", "Diminished. Written ~Cdim~ in some books."),
+            ("~C°~", "Diminished, or ~Cdim~."),
             ("~C+~", "Augmented, or ~Caug~."),
-            ("+b3+", "A degree: three semitones up. The flat goes "
-             "before the number, as a chord symbol writes it."),
+            ("~[flat]~", "Flat. A semitone down."),
+            ("~[sharp]~", "Sharp. A semitone up."),
+            ("~[natural]~", "Natural. Cancels one the key signature asked "
+             "for."),
+            ("+b3+", "A degree: three semitones up. The flat goes first, "
+             "as a chord symbol writes it."),
             ("~Bb~", "A note. The flat goes after: here it is part of "
              "the name."),
         ]),
-        ("note", "Names of notes and chords are red, degrees and "
-         "intervals yellow, fingerings the color of their instrument."),
+
     ]),
     ("chromatic", "The Chromatic Scale", [
         ("para", "Twelve notes, each one fret or one key apart, and then "
@@ -1258,6 +1263,9 @@ class Book(object):
         out = re.sub(r"@(\w+):(.+?)@",
                      lambda m: r"\instfrets{%s}{%s}" % (INK[m.group(1)],
                                                         m.group(2)), out)
+        out = (out.replace("[flat]", r"$\flat$")
+                  .replace("[sharp]", r"$\sharp$")
+                  .replace("[natural]", r"$\natural$"))
         out = re.sub(r"~(.+?)~", r"\\notename{\1}", out)
         out = re.sub(r"\+(.+?)\+", r"\\intervalname{\1}", out)
         out = re.sub(r"`(.+?)`", r"\\frets{\1}", out)
