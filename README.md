@@ -137,9 +137,7 @@ Two of those warnings reach the page as superscripts, because a player needs to 
 - **r** for rootless. A five-note chord will not fit on four strings, so the root goes and the bass covers it. Fine for rhythm, wrong for soloing.
 - **i** for inversion. The named bass note is in the chord but not underneath it. Only three of these are left: `generate.py` now treats a named bass as binding, and falls back to an inversion only where the instrument genuinely cannot reach. All three are mandolin shapes from the notebook, kept as played.
 
-When a voicing failed, `tools/repair.py` looked for the nearest playable fingering that does spell the chord, preferring the fewest strings moved. Everything it changed is in [CORRECTIONS.md](CORRECTIONS.md), with the notebook's value beside the printed one. The search stops as soon as the chord is fully spelled: a two-string fix that turns `Gm` into a bare `G5` is worse than a three-string one that sounds the flat third.
-
-Six entries couldn't be repaired. Those were either dropped in favor of another voicing of the same chord or replaced with a generated shape. They're listed at the end of `CORRECTIONS.md`.
+When a voicing failed, `tools/repair.py` looked for the nearest playable fingering that does spell the chord, preferring the fewest strings moved. E
 
 Provenance lives in `data/notebook-source.yaml`, which is frozen. It used to be a flag on each entry, but that kept getting stripped, and stale generated shapes then survived rounds of improvement without anyone noticing. `tools/provenance.py --sync` rebuilds the flags from the record.
 
