@@ -1444,7 +1444,6 @@ class Book(object):
         if not self.only:
             self.w(r"\sectiondivider{Piano Chords}{%s}"
                    % tex_escape(self.tuning_label("piano")))
-        self.circle_of_fifths("piano")
         doc = self.voicings["piano"]
         by_key = {k["key"]: k for k in doc["keys"]}
         for key in CHROMATIC:
@@ -1478,6 +1477,10 @@ class Book(object):
                         "first" if starts_group else "",
                         tex_escape(entry["chord"]), cells))
                 self.w(r"\end{pianopage}")
+        # Every key runs two pages, so the circle goes after them rather
+        # than before: that puts each key on a left page with its
+        # continuation facing it, instead of on the back of the leaf.
+        self.circle_of_fifths("piano")
 
     def piano_open(self, symbol, key=None):
         """The spread voicing for a chord, where the shape table has one.
