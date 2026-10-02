@@ -10,7 +10,7 @@
 // name changes, the new worker installs beside the old one, and the old
 // cache is thrown away the moment the new one is ready.
 
-var VERSION = "cf95ee102de7";
+var VERSION = "985c71025bc9";
 var SHELL = "fancychords-shell-" + VERSION;
 var FILES = "fancychords-files-" + VERSION;
 var PRECACHE = [
@@ -28,6 +28,7 @@ var PRECACHE = [
   "index.html",
   "mandolin.html",
   "manifest.webmanifest",
+  "offline.js",
   "pamphlet-stitch.svg",
   "piano.html",
   "style.css",

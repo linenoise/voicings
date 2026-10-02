@@ -77,10 +77,26 @@ a.btn:hover, a.btn:focus {
    the buttons stack and go full width: a thumb is a blunt instrument. */
 @media (max-width: 46rem) {
   ul.buttons { display: block; }
+  html.offline .getit.checked ul.buttons { display: block; }
   ul.buttons li { margin-bottom: 0.7rem; }
   a.btn { min-width: 0; }
 }
 p.booklets { margin: 0 0 0.9rem; }
+/* Offline, a download button is a dead end unless that file is already in
+   the cache, so the buttons stay down until offline.js has checked each
+   one -- shown and then withdrawn is worse than a moment's wait. The
+   `checked` class is the script saying it has been round them. */
+html.offline .getit ul.buttons { display: none; }
+html.offline .getit.checked ul.buttons { display: grid; }
+ul.buttons li[hidden] { display: none; }
+/* Dashed, not solid: this is the absence of a button, and it should not
+   read as one more thing to press. */
+.offline-note {
+  margin: 0; padding: 0.7rem 1rem;
+  border: 2px dashed var(--rule); border-radius: 6px;
+  color: var(--faint); font-size: 0.9rem;
+}
+.offline-note a { color: inherit; }
 /* --- the theory chapter ------------------------------------------- */
 dl.terms { margin: 0.8rem 0 1.2rem; }
 dl.terms .term { display: flex; gap: 0.8rem; margin: 0 0 0.45rem; }
