@@ -10,7 +10,9 @@ in `data/` changes in both places or in neither. What this file owns is
 the HTML around it.
 """
 
+import hashlib
 import html
+import json
 import math
 import os
 import re
@@ -176,6 +178,18 @@ class Site(object):
             '<link rel="icon" href="favicon.svg" type="image/svg+xml">',
             '<link rel="icon" href="favicon.png" sizes="32x32">',
             '<link rel="apple-touch-icon" href="apple-touch-icon.png">',
+            '<link rel="manifest" href="manifest.webmanifest">',
+            '<meta name="theme-color" content="%s">' % PAPER,
+            # Added to the home screen the site runs without Safari's
+            # chrome, which is the point: a reader in a rehearsal wants
+            # the chords, not an address bar. The apple- names are the
+            # old spelling and the only one iOS reads; the plain one is
+            # what everything else reads.
+            '<meta name="mobile-web-app-capable" content="yes">',
+            '<meta name="apple-mobile-web-app-capable" content="yes">',
+            '<meta name="apple-mobile-web-app-title" content="Fancy Chords">',
+            '<meta name="apple-mobile-web-app-status-bar-style" '
+            'content="default">',
             '<link rel="stylesheet" href="style.css">',
             "</head>",
             "<body%s>" % (' class="inst-%s"' % active if active else ""),
@@ -190,6 +204,12 @@ class Site(object):
             "that builds it is open source. Its source code is available at "
             '<a href="%s">%s</a>.</p></footer>'
             % (AUTHOR_URL, SOURCE_URL, esc(SOURCE_URL)),
+            # Registered after load so it never competes with the page
+            # itself for the connection. A browser without service
+            # workers just reads the site online, as it always did.
+            '<script>if("serviceWorker" in navigator){'
+            'addEventListener("load",function(){'
+            'navigator.serviceWorker.register("sw.js");});}</script>',
             "</body>",
             "</html>",
         ]
@@ -229,7 +249,12 @@ class Site(object):
                '<ul class="buttons">']
         for suffix, label, sub in rows:
             f = "%s%s.pdf" % (title, suffix)
-            out.append('<li><a class="btn" href="downloads/%s">'
+            # A PDF opened inside the home-screen app has no back
+            # button to come out of -- iOS gives a standalone window no
+            # chrome at all -- so the downloads leave for the browser,
+            # where they can be read, saved and shared.
+            out.append('<li><a class="btn" href="downloads/%s" '
+                       'target="_blank" rel="noopener">'
                        '<span class="what">%s</span>'
                        '<span class="meta">%s</span></a></li>'
                        % (esc(f.replace(" ", "%20")), esc(label), sub))
@@ -992,6 +1017,168 @@ footer a { color: var(--faint); }
                           pens=pens)
 
 
+    def manifest(self):
+        """What the home screen needs to treat this as an application."""
+        spec = {
+            "name": "Fancy Chords and Their Voicings",
+            # What fits under an icon on a home screen. The full title
+            # is twelve characters past where iOS starts eliding.
+            "short_name": "Fancy Chords",
+            "description": "Chord voicings for mandolin, guitar, ukulele, "
+                           "piano, banjo, bass and cello.",
+            # Relative, so the site works just as well from a project
+            # path as it does from the apex domain.
+            "start_url": "./",
+            "scope": "./",
+            "display": "standalone",
+            "orientation": "any",
+            "background_color": PAPER,
+            "theme_color": PAPER,
+            "icons": [
+                {"src": "icon-192.png", "sizes": "192x192",
+                 "type": "image/png"},
+                {"src": "icon-512.png", "sizes": "512x512",
+                 "type": "image/png"},
+                {"src": "favicon.svg", "sizes": "any",
+                 "type": "image/svg+xml"},
+            ],
+        }
+        path = os.path.join(self.out, "manifest.webmanifest")
+        with open(path, "w") as fh:
+            fh.write(json.dumps(spec, indent=2) + "\n")
+        return path
+
+    def offline_assets(self):
+        """Every file the site needs to open cold, newest build first.
+
+        Read off what was actually written rather than kept by hand: a
+        page added to the site and forgotten here would be a page that
+        404s in the field, which is the one place nobody can fix it.
+        """
+        # Dotfiles are instructions to the host, not parts of the site,
+        # and .DS_Store is not even that -- it is ignored by git and so
+        # never deployed. One name in the list that 404s fails the whole
+        # install, and the site would have no offline copy at all.
+        return sorted(name for name in os.listdir(self.out)
+                      if os.path.isfile(os.path.join(self.out, name))
+                      and not name.startswith(".")
+                      and name not in NOT_CACHED)
+
+    def service_worker(self, assets):
+        """The worker, versioned by the contents of what it caches."""
+        digest = hashlib.sha256()
+        for name in assets:
+            digest.update(name.encode())
+            with open(os.path.join(self.out, name), "rb") as fh:
+                digest.update(fh.read())
+        # "./" and "index.html" are the same file by two names, and a
+        # cache match is by name. Someone who opened the bare domain
+        # should not be told the site is missing.
+        listed = ["./"] + assets
+        js = (SERVICE_WORKER
+              .replace("__VERSION__", digest.hexdigest()[:12])
+              .replace("__PRECACHE__", json.dumps(listed, indent=2)))
+        path = os.path.join(self.out, "sw.js")
+        with open(path, "w") as fh:
+            fh.write(js)
+        return path
+
+
+# Written to docs/ but not cached by the worker: CNAME is a GitHub Pages
+# instruction rather than part of the site, and a worker that cached
+# itself would be a worker that could never be replaced.
+NOT_CACHED = {"CNAME", "sw.js"}
+
+
+SERVICE_WORKER = """// Generated by tools/site.py. Edits here are overwritten on the next build.
+//
+// A rehearsal room is exactly where the wifi gives out, so every page,
+// stylesheet and image of this site is cached the first time it loads and
+// served from that cache afterwards. The PDFs are not: they are 2.6MB
+// between them, and making the first visit pay for files most readers
+// never open is a poor trade. One opened is one kept.
+//
+// VERSION is a hash of everything in the shell. Change a page and the
+// name changes, the new worker installs beside the old one, and the old
+// cache is thrown away the moment the new one is ready.
+
+var VERSION = "__VERSION__";
+var SHELL = "fancychords-shell-" + VERSION;
+var FILES = "fancychords-files-" + VERSION;
+var PRECACHE = __PRECACHE__;
+
+self.addEventListener("install", function (event) {
+  event.waitUntil(
+    caches.open(SHELL).then(function (cache) {
+      return cache.addAll(PRECACHE);
+    }).then(function () {
+      return self.skipWaiting();
+    })
+  );
+});
+
+self.addEventListener("activate", function (event) {
+  event.waitUntil(
+    caches.keys().then(function (names) {
+      return Promise.all(names.map(function (name) {
+        if (name !== SHELL && name !== FILES) {
+          return caches.delete(name);
+        }
+      }));
+    }).then(function () {
+      return self.clients.claim();
+    })
+  );
+});
+
+self.addEventListener("fetch", function (event) {
+  var request = event.request;
+  if (request.method !== "GET") {
+    return;
+  }
+  var url = new URL(request.url);
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  // A download: cached copy if we have one, otherwise fetch it and keep
+  // it, so the booklet you opened once is yours on the next flight.
+  if (url.pathname.indexOf("/downloads/") !== -1) {
+    event.respondWith(
+      caches.match(request).then(function (hit) {
+        return hit || fetch(request).then(function (response) {
+          if (response.ok) {
+            var copy = response.clone();
+            caches.open(FILES).then(function (cache) {
+              cache.put(request, copy);
+            });
+          }
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request, { ignoreSearch: true }).then(function (hit) {
+      if (hit) {
+        return hit;
+      }
+      return fetch(request).catch(function () {
+        // An address this cache has never seen and no network to go ask.
+        // The front page is in there and knows the way to everything.
+        if (request.mode === "navigate") {
+          return caches.match("index.html");
+        }
+        return Response.error();
+      });
+    })
+  );
+});
+"""
+
+
 def main():
     out = os.path.join(ROOT, "docs")
     downloads = os.path.join(out, "downloads")
@@ -1013,7 +1200,8 @@ def main():
             copied += 1
 
     for name in ("pamphlet-stitch.svg", "booklets.jpg", "favicon.svg",
-                 "favicon.png", "apple-touch-icon.png"):
+                 "favicon.png", "apple-touch-icon.png",
+                 "icon-192.png", "icon-512.png"):
         src = os.path.join(ROOT, "images", name)
         if os.path.exists(src):
             shutil.copy2(src, os.path.join(out, name))
@@ -1028,8 +1216,15 @@ def main():
         else:
             site.instrument_page(inst)
 
+    # Last, so the worker's file list and version hash describe the
+    # site as it was actually just written.
+    site.manifest()
+    assets = site.offline_assets()
+    site.service_worker(assets)
+
     pages = len([f for f in os.listdir(out) if f.endswith(".html")])
-    print("wrote %d pages and %d downloads to docs/" % (pages, copied))
+    print("wrote %d pages, %d downloads and %d cached files to docs/"
+          % (pages, copied, len(assets)))
 
 
 if __name__ == "__main__":

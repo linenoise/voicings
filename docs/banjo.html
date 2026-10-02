@@ -8,6 +8,12 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#FDFCF8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Fancy Chords">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="inst-banjo">
@@ -29,9 +35,9 @@
 <p class="edition">Download <cite>Fancy Banjo Chords and Their Voicings</cite></p>
 <p class="booklets">This booklet is designed to be printed, so nobody has to stare at their phone during rehearsal.<br>Or you can also download a copy to read on your device:</p>
 <ul class="buttons">
-<li><a class="btn" href="downloads/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf"><span class="what">To Read on a screen</span><span class="meta">16 pages &middot; PDF</span></a></li>
-<li><a class="btn" href="downloads/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20(print-letter).pdf"><span class="what">To Print on US Letter</span><span class="meta">2 sheets &middot; PDF</span></a></li>
-<li><a class="btn" href="downloads/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20(print-A4).pdf"><span class="what">To Print on A4</span><span class="meta">2 sheets &middot; PDF</span></a></li>
+<li><a class="btn" href="downloads/Fancy%20Banjo%20Chords%20and%20Their%20Voicings.pdf" target="_blank" rel="noopener"><span class="what">To Read on a screen</span><span class="meta">16 pages &middot; PDF</span></a></li>
+<li><a class="btn" href="downloads/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20(print-letter).pdf" target="_blank" rel="noopener"><span class="what">To Print on US Letter</span><span class="meta">2 sheets &middot; PDF</span></a></li>
+<li><a class="btn" href="downloads/Fancy%20Banjo%20Chords%20and%20Their%20Voicings%20(print-A4).pdf" target="_blank" rel="noopener"><span class="what">To Print on A4</span><span class="meta">2 sheets &middot; PDF</span></a></li>
 </ul></div>
 <section class="contents"><h2>Contents</h2><ul><li><a href="#circle">The Circle of Fifths</a></li>
 <li><a href="#roots">Root Positions</a></li>
@@ -80,5 +86,6 @@ Banjo Chords, each with its tuning and a QR code on the cover"></p>
 
 </main>
 <footer><p>Copyright &copy; 2026 <a href="https://danne.stayskal.com">Danne Stayskal</a>.<br>This site and the software that builds it is open source. Its source code is available at <a href="http://github.com/linenoise/voicings">http://github.com/linenoise/voicings</a>.</p></footer>
+<script>if("serviceWorker" in navigator){addEventListener("load",function(){navigator.serviceWorker.register("sw.js");});}</script>
 </body>
 </html>
