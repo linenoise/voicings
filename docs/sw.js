@@ -10,7 +10,7 @@
 // name changes, the new worker installs beside the old one, and the old
 // cache is thrown away the moment the new one is ready.
 
-var VERSION = "985c71025bc9";
+var VERSION = "5ec5b5f46deb";
 var SHELL = "fancychords-shell-" + VERSION;
 var FILES = "fancychords-files-" + VERSION;
 var PRECACHE = [

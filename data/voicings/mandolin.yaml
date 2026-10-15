@@ -663,7 +663,6 @@ keys:
   - chord: F
     frets:
     - '5301'
-    - '5335'
   - chord: Fm
     frets:
     - '1334'
@@ -764,6 +763,7 @@ keys:
     derived: true
   - chord: F/C
     frets:
+    - '5301'
     - '5335'
   - chord: Fm/C
     frets:
